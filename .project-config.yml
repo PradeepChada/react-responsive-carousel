@@ -3,3 +3,34 @@ project-config-version: 1.1
 
 pivotal:
   project_id: 2377446 # Enterprise Architecture
+
+service:                        # Values required to deploy the service.
+  port: 3000                    # Webserver HTTP port inside Docker container
+  #    subdomain:                 # [subdomain](.environmemnt/stack)?.containerstore.com
+  health: /health               # Override for health check URI.
+  replicas:
+    prd: 3
+    tst: 2
+  swarm_location:
+    default: dfw
+
+#notifications:                 # Who to notify for failed health-check or OWASP vulnerabilities
+#   emails: yourname@containerstore.com,yourteam@containerstore.com
+
+metrics:                        # Where Prometheus will scrape metrics from
+  app:
+    port: default               # use service.port for scraping metrics
+    path: /actuator/prometheus  # override URI path from default: /metrics
+#    jmx:
+#        port: 8989             # scrape additional JVM metrics from this port
+#                               # Use with Prometheus' standard JavaAgent
+
+logging:                  #
+  format: json            # Override Splunk Driver log format from default: raw
+  sourcetype: _json       # Override Splunk sourcetype from default: log4j_tcs_v2
+
+deploy_authorization:
+  prd:
+    - SEC_Developers
+  trn:
+    - SEC_Developers
