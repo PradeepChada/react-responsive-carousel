@@ -2,7 +2,6 @@ FROM node:14.18.0-slim as base
 
 WORKDIR /home/app/
 
-
 RUN groupadd --gid 1001 app \
 && useradd --uid 1001 --gid app --shell /bin/bash --create-home app
 
