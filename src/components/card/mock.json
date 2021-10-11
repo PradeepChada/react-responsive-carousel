@@ -1,0 +1,26 @@
+{
+    "data": {
+        "getProductById": {
+            "id": "1251",
+            "title": "pillow",
+            "description": "Wakefit Hollow Fiber Pillow",
+            "images": [
+                "https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/www.containerstore.com/v~4b.11a/catalogimages/324234/WeatherTightTotesClear_x.jpg?width=1200&height=1200&align=center&yocs=2C_4c_2E_2H_",
+                "https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/www.containerstore.com/v~4b.11a/catalogimages/324233/CT_17_Weather-Tight-Boxes_R012717_12.jpg?width=1200&height=1200&align=center&yocs=2C_4c_2E_2H_"
+            ],
+            "price": {
+                "mrp": 1000,
+                "salePrice": 899,
+                "youSaved": 101
+            },
+            "inventory": {
+                "inStock": false
+            },
+            "reviews": {
+                "rating": "4 stars",
+                "reviewHeadline": "Good Product in this segment",
+                "review": "Found no issue in last 1 year"
+            }
+        }
+    }
+}
