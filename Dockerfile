@@ -22,7 +22,7 @@ WORKDIR /home/app/
 RUN groupadd --gid 1001 app \
 && useradd --uid 1001 --gid app --shell /bin/bash --create-home app
 
-RUN echo "build.artifactId=mcs" > /home/app/build.properties
+RUN echo "build.artifactId=mobius-web" > /home/app/build.properties
 RUN echo "build.version=$VERSION" >> /home/app/build.properties
 RUN echo "version=$VERSION" >> /home/app/build.properties
 RUN echo "build.scmRevision.id=`echo $VERSION | cut -d "-" -f3`" >> /home/app/build.properties
