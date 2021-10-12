@@ -2,7 +2,7 @@
 project-config-version: 1.1
 
 pivotal:
-  project_id: 2377446 # Enterprise Architecture
+  project_id: 2527172 # mPOS - Mobile Point of Sale
 
 service:                        # Values required to deploy the service.
   port: 3000                    # Webserver HTTP port inside Docker container
