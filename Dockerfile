@@ -13,7 +13,6 @@ RUN yarn build
 
 FROM node:14.18.0-slim
 
-ARG PORT=3000
 # Default to SNAPSHOT if version is not provided
 ARG VERSION=SNAPSHOT
 WORKDIR /home/app/
@@ -30,8 +29,7 @@ RUN echo "build.timestamp=`date +%s000`" >> /home/app/build.properties
 COPY --from=base /home/app/build/ .
 COPY --from=base /home/app/package.json /home/app/package.json
 COPY --from=base /home/app/node_modules ./node_modules
-EXPOSE ${PORT}
 
 USER app:app
-EXPOSE 3000
+EXPOSE 5000
 CMD ["yarn", "start"]
