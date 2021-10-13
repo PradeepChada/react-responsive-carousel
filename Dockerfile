@@ -26,10 +26,9 @@ RUN echo "version=$VERSION" >> /usr/src/app/build.properties
 RUN echo "build.scmRevision.id=`echo $VERSION | cut -d "-" -f3`" >> /usr/src/app/build.properties
 RUN echo "build.timestamp=`date +%s000`" >> /usr/src/app/build.properties
 
-COPY --from=base /usr/src/app/build/ .
+COPY --from=base /usr/src/app/build ./build
 COPY --from=base /usr/src/app/package.json /usr/src/app/package.json
 COPY --from=base /usr/src/app/node_modules ./node_modules
 
 USER app:app
-EXPOSE 3000
 CMD ["yarn", "serve"]
