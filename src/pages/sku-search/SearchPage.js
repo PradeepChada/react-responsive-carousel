@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchBar from '../sku-search/searchbar/SearchBar';
-
 import {
   Wrapper,
   TextWrapper,
@@ -66,6 +65,7 @@ function SearchPage() {
       <SearchPageText />
       {/* <SKUMalfunction /> */}
       {/* <UnKnownError/> */}
+      {/* <SkuTile skuInfo={null} skuQuantity={null} error={null} /> */}
     </Wrapper>
   );
 }
