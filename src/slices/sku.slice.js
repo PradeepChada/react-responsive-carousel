@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   loading: false,
   skuData: null,
   error: null,
+  // error: skuErrorMessages.malfunction,
   skuAvailabilityLoading: false,
   skuAvailability: null,
   skuAvailabilityError: null

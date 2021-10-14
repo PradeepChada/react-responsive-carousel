@@ -1,20 +1,22 @@
-import { Typography, Skeleton } from '@mui/material';
+import { Typography, Skeleton, Button, Divider } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
 import {
-  // Availability,
+  Availability,
   InfoTile,
   PageContainer,
   Price,
   Spec,
+  ErrorWrapper
 } from './ProductDetails.styles';
-// import StoreIcon from './../../assets/icons/store.svg';
-// import DeliveryIcon from './../../assets/icons/delivery.svg';
+import StoreIcon from './../../assets/icons/store.svg';
+import DeliveryIcon from './../../assets/icons/delivery.svg';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSkuDetails } from '../../slices/sku.slice';
+import SkuError from '../../components/sku-error/SkuError';
 
 const getSkuPrice = (skuPrices = {}, type) => {
   return skuPrices[type]?.amount;
@@ -36,24 +38,24 @@ const LoadingSkeleton = () => {
         <Skeleton variant="rectangular" width={207} height={207} />
       </Box>
       <Box display="flex" marginTop={1} justifyConten="flex-start">
-        <Skeleton variant="rectangular" width={43} height={43} sx={{marginRight: 1}} />
+        <Skeleton variant="rectangular" width={43} height={43} sx={{ marginRight: 1 }} />
         <Skeleton variant="rectangular" width={43} height={43} />
       </Box>
-      <Skeleton width={70} height={30} sx={{marginTop:'10px', marginBottom: '10px'}} />
-      <Skeleton width={200} sx={{marginTop:'10px'}} />
-      <Skeleton width={110} sx={{marginBottom:'5px'}} />
-      <Skeleton width={60} sx={{marginTop: 2, marginBottom: 1}} />
-      <Skeleton height={50} sx={{transform: 'none',}} />
-      <Skeleton height={80} sx={{marginTop: 1, transform: 'none'}} />
-      <Skeleton height={40} sx={{marginTop:2}} />
-      <Skeleton height={40} sx={{marginBottom:'5px'}} />
+      <Skeleton width={70} height={30} sx={{ marginTop: '10px', marginBottom: '10px' }} />
+      <Skeleton width={200} sx={{ marginTop: '10px' }} />
+      <Skeleton width={110} sx={{ marginBottom: '5px' }} />
+      <Skeleton width={60} sx={{ marginTop: 2, marginBottom: 1 }} />
+      <Skeleton height={50} sx={{ transform: 'none', }} />
+      <Skeleton height={80} sx={{ marginTop: 1, transform: 'none' }} />
+      <Skeleton height={40} sx={{ marginTop: 2 }} />
+      <Skeleton height={40} sx={{ marginBottom: '5px' }} />
     </Box>
   )
 }
 
 const ProductDetails = ({ history, match }) => {
   const dispatch = useDispatch();
-  const { loading, skuData } = useSelector(
+  const { loading, skuData, error } = useSelector(
     (state) => state.sku
   );
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
@@ -65,6 +67,11 @@ const ProductDetails = ({ history, match }) => {
 
   if (loading) {
     return <LoadingSkeleton />
+  }
+  if (error) {
+    return <ErrorWrapper alignItems="center">
+      <SkuError {...error}/>
+    </ErrorWrapper>
   }
   return (
     <PageContainer>
@@ -92,7 +99,7 @@ const ProductDetails = ({ history, match }) => {
           Color: <span>{color}</span>
         </Spec>}
       </div>
-      {/* <Availability>
+      <Availability>
         <Typography className='sub-head'>Availability</Typography>
         <Box className='store-tile'>
           <img src={StoreIcon} alt='Store' />
@@ -117,7 +124,7 @@ const ProductDetails = ({ history, match }) => {
             </div>
           </Box>
         </Box>
-      </Availability> */}
+      </Availability>
       <Box>
         <InfoTile
           onClick={() => history.push(`/product-info/${match?.params?.id}`)}

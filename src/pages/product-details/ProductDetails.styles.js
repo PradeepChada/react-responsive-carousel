@@ -91,3 +91,7 @@ export const InfoTile = styled(Box)({
     color: colors.lightBlue,
   },
 });
+
+export const ErrorWrapper = styled(Box)({
+  padding: '29px 45px'
+})

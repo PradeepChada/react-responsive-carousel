@@ -4,10 +4,10 @@ export const skuErrorMessages = {
   },
   malfunction: {
     title: 'Search Malfunction',
-    Description: 'Please enter SKU manually or check barcode'
+    description: 'Please enter SKU manually or check barcode'
   },
   unknown: {
     title: 'Unknown Error',
-    Description: 'Please try to scan or search again'
+    description: 'Please try to scan or search again'
   }
 };
