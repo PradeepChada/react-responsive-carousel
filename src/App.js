@@ -1,6 +1,5 @@
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import CurrencyDetails from './pages/currency-details/CurrencyDetails';
 import { ThemeProvider, styled } from '@mui/material/styles';
 import HomeContainer from './pages/home/HomePage';
 import store from './store';
@@ -21,13 +20,7 @@ const App = () => {
           <Header />
           <StyledBody>
             <Switch>
-              <Route
-                exact
-                path='/currency/details'
-                component={CurrencyDetails}
-              />
               <Route exact path='/' component={HomeContainer} />
-              {/* <Redirect from="/" to="/currency/details" /> */}
             </Switch>
           </StyledBody>
         </BrowserRouter>
