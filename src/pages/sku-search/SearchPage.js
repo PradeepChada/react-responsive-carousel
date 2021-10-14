@@ -10,6 +10,9 @@ import {
   ErrorIconWrapper,
   SKUMalfunctionText,
   SKUMalfunctionDescription,
+  UnknownErrorWrapper,
+  UnknownErrorText,
+  UnknownErrorDescription,
 } from './SearchPage.styles';
 
 const SKUMalfunction = () => {
@@ -25,6 +28,22 @@ const SKUMalfunction = () => {
         Please enter SKU manually or check barcode
       </SKUMalfunctionDescription>
     </SKUMalfunctionWrapper>
+  );
+};
+
+const UnKnownError = () => {
+  return (
+    <UnknownErrorWrapper
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
+    >
+      <ErrorIconWrapper />
+      <UnknownErrorText>Unknown Error</UnknownErrorText>
+      <UnknownErrorDescription>
+        There was a technical error. Please try again.
+      </UnknownErrorDescription>
+    </UnknownErrorWrapper>
   );
 };
 
@@ -46,6 +65,7 @@ function SearchPage() {
       <SearchBar />
       <SearchPageText />
       {/* <SKUMalfunction /> */}
+      {/* <UnKnownError/> */}
     </Wrapper>
   );
 }
