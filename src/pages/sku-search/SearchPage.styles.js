@@ -52,3 +52,20 @@ export const SKUMalfunctionDescription = styled(Typography)({
   width: '200px',
 });
 
+export const UnknownErrorWrapper = styled(Box)({
+  marginTop: '29px',
+});
+
+export const UnknownErrorText = styled(Typography)({
+  fontSize: '22px',
+  color: colors.fontColor,
+  fontWeight: '700',
+});
+
+export const UnknownErrorDescription = styled(Typography)({
+  ontSize: '16px',
+  color: colors.fontColor,
+  fontWeight: '400',
+  textAlign: 'center',
+  width: '200px',
+});
