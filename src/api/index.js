@@ -1,6 +1,9 @@
 import axios from 'axios';
+import config from './../config';
 
-const http = axios.create();
+const http = axios.create({
+    baseURL: config.API_BASE_URL
+});
 
 /**
  * Interceptor for all requests
