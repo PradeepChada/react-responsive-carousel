@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Header component should render a snapshot 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-i9gxme"
+  >
+    <header
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic ForwardRef(AppBar)-root-1 css-hip9hq-MuiPaper-root-MuiAppBar-root"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1q8k0pk-MuiToolbar-root"
+      >
+        <button
+          aria-label="open drawer"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeLarge ForwardRef(IconButton)-root-2 css-hu6rs9-MuiButtonBase-root-MuiIconButton-root"
+          data-testid="home-icon"
+          tabindex="0"
+          type="button"
+        >
+          <img
+            alt="Home"
+            src="home.svg"
+          />
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          class="MuiBox-root css-1l8q18s"
+        >
+          <img
+            alt="The Container Store"
+            class="img-root-3"
+            src="logo.svg"
+          />
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+`;
