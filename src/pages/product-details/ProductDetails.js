@@ -1,36 +1,71 @@
-import { Typography, Button, Divider } from '@mui/material';
+import { Typography, Skeleton } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
 import {
-  Availability,
+  // Availability,
   InfoTile,
   PageContainer,
   Price,
   Spec,
 } from './ProductDetails.styles';
-import StoreIcon from './../../assets/icons/store.svg';
-import DeliveryIcon from './../../assets/icons/delivery.svg';
+// import StoreIcon from './../../assets/icons/store.svg';
+// import DeliveryIcon from './../../assets/icons/delivery.svg';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSkuDetails } from '../../slices/sku.slice';
 
-const getSkuPrice = (skuPrices={}, type) => {
+const getSkuPrice = (skuPrices = {}, type) => {
   return skuPrices[type]?.amount;
+}
+
+const getColor = (attributes) => {
+  return attributes?.find(o => o.id === 'COLOR')?.name
+}
+
+const LoadingSkeleton = () => {
+  return (
+    <Box padding={1}>
+      <Skeleton variant="rectangular" height={16} />
+      <Box display='flex' justifyContent='space-between' alignItems='center' marginTop={'5px'} marginBottom={1}>
+        <div />
+        <Skeleton variant="rectangular" width={60} height={10} />
+      </Box>
+      <Box display="flex">
+        <Skeleton variant="rectangular" width={207} height={207} />
+      </Box>
+      <Box display="flex" marginTop={1} justifyConten="flex-start">
+        <Skeleton variant="rectangular" width={43} height={43} sx={{marginRight: 1}} />
+        <Skeleton variant="rectangular" width={43} height={43} />
+      </Box>
+      <Skeleton width={70} height={30} sx={{marginTop:'10px', marginBottom: '10px'}} />
+      <Skeleton width={200} sx={{marginTop:'10px'}} />
+      <Skeleton width={110} sx={{marginBottom:'5px'}} />
+      <Skeleton width={60} sx={{marginTop: 2, marginBottom: 1}} />
+      <Skeleton height={50} sx={{transform: 'none',}} />
+      <Skeleton height={80} sx={{marginTop: 1, transform: 'none'}} />
+      <Skeleton height={40} sx={{marginTop:2}} />
+      <Skeleton height={40} sx={{marginBottom:'5px'}} />
+    </Box>
+  )
 }
 
 const ProductDetails = ({ history, match }) => {
   const dispatch = useDispatch();
-  const { loading, skuData, skuAvailability, error } = useSelector(
+  const { loading, skuData } = useSelector(
     (state) => state.sku
   );
-  const availability = skuAvailability?.inventoryEstimates[0] || {};
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
+  const color = getColor(skuData?.attribute)
 
   useEffect(() => {
     dispatch(fetchSkuDetails(match?.params?.id, 899));
-  }, [dispatch])
+  }, [dispatch, match?.params?.id])
+
+  if (loading) {
+    return <LoadingSkeleton />
+  }
   return (
     <PageContainer>
       <ProductTitle
@@ -40,12 +75,7 @@ const ProductDetails = ({ history, match }) => {
         ratingCount={10}
       />
       <ProductCarousel
-        images={skuData?.mediaList?.map((o) => o.url) || []}
-        // images={[
-        //   'https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/www.containerstore.com/v~4b.11c/catalogimages/331896/OD_17_10018841-File-Tote-Boxes-Hangi.jpg?width=1200&height=1200&align=center&yocs=2C_4c_2E_2H_',
-        //   'https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/www.containerstore.com/v~4b.11c/catalogimages/370134/OF_19-10013806-Portable-File_Tote_RG.jpg?width=1200&height=1200&align=center&yocs=2C_4c_2E_2H_',
-        //   'https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/www.containerstore.com/v~4b.11c/catalogimages/369949/OF_19_%2010013806-File-Totes_RGB.jpg?width=1200&height=1200&align=center&yocs=2C_4c_2E_2H_',
-        // ]}
+        images={skuData?.mediaList?.map((o) => `https://www.devpreview.containerstore.com/${o.url}`) || []}
       />
       <Price>${price}/ea</Price>
       <div>
@@ -55,11 +85,14 @@ const ProductDetails = ({ history, match }) => {
             {skuData?.dimension?.length}" sq. x {skuData?.dimension?.height}" h
           </span>
         </Spec>
-        <Spec>
-          Color: <span>Clear</span>
-        </Spec>
+        {!!skuData?.dimension?.weight && <Spec>
+          Color: <span>{skuData?.dimension?.weight}</span>
+        </Spec>}
+        {color && <Spec>
+          Color: <span>{color}</span>
+        </Spec>}
       </div>
-      <Availability>
+      {/* <Availability>
         <Typography className='sub-head'>Availability</Typography>
         <Box className='store-tile'>
           <img src={StoreIcon} alt='Store' />
@@ -84,7 +117,7 @@ const ProductDetails = ({ history, match }) => {
             </div>
           </Box>
         </Box>
-      </Availability>
+      </Availability> */}
       <Box>
         <InfoTile
           onClick={() => history.push(`/product-info/${match?.params?.id}`)}
@@ -92,12 +125,12 @@ const ProductDetails = ({ history, match }) => {
           <Typography>Product Information</Typography>
           <ChevronRight />
         </InfoTile>
-        <InfoTile
+        {/* <InfoTile
           onClick={() => history.push(`/product-variants/${match?.params?.id}`)}
         >
           <Typography>Additional Sizes & Colors (3)</Typography>
           <ChevronRight />
-        </InfoTile>
+        </InfoTile> */}
       </Box>
     </PageContainer>
   );
