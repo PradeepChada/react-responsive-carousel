@@ -62,7 +62,7 @@ function SearchPage() {
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
       <SearchBar />
-      {/* <SearchPageText /> */}
+      <SearchPageText />
       {/* <SKUMalfunction /> */}
       {/* <UnKnownError/> */}
       {/* <SkuTile skuInfo={null} skuQuantity={null} error={null} /> */}
