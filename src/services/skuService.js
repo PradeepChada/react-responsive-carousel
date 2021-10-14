@@ -6,7 +6,7 @@ export const getSkuInfo = (skuCode, storeId) => {
   return Axios.get(url)
 };
 
-export const getSkuQuantity = () => {
+export const getSkuAvailability = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(skuAvailability);

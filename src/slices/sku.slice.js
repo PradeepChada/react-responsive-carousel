@@ -42,9 +42,9 @@ const skuSlice = createSlice({
 
 const actions = skuSlice.actions;
 
-export const fetchSkuDetails = (skuCode) => (dispatch) => {
+export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
   dispatch(actions.loading());
-  skuService.getSkuInfo(skuCode)
+  skuService.getSkuInfo(skuCode, storeId)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.failure(skuErrorMessages.notFound));
