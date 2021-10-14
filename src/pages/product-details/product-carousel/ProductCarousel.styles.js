@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 export const Slider = styled(Carousel)(({ theme }) => ({
   marginTop: 10,
-  minHeight: 345,
+  minHeight: 300,
   '& .slider-wrapper': {
     '& .slide': {
       minWidth: '261px !important',

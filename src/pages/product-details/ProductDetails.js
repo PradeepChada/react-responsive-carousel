@@ -62,8 +62,9 @@ const ProductDetails = ({ history, match }) => {
   const color = getColor(skuData?.attribute)
 
   useEffect(() => {
+    if(!skuData)
     dispatch(fetchSkuDetails(match?.params?.id, 899));
-  }, [dispatch, match?.params?.id])
+  }, [dispatch, match?.params?.id, skuData])
 
   if (loading) {
     return <LoadingSkeleton />
@@ -82,7 +83,7 @@ const ProductDetails = ({ history, match }) => {
         ratingCount={10}
       />
       <ProductCarousel
-        images={skuData?.mediaList?.map((o) => `https://www.devpreview.containerstore.com/${o.url}`) || []}
+        images={skuData?.mediaList?.map((o) => o.url) || []}
       />
       <Price>${price}/ea</Price>
       <div>
@@ -132,12 +133,12 @@ const ProductDetails = ({ history, match }) => {
           <Typography>Product Information</Typography>
           <ChevronRight />
         </InfoTile>
-        {/* <InfoTile
+        <InfoTile
           onClick={() => history.push(`/product-variants/${match?.params?.id}`)}
         >
           <Typography>Additional Sizes & Colors (3)</Typography>
           <ChevronRight />
-        </InfoTile> */}
+        </InfoTile>
       </Box>
     </PageContainer>
   );
