@@ -10,4 +10,7 @@ export const colors = {
     gray81: '#CFCFCF',
     gray85: '#D9D9D9',
     abbey: '#54565B',
+    danger: '#DF2E2F',
+    dangerBackground: '#FDF4F5',
+    dangerBorder: 'rgba(223, 46, 47, 0.1)'
   };

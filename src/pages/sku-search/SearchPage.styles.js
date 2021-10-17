@@ -27,6 +27,10 @@ export const Description = styled(Typography)({
   color: colors.fontColor,
 });
 
+export const ErrorWrapper = styled(Box)({
+  padding: '29px 45px'
+})
+
 export const SKUMalfunctionWrapper = styled(Box)({
   marginTop: '29px',
 });

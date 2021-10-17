@@ -16,15 +16,8 @@ import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSkuDetails } from '../../slices/sku.slice';
+import {getSkuPrice, getColor} from './../../utils/skuHelpers'
 import SkuError from '../../components/sku-error/SkuError';
-
-const getSkuPrice = (skuPrices = {}, type) => {
-  return skuPrices[type]?.amount;
-}
-
-const getColor = (attributes) => {
-  return attributes?.find(o => o.id === 'COLOR')?.name
-}
 
 const LoadingSkeleton = () => {
   return (
