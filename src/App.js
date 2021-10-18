@@ -4,6 +4,8 @@ import { ThemeProvider, styled } from '@mui/material/styles';
 import HomeContainer from './pages/home/HomePage';
 import ProductDetails from './pages/product-details/ProductDetails';
 import SearchContainer from './pages/sku-search/SearchPage';
+import ProductInfo from './pages/product-info/ProductInfo';
+import ProductVariants from './pages/product-variants/ProductVariants';
 import store from './store';
 import Header from './components/header/Header';
 import theme from './theme';
@@ -23,12 +25,18 @@ const App = () => {
           <StyledBody>
             <Switch>
               <Route exact path='/' component={HomeContainer} />
+              <Route exact path='/sku-search' component={SearchContainer} />
               <Route
                 exact
                 path='/product-details/:id'
                 component={ProductDetails}
               />
-              <Route exact path='/sku-search' component={SearchContainer} />
+                            <Route exact path='/product-info/:id' component={ProductInfo} />
+              <Route
+                exact
+                path='/product-variants/:id'
+                component={ProductVariants}
+              />
             </Switch>
           </StyledBody>
         </BrowserRouter>

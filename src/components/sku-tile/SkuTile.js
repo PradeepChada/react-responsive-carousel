@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 import {
   Wrapper,
   ImageSkeleton,
@@ -17,7 +18,7 @@ import {
 } from './SkuTile.styles';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
-const SKUTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityError, handleClick }) => {
+const SkuTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityError, handleClick }) => {
 
   const _renderSkeleton = () => {
     return (
@@ -59,4 +60,12 @@ const SKUTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityErro
   );
 }
 
-export default SKUTile;
+export default SkuTile;
+
+SkuTile.propTypes = {
+  skuInfo: PropTypes.object.isRequired,
+  loading: PropTypes.bool,
+  skuAvailabilityLoading: PropTypes.bool,
+  skuAvailabilityError: PropTypes.object,
+  handleClick: PropTypes.func
+}

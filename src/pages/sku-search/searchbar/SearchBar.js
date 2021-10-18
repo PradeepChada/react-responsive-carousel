@@ -14,7 +14,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
     let input = event.target.value;
     if (input.includes('\n')) {
       input = input.replace('\n', '');
-      handleSearch(input);
+      handleSearch(input.trim());
     }
     setSKUCode(input);
   };
@@ -26,7 +26,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
 
   const handleSearchButtonClick = (e) => {
     e.preventDefault();
-    handleSearch(SKUCode)
+    handleSearch(SKUCode.trim())
   };
 
   const onBlurInput = ({ target }) => {
