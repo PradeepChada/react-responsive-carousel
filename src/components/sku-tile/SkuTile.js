@@ -17,7 +17,7 @@ import {
 } from './SkuTile.styles';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
-const SKUTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityError }) => {
+const SKUTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityError, handleClick }) => {
 
   const _renderSkeleton = () => {
     return (
@@ -36,7 +36,7 @@ const SKUTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityErro
   if (loading) return _renderSkeleton();
 
   return (
-    <Wrapper>
+    <Wrapper onClick={() => handleClick(skuInfo.skuId)}>
       <Image src={skuInfo?.image} alt='SKUImage' />
       <Box flexDirection='column' overflow='hidden'>
         <Price>${skuInfo?.price}/ea</Price>
