@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import {
   PaperWrapper,
@@ -9,12 +9,13 @@ import {
 
 const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
-  const handleSearchButtonClick = (event) => {
-    event.preventDefault();
-  };
 
   const onChangeHandler = (event) => {
     let input = event.target.value;
+    if (input.includes('\n')) {
+      input = input.replace('\n', '');
+      handleSearch(input);
+    }
     setSKUCode(input);
   };
 
@@ -23,6 +24,15 @@ const SearchBar = ({ handleSearch, handleClear }) => {
     handleClear();
   };
 
+  const handleSearchButtonClick = (e) => {
+    e.preventDefault();
+    handleSearch(SKUCode)
+  };
+
+  const onBlurInput = ({ target }) => {
+    target.focus();
+  }
+
   return (
     <PaperWrapper component='form'>
       <InputBaseWrapper
@@ -30,6 +40,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
         inputProps={{ 'aria-label': 'sku-input' }}
         value={SKUCode}
         onChange={onChangeHandler}
+        onBlur={onBlurInput}
         autoFocus
       />
       <ClearText onClick={handleClearButtonClick}>Clear</ClearText>
@@ -39,7 +50,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
         data-testid='search-button'
         onClick={handleSearchButtonClick}
       >
-        <SearchIcon onClick={() => handleSearch(SKUCode)} />
+        <SearchIcon />
       </IconButtonWrapper>
     </PaperWrapper>
   );
