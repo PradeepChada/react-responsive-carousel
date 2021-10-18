@@ -15,7 +15,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
 
   const onChangeHandler = (event) => {
     let input = event.target.value;
-    setSKUCode(input);
+    setSKUCode(input.trim());
   };
 
   const handleClearButtonClick = () => {
