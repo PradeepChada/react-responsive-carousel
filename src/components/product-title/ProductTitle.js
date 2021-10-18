@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import PropTypes from 'prop-types';
 import { SkuNumber } from './ProductTitle.styles';
 
 const ProductTitle = ({ title, skuId }) => {
@@ -24,3 +25,8 @@ const ProductTitle = ({ title, skuId }) => {
 };
 
 export default ProductTitle;
+
+ProductTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  skuId: PropTypes.string.isRequired
+}

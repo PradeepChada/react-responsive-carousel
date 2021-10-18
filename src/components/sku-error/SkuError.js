@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TextWrapper, Title, Description, ErrorIcon } from './SkuError.styles';
 
 const SkuError = ({ title, description }) => {
@@ -15,3 +16,8 @@ const SkuError = ({ title, description }) => {
 
 
 export default SkuError;
+
+SkuError.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string
+}
