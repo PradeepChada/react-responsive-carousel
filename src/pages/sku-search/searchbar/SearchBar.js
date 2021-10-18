@@ -9,19 +9,29 @@ import {
 
 const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
-  const handleSearchButtonClick = (event) => {
-    event.preventDefault();
-  };
 
   const onChangeHandler = (event) => {
     let input = event.target.value;
-    setSKUCode(input.trim());
+    if (input.includes('\n')) {
+      input = input.replace('\n', '');
+      handleSearch(input.trim());
+    }
+    setSKUCode(input);
   };
 
   const handleClearButtonClick = () => {
     setSKUCode('');
     handleClear();
   };
+
+  const handleSearchButtonClick = (e) => {
+    e.preventDefault();
+    handleSearch(SKUCode.trim())
+  };
+
+  const onBlurInput = ({ target }) => {
+    target.focus();
+  }
 
   return (
     <PaperWrapper component='form'>
@@ -30,6 +40,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
         inputProps={{ 'aria-label': 'sku-input' }}
         value={SKUCode}
         onChange={onChangeHandler}
+        onBlur={onBlurInput}
         autoFocus
       />
       <ClearText onClick={handleClearButtonClick}>Clear</ClearText>
@@ -39,7 +50,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
         data-testid='search-button'
         onClick={handleSearchButtonClick}
       >
-        <SearchIcon onClick={() => handleSearch(SKUCode)} />
+        <SearchIcon />
       </IconButtonWrapper>
     </PaperWrapper>
   );
