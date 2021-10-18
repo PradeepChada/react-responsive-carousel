@@ -18,6 +18,8 @@ const skuSlice = createSlice({
   reducers: {
     loading: (state) => {
       state.loading = true;
+      state.skuData = null;
+      state.error = null
     },
     success: (state, action) => {
       state.loading = false;
@@ -27,21 +29,27 @@ const skuSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    inventoryLoading: (state) => {
-      state.loading = true;
+    reset: () => {
+      return INITIAL_STATE
     },
-    inventorySuccess: (state, action) => {
-      state.loading = false;
-      state.skuData = action.payload;
+    skuAvailabilityLoading: (state) => {
+      state.skuAvailabilityLoading = true;
+      state.skuAvailability = null;
+      state.skuAvailabilityError = null;
     },
-    inventoryFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+    skuAvailabilitySuccess: (state, action) => {
+      state.skuAvailabilityLoading = false;
+      state.skuAvailability = action.payload;
+    },
+    skuAvailabilityFailure: (state, action) => {
+      state.skuAvailabilityLoading = false;
+      state.skuAvailabilityError = action.payload;
     },
   }
 });
 
-const actions = skuSlice.actions;
+
+export const actions = skuSlice.actions;
 
 export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
   dispatch(actions.loading());
@@ -53,18 +61,19 @@ export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
         dispatch(actions.success(res?.data));
     })
     .catch(() => {
-      dispatch(actions.failure(skuErrorMessages.UnknownError));
+      dispatch(actions.failure(skuErrorMessages.unknown));
     });
 };
 
-export const fetchSkuAvailability = (skuCode) => (dispatch) => {
-  dispatch(actions.inventoryLoading());
-  skuService.getSkuAvailability(skuCode)
+export const fetchSkuAvailability = (body) => (dispatch) => {
+  dispatch(actions.skuAvailabilityLoading());
+  skuService.getSkuAvailability(body)
     .then((res) => {
-      dispatch(actions.inventorySuccess(res));
+    //  throw new Error()
+      dispatch(actions.skuAvailabilitySuccess(res?.data));
     })
-    .catch(() => {
-      dispatch(actions.inventoryFailure(skuErrorMessages.UnknownError));
+    .catch((err) => {
+      dispatch(actions.skuAvailabilityFailure(err));
     });
 };
 

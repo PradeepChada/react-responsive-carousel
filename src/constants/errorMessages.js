@@ -4,13 +4,14 @@ export const skuErrorMessages = {
   },
   malfunction: {
     title: 'Search Malfunction',
-    Description: 'Please enter SKU manually or check barcode',
+    description: 'Please enter SKU manually or check barcode',
   },
   unknown: {
     title: 'Unknown Error',
-    Description: 'Please try to scan or search again',
+    description: 'Please try to scan or search again',
   },
   inventory: {
-    title: 'currenlty sku quantity is not available',
+    description: 'Availability information is unavailable at this time. Please rescan or enter SKU manually.',
+    shortDescription: 'Availability information is unavailable at this time.',
   },
 };
