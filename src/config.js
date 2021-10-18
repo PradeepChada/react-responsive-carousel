@@ -3,7 +3,7 @@
 export const getUrlConfig = () => {
     let CATELOG_BASE_URL = '';
     let INVENTORY_BASE_URL = ''
-    if(window.location.origin.includes('devPreview') || window.location.origin.includes('localhost')){
+    if(window.location.origin.includes('devpreview') || window.location.origin.includes('localhost')){
         CATELOG_BASE_URL = 'https://catalog-services.devpreview.containerstore.com'
         INVENTORY_BASE_URL = 'https://inventory-services.devpreview.containerstore.com'
     }
