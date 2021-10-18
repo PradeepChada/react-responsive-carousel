@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSkuDetails, actions, fetchSkuAvailability } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -34,6 +34,10 @@ const SearchPage = ({history}) => {
   );
 
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
+
+  useEffect(() => {
+    dispatch(actions.reset())
+  }, [])
 
 
   const handleSearch = (skuId) => {
