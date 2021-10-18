@@ -1,5 +1,5 @@
 import { styled } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { colors } from './../../../utils/themeUtils';
 
@@ -24,4 +24,6 @@ export const Chevron = styled(ChevronRightIcon)(({ theme }) => ({
   fontSize: 18,
 }));
 
-export const Title = styled();
+export const Title = styled(Typography)({
+  lineHeight: "22px"
+})
