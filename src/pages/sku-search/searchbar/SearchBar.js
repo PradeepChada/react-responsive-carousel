@@ -7,7 +7,7 @@ import {
   IconButtonWrapper,
 } from './SearchBar.styles';
 
-function SearchBar() {
+const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
   const handleSearchButtonClick = (event) => {
     event.preventDefault();
@@ -15,15 +15,14 @@ function SearchBar() {
 
   const onChangeHandler = (event) => {
     let input = event.target.value;
-    if (input.includes('\n')) {
-      input = input.replace('\n', '');
-    }
-    setSKUCode(event.target.value);
+    setSKUCode(input);
   };
 
   const handleClearButtonClick = () => {
     setSKUCode('');
+    handleClear();
   };
+
   return (
     <PaperWrapper component='form'>
       <InputBaseWrapper
@@ -40,10 +39,15 @@ function SearchBar() {
         data-testid='search-button'
         onClick={handleSearchButtonClick}
       >
-        <SearchIcon />
+        <SearchIcon onClick={() => handleSearch(SKUCode)} />
       </IconButtonWrapper>
     </PaperWrapper>
   );
 }
 
 export default SearchBar;
+
+SearchBar.defaultProps = {
+  handleSearch: () => { },
+  handleClear: () => { }
+}
