@@ -37,7 +37,7 @@ const SearchPage = ({history}) => {
 
   useEffect(() => {
     dispatch(actions.reset())
-  }, [])
+  }, [dispatch])
 
 
   const handleSearch = (skuId) => {
