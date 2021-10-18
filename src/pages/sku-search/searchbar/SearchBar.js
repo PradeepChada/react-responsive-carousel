@@ -15,10 +15,6 @@ const SearchBar = ({ handleSearch, handleClear }) => {
 
   const onChangeHandler = (event) => {
     let input = event.target.value;
-    if (input.includes('\n')) {
-      input = input.replace('\n', '');
-      handleSearch(input);
-    }
     setSKUCode(input);
   };
 

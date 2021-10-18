@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchSkuDetails } from '../../slices/sku.slice';
 import {getSkuPrice, getColor} from './../../utils/skuHelpers'
 import SkuError from '../../components/sku-error/SkuError';
+import config from './../../config'
 
 const LoadingSkeleton = () => {
   return (
@@ -76,7 +77,7 @@ const ProductDetails = ({ history, match }) => {
         ratingCount={10}
       />
       <ProductCarousel
-        images={skuData?.mediaList?.map((o) => o.url) || []}
+        images={skuData?.mediaList?.map((o) => `${config.ASSET_URL}${o.url}`) || []}
       />
       <Price>${price}/ea</Price>
       <div>

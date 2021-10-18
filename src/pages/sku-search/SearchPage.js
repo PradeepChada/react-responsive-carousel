@@ -6,6 +6,7 @@ import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
 import { getSkuPrice } from './../../utils/skuHelpers'
+import config from './../../config';
 import {
   Wrapper,
   TextWrapper,
@@ -26,7 +27,7 @@ const SearchPageText = () => {
   );
 };
 
-const SearchPage = () => {
+const SearchPage = ({history}) => {
   const dispatch = useDispatch();
   const { loading, skuData, error, skuAvailabilityLoading, skuAvailability, skuAvailabilityError } = useSelector(
     (state) => state.sku
@@ -39,10 +40,10 @@ const SearchPage = () => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction))
     else {
       const stockBody = {
-        "sourceStoreNumber": "0",
-        "fulfillmentStoreNumbers": ["5"],
-        "skuQtyPairs": [{
-          "skuNumber": "4010",
+        sourceStoreNumber: "0",
+        fulfillmentStoreNumbers: [899],
+        skuQtyPairs: [{
+          "skuNumber": skuId,
           "qty": 0
         }
         ]
@@ -56,9 +57,10 @@ const SearchPage = () => {
     dispatch(actions.reset())
   }
 
+  const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {
     name: skuData?.name,
-    image: skuData?.mediaList?.[0]?.url,
+    image: skuImg,
     price,
     skuId: skuData?.id,
     qtyAvailableAtStore: skuAvailability?.inventoryEstimates?.[0]?.qtyAvailableAtStore
@@ -77,6 +79,7 @@ const SearchPage = () => {
           loading={loading}
           skuAvailabilityLoading={skuAvailabilityLoading}
           skuAvailabilityError={skuAvailabilityError}
+          handleClick={id => history.push(`/product-details/${id}`)}
         />}
     </Wrapper>
   );
