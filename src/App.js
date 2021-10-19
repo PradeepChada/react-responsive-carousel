@@ -17,6 +17,10 @@ const StyledBody = styled('div')({
 });
 
 const App = () => {
+  var screenOrientation = window?.screen?.orientation;
+  if (screenOrientation) {
+    screenOrientation.lock('portrait');
+  }
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>

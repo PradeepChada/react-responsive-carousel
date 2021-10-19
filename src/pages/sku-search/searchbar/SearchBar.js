@@ -38,6 +38,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
       <InputBaseWrapper
         placeholder='Scan barcode or enter SKU'
         inputProps={{ 'aria-label': 'sku-input' }}
+        type='number'
         value={SKUCode}
         onChange={onChangeHandler}
         onBlur={onBlurInput}
