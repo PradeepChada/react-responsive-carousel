@@ -10,13 +10,15 @@ export const PageContainer = styled(Container)({
 export const Price = styled('div')({
   fontSize: '32px',
   color: '#333337',
-  margin: '20px 0',
+  margin: '18px 0 0 0',
+  lineHeight: '18px',
   fontWeight: 600,
 });
 
 export const Spec = styled(Typography)({
   fontSize: 14,
   lineHeight: '18px',
+  marginTop: 24,
   fontWeight: 600,
   '& span': {
     fontWeight: 400,
@@ -34,7 +36,7 @@ export const Availability = styled(Box)({
   '& .store-tile': {
     background: '#F6F6FA',
     padding: '14px',
-    margin: '5px 0',
+    margin: '0px 0',
     display: 'flex',
     alignItems: 'center',
     '& img': {

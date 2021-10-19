@@ -1,19 +1,16 @@
 import * as skuService from '../services/sku.service';
+import * as additionalSku from '../services/skuVariants.service';
 import { createSlice } from '@reduxjs/toolkit';
 import { skuErrorMessages } from '../constants/errorMessages';
 
 const INITIAL_STATE = {
   loading: false,
-  skuData: null,
+  skuVariants: null,
   error: null,
   // error: skuErrorMessages.malfunction,
   skuAvailabilityLoading: false,
   skuAvailability: null,
-  skuAvailabilityError: null,
-
-  mktAvailLoading: false,
-  mktAvailData: null,
-  mktAvailError: null
+  skuAvailabilityError: null
 };
 
 const skuSlice = createSlice({
@@ -22,12 +19,12 @@ const skuSlice = createSlice({
   reducers: {
     loading: (state) => {
       state.loading = true;
-      state.skuData = null;
+      state.skuVariants = null;
       state.error = null
     },
     success: (state, action) => {
       state.loading = false;
-      state.skuData = action.payload;
+      state.skuVariants = action.payload;
     },
     failure: (state, action) => {
       state.loading = false;
@@ -49,28 +46,15 @@ const skuSlice = createSlice({
       state.skuAvailabilityLoading = false;
       state.skuAvailabilityError = action.payload;
     },
-    storeAvailLoading: (state) => {
-      state.skuAvailabilityLoading = true;
-      state.skuAvailability = null;
-      state.skuAvailabilityError = null;
-    },
-    storeAvailSuccess: (state, action) => {
-      state.skuAvailabilityLoading = false;
-      state.skuAvailability = action.payload;
-    },
-    storeAvailFailure: (state, action) => {
-      state.skuAvailabilityLoading = false;
-      state.skuAvailabilityError = action.payload;
-    },
   }
 });
 
 
 export const actions = skuSlice.actions;
 
-export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
+export const fetchASkuVariants = (skuCode, storeId) => (dispatch) => {
   dispatch(actions.loading());
-  skuService.getSkuInfo(skuCode, storeId)
+  additionalSku.getSkuVariants(skuCode, storeId)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.failure(skuErrorMessages.notFound));
@@ -86,21 +70,11 @@ export const fetchSkuAvailability = (body) => (dispatch) => {
   dispatch(actions.skuAvailabilityLoading());
   skuService.getSkuAvailability(body)
     .then((res) => {
+    //  throw new Error()
       dispatch(actions.skuAvailabilitySuccess(res?.data));
     })
     .catch((err) => {
       dispatch(actions.skuAvailabilityFailure(err));
-    });
-};
-
-export const fetchStoreAvailability = (body) => (dispatch) => {
-  dispatch(actions.storeAvailLoading());
-  skuService.getStoreAvailability(body)
-    .then((res) => {
-      dispatch(actions.storeAvailSuccess(res?.data));
-    })
-    .catch((err) => {
-      dispatch(actions.storeAvailFailure(err));
     });
 };
 
