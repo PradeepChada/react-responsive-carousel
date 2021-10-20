@@ -27,6 +27,6 @@ const ProductTitle = ({ title, skuId }) => {
 export default ProductTitle;
 
 ProductTitle.propTypes = {
-  title: PropTypes.string.isRequired,
-  skuId: PropTypes.string.isRequired
+  title: PropTypes.string,
+  skuId: PropTypes.number
 }

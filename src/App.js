@@ -34,7 +34,7 @@ const App = () => {
                             <Route exact path='/product-info/:id' component={ProductInfo} />
               <Route
                 exact
-                path='/product-variants/:id'
+                path='/product-variants/:id/:defaultProduct'
                 component={ProductVariants}
               />
             </Switch>

@@ -14,6 +14,6 @@ export const getSkuAvailability = (body) => {
 
 
 export const getStoreAvailability = (body) => {
-  const url = `${config.INVENTORY_BASE_URL}/store-sku-availabilities`
+  const url = `${config.INVENTORY_BASE_URL}/market-availabilities`
   return Axios.post(url, body)
 };

@@ -36,7 +36,7 @@ export const Availability = styled(Box)({
   '& .store-tile': {
     background: '#F6F6FA',
     padding: '14px',
-    margin: '0px 0',
+    margin: '4px 0',
     display: 'flex',
     alignItems: 'center',
     '& img': {
@@ -47,7 +47,10 @@ export const Availability = styled(Box)({
       fontSize: 12,
       lineHeight: '16px',
       '& .stock-green': {
-        color: '#128400',
+        color: colors.green,
+      },
+      '& .stock-red': {
+        color: colors.red,
       },
     },
     '& .availability-link': {

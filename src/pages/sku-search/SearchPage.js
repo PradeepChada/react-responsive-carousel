@@ -44,10 +44,10 @@ const SearchPage = ({history}) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction))
     else {
       const stockBody = {
-        sourceStoreNumber: "0",
-        fulfillmentStoreNumbers: [899],
+        sourceStoreNumber: "5",
+        fulfillmentStoreNumbers: [5, 899],
         skuQtyPairs: [{
-          "skuNumber": skuId,
+          "skuNumber": Number(skuId),
           "qty": 0
         }
         ]
@@ -61,13 +61,15 @@ const SearchPage = ({history}) => {
     dispatch(actions.reset())
   }
 
+  const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.storeId === storeId)?.qtyAvailableAtStore;
+
   const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
     price,
     skuId: skuData?.id,
-    qtyAvailableAtStore: skuAvailability?.inventoryEstimates?.[0]?.qtyAvailableAtStore
+    qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, 5)
   }
 
   return (

@@ -22,7 +22,7 @@ const skuSlice = createSlice({
   reducers: {
     loading: (state) => {
       state.loading = true;
-      state.skuData = null;
+      // state.skuData = null;
       state.error = null
     },
     success: (state, action) => {

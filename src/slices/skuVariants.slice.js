@@ -17,16 +17,16 @@ const skuSlice = createSlice({
   name: 'sku',
   initialState: INITIAL_STATE,
   reducers: {
-    loading: (state) => {
+    variantsLoading: (state) => {
       state.loading = true;
       state.skuVariants = null;
       state.error = null
     },
-    success: (state, action) => {
+    variantsSuccess: (state, action) => {
       state.loading = false;
       state.skuVariants = action.payload;
     },
-    failure: (state, action) => {
+    variantsFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -53,16 +53,26 @@ const skuSlice = createSlice({
 export const actions = skuSlice.actions;
 
 export const fetchASkuVariants = (skuCode, storeId) => (dispatch) => {
-  dispatch(actions.loading());
+  dispatch(actions.variantsLoading());
   additionalSku.getSkuVariants(skuCode, storeId)
     .then((res) => {
       if (res?.status === 204)
-        dispatch(actions.failure(skuErrorMessages.notFound));
-      else
-        dispatch(actions.success(res?.data));
+        dispatch(actions.variantsSuccess(skuErrorMessages.productVariants));
+      else{
+        dispatch(actions.variantsSuccess(res?.data));
+        const stockBody = {
+          sourceStoreNumber: "0",
+          fulfillmentStoreNumbers: [899],
+          skuQtyPairs: res?.data?.skus?.map(o => ({
+            skuNumber: o.id,
+            qty: 0
+          }))
+        }
+        dispatch(fetchSkuAvailability(stockBody));
+      }
     })
     .catch(() => {
-      dispatch(actions.failure(skuErrorMessages.unknown));
+      dispatch(actions.variantsSuccess(skuErrorMessages.productVariants));
     });
 };
 
@@ -70,7 +80,6 @@ export const fetchSkuAvailability = (body) => (dispatch) => {
   dispatch(actions.skuAvailabilityLoading());
   skuService.getSkuAvailability(body)
     .then((res) => {
-    //  throw new Error()
       dispatch(actions.skuAvailabilitySuccess(res?.data));
     })
     .catch((err) => {

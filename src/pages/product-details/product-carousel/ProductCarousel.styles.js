@@ -7,6 +7,7 @@ export const Slider = styled(Carousel)(({ theme }) => ({
   '& .slider-wrapper': {
     '& .slide': {
       minWidth: '208px !important',
+      width: '208px !important',
       marginRight: 20,
       minHeight: 207
     },
@@ -25,4 +26,7 @@ export const Slider = styled(Carousel)(({ theme }) => ({
       },
     },
   },
+  '& .carousel-status':{
+    display: 'none'
+  }
 }));

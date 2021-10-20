@@ -14,4 +14,7 @@ export const skuErrorMessages = {
     description: 'Availability information is unavailable at this time. Please rescan or enter SKU manually.',
     shortDescription: 'Availability information is unavailable at this time.',
   },
+  productVariants: {
+    title: 'Product Variants not available'
+  }
 };
