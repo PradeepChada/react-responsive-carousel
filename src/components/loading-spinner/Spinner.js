@@ -1,7 +1,7 @@
 import React from 'react';
 import './Spinner.css';
 import { Wrapper, SpinnerParent, SpinnerChild } from './Spinner.styles';
-function Spinner() {
+const Spinner = () => {
   return (
     <Wrapper>
       <SpinnerParent>

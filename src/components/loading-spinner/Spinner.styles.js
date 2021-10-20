@@ -1,15 +1,15 @@
-import { styled } from '@mui/styles';
+import { styled, keyframes } from '@mui/system';
 import { colors } from './../../utils/themeUtils';
 
 export const Wrapper = styled('div')({
-  position: 'absolute',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100vw',
-  height: '100vh',
-  background: colors.white,
-  opacity: '0.75',
+  // position: 'absolute',
+  // display: 'flex',
+  // justifyContent: 'center',
+  // alignItems: 'center',
+  // width: '100vw',
+  // height: '100vh',
+  // background: colors.white,
+  // opacity: '0.75',
 });
 
 export const SpinnerParent = styled('div')({
@@ -20,6 +20,16 @@ export const SpinnerParent = styled('div')({
   background: 'none',
 });
 
+const spin = keyframes`
+0%: {
+  opacity: 1;
+},
+100% {
+  opacity: 0;
+}
+`;
+
+
 export const SpinnerChild = styled('div')({
   // animationName: 'anim',
   width: '100%',
@@ -28,16 +38,7 @@ export const SpinnerChild = styled('div')({
   transform: 'translateZ(0) scale(1)',
   backfaceVisibility: 'hidden',
   transformOrigin: '0 0',
-  '@keyframes anim': {
-    '0%': {
-      opacity: '1',
-    },
-    '100%': {
-      opacity: '0',
-    },
-  },
-
-  '&: div': {
+  '& div': {
     left: '94.56px',
     top: '61.07px',
     position: 'absolute',
@@ -48,7 +49,8 @@ export const SpinnerChild = styled('div')({
     border: '2.1670000000000003px / 2.1670000000000003px',
     transformOrigin: '3.94px 37.43px',
     boxSizing: 'content-box',
-  },
+  animation: `${spin} linear 1.2048192771084336s infinite`,
+},
   '& div:nth-child(1)': {
     transform: 'rotate(0deg)',
     animationDelay: '-1.0542168674698795s',
