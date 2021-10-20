@@ -6,7 +6,7 @@ const ProductCarousel = ({ images }) => {
   return (
     <Slider showArrows={false} showIndicators={false} centerMode>
       {images.map((val) => (
-        <img className='slide-image' src={val} alt={val} />
+        <img key={val} className='slide-image' src={val} alt={val} />
       ))}
     </Slider>
   );

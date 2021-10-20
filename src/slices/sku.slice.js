@@ -1,4 +1,4 @@
-import * as skuService from '../services/skuService';
+import * as skuService from '../services/sku.service';
 import { createSlice } from '@reduxjs/toolkit';
 import { skuErrorMessages } from '../constants/errorMessages';
 
@@ -9,7 +9,11 @@ const INITIAL_STATE = {
   // error: skuErrorMessages.malfunction,
   skuAvailabilityLoading: false,
   skuAvailability: null,
-  skuAvailabilityError: null
+  skuAvailabilityError: null,
+
+  mktAvailLoading: false,
+  mktAvailData: null,
+  mktAvailError: null,
 };
 
 const skuSlice = createSlice({
@@ -18,8 +22,8 @@ const skuSlice = createSlice({
   reducers: {
     loading: (state) => {
       state.loading = true;
-      state.skuData = null;
-      state.error = null
+      // state.skuData = null;
+      state.error = null;
     },
     success: (state, action) => {
       state.loading = false;
@@ -30,7 +34,7 @@ const skuSlice = createSlice({
       state.error = action.payload;
     },
     reset: () => {
-      return INITIAL_STATE
+      return INITIAL_STATE;
     },
     skuAvailabilityLoading: (state) => {
       state.skuAvailabilityLoading = true;
@@ -45,20 +49,45 @@ const skuSlice = createSlice({
       state.skuAvailabilityLoading = false;
       state.skuAvailabilityError = action.payload;
     },
-  }
+    storeAvailLoading: (state) => {
+      state.skuAvailabilityLoading = true;
+      state.skuAvailability = null;
+      state.skuAvailabilityError = null;
+    },
+    storeAvailSuccess: (state, action) => {
+      state.skuAvailabilityLoading = false;
+      state.skuAvailability = action.payload;
+    },
+    storeAvailFailure: (state, action) => {
+      state.skuAvailabilityLoading = false;
+      state.skuAvailabilityError = action.payload;
+    },
+  },
 });
-
 
 export const actions = skuSlice.actions;
 
-export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
+export const fetchSkuDetails = (skuCode, storeId, fetchQty = true) => (dispatch) => {
   dispatch(actions.loading());
-  skuService.getSkuInfo(skuCode, storeId)
+  skuService
+    .getSkuInfo(skuCode, storeId)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.failure(skuErrorMessages.notFound));
-      else
+      else {
+        const stockBody = {
+          sourceStoreNumber: '5',
+          fulfillmentStoreNumbers: [5, 899],
+          skuQtyPairs: [
+            {
+              skuNumber: skuCode,
+              qty: 0,
+            },
+          ],
+        };
+        fetchQty && dispatch(fetchSkuAvailability(stockBody));
         dispatch(actions.success(res?.data));
+      }
     })
     .catch(() => {
       dispatch(actions.failure(skuErrorMessages.unknown));
@@ -67,9 +96,9 @@ export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
 
 export const fetchSkuAvailability = (body) => (dispatch) => {
   dispatch(actions.skuAvailabilityLoading());
-  skuService.getSkuAvailability(body)
+  skuService
+    .getSkuAvailability(body)
     .then((res) => {
-    //  throw new Error()
       dispatch(actions.skuAvailabilitySuccess(res?.data));
     })
     .catch((err) => {
@@ -77,5 +106,16 @@ export const fetchSkuAvailability = (body) => (dispatch) => {
     });
 };
 
+export const fetchStoreAvailability = (body) => (dispatch) => {
+  dispatch(actions.storeAvailLoading());
+  skuService
+    .getStoreAvailability(body)
+    .then((res) => {
+      dispatch(actions.storeAvailSuccess(res?.data));
+    })
+    .catch((err) => {
+      dispatch(actions.storeAvailFailure(err));
+    });
+};
 
 export default skuSlice;
