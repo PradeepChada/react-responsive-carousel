@@ -1,19 +1,24 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSkuDetails, actions, fetchSkuAvailability } from '../../slices/sku.slice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchSkuDetails,
+  actions,
+  fetchSkuAvailability,
+} from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
-import { getSkuPrice } from './../../utils/skuHelpers'
+import { getSkuPrice } from './../../utils/skuHelpers';
 import config from './../../config';
 import {
   Wrapper,
   TextWrapper,
   Title,
   Description,
-  ErrorWrapper
+  ErrorWrapper,
 } from './SearchPage.styles';
+import Spinner from '../../components/loading-spinner/Spinner';
 
 const SearchPageText = () => {
   return (
@@ -27,52 +32,60 @@ const SearchPageText = () => {
   );
 };
 
-const SearchPage = ({history}) => {
+const SearchPage = ({ history }) => {
   const dispatch = useDispatch();
-  const { loading, skuData, error, skuAvailabilityLoading, skuAvailability, skuAvailabilityError } = useSelector(
-    (state) => state.sku
-  );
+  const {
+    loading,
+    skuData,
+    error,
+    skuAvailabilityLoading,
+    skuAvailability,
+    skuAvailabilityError,
+  } = useSelector((state) => state.sku);
 
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
 
   useEffect(() => {
-    dispatch(actions.reset())
-  }, [dispatch])
-
+    dispatch(actions.reset());
+  }, [dispatch]);
 
   const handleSearch = (skuId) => {
-    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction))
+    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
     else {
       const stockBody = {
-        sourceStoreNumber: "0",
+        sourceStoreNumber: '0',
         fulfillmentStoreNumbers: [899],
-        skuQtyPairs: [{
-          "skuNumber": skuId,
-          "qty": 0
-        }
-        ]
-      }
+        skuQtyPairs: [
+          {
+            skuNumber: skuId,
+            qty: 0,
+          },
+        ],
+      };
       dispatch(fetchSkuAvailability(stockBody));
       dispatch(fetchSkuDetails(skuId, 899));
     }
-  }
+  };
 
   const handleClear = () => {
-    dispatch(actions.reset())
-  }
+    dispatch(actions.reset());
+  };
 
-  const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
+  const skuImg = skuData?.mediaList?.[0]?.url
+    ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}`
+    : null;
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
     price,
     skuId: skuData?.id,
-    qtyAvailableAtStore: skuAvailability?.inventoryEstimates?.[0]?.qtyAvailableAtStore
-  }
+    qtyAvailableAtStore:
+      skuAvailability?.inventoryEstimates?.[0]?.qtyAvailableAtStore,
+  };
 
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
-      <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
+      {/* <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
       {!loading && !error && !skuData && <SearchPageText />}
       {error ?
         <ErrorWrapper alignItems="center">
@@ -84,9 +97,10 @@ const SearchPage = ({history}) => {
           skuAvailabilityLoading={skuAvailabilityLoading}
           skuAvailabilityError={skuAvailabilityError}
           handleClick={id => history.push(`/product-details/${id}`)}
-        />}
+        />} */}
+      <Spinner />
     </Wrapper>
   );
-}
+};
 
 export default SearchPage;
