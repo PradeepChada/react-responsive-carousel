@@ -67,7 +67,7 @@ const skuSlice = createSlice({
 
 export const actions = skuSlice.actions;
 
-export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
+export const fetchSkuDetails = (skuCode, storeId, fetchQty = true) => (dispatch) => {
   dispatch(actions.loading());
   skuService
     .getSkuInfo(skuCode, storeId)
@@ -85,7 +85,7 @@ export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
             },
           ],
         };
-        dispatch(fetchSkuAvailability(stockBody));
+        fetchQty && dispatch(fetchSkuAvailability(stockBody));
         dispatch(actions.success(res?.data));
       }
     })

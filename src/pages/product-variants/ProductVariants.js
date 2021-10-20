@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Skeleton, Box, Typography } from '@mui/material';
+import { Skeleton, Box } from '@mui/material';
 import ProductTitle from '../../components/product-title/ProductTitle';
 import SkuTile from '../../components/sku-tile/SkuTile';
 import { fetchASkuVariants } from '../../slices/skuVariants.slice';
@@ -11,7 +11,7 @@ import {
   Title,
   ErrorWrapper,
 } from './ProductVariants.styles';
-import { getSkuPrice } from './../../utils/skuHelpers';
+import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -48,16 +48,12 @@ const ProductVariants = ({ history, match }) => {
     skuAvailability,
   } = useSelector((state) => state.sku);
 
-  const getQuantity = (skuId, data = []) => {
-    return data?.find((o) => o.fulfillmentStoreNumber === skuId)?.qtyAvailableAtStore;
-  };
-
   useEffect(() => {
     dispatch(fetchASkuVariants(match?.params?.defaultProduct, 899));
   }, [dispatch, match?.params?.defaultProduct]);
 
   useEffect(() => {
-   if (!skuData) dispatch(fetchSkuDetails(match?.params?.id, 899));
+    if (!skuData) dispatch(fetchSkuDetails(match?.params?.id, 899, false));
   }, [dispatch, match?.params?.id, skuData]);
 
   const getSkuData = (item) => {
@@ -65,7 +61,7 @@ const ProductVariants = ({ history, match }) => {
       image: `${config.ASSET_URL}${item.mediaList?.[0]?.url}`,
       price: getSkuPrice(item?.productPrice, 'maxRetailPrice'),
       name: item.name,
-      qtyAvailableAtStore: getQuantity(
+      qtyAvailableAtStore: getQtyInStore(
         item.id,
         skuAvailability?.inventoryEstimates
       ),
@@ -81,7 +77,7 @@ const ProductVariants = ({ history, match }) => {
       </ErrorWrapper>
     );
   }
-  const variants = skuVariants?.skus?.filter((o) => o.id !== match?.params?.id)
+  const variants = skuVariants?.skus?.filter((o) => o.id !== match?.params?.id);
   return (
     <PageContainer>
       {skuTitleLoading ? (
@@ -95,26 +91,34 @@ const ProductVariants = ({ history, match }) => {
         />
       )}
       <Wrapper>
-        <Title variant='h6'>Additional Sizes & Colors {variants?.length ? `(${variants.length})` : null}</Title>
+        <Title variant='h6'>
+          Additional Sizes & Colors{' '}
+          {variants?.length ? `(${variants.length})` : null}
+        </Title>
       </Wrapper>
-      {loading
-        ? Array(2)
+      {
+        loading ? (
+          Array(2)
             .fill(null)
-            .map(() => <SkuTile loading={true} />)
-        : variants?.length ? variants.map((item) => {
-              const skuInfo = getSkuData(item);
-              return (
-                <SkuTile
-                  skuInfo={skuInfo}
-                  skuAvailabilityLoading={skuAvailabilityLoading}
-                  skuAvailabilityError={skuAvailabilityError}
-                  handleClick={(id) => history.push(`/product-details/${id}`)}
-                />
-              );
-            }) : 
-            <SkuError {...skuErrorMessages.productVariants} />
-            // <Typography h1 textAlign="center" marginTop={5} >Product variants not available</Typography>
-          }
+            .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
+        ) : variants?.length ? (
+          variants.map((item, i) => {
+            const skuInfo = getSkuData(item);
+            return (
+              <SkuTile
+                key={`key${i}`}
+                skuInfo={skuInfo}
+                skuAvailabilityLoading={skuAvailabilityLoading}
+                skuAvailabilityError={skuAvailabilityError}
+                handleClick={(id) => history.push(`/product-details/${id}`)}
+              />
+            );
+          })
+        ) : (
+          <SkuError {...skuErrorMessages.productVariants} />
+        )
+        // <Typography h1 textAlign="center" marginTop={5} >Product variants not available</Typography>
+      }
     </PageContainer>
   );
 };

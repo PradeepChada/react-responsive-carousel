@@ -63,7 +63,7 @@ const SkuTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityErro
 export default SkuTile;
 
 SkuTile.propTypes = {
-  skuInfo: PropTypes.object.isRequired,
+  skuInfo: PropTypes.object,
   loading: PropTypes.bool,
   skuAvailabilityLoading: PropTypes.bool,
   skuAvailabilityError: PropTypes.object,

@@ -5,7 +5,7 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
-import { getSkuPrice } from './../../utils/skuHelpers'
+import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers'
 import config from './../../config';
 import {
   Wrapper,
@@ -52,7 +52,7 @@ const SearchPage = ({history}) => {
     dispatch(actions.reset())
   }
 
-  const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
+  // const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
 
   const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {

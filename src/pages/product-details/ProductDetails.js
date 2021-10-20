@@ -15,8 +15,8 @@ import DeliveryIcon from './../../assets/icons/delivery.svg';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSkuDetails, fetchSkuAvailability } from '../../slices/sku.slice';
-import { getSkuPrice, getColor } from './../../utils/skuHelpers';
+import { fetchSkuDetails } from '../../slices/sku.slice';
+import { getSkuPrice, getQtyInStore, getQtyInDC, getQtyOnline } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
 
@@ -86,9 +86,9 @@ const ProductDetails = ({ history, match }) => {
       </ErrorWrapper>
     );
   }
-  const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
-  const getQtyInDC = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableInDc;
-  const getQtyOnline = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
+  // const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
+  // const getQtyInDC = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableInDc;
+  // const getQtyOnline = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 
   const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, "5")
   const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, "5");

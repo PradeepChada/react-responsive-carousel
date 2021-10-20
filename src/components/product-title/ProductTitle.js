@@ -28,5 +28,8 @@ export default ProductTitle;
 
 ProductTitle.propTypes = {
   title: PropTypes.string,
-  skuId: PropTypes.number
+  skuId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
 }
