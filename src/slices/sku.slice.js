@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 
   mktAvailLoading: false,
   mktAvailData: null,
-  mktAvailError: null
+  mktAvailError: null,
 };
 
 const skuSlice = createSlice({
@@ -23,7 +23,7 @@ const skuSlice = createSlice({
     loading: (state) => {
       state.loading = true;
       // state.skuData = null;
-      state.error = null
+      state.error = null;
     },
     success: (state, action) => {
       state.loading = false;
@@ -34,7 +34,7 @@ const skuSlice = createSlice({
       state.error = action.payload;
     },
     reset: () => {
-      return INITIAL_STATE
+      return INITIAL_STATE;
     },
     skuAvailabilityLoading: (state) => {
       state.skuAvailabilityLoading = true;
@@ -62,20 +62,32 @@ const skuSlice = createSlice({
       state.skuAvailabilityLoading = false;
       state.skuAvailabilityError = action.payload;
     },
-  }
+  },
 });
-
 
 export const actions = skuSlice.actions;
 
 export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
   dispatch(actions.loading());
-  skuService.getSkuInfo(skuCode, storeId)
+  skuService
+    .getSkuInfo(skuCode, storeId)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.failure(skuErrorMessages.notFound));
-      else
+      else {
+        const stockBody = {
+          sourceStoreNumber: '5',
+          fulfillmentStoreNumbers: [5, 899],
+          skuQtyPairs: [
+            {
+              skuNumber: skuCode,
+              qty: 0,
+            },
+          ],
+        };
+        dispatch(fetchSkuAvailability(stockBody));
         dispatch(actions.success(res?.data));
+      }
     })
     .catch(() => {
       dispatch(actions.failure(skuErrorMessages.unknown));
@@ -84,7 +96,8 @@ export const fetchSkuDetails = (skuCode, storeId) => (dispatch) => {
 
 export const fetchSkuAvailability = (body) => (dispatch) => {
   dispatch(actions.skuAvailabilityLoading());
-  skuService.getSkuAvailability(body)
+  skuService
+    .getSkuAvailability(body)
     .then((res) => {
       dispatch(actions.skuAvailabilitySuccess(res?.data));
     })
@@ -95,7 +108,8 @@ export const fetchSkuAvailability = (body) => (dispatch) => {
 
 export const fetchStoreAvailability = (body) => (dispatch) => {
   dispatch(actions.storeAvailLoading());
-  skuService.getStoreAvailability(body)
+  skuService
+    .getStoreAvailability(body)
     .then((res) => {
       dispatch(actions.storeAvailSuccess(res?.data));
     })
@@ -103,6 +117,5 @@ export const fetchStoreAvailability = (body) => (dispatch) => {
       dispatch(actions.storeAvailFailure(err));
     });
 };
-
 
 export default skuSlice;

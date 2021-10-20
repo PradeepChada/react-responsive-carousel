@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSkuDetails, actions, fetchSkuAvailability } from '../../slices/sku.slice';
+import { fetchSkuDetails, actions } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
@@ -43,16 +43,7 @@ const SearchPage = ({history}) => {
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction))
     else {
-      const stockBody = {
-        sourceStoreNumber: "5",
-        fulfillmentStoreNumbers: [5, 899],
-        skuQtyPairs: [{
-          "skuNumber": Number(skuId),
-          "qty": 0
-        }
-        ]
-      }
-      dispatch(fetchSkuAvailability(stockBody));
+
       dispatch(fetchSkuDetails(skuId, 899));
     }
   }
