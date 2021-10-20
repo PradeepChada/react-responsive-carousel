@@ -68,26 +68,10 @@ const ProductDetails = ({ history, match }) => {
     (state) => state.sku
   );
 
-  // const { qtyAvailableAtStore, qtyAvailableInDc } =
-  //   skuAvailability?.inventoryEstimates?.[0] || {};
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
-  const color = getColor(skuData?.attribute);
-
-
 
   useEffect(() => {
     if (!skuData) {
-      const stockBody = {
-        sourceStoreNumber: '0',
-        fulfillmentStoreNumbers: [899],
-        skuQtyPairs: [
-          {
-            skuNumber: match?.params?.id,
-            qty: 0,
-          },
-        ],
-      };
-      dispatch(fetchSkuAvailability(stockBody));
       dispatch(fetchSkuDetails(match?.params?.id, 899));
     }
   }, [dispatch, match?.params?.id, skuData]);
@@ -103,11 +87,11 @@ const ProductDetails = ({ history, match }) => {
     );
   }
   const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
-  const getQtyInDC = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
-  const getQtyOnline = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableAtStore;
+  const getQtyInDC = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableInDc;
+  const getQtyOnline = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 
-  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, 5)
-  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates);
+  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, "5")
+  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, "5");
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
 
   return (
@@ -135,9 +119,9 @@ const ProductDetails = ({ history, match }) => {
             Weight: <span>{skuData?.dimension?.weight}</span>
           </Spec>
         )}
-        {color && (
+        {skuData?.color && (
           <Spec>
-            Color: <span>{color}</span>
+            Color: <span>{skuData?.color}</span>
           </Spec>
         )}
       </div>

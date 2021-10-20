@@ -18,11 +18,14 @@ export const Price = styled('div')({
 export const Spec = styled(Typography)({
   fontSize: 14,
   lineHeight: '18px',
-  marginTop: 24,
   fontWeight: 600,
+  marginTop: 3,
   '& span': {
     fontWeight: 400,
   },
+  '&:first-child':{
+  marginTop: 24,
+  }
 });
 
 export const Availability = styled(Box)({

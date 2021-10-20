@@ -49,7 +49,7 @@ const ProductVariants = ({ history, match }) => {
   } = useSelector((state) => state.sku);
 
   const getQuantity = (skuId, data = []) => {
-    return data?.find((o) => o.skuNumber === skuId)?.qtyAvailableAtStore;
+    return data?.find((o) => o.fulfillmentStoreNumber === skuId)?.qtyAvailableAtStore;
   };
 
   useEffect(() => {

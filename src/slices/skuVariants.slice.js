@@ -61,8 +61,8 @@ export const fetchASkuVariants = (skuCode, storeId) => (dispatch) => {
       else{
         dispatch(actions.variantsSuccess(res?.data));
         const stockBody = {
-          sourceStoreNumber: "0",
-          fulfillmentStoreNumbers: [899],
+          sourceStoreNumber: "5",
+          fulfillmentStoreNumbers: [899, 5],
           skuQtyPairs: res?.data?.skus?.map(o => ({
             skuNumber: o.id,
             qty: 0
