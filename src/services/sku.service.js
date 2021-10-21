@@ -1,5 +1,4 @@
 import Axios from '../api';
-// import { skuAvailability } from '../utils/MockData';
 import config from '../config'
 
 export const getSkuInfo = (skuCode, storeId) => {
@@ -14,7 +13,6 @@ export const getSkuAvailability = (body) => {
 
 
 export const getStoreAvailability = (skuId) => {
-  // https://inventory-services.devpreview.containerstore.com/market-availabilities?sku=10013666&store=899
   const url = `${config.INVENTORY_BASE_URL}/market-availabilities?sku=${skuId}&store=899`
   return Axios.get(url)
 };

@@ -9,13 +9,16 @@ import {
   Price,
   Spec,
   ErrorWrapper,
+  StockError,
 } from './ProductDetails.styles';
 import StoreIcon from './../../assets/icons/store.svg';
 import DeliveryIcon from './../../assets/icons/delivery.svg';
+import RefreshIcon from './../../assets/icons/refresh.svg';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  fetchSkuAvailability,
   fetchSkuDetails,
   fetchStoreAvailability,
 } from '../../slices/sku.slice';
@@ -28,6 +31,7 @@ import {
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
+import { skuErrorMessages } from '../../constants/errorMessages';
 
 const LoadingSkeleton = () => {
   return (
@@ -78,6 +82,8 @@ const ProductDetails = ({ history, match }) => {
     skuData,
     error,
     skuAvailability,
+    skuAvailabilityLoading,
+    skuAvailabilityError,
     mktAvailLoading,
     mktAvailData,
     mktAvailError,
@@ -95,6 +101,20 @@ const ProductDetails = ({ history, match }) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id));
     setShowDrawer(open);
   };
+  
+  const fetchSkuAvailabilityData = () => {
+    const stockBody = {
+      sourceStoreNumber: 49,
+      fulfillmentStoreNumbers: [49, 899],
+      skuQtyPairs: [
+        {
+          skuNumber: match?.params?.id,
+          qty: 0,
+        },
+      ],
+    };
+    dispatch(fetchSkuAvailability(stockBody));
+  }
 
   const _renderDrawer = () => {
     return (
@@ -106,8 +126,11 @@ const ProductDetails = ({ history, match }) => {
         <NetworkInventory
           anchor={'left'}
           toggleDrawer={toggleDrawer}
-          data={mktAvailData?.storeAvailabilities}
+          data={mktAvailData?.storeAvailabilities?.filter(
+            (o) => o.storeNumber !== 899
+          )}
           loading={mktAvailLoading}
+          error={mktAvailError}
         />
       </Drawer>
     );
@@ -162,49 +185,78 @@ const ProductDetails = ({ history, match }) => {
       </div>
       <Availability>
         <Typography className='sub-head'>Availability</Typography>
-        <Box className='store-tile'>
-          <img src={StoreIcon} alt='Store' />
-          <Box flexGrow={1}>
-            <div className='stock-details'>
-              {inStoreQty ? (
-                <span className='stock-green'>{inStoreQty} in Stock</span>
-              ) : (
-                <span className='stock-red'>Out of Stock</span>
-              )}{' '}
-              in this store
-            </div>
-            <Button
-              className='availability-link'
-              variant='text'
-              onClick={() => toggleDrawer(true)}
-            >
-              View availability in other stores
-            </Button>
-          </Box>
-        </Box>
-        <Box className='store-tile other-stores'>
-          <img src={DeliveryIcon} alt='Store' />
-          <Box flexGrow={1}>
-            <div className='stock-details'>
-              {dcQty ? (
-                <span className='stock-green'>{dcQty} in Stock</span>
-              ) : (
-                <span className='stock-red'>Out of Stock</span>
-              )}{' '}
-              in DC
-              {/* <span className='stock-green'>{qtyAvailableInDc} in Stock</span> in DC */}
-            </div>
-            <Divider />
-            <div className='stock-details'>
-              {onlineQty ? (
-                <span className='stock-green'>{onlineQty} in Stock</span>
-              ) : (
-                <span className='stock-red'>Out of Stock</span>
-              )}{' '}
-              online
-            </div>
-          </Box>
-        </Box>
+        {skuAvailabilityError ? (
+          <StockError>
+            {skuErrorMessages.inventory?.shortDescription}
+            <Box className="refresh-btn">
+              {/* <CachedIcon />  */}
+              <img src={RefreshIcon} alt="Refresh" />
+              <Button onClick={fetchSkuAvailabilityData} variant='text'>Refresh Page</Button>
+            </Box>
+          </StockError>
+        ) : (
+          <>
+            <Box className='store-tile'>
+              <img src={StoreIcon} alt='Store' />
+              <Box flexGrow={1}>
+                {skuAvailabilityLoading ? (
+                  <Skeleton />
+                ) : (
+                  <div className='stock-details'>
+                    {inStoreQty ? (
+                      <span className='stock-green'>{inStoreQty} in Stock</span>
+                    ) : (
+                      <span className='stock-red'>Out of Stock</span>
+                    )}{' '}
+                    in this store
+                  </div>
+                )}
+                {skuAvailabilityLoading ? (
+                  <Skeleton width={200} />
+                ) : (
+                  <Button
+                    className='availability-link'
+                    variant='text'
+                    onClick={() => toggleDrawer(true)}
+                  >
+                    View availability in other stores
+                  </Button>
+                )}
+              </Box>
+            </Box>
+            <Box className='store-tile other-stores'>
+              <img src={DeliveryIcon} alt='Store' />
+              <Box flexGrow={1}>
+                {skuAvailabilityLoading ? (
+                  <Skeleton />
+                ) : (
+                  <div className='stock-details'>
+                    {dcQty ? (
+                      <span className='stock-green'>{dcQty} in Stock</span>
+                    ) : (
+                      <span className='stock-red'>Out of Stock</span>
+                    )}{' '}
+                    in DC
+                    {/* <span className='stock-green'>{qtyAvailableInDc} in Stock</span> in DC */}
+                  </div>
+                )}
+                <Divider />
+                {skuAvailabilityLoading ? (
+                  <Skeleton />
+                ) : (
+                  <div className='stock-details'>
+                    {onlineQty ? (
+                      <span className='stock-green'>{onlineQty} in Stock</span>
+                    ) : (
+                      <span className='stock-red'>Out of Stock</span>
+                    )}{' '}
+                    online
+                  </div>
+                )}
+              </Box>
+            </Box>
+          </>
+        )}
       </Availability>
       <Box>
         <InfoTile

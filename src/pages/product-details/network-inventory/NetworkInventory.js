@@ -8,9 +8,15 @@ import {
   ValueOutOfStock,
 } from './NetworkInventory.styles';
 import CloseIcon from '@mui/icons-material/Close';
-import { List, ListItem, ListItemText, Skeleton } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Skeleton,
+  Typography,
+} from '@mui/material';
 
-const NetworkInventory = ({ toggleDrawer, data, loading }) => {
+const NetworkInventory = ({ toggleDrawer, data, loading, error }) => {
   return (
     <InventoryBox>
       <Title>
@@ -26,7 +32,9 @@ const NetworkInventory = ({ toggleDrawer, data, loading }) => {
             <Skeleton sx={{ marginTop: 2 }} height={30} />
             <Skeleton height={30} />
           </ListWrapper>
-        ) : (
+        ) : error ? (
+          <Typography>Unable to load Data</Typography>
+        ) : data.length ? (
           data?.map((outlet, index) => (
             <ListItem button key={index} className='list-item'>
               <ListItemText
@@ -40,6 +48,8 @@ const NetworkInventory = ({ toggleDrawer, data, loading }) => {
               )}
             </ListItem>
           ))
+        ) : (
+          <Typography variant="h2" >Data not available</Typography>
         )}
       </List>
     </InventoryBox>
@@ -51,6 +61,8 @@ export default NetworkInventory;
 NetworkInventory.prototypes = {
   toggleDrawer: PropTypes.func.isRequired,
   data: PropTypes.array,
+  loading: PropTypes.bool,
+  error: PropTypes.object,
 };
 
 NetworkInventory.defaultProps = {
