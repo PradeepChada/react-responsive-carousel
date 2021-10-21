@@ -85,20 +85,24 @@ const SearchPage = ({ history }) => {
 
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
-      {/* <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
+      <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
       {!loading && !error && !skuData && <SearchPageText />}
-      {error ?
-        <ErrorWrapper alignItems="center">
+      {error ? (
+        <ErrorWrapper alignItems='center'>
           <SkuError {...error} />
-        </ErrorWrapper> : (loading || skuData) && <SkuTile
-          skuInfo={skuInfo}
-          skuAvailability={skuAvailability}
-          loading={loading}
-          skuAvailabilityLoading={skuAvailabilityLoading}
-          skuAvailabilityError={skuAvailabilityError}
-          handleClick={id => history.push(`/product-details/${id}`)}
-        />} */}
-      <Spinner />
+        </ErrorWrapper>
+      ) : (
+        (loading || skuData) && (
+          <SkuTile
+            skuInfo={skuInfo}
+            skuAvailability={skuAvailability}
+            loading={loading}
+            skuAvailabilityLoading={skuAvailabilityLoading}
+            skuAvailabilityError={skuAvailabilityError}
+            handleClick={(id) => history.push(`/product-details/${id}`)}
+          />
+        )
+      )}
     </Wrapper>
   );
 };

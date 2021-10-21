@@ -1,7 +1,8 @@
 import React from 'react';
-import './Spinner.css';
+import PropTypes from 'prop-types';
 import { Wrapper, SpinnerParent, SpinnerChild } from './Spinner.styles';
-const Spinner = () => {
+const Spinner = ({ isActive }) => {
+  if (!isActive) return null;
   return (
     <Wrapper>
       <SpinnerParent>
@@ -18,6 +19,10 @@ const Spinner = () => {
       </SpinnerParent>
     </Wrapper>
   );
-}
+};
 
 export default Spinner;
+
+Spinner.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+};

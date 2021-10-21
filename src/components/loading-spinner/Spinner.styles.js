@@ -2,14 +2,15 @@ import { styled, keyframes } from '@mui/system';
 import { colors } from './../../utils/themeUtils';
 
 export const Wrapper = styled('div')({
-  // position: 'absolute',
-  // display: 'flex',
-  // justifyContent: 'center',
-  // alignItems: 'center',
-  // width: '100vw',
-  // height: '100vh',
-  // background: colors.white,
-  // opacity: '0.75',
+  position: 'absolute',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100vw',
+  height: '100vh',
+  background: colors.white,
+  opacity: '0.75',
+  zIndex: '1',
 });
 
 export const SpinnerParent = styled('div')({
@@ -29,9 +30,7 @@ const spin = keyframes`
 }
 `;
 
-
 export const SpinnerChild = styled('div')({
-  // animationName: 'anim',
   width: '100%',
   height: '100%',
   position: 'relative',
@@ -43,52 +42,52 @@ export const SpinnerChild = styled('div')({
     top: '61.07px',
     position: 'absolute',
     animation: `anim linear 1.2048192771084336s infinite`,
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
     width: '7.88px',
     height: '19.7px',
     border: '2.1670000000000003px / 2.1670000000000003px',
     transformOrigin: '3.94px 37.43px',
     boxSizing: 'content-box',
-  animation: `${spin} linear 1.2048192771084336s infinite`,
-},
+    animation: `${spin} linear 1.2048192771084336s infinite`,
+  },
   '& div:nth-child(1)': {
     transform: 'rotate(0deg)',
     animationDelay: '-1.0542168674698795s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(2)': {
     transform: 'rotate(45deg)',
     animationDelay: '-0.9036144578313252s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(3)': {
     transform: 'rotate(90deg)',
     animationDelay: '-0.753012048192771s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(4)': {
     transform: 'rotate(135deg)',
     animationDelay: '-0.6024096385542168s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(5)': {
     transform: 'rotate(180deg)',
     animationDelay: '-0.4518072289156626s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(6)': {
     transform: 'rotate(225deg)',
     animationDelay: '-0.3012048192771084s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(7)': {
-    transform: 'rotate(rotate(270deg))',
+    transform: 'rotate(270deg)',
     animationDelay: '-0.1506024096385542s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
   '& div:nth-child(8)': {
     transform: 'rotate(315deg)',
     animationDelay: '0s',
-    background: '#2e50a7',
+    background: colors.spinnerBackground,
   },
 });
