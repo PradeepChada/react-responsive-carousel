@@ -103,3 +103,25 @@ export const InfoTile = styled(Box)({
 export const ErrorWrapper = styled(Box)({
   padding: '29px 45px'
 })
+
+export const StockError = styled(Box)({
+  backgroundColor: colors.dangerBackground,
+  fontSize: '14px',
+  color: colors.danger,
+  border: `1px solid ${colors.dangerBorder}`,
+  borderRadius: '4px',
+  fontWeight: '400',
+  padding: '5px 10px 13px 10px',
+  '& .refresh-btn':{
+    display: 'flex',
+    alignItems: 'center',
+    fontWeight: 'bold'
+  },
+  '& button':{
+    textTransform: 'none',
+    color: colors.danger,
+    textDecoration: 'underline',
+    fontWeight: '600',
+    padding: '0px 5px'
+  }
+});
