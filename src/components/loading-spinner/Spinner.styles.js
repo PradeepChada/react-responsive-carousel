@@ -46,6 +46,7 @@ export const SpinnerChild = styled('div')({
     width: '7.88px',
     height: '19.7px',
     border: '2.1670000000000003px / 2.1670000000000003px',
+    borderRadius: '20px',
     transformOrigin: '3.94px 37.43px',
     boxSizing: 'content-box',
     animation: `${spin} linear 1.2048192771084336s infinite`,

@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Wrapper, SpinnerParent, SpinnerChild } from './Spinner.styles';
-const Spinner = ({ isActive }) => {
+import { useSelector } from 'react-redux';
+const Spinner = () => {
+  const { isActive } = useSelector((state) => state.spinner);
   if (!isActive) return null;
   return (
     <Wrapper>
@@ -22,7 +23,3 @@ const Spinner = ({ isActive }) => {
 };
 
 export default Spinner;
-
-Spinner.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-};

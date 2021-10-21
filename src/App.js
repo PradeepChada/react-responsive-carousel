@@ -26,7 +26,7 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Spinner isActive={true} />
+          <Spinner />
           <Header />
           <StyledBody>
             <Switch>

@@ -18,7 +18,6 @@ import {
   Description,
   ErrorWrapper,
 } from './SearchPage.styles';
-import Spinner from '../../components/loading-spinner/Spinner';
 
 const SearchPageText = () => {
   return (
