@@ -59,9 +59,9 @@ export const Title = styled(Typography)({
   color: colors.fontColor,
   fontWeight: '400',
   marginBottom: '12px',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
+  // textOverflow: 'ellipsis',
+  // whiteSpace: 'nowrap',
+  // overflow: 'hidden',
 });
 
 export const Stock = styled(Typography)({
