@@ -1,6 +1,6 @@
-import { Typography, Skeleton, Button, Divider } from '@mui/material';
+import { Typography, Skeleton, Button, Divider, Drawer } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
 import {
   Availability,
@@ -16,9 +16,15 @@ import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSkuDetails } from '../../slices/sku.slice';
-import { getSkuPrice, getQtyInStore, getQtyInDC, getQtyOnline } from './../../utils/skuHelpers';
+import {
+  getSkuPrice,
+  getQtyInStore,
+  getQtyInDC,
+  getQtyOnline,
+} from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
+import NetworkInventory from './network-inventory/NetworkInventory';
 
 const LoadingSkeleton = () => {
   return (
@@ -67,7 +73,7 @@ const ProductDetails = ({ history, match }) => {
   const { loading, skuData, error, skuAvailability } = useSelector(
     (state) => state.sku
   );
-
+  const [showDrawer, setShowDrawer] = useState(false);
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
 
   useEffect(() => {
@@ -75,6 +81,24 @@ const ProductDetails = ({ history, match }) => {
       dispatch(fetchSkuDetails(match?.params?.id, 899));
     }
   }, [dispatch, match?.params?.id, skuData]);
+
+  // const fetchNetworkInventoryDetails = () => {
+  //   if()
+  // }
+
+  const toggleDrawer = (open) => {
+    setShowDrawer(open);
+  };
+
+  const _renderDrawer = () => {
+    return <Drawer
+      anchor={'left'}
+      open={showDrawer}
+      onClose={() => toggleDrawer(false)}
+    >
+      <NetworkInventory anchor={'left'} toggleDrawer={toggleDrawer} />
+    </Drawer>;
+  };
 
   if (loading) {
     return <LoadingSkeleton />;
@@ -86,16 +110,14 @@ const ProductDetails = ({ history, match }) => {
       </ErrorWrapper>
     );
   }
-  // const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
-  // const getQtyInDC = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableInDc;
-  // const getQtyOnline = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 
-  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, "5")
-  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, "5");
+  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, '5');
+  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, '5');
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
 
   return (
     <PageContainer>
+      {_renderDrawer()}
       <ProductTitle
         title={skuData?.name}
         skuId={skuData?.id}
@@ -132,14 +154,17 @@ const ProductDetails = ({ history, match }) => {
           <Box flexGrow={1}>
             <div className='stock-details'>
               {inStoreQty ? (
-                <span className='stock-green'>
-                  {inStoreQty} in Stock
-                </span>
+                <span className='stock-green'>{inStoreQty} in Stock</span>
               ) : (
                 <span className='stock-red'>Out of Stock</span>
-              )} in this store
+              )}{' '}
+              in this store
             </div>
-            <Button className='availability-link' variant='text'>
+            <Button
+              className='availability-link'
+              variant='text'
+              onClick={() => toggleDrawer(true)}
+            >
               View availability in other stores
             </Button>
           </Box>
@@ -158,10 +183,12 @@ const ProductDetails = ({ history, match }) => {
             </div>
             <Divider />
             <div className='stock-details'>
-            {onlineQty ? (
+              {onlineQty ? (
                 <span className='stock-green'>{onlineQty} in Stock</span>
               ) : (
-              <span className='stock-red'>Out of Stock</span>)} online
+                <span className='stock-red'>Out of Stock</span>
+              )}{' '}
+              online
             </div>
           </Box>
         </Box>
@@ -174,7 +201,11 @@ const ProductDetails = ({ history, match }) => {
           <ChevronRight />
         </InfoTile>
         <InfoTile
-          onClick={() => history.push(`/product-variants/${match?.params?.id}/${skuData?.defaultProductId}`)}
+          onClick={() =>
+            history.push(
+              `/product-variants/${match?.params?.id}/${skuData?.defaultProductId}`
+            )
+          }
         >
           <Typography>Additional Sizes & Colors</Typography>
           <ChevronRight />
