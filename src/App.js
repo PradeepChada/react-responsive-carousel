@@ -10,6 +10,7 @@ import store from './store';
 import Header from './components/header/Header';
 import theme from './theme';
 import './App.css';
+import Spinner from './components/loading-spinner/Spinner';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -25,6 +26,7 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
+          <Spinner />
           <Header />
           <StyledBody>
             <Switch>
@@ -35,7 +37,7 @@ const App = () => {
                 path='/product-details/:id'
                 component={ProductDetails}
               />
-                            <Route exact path='/product-info/:id' component={ProductInfo} />
+              <Route exact path='/product-info/:id' component={ProductInfo} />
               <Route
                 exact
                 path='/product-variants/:id/:defaultProduct'

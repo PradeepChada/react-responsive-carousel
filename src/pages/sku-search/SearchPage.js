@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkuDetails, actions } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
-import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers'
+import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import config from './../../config';
 import {
   Wrapper,
   TextWrapper,
   Title,
   Description,
-  ErrorWrapper
+  ErrorWrapper,
 } from './SearchPage.styles';
 
 const SearchPageText = () => {
@@ -27,29 +27,33 @@ const SearchPageText = () => {
   );
 };
 
-const SearchPage = ({history}) => {
+const SearchPage = ({ history }) => {
   const dispatch = useDispatch();
-  const { loading, skuData, error, skuAvailabilityLoading, skuAvailability, skuAvailabilityError } = useSelector(
-    (state) => state.sku
-  );
+  const {
+    loading,
+    skuData,
+    error,
+    skuAvailabilityLoading,
+    skuAvailability,
+    skuAvailabilityError,
+  } = useSelector((state) => state.sku);
 
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
 
   useEffect(() => {
-    dispatch(actions.reset())
-  }, [dispatch])
-
+    dispatch(actions.reset());
+  }, [dispatch]);
 
   const handleSearch = (skuId) => {
-    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction))
+    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
     else {
       dispatch(fetchSkuDetails(skuId, 49));
     }
-  }
+  };
 
   const handleClear = () => {
-    dispatch(actions.reset())
-  }
+    dispatch(actions.reset());
+  };
 
   const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {
@@ -64,19 +68,24 @@ const SearchPage = ({history}) => {
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
       <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
       {!loading && !error && !skuData && <SearchPageText />}
-      {error ?
-        <ErrorWrapper alignItems="center">
+      {error ? (
+        <ErrorWrapper alignItems='center'>
           <SkuError {...error} />
-        </ErrorWrapper> : (loading || skuData) && <SkuTile
-          skuInfo={skuInfo}
-          skuAvailability={skuAvailability}
-          loading={loading}
-          skuAvailabilityLoading={skuAvailabilityLoading}
-          skuAvailabilityError={skuAvailabilityError}
-          handleClick={id => history.push(`/product-details/${id}`)}
-        />}
+        </ErrorWrapper>
+      ) : (
+        (loading || skuData) && (
+          <SkuTile
+            skuInfo={skuInfo}
+            skuAvailability={skuAvailability}
+            loading={loading}
+            skuAvailabilityLoading={skuAvailabilityLoading}
+            skuAvailabilityError={skuAvailabilityError}
+            handleClick={(id) => history.push(`/product-details/${id}`)}
+          />
+        )
+      )}
     </Wrapper>
   );
-}
+};
 
 export default SearchPage;
