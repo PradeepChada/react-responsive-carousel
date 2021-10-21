@@ -2,8 +2,8 @@ import Axios from '../api';
 // import { skuAvailability } from '../utils/MockData';
 import config from '../config'
 
-export const getSkuInfo = (skuCode, storeId) => {
-  const url = `${config.CATELOG_BASE_URL}/v1/sku/${skuCode}?storeId=${storeId}`
+export const getSkuInfo = (skuCode) => {
+  const url = `${config.CATELOG_BASE_URL}/v1/sku/${skuCode}?storeId=899`
   return Axios.get(url)
 };
 

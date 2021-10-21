@@ -71,8 +71,8 @@ const ProductDetails = ({ history, match }) => {
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
 
   useEffect(() => {
-    if (!skuData) {
-      dispatch(fetchSkuDetails(match?.params?.id, 899));
+    if (skuData?.id !== Number(match?.params?.id)) {
+      dispatch(fetchSkuDetails(match?.params?.id, 49));
     }
   }, [dispatch, match?.params?.id, skuData]);
 
@@ -86,12 +86,9 @@ const ProductDetails = ({ history, match }) => {
       </ErrorWrapper>
     );
   }
-  // const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
-  // const getQtyInDC = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableInDc;
-  // const getQtyOnline = (data=[]) =>  data?.find(o => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 
-  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, "5")
-  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, "5");
+  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
+  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber);
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
 
   return (
@@ -114,11 +111,11 @@ const ProductDetails = ({ history, match }) => {
         <Spec>
           Dimensions: <span>{skuData?.dimensionDescription}</span>
         </Spec>
-        {!!skuData?.dimension?.weight && (
+        {/* {!!skuData?.dimension?.weight && (
           <Spec>
             Weight: <span>{skuData?.dimension?.weight}</span>
           </Spec>
-        )}
+        )} */}
         {skuData?.color && (
           <Spec>
             Color: <span>{skuData?.color}</span>
