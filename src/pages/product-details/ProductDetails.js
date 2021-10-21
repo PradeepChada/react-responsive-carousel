@@ -15,7 +15,10 @@ import DeliveryIcon from './../../assets/icons/delivery.svg';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ProductCarousel from './product-carousel/ProductCarousel';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSkuDetails } from '../../slices/sku.slice';
+import {
+  fetchSkuDetails,
+  fetchStoreAvailability,
+} from '../../slices/sku.slice';
 import {
   getSkuPrice,
   getQtyInStore,
@@ -70,9 +73,15 @@ const LoadingSkeleton = () => {
 
 const ProductDetails = ({ history, match }) => {
   const dispatch = useDispatch();
-  const { loading, skuData, error, skuAvailability } = useSelector(
-    (state) => state.sku
-  );
+  const {
+    loading,
+    skuData,
+    error,
+    skuAvailability,
+    mktAvailLoading,
+    mktAvailData,
+    mktAvailError,
+  } = useSelector((state) => state.sku);
   const [showDrawer, setShowDrawer] = useState(false);
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
 
@@ -82,22 +91,26 @@ const ProductDetails = ({ history, match }) => {
     }
   }, [dispatch, match?.params?.id, skuData]);
 
-  // const fetchNetworkInventoryDetails = () => {
-  //   if()
-  // }
-
   const toggleDrawer = (open) => {
+    open && dispatch(fetchStoreAvailability(match?.params?.id));
     setShowDrawer(open);
   };
 
   const _renderDrawer = () => {
-    return <Drawer
-      anchor={'left'}
-      open={showDrawer}
-      onClose={() => toggleDrawer(false)}
-    >
-      <NetworkInventory anchor={'left'} toggleDrawer={toggleDrawer} />
-    </Drawer>;
+    return (
+      <Drawer
+        anchor={'left'}
+        open={showDrawer}
+        onClose={() => toggleDrawer(false)}
+      >
+        <NetworkInventory
+          anchor={'left'}
+          toggleDrawer={toggleDrawer}
+          data={mktAvailData?.storeAvailabilities}
+          loading={mktAvailLoading}
+        />
+      </Drawer>
+    );
   };
 
   if (loading) {
