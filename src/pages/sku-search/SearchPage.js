@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchSkuDetails,
-  actions,
-  fetchSkuAvailability,
-} from '../../slices/sku.slice';
+import { fetchSkuDetails, actions } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
-import { getSkuPrice } from './../../utils/skuHelpers';
+import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import config from './../../config';
 import {
   Wrapper,
@@ -51,17 +47,6 @@ const SearchPage = ({ history }) => {
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
     else {
-      const stockBody = {
-        sourceStoreNumber: '0',
-        fulfillmentStoreNumbers: [899],
-        skuQtyPairs: [
-          {
-            skuNumber: skuId,
-            qty: 0,
-          },
-        ],
-      };
-      dispatch(fetchSkuAvailability(stockBody));
       dispatch(fetchSkuDetails(skuId, 899));
     }
   };
@@ -69,6 +54,8 @@ const SearchPage = ({ history }) => {
   const handleClear = () => {
     dispatch(actions.reset());
   };
+
+  // const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
 
   const skuImg = skuData?.mediaList?.[0]?.url
     ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}`
@@ -78,8 +65,10 @@ const SearchPage = ({ history }) => {
     image: skuImg,
     price,
     skuId: skuData?.id,
-    qtyAvailableAtStore:
-      skuAvailability?.inventoryEstimates?.[0]?.qtyAvailableAtStore,
+    qtyAvailableAtStore: getQtyInStore(
+      skuAvailability?.inventoryEstimates,
+      '5'
+    ),
   };
 
   return (
