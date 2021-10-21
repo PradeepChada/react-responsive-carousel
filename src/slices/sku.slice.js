@@ -80,7 +80,7 @@ export const fetchSkuDetails = (skuCode, storeId, fetchQty = true) => (dispatch)
           fulfillmentStoreNumbers: [storeId, 899],
           skuQtyPairs: [
             {
-              skuNumber: skuCode,
+              skuNumber: res?.data?.id,
               qty: 0,
             },
           ],
