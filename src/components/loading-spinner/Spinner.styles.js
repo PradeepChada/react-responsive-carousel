@@ -41,7 +41,6 @@ export const SpinnerChild = styled('div')({
     left: '94.56px',
     top: '61.07px',
     position: 'absolute',
-    animation: `anim linear 1.2048192771084336s infinite`,
     background: colors.spinnerBackground,
     width: '7.88px',
     height: '19.7px',
