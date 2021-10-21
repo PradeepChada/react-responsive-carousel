@@ -29,8 +29,8 @@ const ProductInfo = ({ match }) => {
   );
 
   useEffect(() => {
-    if (!skuData)
-      dispatch(fetchSkuDetails(match?.params?.id, 899));
+    if (skuData?.id !== Number(match?.params?.id))
+      dispatch(fetchSkuDetails(match?.params?.id, 49));
   }, [dispatch, match?.params?.id, skuData])
 
   if (loading) {

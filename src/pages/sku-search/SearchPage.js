@@ -43,8 +43,7 @@ const SearchPage = ({history}) => {
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction))
     else {
-
-      dispatch(fetchSkuDetails(skuId, 899));
+      dispatch(fetchSkuDetails(skuId, 49));
     }
   }
 
@@ -52,15 +51,13 @@ const SearchPage = ({history}) => {
     dispatch(actions.reset())
   }
 
-  // const getQtyInStore = (data=[], storeId) =>  data?.find(o => o.fulfillmentStoreNumber === storeId)?.qtyAvailableAtStore;
-
   const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
     price,
     skuId: skuData?.id,
-    qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, "5")
+    qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
   }
 
   return (

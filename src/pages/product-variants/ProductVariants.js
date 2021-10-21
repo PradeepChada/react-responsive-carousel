@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Skeleton, Box } from '@mui/material';
 import ProductTitle from '../../components/product-title/ProductTitle';
 import SkuTile from '../../components/sku-tile/SkuTile';
-import { fetchASkuVariants } from '../../slices/skuVariants.slice';
+import { fetchSkuVariants } from '../../slices/skuVariants.slice';
 import { fetchSkuDetails } from '../../slices/sku.slice';
 import {
   PageContainer,
@@ -49,11 +49,11 @@ const ProductVariants = ({ history, match }) => {
   } = useSelector((state) => state.sku);
 
   useEffect(() => {
-    dispatch(fetchASkuVariants(match?.params?.defaultProduct, 899));
+    dispatch(fetchSkuVariants(match?.params?.defaultProduct, 49));
   }, [dispatch, match?.params?.defaultProduct]);
 
   useEffect(() => {
-    if (!skuData) dispatch(fetchSkuDetails(match?.params?.id, 899, false));
+    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, 49, false));
   }, [dispatch, match?.params?.id, skuData]);
 
   const getSkuData = (item) => {
@@ -62,8 +62,8 @@ const ProductVariants = ({ history, match }) => {
       price: getSkuPrice(item?.productPrice, 'maxRetailPrice'),
       name: item.name,
       qtyAvailableAtStore: getQtyInStore(
-        item.id,
-        skuAvailability?.inventoryEstimates
+        skuAvailability?.inventoryEstimates,
+        skuAvailability?.requestStoreNumber
       ),
       skuId: item.id,
     };

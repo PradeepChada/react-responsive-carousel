@@ -70,14 +70,14 @@ export const actions = skuSlice.actions;
 export const fetchSkuDetails = (skuCode, storeId, fetchQty = true) => (dispatch) => {
   dispatch(actions.loading());
   skuService
-    .getSkuInfo(skuCode, storeId)
+    .getSkuInfo(skuCode)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.failure(skuErrorMessages.notFound));
       else {
         const stockBody = {
-          sourceStoreNumber: '5',
-          fulfillmentStoreNumbers: [5, 899],
+          sourceStoreNumber: storeId,
+          fulfillmentStoreNumbers: [storeId, 899],
           skuQtyPairs: [
             {
               skuNumber: skuCode,
