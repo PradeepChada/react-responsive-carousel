@@ -10,6 +10,7 @@ export const ClearText = styled('span')({
   cursor: 'pointer',
   fontSize: '12px',
   marginRight: '8.04px',
+  lineHeight: '18px',
 });
 
 export const PaperWrapper = styled(Paper)({
