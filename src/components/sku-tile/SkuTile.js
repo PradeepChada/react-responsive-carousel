@@ -41,7 +41,7 @@ const SkuTile = ({ skuInfo, loading, skuAvailabilityLoading, skuAvailabilityErro
       <Image src={skuInfo?.image} alt='SKUImage' />
       <Box flexDirection='column' overflow='hidden'>
         <Price>${skuInfo?.price}/ea</Price>
-        <Title data-testid='sku-title'>{skuInfo?.name}</Title>
+        <Title data-testid='sku-title'>{skuInfo?.name.substring(0,25)}...</Title>
 
         {skuAvailabilityLoading ?
           <StockSkeleton variant='text' data-testid='stock-skeleton' />
