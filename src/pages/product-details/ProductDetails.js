@@ -92,13 +92,13 @@ const ProductDetails = ({ history, match }) => {
   const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
 
   useEffect(() => {
-    if (!skuData) {
-      dispatch(fetchSkuDetails(match?.params?.id, 899));
+    if (skuData?.id !== Number(match?.params?.id)) {
+      dispatch(fetchSkuDetails(match?.params?.id, 49));
     }
   }, [dispatch, match?.params?.id, skuData]);
 
   const toggleDrawer = (open) => {
-    open && dispatch(fetchStoreAvailability(match?.params?.id));
+    open && dispatch(fetchStoreAvailability(match?.params?.id, 49));
     setShowDrawer(open);
   };
   
@@ -127,7 +127,7 @@ const ProductDetails = ({ history, match }) => {
           anchor={'left'}
           toggleDrawer={toggleDrawer}
           data={mktAvailData?.storeAvailabilities?.filter(
-            (o) => o.storeNumber !== 899
+            (o) => ![899, Number(skuAvailability?.requestStoreNumber)].includes(o.storeNumber)
           )}
           loading={mktAvailLoading}
           error={mktAvailError}
@@ -147,8 +147,8 @@ const ProductDetails = ({ history, match }) => {
     );
   }
 
-  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, '5');
-  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, '5');
+  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
+  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber);
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
 
   return (
@@ -172,11 +172,11 @@ const ProductDetails = ({ history, match }) => {
         <Spec>
           Dimensions: <span>{skuData?.dimensionDescription}</span>
         </Spec>
-        {!!skuData?.dimension?.weight && (
+        {/* {!!skuData?.dimension?.weight && (
           <Spec>
             Weight: <span>{skuData?.dimension?.weight}</span>
           </Spec>
-        )}
+        )} */}
         {skuData?.color && (
           <Spec>
             Color: <span>{skuData?.color}</span>

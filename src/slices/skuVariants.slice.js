@@ -52,17 +52,17 @@ const skuSlice = createSlice({
 
 export const actions = skuSlice.actions;
 
-export const fetchASkuVariants = (skuCode, storeId) => (dispatch) => {
+export const fetchSkuVariants = (skuCode, storeId) => (dispatch) => {
   dispatch(actions.variantsLoading());
-  additionalSku.getSkuVariants(skuCode, storeId)
+  additionalSku.getSkuVariants(skuCode)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.variantsSuccess(skuErrorMessages.productVariants));
       else{
         dispatch(actions.variantsSuccess(res?.data));
         const stockBody = {
-          sourceStoreNumber: "5",
-          fulfillmentStoreNumbers: [899, 5],
+          sourceStoreNumber: storeId,
+          fulfillmentStoreNumbers: [899, storeId],
           skuQtyPairs: res?.data?.skus?.map(o => ({
             skuNumber: o.id,
             qty: 0

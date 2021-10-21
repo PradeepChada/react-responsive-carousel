@@ -26,19 +26,19 @@ const SearchBar = ({ handleSearch, handleClear }) => {
 
   const handleSearchButtonClick = (e) => {
     e.preventDefault();
-    handleSearch(SKUCode.trim())
+    handleSearch(SKUCode.trim());
   };
 
   const onBlurInput = ({ target }) => {
     target.focus();
-  }
+  };
 
   return (
     <PaperWrapper component='form'>
       <InputBaseWrapper
         placeholder='Scan barcode or enter SKU'
         inputProps={{ 'aria-label': 'sku-input' }}
-        type='number'
+        type='text'
         value={SKUCode}
         onChange={onChangeHandler}
         onBlur={onBlurInput}
@@ -55,11 +55,11 @@ const SearchBar = ({ handleSearch, handleClear }) => {
       </IconButtonWrapper>
     </PaperWrapper>
   );
-}
+};
 
 export default SearchBar;
 
 SearchBar.defaultProps = {
-  handleSearch: () => { },
-  handleClear: () => { }
-}
+  handleSearch: () => {},
+  handleClear: () => {},
+};
