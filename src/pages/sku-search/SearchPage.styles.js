@@ -10,26 +10,28 @@ export const Wrapper = styled(Box)({
 });
 
 export const TextWrapper = styled(Box)({
-  width: '260px',
+  width: '271px',
   marginTop: '30px',
 });
 
 export const Title = styled(Typography)({
-  fontSize: '18px',
+  fontSize: '22px',
+  lineHeight: '33px',
   fontWeight: '700',
   color: colors.fontColor,
 });
 
 export const Description = styled(Typography)({
   fontSize: '16px',
+  lineHeight: '24px',
   fontWeight: '400',
   textAlign: 'center',
   color: colors.fontColor,
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 45px'
-})
+  padding: '29px 45px',
+});
 
 export const SKUMalfunctionWrapper = styled(Box)({
   marginTop: '29px',
@@ -73,4 +75,3 @@ export const UnknownErrorDescription = styled(Typography)({
   textAlign: 'center',
   width: '200px',
 });
-

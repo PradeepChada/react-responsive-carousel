@@ -1,6 +1,7 @@
 import { styled } from '@mui/styles';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { colors } from '../../../utils/themeUtils';
 
@@ -28,6 +29,11 @@ export const IconButtonWrapper = styled(IconButton)({
   borderRadius: '0 4px 4px 0',
   color: colors.primary,
   height: '35px',
+});
+
+export const SearchIconWraper = styled(SearchIcon)({
+  height: '15.36px',
+  width: '14.66px',
 });
 
 export const InputBaseWrapper = styled(InputBase)({
