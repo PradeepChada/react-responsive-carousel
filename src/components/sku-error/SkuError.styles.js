@@ -17,7 +17,8 @@ export const ErrorIcon = styled(ErrorOutlineIcon)({
 });
 
 export const Title = styled(Typography)({
-  fontSize: '18px',
+  fontSize: '22px',
+  lineHeight: '33px',
   fontWeight: '700',
   color: colors.fontColor,
 });
