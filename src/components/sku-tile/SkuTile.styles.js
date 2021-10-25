@@ -52,20 +52,20 @@ export const Price = styled(Typography)({
   color: colors.fontColor,
   fontWeight: '700',
   marginBottom: '4px',
+  lineHeight: '20px',
 });
 
 export const Title = styled(Typography)({
   fontSize: '14px',
+  lineHeight: '18px',
   color: colors.fontColor,
   fontWeight: '400',
   marginBottom: '12px',
-  // textOverflow: 'ellipsis',
-  // whiteSpace: 'nowrap',
-  // overflow: 'hidden',
 });
 
 export const Stock = styled(Typography)({
   fontSize: '14px',
+  lineHeight: '18px',
   color: colors.green,
   fontWeight: '700',
   marginBottom: '30px',
@@ -88,6 +88,7 @@ export const StockError = styled(Box)({
 
 export const OutOfStock = styled(Typography)({
   fontSize: '14px',
+  lineHeight: '18px',
   color: colors.red,
   fontWeight: '700',
   marginBottom: '30px',
@@ -95,6 +96,7 @@ export const OutOfStock = styled(Typography)({
 
 export const Code = styled(Typography)({
   fontSize: '12px',
+  lineHeight: '14px',
   color: colors.abbey,
   fontWeight: '400',
 });
