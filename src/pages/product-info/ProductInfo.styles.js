@@ -15,7 +15,7 @@ export const Wrapper = styled(Box)({
     '& li': {
       color: colors.black,
       fontSize: 14,
-      lineHeight: '24px',
+      lineHeight: '21px',
     },
   },
 });

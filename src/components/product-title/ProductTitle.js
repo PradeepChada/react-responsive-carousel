@@ -1,13 +1,12 @@
 import React from 'react';
-import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
-import { SkuNumber } from './ProductTitle.styles';
+import { SkuNumber, Title } from './ProductTitle.styles';
 
 const ProductTitle = ({ title, skuId }) => {
   return (
     <Box>
-      <Typography fontWeight={600}>{title}</Typography>
+      <Title fontWeight={600}>{title}</Title>
       <Box display='flex' justifyContent='space-between' alignItems='center'>
         <Box display='flex' alignItems='center'>
           {/* <StyledRating
