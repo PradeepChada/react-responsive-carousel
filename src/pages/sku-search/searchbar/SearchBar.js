@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
 import {
   PaperWrapper,
   InputBaseWrapper,
   ClearText,
   IconButtonWrapper,
+  SearchIconWraper,
 } from './SearchBar.styles';
 
 const SearchBar = ({ handleSearch, handleClear }) => {
@@ -51,7 +51,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
         data-testid='search-button'
         onClick={handleSearchButtonClick}
       >
-        <SearchIcon />
+        <SearchIconWraper />
       </IconButtonWrapper>
     </PaperWrapper>
   );
