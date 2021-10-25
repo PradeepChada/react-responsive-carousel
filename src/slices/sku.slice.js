@@ -67,32 +67,36 @@ const skuSlice = createSlice({
 
 export const actions = skuSlice.actions;
 
-export const fetchSkuDetails = (skuCode, storeId, fetchQty = true) => (dispatch) => {
-  dispatch(actions.loading());
-  skuService
-    .getSkuInfo(skuCode)
-    .then((res) => {
-      if (res?.status === 204)
-        dispatch(actions.failure(skuErrorMessages.notFound));
-      else {
-        const stockBody = {
-          sourceStoreNumber: storeId,
-          fulfillmentStoreNumbers: [storeId, 899],
-          skuQtyPairs: [
-            {
-              skuNumber: res?.data?.id,
-              qty: 0,
-            },
-          ],
-        };
-        fetchQty && dispatch(fetchSkuAvailability(stockBody));
-        dispatch(actions.success(res?.data));
-      }
-    })
-    .catch(() => {
-      dispatch(actions.failure(skuErrorMessages.unknown));
-    });
-};
+export const fetchSkuDetails =
+  (skuCode, storeId, fetchQty = true) =>
+  (dispatch) => {
+    dispatch(actions.loading());
+    skuService
+      .getSkuInfo(skuCode)
+      .then((res) => {
+        if (res?.status === 204)
+          dispatch(actions.failure(skuErrorMessages.notFound));
+        else {
+          const stockBody = {
+            sourceStoreNumber: storeId,
+            fulfillmentStoreNumbers: [storeId, 899],
+            skuQtyPairs: [
+              {
+                skuNumber: res?.data?.id,
+                qty: 0,
+              },
+            ],
+          };
+          fetchQty && dispatch(fetchSkuAvailability(stockBody));
+          dispatch(actions.success(res?.data));
+        }
+      })
+      .catch(({ response }) => {
+        if (response.status === 400)
+          dispatch(actions.failure(skuErrorMessages.notFound));
+        else dispatch(actions.failure(skuErrorMessages.unknown));
+      });
+  };
 
 export const fetchSkuAvailability = (body) => (dispatch) => {
   dispatch(actions.skuAvailabilityLoading());
