@@ -111,7 +111,7 @@ export const StockError = styled(Box)({
   border: `1px solid ${colors.dangerBorder}`,
   borderRadius: '4px',
   fontWeight: '400',
-  padding: '5px 10px 13px 10px',
+  padding: '5px 10px 12px 10px',
   '& .refresh-btn':{
     display: 'flex',
     alignItems: 'center',
