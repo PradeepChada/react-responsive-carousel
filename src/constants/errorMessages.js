@@ -15,6 +15,6 @@ export const skuErrorMessages = {
     shortDescription: 'Availability information is unavailable at this time.',
   },
   productVariants: {
-    title: 'Product Variants not available'
+    title: 'No additional sizes or colors linked to this product.'
   }
 };

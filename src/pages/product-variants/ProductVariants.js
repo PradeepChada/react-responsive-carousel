@@ -7,9 +7,9 @@ import { fetchSkuVariants } from '../../slices/skuVariants.slice';
 import { fetchSkuDetails } from '../../slices/sku.slice';
 import {
   PageContainer,
-  Wrapper,
   Title,
   ErrorWrapper,
+  NoContent
 } from './ProductVariants.styles';
 import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
@@ -90,12 +90,11 @@ const ProductVariants = ({ history, match }) => {
           ratingCount={10}
         />
       )}
-      <Wrapper>
-        <Title variant='h6'>
+        <Title variant='h6' noContent={variants?.length === 0}>
           Additional Sizes & Colors{' '}
           {variants?.length ? `(${variants.length})` : null}
         </Title>
-      </Wrapper>
+      {/* <Wrapper> */}
       {
         loading ? (
           Array(2)
@@ -115,10 +114,11 @@ const ProductVariants = ({ history, match }) => {
             );
           })
         ) : (
-          <SkuError {...skuErrorMessages.productVariants} />
+        <NoContent >{skuErrorMessages.productVariants.title}</NoContent>
+          // <SkuError {...skuErrorMessages.productVariants} />
         )
-        // <Typography h1 textAlign="center" marginTop={5} >Product variants not available</Typography>
       }
+      {/* </Wrapper> */}
     </PageContainer>
   );
 };
