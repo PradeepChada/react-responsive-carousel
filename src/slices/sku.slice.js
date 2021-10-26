@@ -92,7 +92,7 @@ export const fetchSkuDetails =
         }
       })
       .catch(({ response }) => {
-        if (response.status === 400)
+        if (response?.status === 400)
           dispatch(actions.failure(skuErrorMessages.notFound));
         else dispatch(actions.failure(skuErrorMessages.unknown));
       });
