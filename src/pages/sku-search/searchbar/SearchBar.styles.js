@@ -29,6 +29,9 @@ export const IconButtonWrapper = styled(IconButton)({
   borderRadius: '0 4px 4px 0',
   color: colors.primary,
   height: '35px',
+  '&:enabled': {
+    backgroundColor: colors.lightGray,
+  },
 });
 
 export const SearchIconWraper = styled(SearchIcon)({
