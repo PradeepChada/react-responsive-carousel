@@ -16,6 +16,7 @@ export const Title = styled(Typography)({
   fontSize: 18,
   lineHeight: '22px',
   fontWeight: 600,
+  marginTop: 25,
   marginBottom: props => props.noContent ? 8 : 16,
 });
 
