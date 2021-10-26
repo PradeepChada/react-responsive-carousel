@@ -19,5 +19,5 @@ export const Title = styled(Typography)({
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 45px'
+  padding: '29px'
 })

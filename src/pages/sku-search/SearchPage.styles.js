@@ -30,7 +30,7 @@ export const Description = styled(Typography)({
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 45px',
+  padding: '29px',
 });
 
 export const SKUMalfunctionWrapper = styled(Box)({
