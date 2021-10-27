@@ -30,6 +30,7 @@ const SearchPageText = () => {
 const SearchPage = ({ history }) => {
   const dispatch = useDispatch();
   const {
+    storeId,
     loading,
     skuData,
     error,
@@ -47,7 +48,7 @@ const SearchPage = ({ history }) => {
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
     else {
-      dispatch(fetchSkuDetails(skuId, 49));
+      dispatch(fetchSkuDetails(skuId, storeId));
     }
   };
 

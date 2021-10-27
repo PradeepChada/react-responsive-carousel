@@ -78,6 +78,7 @@ const LoadingSkeleton = () => {
 const ProductDetails = ({ history, match }) => {
   const dispatch = useDispatch();
   const {
+    storeId,
     loading,
     skuData,
     error,
@@ -93,19 +94,19 @@ const ProductDetails = ({ history, match }) => {
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id)) {
-      dispatch(fetchSkuDetails(match?.params?.id, 49));
+      dispatch(fetchSkuDetails(match?.params?.id, storeId));
     }
   }, [dispatch, match?.params?.id, skuData]);
 
   const toggleDrawer = (open) => {
-    open && dispatch(fetchStoreAvailability(match?.params?.id, 49));
+    open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
     setShowDrawer(open);
   };
   
   const fetchSkuAvailabilityData = () => {
     const stockBody = {
-      sourceStoreNumber: 49,
-      fulfillmentStoreNumbers: [49, 899],
+      sourceStoreNumber: storeId,
+      fulfillmentStoreNumbers: [storeId, 899],
       skuQtyPairs: [
         {
           skuNumber: match?.params?.id,
