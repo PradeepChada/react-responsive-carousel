@@ -41,6 +41,7 @@ const ProductVariants = ({ history, match }) => {
   );
 
   const {
+    storeId,
     loading: skuTitleLoading,
     skuData,
     skuAvailabilityLoading,
@@ -49,11 +50,11 @@ const ProductVariants = ({ history, match }) => {
   } = useSelector((state) => state.sku);
 
   useEffect(() => {
-    dispatch(fetchSkuVariants(match?.params?.defaultProduct, 49));
+    dispatch(fetchSkuVariants(match?.params?.defaultProduct, storeId));
   }, [dispatch, match?.params?.defaultProduct]);
 
   useEffect(() => {
-    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, 49, false));
+    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
   }, [dispatch, match?.params?.id, skuData]);
 
   const getSkuData = (item) => {

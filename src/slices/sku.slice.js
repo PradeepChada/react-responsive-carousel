@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { skuErrorMessages } from '../constants/errorMessages';
 
 const INITIAL_STATE = {
+  storeId: 49,
   loading: false,
   skuData: null,
   error: null,
@@ -20,6 +21,9 @@ const skuSlice = createSlice({
   name: 'sku',
   initialState: INITIAL_STATE,
   reducers: {
+    updateStoreId: (state, action) => {
+      state.storeId = action.payload
+    },
     loading: (state) => {
       state.loading = true;
       // state.skuData = null;
@@ -33,8 +37,8 @@ const skuSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    reset: () => {
-      return INITIAL_STATE;
+    reset: (state) => {
+      return {...INITIAL_STATE, storeId: state.storeId};
     },
     skuAvailabilityLoading: (state) => {
       state.skuAvailabilityLoading = true;

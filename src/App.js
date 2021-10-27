@@ -11,6 +11,7 @@ import Header from './components/header/Header';
 import theme from './theme';
 import './App.css';
 import Spinner from './components/loading-spinner/Spinner';
+import StoreProvider from './components/store-provider/StoreProvider';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -26,6 +27,7 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
+        <StoreProvider>
           <Spinner />
           <Header />
           <StyledBody>
@@ -45,6 +47,7 @@ const App = () => {
               />
             </Switch>
           </StyledBody>
+          </StoreProvider>
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
