@@ -10,6 +10,7 @@ import {
   Spec,
   ErrorWrapper,
   StockError,
+  SalePriceWrapper,
 } from './ProductDetails.styles';
 import StoreIcon from './../../assets/icons/store.svg';
 import DeliveryIcon from './../../assets/icons/delivery.svg';
@@ -23,10 +24,10 @@ import {
   fetchStoreAvailability,
 } from '../../slices/sku.slice';
 import {
-  getSkuPrice,
   getQtyInStore,
   getQtyInDC,
   getQtyOnline,
+  getSkuPriceDetails,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
@@ -89,7 +90,7 @@ const ProductDetails = ({ history, match }) => {
     mktAvailError,
   } = useSelector((state) => state.sku);
   const [showDrawer, setShowDrawer] = useState(false);
-  const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
+  const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id)) {
@@ -101,7 +102,7 @@ const ProductDetails = ({ history, match }) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, 49));
     setShowDrawer(open);
   };
-  
+
   const fetchSkuAvailabilityData = () => {
     const stockBody = {
       sourceStoreNumber: 49,
@@ -114,7 +115,7 @@ const ProductDetails = ({ history, match }) => {
       ],
     };
     dispatch(fetchSkuAvailability(stockBody));
-  }
+  };
 
   const _renderDrawer = () => {
     return (
@@ -127,7 +128,10 @@ const ProductDetails = ({ history, match }) => {
           anchor={'left'}
           toggleDrawer={toggleDrawer}
           data={mktAvailData?.storeAvailabilities?.filter(
-            (o) => ![899, Number(skuAvailability?.requestStoreNumber)].includes(o.storeNumber)
+            (o) =>
+              ![899, Number(skuAvailability?.requestStoreNumber)].includes(
+                o.storeNumber
+              )
           )}
           loading={mktAvailLoading}
           error={mktAvailError}
@@ -147,8 +151,14 @@ const ProductDetails = ({ history, match }) => {
     );
   }
 
-  const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
-  const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber);
+  const inStoreQty = getQtyInStore(
+    skuAvailability?.inventoryEstimates,
+    skuAvailability?.requestStoreNumber
+  );
+  const onlineQty = getQtyOnline(
+    skuAvailability?.inventoryEstimates,
+    skuAvailability?.requestStoreNumber
+  );
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
 
   return (
@@ -167,7 +177,25 @@ const ProductDetails = ({ history, match }) => {
             ?.map((o) => `${config.ASSET_URL}${o.url}`) || []
         }
       />
-      <Price>${price}/ea</Price>
+      {skuPriceDetails?.onSale ? (
+        <SalePriceWrapper>
+          <Typography className='sale-price'>
+            ${skuPriceDetails?.salePrice}
+          </Typography>
+          <Box marginLeft={'10px'}>
+            <Typography className='normal-price'>
+              Was ${skuPriceDetails?.price}
+            </Typography>
+            <Typography className='savings'>
+              Save ${skuPriceDetails?.maxSavings} ({skuPriceDetails?.maxPercentOff}
+              % off)
+            </Typography>
+          </Box>
+        </SalePriceWrapper>
+      ) : (
+        <Price>${skuPriceDetails?.price}/ea</Price>
+      )}
+
       <div>
         <Spec>
           Dimensions: <span>{skuData?.dimensionDescription}</span>
@@ -188,10 +216,12 @@ const ProductDetails = ({ history, match }) => {
         {skuAvailabilityError ? (
           <StockError>
             {skuErrorMessages.inventory?.shortDescription}
-            <Box className="refresh-btn">
+            <Box className='refresh-btn'>
               {/* <CachedIcon />  */}
-              <img src={RefreshIcon} alt="Refresh" />
-              <Button onClick={fetchSkuAvailabilityData} variant='text'>Refresh Page</Button>
+              <img src={RefreshIcon} alt='Refresh' />
+              <Button onClick={fetchSkuAvailabilityData} variant='text'>
+                Refresh Page
+              </Button>
             </Box>
           </StockError>
         ) : (

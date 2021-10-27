@@ -1,15 +1,38 @@
 import { styled } from '@mui/styles';
 import { Container, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box} from '@mui/system';
 import { colors } from './../../utils/themeUtils';
 
 export const PageContainer = styled(Container)({
   padding: '9px 15px',
 });
 
+export const SalePriceWrapper = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  '& .sale-price': {
+    fontSize: '32px',
+    lineHeight: '18px',
+    fontWeight: '700',
+    color: colors.danger,
+  },
+  '& .normal-price': {
+    fontSize: '12px',
+    lineHeight: '14px',
+    fontWeight: '400',
+    color: colors.fontColor,
+    marginBottom: '1.5px',
+  },
+  '& .savings': {
+    fontSize: '14px',
+    lineHeight: '14px',
+    fontWeight: '700',
+    color: colors.green,
+  },
+});
 export const Price = styled('div')({
   fontSize: '32px',
-  color: '#333337',
+  color: colors.fontColor,
   margin: '18px 0 0 0',
   lineHeight: '18px',
   fontWeight: 600,
@@ -23,9 +46,9 @@ export const Spec = styled(Typography)({
   '& span': {
     fontWeight: 400,
   },
-  '&:first-child':{
-  marginTop: 24,
-  }
+  '&:first-child': {
+    marginTop: 24,
+  },
 });
 
 export const Availability = styled(Box)({
@@ -37,7 +60,7 @@ export const Availability = styled(Box)({
     marginBottom: 7,
   },
   '& .store-tile': {
-    background: '#F6F6FA',
+    background: colors.lightBackground,
     padding: '14px',
     margin: '4px 0',
     display: 'flex',
@@ -57,7 +80,7 @@ export const Availability = styled(Box)({
       },
     },
     '& .availability-link': {
-      color: '#005DAB',
+      color: colors.primary,
       fontSize: 10,
       lineHeight: '22px',
       textDecoration: 'underline',
@@ -77,7 +100,7 @@ export const Availability = styled(Box)({
       },
     },
     '& hr': {
-      borderColor: '#fff',
+      borderColor: colors.white,
       borderWidth: 1,
     },
   },
@@ -89,7 +112,7 @@ export const InfoTile = styled(Box)({
   justifyContent: 'space-between',
   fontSize: 16,
   lineHeight: '22px',
-  borderBottom: '1px solid #D9D9D9',
+  borderBottom: `1px solid ${colors.gray85} `,
   '& p': {
     fontSize: 16,
     lineHeight: '22px',
@@ -101,8 +124,8 @@ export const InfoTile = styled(Box)({
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 0px'
-})
+  padding: '29px 0px',
+});
 
 export const StockError = styled(Box)({
   backgroundColor: colors.dangerBackground,
@@ -112,16 +135,16 @@ export const StockError = styled(Box)({
   borderRadius: '4px',
   fontWeight: '400',
   padding: '5px 10px 12px 10px',
-  '& .refresh-btn':{
+  '& .refresh-btn': {
     display: 'flex',
     alignItems: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-  '& button':{
+  '& button': {
     textTransform: 'none',
     color: colors.danger,
     textDecoration: 'underline',
     fontWeight: '600',
-    padding: '0px 5px'
-  }
+    padding: '0px 5px',
+  },
 });
