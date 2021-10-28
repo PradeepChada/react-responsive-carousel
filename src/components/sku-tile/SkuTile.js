@@ -51,7 +51,7 @@ const SkuTile = ({
               ${skuInfo?.skuPriceDetails?.salePrice}
             </Typography>
             <Typography className='normal-price'>
-              Was ${skuInfo?.skuPriceDetails?.price}
+              ${skuInfo?.skuPriceDetails?.price}
             </Typography>
           </SalePriceWrapper>
         ) : (
