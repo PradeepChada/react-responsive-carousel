@@ -1,15 +1,12 @@
 const express = require("express");
 const consul = require("consul");
-const isDev = process.env.NODE_ENV !== "production";
-const path = require('path')
-// const ngrok =
-//   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
-//     ? require("ngrok")
-//     : false;
-// const resolve = require("path").resolve;
+const path = require("path");
 
+const NODE_ENV = process.env.NODE_ENV || "dev";
 const app = express();
 let _instance;
+process.env.REACT_APP_BASE_URL = 'CATELLOG'
+const serveBuild = () => {
 // Serve any static files
 app.use(express.static(path.join(__dirname, "./build")));
 
@@ -17,47 +14,44 @@ app.use(express.static(path.join(__dirname, "./build")));
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./build", "index.html"));
 });
+}
 
-class Features {
-  constructor(environment, consulClient) {
-    this.consul = consulClient;
-    this.environment = environment;
-    // this.key = `service/${environment}/pdp-web/APP_CONFIG`;
-    this.key = 'service/devpokey/pdp-web/APP_CONFIG'
-    // logger.info(`Consul prefix ${this.key}`);
-    this.data = {};
-    this.watch = this.consul.watch({
-      method: this.consul.kv.get,
-      options: { key: this.key },
+const loadEnv = (envConfig) => {
+  try {
+    for (const key in envConfig) {
+      process.env[key] = process.env[key] || envConfig[key];
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const fetchConsulData = () => {
+  const consulClient = consul({
+    host: "dfwconsv1.containerstore.com",
+  });
+  const environment = NODE_ENV+"preview";
+  if (!_instance || consulClient) {
+    const key = `service/${environment}/pdp-web/APP_CONFIG`;
+    // const key = `service/devpreview/pdp-web/APP_CONFIG`;
+    const watch = consulClient.watch({
+      method: consulClient.kv.get,
+      options: { key: key },
     });
-    this.watch.on("change", (data) => {
-        console.log("DATA =>", data)
-    //   logger.info(
-    //     `consul change detected on ${this.key}: ${JSON.stringify(data.Value)}`
-    //   );
+    watch.on("change", (data) => {
       try {
-        this.data = JSON.parse(data.Value);
+        const envJson = JSON.parse(data.Value);
+        loadEnv(envJson);
+        console.log("ENV FILES =>", process.env);
       } catch (e) {
-        // console.log(
-        //   `invalid json found for feature: ${JSON.stringify(data.Value)}`,
-        //   e
-        // );
+        console.log(
+          `invalid json found for feature: ${JSON.stringify(data.Value)}`,
+          e
+        );
       }
     });
   }
-}
-
-
-function instance (environment = 'devpokey', consulClient){
-    if (!_instance || consulClient) {
-    //   logger.info(`Creating new Features instance`);
-      const newFeatures = new Features(environment, consulClient);
-      _instance = newFeatures;
-      return newFeatures;
-    }
-    return _instance;
-  }
-  
+};
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
@@ -67,15 +61,12 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, (err) => {
   if (err) {
-    // logger.error(err.message);
+    console.log(err.message);
     return;
   }
   // initialize
-  instance(
-    "dev",
-    consul({
-      host: "dfwconsv1.containerstore.com",
-    })
-  );
+  fetchConsulData();
+  serveBuild()
+  console.log("NODE SERVER STARTED")
   // Connect to ngrok in dev mode
 });

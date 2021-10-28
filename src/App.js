@@ -12,6 +12,8 @@ import theme from './theme';
 import './App.css';
 import Spinner from './components/loading-spinner/Spinner';
 
+console.log("ENV VARIABLES =>", process.env.REACT_APP_BASE_URL)
+
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
   minHeight: 'calc(100vh - 60px)',
