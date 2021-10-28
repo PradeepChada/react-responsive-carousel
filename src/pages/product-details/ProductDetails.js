@@ -97,7 +97,7 @@ const ProductDetails = ({ history, match }) => {
     if (skuData?.id !== Number(match?.params?.id)) {
       dispatch(fetchSkuDetails(match?.params?.id, storeId));
     }
-  }, [dispatch, match?.params?.id, skuData]);
+  }, [dispatch, match?.params?.id, skuData,storeId]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));

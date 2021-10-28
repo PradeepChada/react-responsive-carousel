@@ -51,11 +51,11 @@ const ProductVariants = ({ history, match }) => {
 
   useEffect(() => {
     dispatch(fetchSkuVariants(match?.params?.defaultProduct, storeId));
-  }, [dispatch, match?.params?.defaultProduct]);
+  }, [dispatch, match?.params?.defaultProduct,storeId]);
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
-  }, [dispatch, match?.params?.id, skuData]);
+  }, [dispatch, match?.params?.id, skuData,storeId]);
 
   const getSkuData = (item) => {
     const skuInfo = {

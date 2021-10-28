@@ -5,7 +5,7 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
-import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
+import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
 import config from './../../config';
 import {
   Wrapper,
@@ -39,8 +39,7 @@ const SearchPage = ({ history }) => {
     skuAvailabilityError,
   } = useSelector((state) => state.sku);
 
-  const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
-
+  const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
   useEffect(() => {
     dispatch(actions.reset());
   }, [dispatch]);
@@ -60,7 +59,7 @@ const SearchPage = ({ history }) => {
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
-    price,
+    skuPriceDetails,
     skuId: skuData?.id,
     qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
   }

@@ -55,12 +55,32 @@ export const Price = styled(Typography)({
   lineHeight: '20px',
 });
 
+export const SalePriceWrapper = styled(Box)({
+  display:"flex",
+  alignItems:"center",
+  marginBottom: '4px',
+  '& .sale-price': {
+    fontSize: '16px',
+    lineHeight: '20px',
+    color: colors.danger,
+    fontWeight: '700',
+    marginRight:"6px"
+  },
+  '& .normal-price': {
+    fontSize: '12px',
+    lineHeight: '14px',
+    color: colors.abbey,
+    fontWeight: '400',
+  },
+});
+
 export const Title = styled(Typography)({
   fontSize: '14px',
   lineHeight: '18px',
   color: colors.fontColor,
   fontWeight: '400',
   marginBottom: '12px',
+  textTransform: 'capitalize',
 });
 
 export const Stock = styled(Typography)({

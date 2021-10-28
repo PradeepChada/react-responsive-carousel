@@ -15,7 +15,7 @@ const StoreProvider = ({children}) => {
 
     useEffect(() => {
         storeId && dispatch(actions.updateStoreId(Number(storeId)))
-    }, [storeId])
+    }, [storeId,dispatch])
     return(
         <div>
             {children}

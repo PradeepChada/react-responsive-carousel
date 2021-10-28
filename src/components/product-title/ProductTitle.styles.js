@@ -3,7 +3,8 @@ import { styled } from '@mui/styles';
 import { colors } from '../../utils/themeUtils';
 
 export const Title = styled(Typography)({
-  lineHeight: '20px'
+  lineHeight: '20px',
+  textTransform: 'capitalize',
 });
 
 export const StyledRating = styled(Rating)({
