@@ -56,21 +56,22 @@ export const Price = styled(Typography)({
 });
 
 export const SalePriceWrapper = styled(Box)({
-  display:"flex",
-  alignItems:"center",
+  display: 'flex',
+  alignItems: 'center',
   marginBottom: '4px',
   '& .sale-price': {
     fontSize: '16px',
     lineHeight: '20px',
     color: colors.danger,
     fontWeight: '700',
-    marginRight:"6px"
+    marginRight: '6px',
   },
   '& .normal-price': {
     fontSize: '12px',
     lineHeight: '14px',
     color: colors.abbey,
     fontWeight: '400',
+    textDecoration: 'line-through',
   },
 });
 
