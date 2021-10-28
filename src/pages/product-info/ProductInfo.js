@@ -31,7 +31,7 @@ const ProductInfo = ({ match }) => {
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id))
       dispatch(fetchSkuDetails(match?.params?.id, storeId));
-  }, [dispatch, match?.params?.id, skuData])
+  }, [dispatch, match?.params?.id, skuData,storeId])
 
   if (loading) {
     return <LoadingSkeleton />
