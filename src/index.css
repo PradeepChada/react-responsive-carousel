@@ -26,7 +26,7 @@
 
 body {
   margin: 0;
-  font-family: Proxima Nova;
+  font-family: 'Proxima Nova';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #F6F6FA;
