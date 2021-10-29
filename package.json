@@ -16,6 +16,7 @@
     "axios": "^0.21.4",
     "consul": "^0.40.0",
     "express": "^4.17.1",
+    "properties-reader": "^0.3.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "serve": "node server",
+    "serve": "node ./server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
