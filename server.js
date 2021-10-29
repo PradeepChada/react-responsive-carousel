@@ -2,10 +2,10 @@ const express = require("express");
 const consul = require("consul");
 const path = require("path");
 
-const NODE_ENV = process.env.NODE_ENV || "dev";
+const NODE_ENV = process.env.DEPLOYMENT_ENVIRONMENT || "dev";
 const app = express();
 let _instance;
-// process.env['REACT_APP_BASE_URL'] = 'CATELLOG'
+
 const serveBuild = () => {
 // Serve any static files
 app.use(express.static(path.join(__dirname, "./build")));
@@ -43,7 +43,7 @@ const fetchConsulData = () => {
         const envJson = JSON.parse(data.Value);
         _instance = envJson;
         loadEnv(envJson);
-        console.log("ENV FILES =>", process.env);
+        console.log("ENV FILES =>", process.env.DEPLOYMENT_ENVIRONMENT);
       } catch (e) {
         console.log(
           `invalid json found for feature: ${JSON.stringify(data.Value)}`,
@@ -58,8 +58,6 @@ app.get('/api/appconfig', (req, res) => {
   res.json(_instance)
 })
 
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
 
 // In production we need to pass these values in instead of relying on webpack
 const port = process.env.PORT || 5000;
