@@ -6,7 +6,7 @@ import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
 import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
-import config from './../../config';
+import config, { getConfig } from './../../config';
 import {
   Wrapper,
   TextWrapper,
@@ -54,8 +54,10 @@ const SearchPage = ({ history }) => {
   const handleClear = () => {
     dispatch(actions.reset());
   };
+  
+  const ASSET_URL = getConfig('asset_base_url');
 
-  const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
+  const skuImg = skuData?.mediaList?.[0]?.url ? `${ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,

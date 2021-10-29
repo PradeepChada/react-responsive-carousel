@@ -29,7 +29,7 @@ import {
   getQtyOnline,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import config from './../../config';
+import { getConfig } from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
@@ -150,6 +150,7 @@ const ProductDetails = ({ history, match }) => {
   const inStoreQty = getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
   const onlineQty = getQtyOnline(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber);
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
+  const ASSET_URL = getConfig('asset_base_url');
 
   return (
     <PageContainer>
@@ -164,7 +165,7 @@ const ProductDetails = ({ history, match }) => {
         images={
           skuData?.mediaList
             ?.filter((o) => o.name === 'SKU_IMAGE')
-            ?.map((o) => `${config.ASSET_URL}${o.url}`) || []
+            ?.map((o) => `${ASSET_URL}${o.url}`) || []
         }
       />
       <Price>${price}/ea</Price>

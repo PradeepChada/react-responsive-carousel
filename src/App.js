@@ -11,8 +11,7 @@ import Header from './components/header/Header';
 import theme from './theme';
 import './App.css';
 import Spinner from './components/loading-spinner/Spinner';
-
-console.log("ENV VARIABLES =>", process.env.REACT_APP_BASE_URL)
+import ConfigProvider from './components/config-provider/ConfigProvider';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -26,6 +25,7 @@ const App = () => {
   }
   return (
     <Provider store={store}>
+      <ConfigProvider>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Spinner />
@@ -49,6 +49,7 @@ const App = () => {
           </StyledBody>
         </BrowserRouter>
       </ThemeProvider>
+      </ConfigProvider>
     </Provider>
   );
 };
