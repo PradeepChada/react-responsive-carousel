@@ -19,7 +19,6 @@ function applicationMetadataReader(buildPropertiesPath, dependencies = {}) {
 
   if (fileSystem.existsSync(buildPropertiesPath)) {
     const properties = propertiesReader(buildPropertiesPath);
-    console.log("build Properties", properties.getAllProperties());
     return properties.getAllProperties();
   }
   return {
@@ -31,7 +30,6 @@ const buildPropertiesPath = path.resolve(process.cwd(), "build.properties");
 const applicationMetadata = applicationMetadataReader(buildPropertiesPath);
 
 router.get("/", (req, res) => {
-
   const defaultDependencies = {
     appMetadata: applicationMetadata,
   };
@@ -39,7 +37,6 @@ router.get("/", (req, res) => {
     ...defaultDependencies,
   };
   if (appMetadata) {
-      console.log("App Meta Data",appMetadata)
     const timestamp = appMetadata["build.timestamp"];
     res.status(200).json(
       Object.assign(appMetadata, {
