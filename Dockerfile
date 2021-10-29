@@ -27,6 +27,7 @@ RUN echo "build.scmRevision.id=`echo $VERSION | cut -d "-" -f3`" >> /usr/src/app
 RUN echo "build.timestamp=`date +%s000`" >> /usr/src/app/build.properties
 
 COPY --from=base /usr/src/app/build ./build
+COPY --from=base /usr/src/app/server ./server
 COPY --from=base /usr/src/app/package.json /usr/src/app/package.json
 COPY --from=base /usr/src/app/node_modules ./node_modules
 
