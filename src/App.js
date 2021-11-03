@@ -5,6 +5,7 @@ import HomeContainer from './pages/home/HomePage';
 import ProductDetails from './pages/product-details/ProductDetails';
 import SearchContainer from './pages/sku-search/SearchPage';
 import ProductInfo from './pages/product-info/ProductInfo';
+import QuestionAndAnswer from './pages/sku-q&a/QuestionAndAnswer';
 import ProductVariants from './pages/product-variants/ProductVariants';
 import store from './store';
 import Header from './components/header/Header';
@@ -27,26 +28,31 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-        <StoreProvider>
-          <Spinner />
-          <Header />
-          <StyledBody>
-            <Switch>
-              <Route exact path='/' component={HomeContainer} />
-              <Route exact path='/sku-search' component={SearchContainer} />
-              <Route
-                exact
-                path='/product-details/:id'
-                component={ProductDetails}
-              />
-              <Route exact path='/product-info/:id' component={ProductInfo} />
-              <Route
-                exact
-                path='/product-variants/:id/:defaultProduct'
-                component={ProductVariants}
-              />
-            </Switch>
-          </StyledBody>
+          <StoreProvider>
+            <Spinner />
+            <Header />
+            <StyledBody>
+              <Switch>
+                <Route exact path='/' component={HomeContainer} />
+                <Route exact path='/sku-search' component={SearchContainer} />
+                <Route
+                  exact
+                  path='/product-details/:id'
+                  component={ProductDetails}
+                />
+                <Route exact path='/product-info/:id' component={ProductInfo} />
+                <Route
+                  exact
+                  path='/product-variants/:id/:defaultProduct'
+                  component={ProductVariants}
+                />
+                <Route
+                  exact
+                  path='/sku-info/q&a/:id'
+                  component={QuestionAndAnswer}
+                />
+              </Switch>
+            </StyledBody>
           </StoreProvider>
         </BrowserRouter>
       </ThemeProvider>

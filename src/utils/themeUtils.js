@@ -14,4 +14,7 @@ export const colors = {
   dangerBackground: '#FDF4F5',
   dangerBorder: 'rgba(223, 46, 47, 0.1)',
   spinnerBackground: '#2e50a7',
+  qaTileBorder: '#EAEBEF',
+  answerBackground: '#F6F6FA',
+  'primary-blue': '#039BE5',
 };
