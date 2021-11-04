@@ -12,6 +12,7 @@ import theme from './theme';
 import './App.css';
 import Spinner from './components/loading-spinner/Spinner';
 import StoreProvider from './components/store-provider/StoreProvider';
+import Reviews from './pages/reviews/Reviews';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -44,6 +45,11 @@ const App = () => {
                 exact
                 path='/product-variants/:id/:defaultProduct'
                 component={ProductVariants}
+              />
+              <Route
+                exact
+                path='/reviews/:id'
+                component={Reviews}
               />
             </Switch>
           </StyledBody>
