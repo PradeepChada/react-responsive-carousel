@@ -1,5 +1,3 @@
-const express = require("express");
-const router = express.Router();
 const PropertiesReader = require("properties-reader");
 const fs = require("fs");
 const path = require("path");
@@ -29,7 +27,7 @@ function applicationMetadataReader(buildPropertiesPath, dependencies = {}) {
 const buildPropertiesPath = path.resolve(process.cwd(), "build.properties");
 const applicationMetadata = applicationMetadataReader(buildPropertiesPath);
 
-router.get("/", (req, res) => {
+const appDetails = (req, res) => {
   const defaultDependencies = {
     appMetadata: applicationMetadata,
   };
@@ -50,6 +48,9 @@ router.get("/", (req, res) => {
     res
       .status(200)
       .json({ status: "message: 'unable to find build.properties'" });
-});
+};
 
-module.exports = router;
+module.exports = {
+  appDetails
+}
+

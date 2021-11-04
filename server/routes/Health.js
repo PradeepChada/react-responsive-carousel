@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
 
-router.get("/", async (req, res) => {
-  res.status(200).json({ status: "NORMAL" });
-});
+ const getHealth = (req, res) => {
+  res.send('NORMAL')
+}
 
-module.exports = router;
+module.exports = {
+  getHealth
+}
