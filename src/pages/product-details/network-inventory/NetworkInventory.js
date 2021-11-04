@@ -33,7 +33,7 @@ const NetworkInventory = ({ toggleDrawer, data, loading, error }) => {
             <Skeleton height={30} />
           </ListWrapper>
         ) : error ? (
-          <Typography>Unable to load Data</Typography>
+          <Typography>Inventory details not available</Typography>
         ) : data.length ? (
           data?.map((outlet, index) => (
             <ListItem button key={index} className='list-item'>
@@ -49,7 +49,7 @@ const NetworkInventory = ({ toggleDrawer, data, loading, error }) => {
             </ListItem>
           ))
         ) : (
-          <Typography variant="h2" >Data not available</Typography>
+          <Typography variant="h2" >Product is not available in other stores</Typography>
         )}
       </List>
     </InventoryBox>

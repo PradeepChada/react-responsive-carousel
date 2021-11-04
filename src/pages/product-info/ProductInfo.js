@@ -24,14 +24,14 @@ const LoadingSkeleton = () => {
 const ProductInfo = ({ match }) => {
   const dispatch = useDispatch();
 
-  const { loading, skuData, error } = useSelector(
+  const { loading, skuData, error, storeId } = useSelector(
     (state) => state.sku
   );
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id))
-      dispatch(fetchSkuDetails(match?.params?.id, 49));
-  }, [dispatch, match?.params?.id, skuData])
+      dispatch(fetchSkuDetails(match?.params?.id, storeId));
+  }, [dispatch, match?.params?.id, skuData,storeId])
 
   if (loading) {
     return <LoadingSkeleton />

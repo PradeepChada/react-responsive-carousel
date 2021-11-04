@@ -41,6 +41,7 @@ const ProductVariants = ({ history, match }) => {
   );
 
   const {
+    storeId,
     loading: skuTitleLoading,
     skuData,
     skuAvailabilityLoading,
@@ -49,12 +50,12 @@ const ProductVariants = ({ history, match }) => {
   } = useSelector((state) => state.sku);
 
   useEffect(() => {
-    dispatch(fetchSkuVariants(match?.params?.defaultProduct, 49));
-  }, [dispatch, match?.params?.defaultProduct]);
+    dispatch(fetchSkuVariants(match?.params?.defaultProduct, storeId));
+  }, [dispatch, match?.params?.defaultProduct,storeId]);
 
   useEffect(() => {
-    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, 49, false));
-  }, [dispatch, match?.params?.id, skuData]);
+    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
+  }, [dispatch, match?.params?.id, skuData,storeId]);
 
   const getSkuData = (item) => {
     const ASSET_URL = getConfig('asset_base_url');

@@ -12,6 +12,7 @@ import theme from './theme';
 import './App.css';
 import Spinner from './components/loading-spinner/Spinner';
 import ConfigProvider from './components/config-provider/ConfigProvider';
+import StoreProvider from './components/store-provider/StoreProvider';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -26,29 +27,31 @@ const App = () => {
   return (
     <Provider store={store}>
       <ConfigProvider>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Spinner />
-          <Header />
-          <StyledBody>
-            <Switch>
-              <Route exact path='/' component={HomeContainer} />
-              <Route exact path='/sku-search' component={SearchContainer} />
-              <Route
-                exact
-                path='/product-details/:id'
-                component={ProductDetails}
-              />
-              <Route exact path='/product-info/:id' component={ProductInfo} />
-              <Route
-                exact
-                path='/product-variants/:id/:defaultProduct'
-                component={ProductVariants}
-              />
-            </Switch>
-          </StyledBody>
-        </BrowserRouter>
-      </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <StoreProvider>
+              <Spinner />
+              <Header />
+              <StyledBody>
+                <Switch>
+                  <Route exact path='/' component={HomeContainer} />
+                  <Route exact path='/sku-search' component={SearchContainer} />
+                  <Route
+                    exact
+                    path='/product-details/:id'
+                    component={ProductDetails}
+                  />
+                  <Route exact path='/product-info/:id' component={ProductInfo} />
+                  <Route
+                    exact
+                    path='/product-variants/:id/:defaultProduct'
+                    component={ProductVariants}
+                  />
+                </Switch>
+              </StyledBody>
+            </StoreProvider>
+          </BrowserRouter>
+        </ThemeProvider>
       </ConfigProvider>
     </Provider>
   );

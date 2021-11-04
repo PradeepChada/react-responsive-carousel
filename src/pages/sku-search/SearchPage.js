@@ -5,8 +5,8 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
-import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
-import config, { getConfig } from './../../config';
+import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
+import { getConfig } from './../../config';
 import {
   Wrapper,
   TextWrapper,
@@ -30,6 +30,7 @@ const SearchPageText = () => {
 const SearchPage = ({ history }) => {
   const dispatch = useDispatch();
   const {
+    storeId,
     loading,
     skuData,
     error,
@@ -38,8 +39,7 @@ const SearchPage = ({ history }) => {
     skuAvailabilityError,
   } = useSelector((state) => state.sku);
 
-  const price = getSkuPrice(skuData?.skuPrices, 'maxRetailPrice');
-
+  const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
   useEffect(() => {
     dispatch(actions.reset());
   }, [dispatch]);
@@ -47,21 +47,21 @@ const SearchPage = ({ history }) => {
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
     else {
-      dispatch(fetchSkuDetails(skuId, 49));
+      dispatch(fetchSkuDetails(skuId, storeId));
     }
   };
 
   const handleClear = () => {
     dispatch(actions.reset());
   };
-  
+
   const ASSET_URL = getConfig('asset_base_url');
 
   const skuImg = skuData?.mediaList?.[0]?.url ? `${ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
-    price,
+    skuPriceDetails,
     skuId: skuData?.id,
     qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
   }
