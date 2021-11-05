@@ -1,6 +1,6 @@
 import Axios from '../api';
 
 export const fetchAppConfig = () => {
-    const config_url = '/api/appconfig';
-    return Axios.get(config_url)
+    const configUrl = '/api/appconfig';
+    return Axios.get(configUrl)
 }

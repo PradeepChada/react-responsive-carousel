@@ -9,7 +9,7 @@ const defaultDependenciesFirst = {
   propertiesReader: PropertiesReader,
 };
 
-function applicationMetadataReader(buildPropertiesPath, dependencies = {}) {
+function applicationMetadataReader(dependencies = {}) {
   const { fileSystem, propertiesReader } = {
     ...defaultDependenciesFirst,
     ...dependencies,
@@ -25,7 +25,7 @@ function applicationMetadataReader(buildPropertiesPath, dependencies = {}) {
 }
 
 const buildPropertiesPath = path.resolve(process.cwd(), "build.properties");
-const applicationMetadata = applicationMetadataReader(buildPropertiesPath);
+const applicationMetadata = applicationMetadataReader();
 
 const appDetails = (req, res) => {
   const defaultDependencies = {
@@ -44,10 +44,11 @@ const appDetails = (req, res) => {
         currentServerTime: new Date(),
       })
     );
-  } else
+  } else {
     res
       .status(200)
       .json({ status: "message: 'unable to find build.properties'" });
+  }
 };
 
 module.exports = {

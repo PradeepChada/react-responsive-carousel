@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { initializeAppConfig } from '../../config';
 
 const ConfigProvider = ({children}) => {
@@ -18,9 +18,11 @@ const ConfigProvider = ({children}) => {
         fetchConfig()
     }, [])
 
-    return (
-        configSuccess ? children : configError ? "COnfig Error" : null
-    )
+    if (configSuccess) {
+        return children;
+    } else {
+        return configError ? "Config Error" : null;
+    }
 
 }
 

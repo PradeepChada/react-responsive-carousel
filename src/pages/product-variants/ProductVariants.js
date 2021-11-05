@@ -13,7 +13,7 @@ import {
 } from './ProductVariants.styles';
 import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import config, { getConfig } from './../../config';
+import { getConfig } from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
 const LoadingSkeleton = () => {

@@ -23,7 +23,7 @@ class ConsulConfig {
     const consulClient = consul({
       host: "dfwconsv1.containerstore.com",
     });
-    
+
     this.environment = `${process.env.DEPLOYMENT_ENVIRONMENT || "dev"}${
       process.env.DEPLOYMENT_STACK || "preview"
     }`;
