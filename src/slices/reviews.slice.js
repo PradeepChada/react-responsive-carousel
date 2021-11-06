@@ -1,5 +1,6 @@
 import * as reviewService from '../services/reviews.service';
 import { createSlice } from '@reduxjs/toolkit';
+import MOCK_DATA from './../utils/ReviewsMock.json'
 
 const INITIAL_STATE = {
   loading: false,
@@ -16,7 +17,7 @@ const reviewSlice = createSlice({
     },
     reviewsSuccess: (state, action) => {
       state.loading = false;
-      state.reviewDetails = action.payload;
+      state.reviewsData = action.payload;
     },
     reviewsFailure: (state, action) => {
       state.loading = false;
@@ -28,6 +29,8 @@ const reviewSlice = createSlice({
 const actions = reviewSlice.actions;
 
 export const fetchReviewDetails = (review) => (dispatch) => {
+  return dispatch(actions.reviewsSuccess(MOCK_DATA));
+
   dispatch(actions.reviewsLoading());
   reviewService
     .getReviewsData(review)

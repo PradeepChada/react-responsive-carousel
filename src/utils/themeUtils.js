@@ -9,9 +9,12 @@ export const colors = {
   lightGray: '#F4F4F4',
   gray81: '#CFCFCF',
   gray85: '#D9D9D9',
+  gray90: '#EAEBEF',
   abbey: '#54565B',
   danger: '#DF2E2F',
   dangerBackground: '#FDF4F5',
   dangerBorder: 'rgba(223, 46, 47, 0.1)',
   spinnerBackground: '#2e50a7',
+  ratingColor: '#EC8423',
+  lightBlue: '#039BE5'
 };
