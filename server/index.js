@@ -3,7 +3,7 @@ const path = require("path");
 const routes = require('./routes');
 const app = express();
 const consulConfig = require('./helpers/consulConfig');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.use('/', routes);
 
