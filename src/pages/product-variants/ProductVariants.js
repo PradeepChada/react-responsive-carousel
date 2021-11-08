@@ -13,7 +13,7 @@ import {
 } from './ProductVariants.styles';
 import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import config from './../../config';
+import { getConfig } from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
 const LoadingSkeleton = () => {
@@ -58,8 +58,9 @@ const ProductVariants = ({ history, match }) => {
   }, [dispatch, match?.params?.id, skuData,storeId]);
 
   const getSkuData = (item) => {
+    const ASSET_URL = getConfig('asset_base_url');
     const skuInfo = {
-      image: `${config.ASSET_URL}${item.mediaList?.[0]?.url}`,
+      image: `${ASSET_URL}${item.mediaList?.[0]?.url}`,
       price: getSkuPrice(item?.productPrice, 'maxRetailPrice'),
       name: item.name,
       qtyAvailableAtStore: getQtyInStore(

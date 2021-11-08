@@ -30,7 +30,7 @@ import {
   getSkuPriceDetails,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import config from './../../config';
+import { getConfig } from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
@@ -161,6 +161,7 @@ const ProductDetails = ({ history, match }) => {
     skuAvailability?.requestStoreNumber
   );
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
+  const ASSET_URL = getConfig('asset_base_url');
 
   return (
     <PageContainer>
@@ -175,7 +176,7 @@ const ProductDetails = ({ history, match }) => {
         images={
           skuData?.mediaList
             ?.filter((o) => o.name === 'SKU_IMAGE')
-            ?.map((o) => `${config.ASSET_URL}${o.url}`) || []
+            ?.map((o) => `${ASSET_URL}${o.url}`) || []
         }
       />
       {skuPriceDetails?.onSale ? (
