@@ -1,8 +1,7 @@
-
- const getHealth = (req, res) => {
-  res.send('NORMAL')
-}
+const getHealth = (req, res) => {
+  res.status(200).json({ status: "NORMAL" });
+};
 
 module.exports = {
-  getHealth
-}
+  getHealth,
+};
