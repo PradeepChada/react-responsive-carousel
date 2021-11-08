@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { BoxWrapper, Asker, Question, Answer } from './QATile.styles';
-function QATile() {
+import moment from 'moment';
+function QATile({ questionInfo, i }) {
+  const { answer, details } = questionInfo;
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    setAnswers(answer?.slice(0, 1));
+  }, []);
+  const viewMoreClick = () => {
+    setAnswers(answer);
+  };
   return (
     <BoxWrapper>
       <Asker>
-        BJ Jones &middot; <span style={{ color: 'black' }}>8 days ago</span>
+        {details?.nickname} &middot;&nbsp;
+        <span style={{ color: 'black' }}>
+          {moment(details?.created_date).fromNow()}
+        </span>
       </Asker>
       <Question>
-        1. Can you confirm that the measurements in the images are wrong? It
-        seems like the different sides are mislabled.
+        {i + 1}. {details?.text}
       </Question>
-      <Answer>
-        <Typography className='answerer'>
-          <span style={{ fontWeight: '700' }}>LTM &middot;</span> 3 months ago
+      {answers?.map((answer) => (
+        <Answer key={answer.answer_id}>
+          <Typography className='answerer'>
+            <span style={{ fontWeight: '700' }}>
+              {answer?.details?.nickname} &middot;
+            </span>{' '}
+            {moment(answer?.details?.created_date).fromNow()}
+          </Typography>
+          <Typography className='answerer-text'>
+            {answer?.details?.text}
+          </Typography>
+        </Answer>
+      ))}
+
+      {answer.length === answers.length ? null : (
+        <Typography className='view-more-answerer' onClick={viewMoreClick}>
+          View {answer?.length - answers?.length} More Answer
         </Typography>
-        <Typography className='answerer-text'>
-          The Marie Kondo Hikidashi Bamboo Drawer Organizers only have the label
-          written on one side. Thank you for your question.
-        </Typography>
-      </Answer>
-      <Typography className='view-more-answerer'>View 4 More Answer</Typography>
+      )}
     </BoxWrapper>
   );
 }

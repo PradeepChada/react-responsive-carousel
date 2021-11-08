@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import Select from '@mui/material/Select';
 import { colors } from '../../utils/themeUtils';
 import Button from '@mui/material/Button';
-
+import Skeleton from '@mui/material/Skeleton';
 export const BoxWrapper = styled(Box)({
   padding: '8px 15px 0px 15px',
   '& .text': {
@@ -56,4 +56,27 @@ export const ButtonWrapper = styled(Button)({
   textTransform: 'capitalize',
   width: '100%',
   marginBottom: '33px',
+});
+
+export const ErrorWrapper = styled(Box)({
+  padding: '29px 0px',
+});
+
+export const SKUNameSkeletion = styled(Skeleton)({
+  fontSize: '16px',
+  marginBottom: '2px',
+});
+
+export const QATextSkeletion = styled(Skeleton)({
+  marginTop: '25px',
+  fontSize: '18px',
+});
+
+export const NoOfQuestionTextSkeletion = styled(Skeleton)({
+  marginTop: '16px',
+  fontSize: '16px',
+});
+
+export const SortBySkeletion = styled(Skeleton)({
+  marginTop: '0px 16px',
 });

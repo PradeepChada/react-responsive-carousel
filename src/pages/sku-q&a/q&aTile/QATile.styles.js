@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 import { colors } from '../../../utils/themeUtils';
 
 export const LoadingBoxWrapper = styled(Box)({
-  padding: '24x',
+  padding: '24px',
   border: `1px solid ${colors.qaTileBorder}`,
   '& .asker': {
     marginBottom: '8px',
@@ -35,6 +35,7 @@ export const Asker = styled(Typography)({
   fontSize: '14px',
   color: colors.primary,
   marginBottom: '8px',
+  textTransform: 'capitalize',
 });
 
 export const Question = styled(Typography)({
@@ -43,6 +44,7 @@ export const Question = styled(Typography)({
   fontWeight: 'bold',
   color: colors.black,
   marginBottom: '16px',
+  wordBreak: 'break-all',
 });
 
 export const Answer = styled(Box)({
@@ -54,11 +56,14 @@ export const Answer = styled(Box)({
     fontWeight: '400',
     color: colors.black,
     marginBottom: '8px',
+    textTransform: 'capitalize',
   },
   '& .answerer-text': {
     fontSize: '16px',
     lineHeight: '20px',
     fontWeight: '400',
     color: colors.black,
+    wordBreak: 'break-all',
   },
+  marginBottom: '8px',
 });
