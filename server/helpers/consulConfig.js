@@ -43,7 +43,6 @@ class ConsulConfig {
     watch.on("change", (data) => {
       try {
         const envJson = data ? JSON.parse(data.Value) : {};
-        this.consulData = envJson;
         console.log(
           `CONSUL DATA FOR ${process.env.DEPLOYMENT_ENVIRONMENT} =>`,
           this.consulData
