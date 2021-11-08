@@ -19,7 +19,7 @@ const PhotoGallery = ({ data = [], handleClick }) => {
               <div
                 className='bg-img'
                 style={{ backgroundImage: `url(${item?.uri})` }}
-                onClick={() => handleClick(i, item)}
+                onClick={() => handleClick(i+1, item)}
               >
                 {i === 3 && (
                   <div className='more'>

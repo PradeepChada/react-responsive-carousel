@@ -1,6 +1,6 @@
 import * as reviewService from '../services/reviews.service';
 import { createSlice } from '@reduxjs/toolkit';
-import MOCK_DATA from './../utils/ReviewsMock.json'
+import MOCK_DATA from './../utils/ReviewsMock.json';
 
 const INITIAL_STATE = {
   loading: false,
@@ -14,9 +14,13 @@ const reviewSlice = createSlice({
   reducers: {
     reviewsLoading: (state) => {
       state.loading = true;
+      // if(state.reviewsData){
+      //   state.reviewsData = {...ac}
+      // }
     },
     reviewsSuccess: (state, action) => {
       state.loading = false;
+  
       state.reviewsData = action.payload;
     },
     reviewsFailure: (state, action) => {
@@ -28,13 +32,21 @@ const reviewSlice = createSlice({
 
 const actions = reviewSlice.actions;
 
-export const fetchReviewDetails = (review) => (dispatch) => {
-  return dispatch(actions.reviewsSuccess(MOCK_DATA));
+export const fetchReviewDetails = (url) => (dispatch, getState) => {
+  // return dispatch(actions.reviewsSuccess(MOCK_DATA));
 
   dispatch(actions.reviewsLoading());
   reviewService
-    .getReviewsData(review)
+    .getReviewsData(url)
     .then((res) => {
+      const {reviews} = getState();
+      if(reviews?.reviewsData){
+        res.data.results[0].reviews =  [
+          ...(reviews?.reviewsData?.results?.[0]?.reviews || []),
+          ...res.data?.results?.[0]?.reviews,
+        ];
+        res.data.results[0].rollup = reviews?.reviewsData?.results?.[0]?.rollup
+      }
       dispatch(actions.reviewsSuccess(res?.data));
     })
     .catch((err) => {

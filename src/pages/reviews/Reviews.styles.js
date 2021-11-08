@@ -156,9 +156,8 @@ export const ReviewContent = styled(Typography)({
   marginBottom: '28px',
   lineHeight: '21px',
   marginTop: '16px',
-  '& span': {
-    color: colors.primary,
-  },
+  color: colors.black,
+  textAlign: 'justify'
 });
 export const ReviewName = styled(Typography)({
   fontSize: '16px',
