@@ -2,11 +2,10 @@ import {
   Typography,
   Box,
   LinearProgress,
-  TextField,
+  Skeleton,
   InputLabel,
   MenuItem,
   FormControl,
-  Rating,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,7 +15,6 @@ import {
   PageContainer,
   RatingContainer,
   Title,
-  StyledRating,
   GalleryBox,
   ReviewTitle,
   ReviewFeature,
@@ -40,6 +38,94 @@ import ProductTitle from '../../components/product-title/ProductTitle';
 import PhotoCarousel from './photo-carousel/PhotoCarousel';
 import ReadMore from '../../components/read-more/ReadMore';
 import moment from 'moment';
+import RatingsBar from '../../components/ratings-bar/RatingsBar';
+import { getReviewsApiUrl } from '../../utils/skuHelpers';
+
+const ReviewSkeleton = () => {
+  return (
+    <Box padding={1}>
+      <Skeleton height={15} width={150} sx={{ marginTop: 1 }} />
+      <Skeleton height={20} width={80} sx={{ marginTop: 1 }} />
+      <Skeleton height={10} sx={{ marginTop: 1 }} />
+      <Skeleton height={10} sx={{ marginTop: 1 }} />
+      <Skeleton height={10} sx={{ marginTop: 1 }} />
+      <Skeleton height={10} sx={{ marginTop: 1 }} />
+    </Box>
+  );
+};
+
+const LoadingSkeleton = () => {
+  return (
+    <Box padding={1}>
+      <Skeleton variant='rectangular' height={16} />
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        marginTop={'5px'}
+        marginBottom={1}
+      >
+        <div />
+        <Skeleton variant='rectangular' width={60} height={10} />
+      </Box>
+      <Skeleton height={10} sx={{ marginTop: 3, transform: 'none' }} />
+      <Box display='flex' alignItems='center' flexDirection='column'>
+        <Skeleton
+          height={30}
+          width={80}
+          sx={{ marginTop: 5, transform: 'none', textAlign: 'center' }}
+        />
+        <Skeleton height={20} width={130} sx={{ marginTop: 1 }} />
+        <Skeleton height={10} width={180} sx={{ marginTop: 1 }} />
+        <Skeleton height={10} width={180} sx={{ marginTop: 1 }} />
+        <Skeleton height={10} width={180} sx={{ marginTop: 1 }} />
+        <Skeleton height={10} width={180} sx={{ marginTop: 1 }} />
+        <Skeleton height={10} width={180} sx={{ marginTop: 1 }} />
+      </Box>
+
+      <Box display='flex'>
+        <Skeleton
+          height={160}
+          width={280}
+          sx={{ marginTop: 3, transform: 'none' }}
+        />
+        <Box sx={{ marginLeft: 1, marginTop: 3 }}>
+          <Skeleton
+            height={77}
+            width={80}
+            sx={{ marginBottom: 1, transform: 'none', display: 'inline-block' }}
+          />
+          <Skeleton
+            height={77}
+            width={80}
+            sx={{
+              marginBottom: 1,
+              marginLeft: 1,
+              transform: 'none',
+              display: 'inline-block',
+            }}
+          />
+          <Skeleton
+            height={77}
+            width={80}
+            sx={{ marginBottom: 1, transform: 'none', display: 'inline-block' }}
+          />
+          <Skeleton
+            height={77}
+            width={80}
+            sx={{
+              marginBottom: 1,
+              marginLeft: 1,
+              transform: 'none',
+              display: 'inline-block',
+            }}
+          />
+        </Box>
+      </Box>
+      <ReviewSkeleton />
+    </Box>
+  );
+};
 
 const Reviews = ({ match }) => {
   const dispatch = useDispatch();
@@ -56,19 +142,8 @@ const Reviews = ({ match }) => {
     setShowModal(false);
   };
 
-  const getUrl = () => {
-    return `/m/1093761574/l/en_US/product/${11006558}/reviews?sort=MostHelpful&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc`;
-  };
-
-  const { reviewsData } = useSelector((state) => state.reviews);
+  const { reviewsData, loading } = useSelector((state) => state.reviews);
   const { storeId, skuData } = useSelector((state) => state.sku);
-
-  useEffect(() => {
-    const url = getUrl();
-    dispatch(fetchReviewDetails(url));
-  }, []);
-
-  console.log('Reviews =>', reviewsData);
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id)) {
@@ -78,14 +153,18 @@ const Reviews = ({ match }) => {
 
   const onChangeSort = (e) => {
     setSort(e.target.value);
-  };
-
-  const onClickNextPage = () => {
-    const url = reviewsData?.paging?.next_page_url+"&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc";
+    const url = getReviewsApiUrl(skuData?.defaultProductId, e.target.value);
     dispatch(fetchReviewDetails(url));
   };
 
-  if (!reviewsData) return 'loading';
+  const onClickNextPage = () => {
+    const url =
+      reviewsData?.paging?.next_page_url +
+      '&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc';
+    dispatch(fetchReviewDetails(url, true));
+  };
+
+  if (!reviewsData) return loading ? <LoadingSkeleton /> : null;
   const { reviews, rollup } = reviewsData?.results?.[0];
   const ratings = ([...rollup?.rating_histogram] || []).reverse();
   const reviewsRemainig =
@@ -102,7 +181,7 @@ const Reviews = ({ match }) => {
       <ProductTitle
         title={skuData?.name}
         skuId={skuData?.id}
-        rating={4}
+        rating={rollup?.average_rating}
         ratingCount={10}
       />
       <Title>Customer Reviews</Title>
@@ -110,12 +189,7 @@ const Reviews = ({ match }) => {
         <Typography variant='h4'>
           {rollup?.average_rating?.toFixed(1)}
         </Typography>
-        <StyledRating
-          name='read-only'
-          value={rollup?.average_rating}
-          size={'small'}
-          readOnly
-        />
+        <RatingsBar rating={rollup?.average_rating} />
         <div className='review-count'>
           out of {rollup?.review_count} reviews
         </div>
@@ -156,15 +230,9 @@ const Reviews = ({ match }) => {
             <ReviewName>
               Jessikida, <span>12 days ago</span>
             </ReviewName>
-            <Rating
+            <RatingsBar
               className='rating-block'
-              value={rollup?.faceoff_positive?.rating}
-              precision={0.5}
-              readOnly
-              size='small'
-              emptyIcon={
-                <StarIcon className='empty-rating' fontSize='inherit' />
-              }
+              rating={rollup?.faceoff_positive?.rating}
             />
             <ReviewFeature>{rollup?.faceoff_positive?.headline}</ReviewFeature>
             <ReviewContent>
@@ -186,15 +254,9 @@ const Reviews = ({ match }) => {
             <ReviewName>
               Jessikida, <span>12 days ago</span>
             </ReviewName>
-            <Rating
+            <RatingsBar
               className='rating-block'
-              value={rollup?.faceoff_negative?.rating}
-              precision={0.5}
-              readOnly
-              size='small'
-              emptyIcon={
-                <StarIcon className='empty-rating' fontSize='inherit' />
-              }
+              rating={rollup?.faceoff_negative?.rating}
             />
             <ReviewFeature>{rollup?.faceoff_negative?.headline}</ReviewFeature>
             <ReviewContent>
@@ -220,16 +282,7 @@ const Reviews = ({ match }) => {
       {reviews?.map((item) => {
         return (
           <ReviewDetails key={item?.internal_review_id}>
-            <Rating
-              className='rating-block'
-              value={item?.metrics?.rating}
-              precision={0.5}
-              readOnly
-              size='small'
-              emptyIcon={
-                <StarIcon className='empty-rating' fontSize='inherit' />
-              }
-            />
+            <RatingsBar rating={item?.metrics?.rating} />
             <ReviewFeature>{item?.details?.headline}</ReviewFeature>
             <SubmittedReview>
               {' '}
@@ -244,9 +297,26 @@ const Reviews = ({ match }) => {
               <ReadMore text={item?.details?.comments} />
             </ReviewContent>
             <RecommendedContent>
-              <RightIcon />
-              <span>Recommended Product</span>
+              {item?.details?.bottom_line === 'Yes' ? (
+                <RightIcon />
+              ) : (
+                <CrossIcon />
+              )}
+              <span>
+                {item?.details?.bottom_line === 'No' ? 'Not' : ''} Recommended
+                Product
+              </span>
             </RecommendedContent>
+            {item?.details?.merchant_response && (
+              <>
+                <ResponseDuration>
+                  {moment(item?.details?.merchant_response_date).fromNow()}
+                </ResponseDuration>
+                <ResponseContent>
+                  <ReadMore text={item?.details?.merchant_response} />
+                </ResponseContent>
+              </>
+            )}
           </ReviewDetails>
         );
       })}

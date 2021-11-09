@@ -30,7 +30,9 @@ const NetworkInventory = ({ toggleDrawer, data, loading, error }) => {
         {loading ? (
           <ListWrapper>
             <Skeleton sx={{ marginTop: 2 }} height={30} />
-            <Skeleton height={30} />
+            {
+              Array(5).fill(null).map(() => <Skeleton height={20} marginTop={2} />)
+            }
           </ListWrapper>
         ) : error ? (
           <Typography>Inventory details not available</Typography>

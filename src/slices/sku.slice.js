@@ -1,6 +1,7 @@
 import * as skuService from '../services/sku.service';
 import { createSlice } from '@reduxjs/toolkit';
 import { skuErrorMessages } from '../constants/errorMessages';
+import { fetchReviewDetails } from './reviews.slice';
 
 const INITIAL_STATE = {
   storeId: 49,
@@ -22,7 +23,7 @@ const skuSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     updateStoreId: (state, action) => {
-      state.storeId = action.payload
+      state.storeId = action.payload;
     },
     loading: (state) => {
       state.loading = true;
@@ -38,7 +39,7 @@ const skuSlice = createSlice({
       state.error = action.payload;
     },
     reset: (state) => {
-      return {...INITIAL_STATE, storeId: state.storeId};
+      return { ...INITIAL_STATE, storeId: state.storeId };
     },
     skuAvailabilityLoading: (state) => {
       state.skuAvailabilityLoading = true;
@@ -92,6 +93,11 @@ export const fetchSkuDetails =
             ],
           };
           fetchQty && dispatch(fetchSkuAvailability(stockBody));
+          if (res?.data?.defaultProductId) {
+            // res.data.defaultProductId = 11006558
+            const path = `/m/1093761574/l/en_US/product/${res?.data?.defaultProductId}/reviews?sort=MostHelpful&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc`;
+            dispatch(fetchReviewDetails(path));
+          }
           dispatch(actions.success(res?.data));
         }
       })

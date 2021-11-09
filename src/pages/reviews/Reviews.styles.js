@@ -1,5 +1,11 @@
 import { styled } from '@mui/styles';
-import { Container, Typography, Box, Rating, Button, Select } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Button,
+  Select,
+} from '@mui/material';
 import { colors } from '../../utils/themeUtils';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import CheckIcon from '@mui/icons-material/Check';
@@ -101,21 +107,6 @@ export const RatingContainer = styled(Box)({
   },
 });
 
-export const StyledRating = styled(Rating)({
-  '& .MuiRating-iconFilled': {
-    '& svg': {
-      color: colors.ratingColor,
-    },
-  },
-  '& .MuiRating-iconEmpty': {
-    '& svg': {
-      color: colors.starEmpty,
-      fill: colors.starEmpty,
-      // backgroundColor: colors.starEmpty
-    },
-  },
-});
-
 export const GalleryBox = styled(Box)({
   margin: '15px 0',
 });
@@ -141,14 +132,7 @@ export const ReviewDetails = styled(Box)({
   borderColor: colors.gray90,
   marginBottom: '16px',
   marginTop: '12px',
-  borderWidth: '1px',
-  '& .rating-block': {
-    color: colors.ratingColor,
-    width: '16px',
-  },
-  '& .empty-rating': {
-    color: colors.gray85,
-  },
+  borderWidth: '1px'
 });
 export const ReviewContent = styled(Typography)({
   fontSize: '14px',
@@ -157,7 +141,7 @@ export const ReviewContent = styled(Typography)({
   lineHeight: '21px',
   marginTop: '16px',
   color: colors.black,
-  textAlign: 'justify'
+  textAlign: 'justify',
 });
 export const ReviewName = styled(Typography)({
   fontSize: '16px',

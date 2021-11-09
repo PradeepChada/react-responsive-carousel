@@ -29,3 +29,8 @@ export const getQtyInDC = (data = [], storeId) =>
     ?.qtyAvailableInDc;
 export const getQtyOnline = (data = []) =>
   data?.find((o) => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
+
+export const getReviewsApiUrl = (productId, sort) => {
+  return `/m/1093761574/l/en_US/product/${productId}/reviews?sort=${sort}&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc`;
+};
+

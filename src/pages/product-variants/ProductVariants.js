@@ -9,7 +9,7 @@ import {
   PageContainer,
   Title,
   ErrorWrapper,
-  NoContent
+  NoContent,
 } from './ProductVariants.styles';
 import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
@@ -39,6 +39,7 @@ const ProductVariants = ({ history, match }) => {
   const { loading, skuVariants, error } = useSelector(
     (state) => state.skuVariants
   );
+  const { reviewsData } = useSelector((state) => state.reviews);
 
   const {
     storeId,
@@ -51,11 +52,12 @@ const ProductVariants = ({ history, match }) => {
 
   useEffect(() => {
     dispatch(fetchSkuVariants(match?.params?.defaultProduct, storeId));
-  }, [dispatch, match?.params?.defaultProduct,storeId]);
+  }, [dispatch, match?.params?.defaultProduct, storeId]);
 
   useEffect(() => {
-    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
-  }, [dispatch, match?.params?.id, skuData,storeId]);
+    if (skuData?.id !== Number(match?.params?.id))
+      dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
+  }, [dispatch, match?.params?.id, skuData, storeId]);
 
   const getSkuData = (item) => {
     const skuInfo = {
@@ -87,39 +89,34 @@ const ProductVariants = ({ history, match }) => {
         <ProductTitle
           title={skuData?.name}
           skuId={match?.params?.id}
-          rating={4}
-          ratingCount={10}
+          rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+          ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
         />
       )}
-        <Title variant='h6' noContent={variants?.length === 0}>
-          Additional Sizes & Colors{' '}
-          {variants?.length ? `(${variants.length})` : null}
-        </Title>
-      {/* <Wrapper> */}
-      {
-        loading ? (
-          Array(2)
-            .fill(null)
-            .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
-        ) : variants?.length ? (
-          variants.map((item, i) => {
-            const skuInfo = getSkuData(item);
-            return (
-              <SkuTile
-                key={`key${i}`}
-                skuInfo={skuInfo}
-                skuAvailabilityLoading={skuAvailabilityLoading}
-                skuAvailabilityError={skuAvailabilityError}
-                handleClick={(id) => history.push(`/product-details/${id}`)}
-              />
-            );
-          })
-        ) : (
-        <NoContent >{skuErrorMessages.productVariants.title}</NoContent>
-          // <SkuError {...skuErrorMessages.productVariants} />
-        )
-      }
-      {/* </Wrapper> */}
+      <Title variant='h6' noContent={variants?.length === 0}>
+        Additional Sizes & Colors{' '}
+        {variants?.length ? `(${variants.length})` : null}
+      </Title>
+      {loading ? (
+        Array(3)
+          .fill(null)
+          .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
+      ) : variants?.length ? (
+        variants.map((item, i) => {
+          const skuInfo = getSkuData(item);
+          return (
+            <SkuTile
+              key={`key${i}`}
+              skuInfo={skuInfo}
+              skuAvailabilityLoading={skuAvailabilityLoading}
+              skuAvailabilityError={skuAvailabilityError}
+              handleClick={(id) => history.push(`/product-details/${id}`)}
+            />
+          );
+        })
+      ) : (
+        <NoContent>{skuErrorMessages.productVariants.title}</NoContent>
+      )}
     </PageContainer>
   );
 };
