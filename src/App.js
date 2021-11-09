@@ -5,6 +5,7 @@ import HomeContainer from './pages/home/HomePage';
 import ProductDetails from './pages/product-details/ProductDetails';
 import SearchContainer from './pages/sku-search/SearchPage';
 import ProductInfo from './pages/product-info/ProductInfo';
+import QuestionAndAnswer from './pages/sku-q&a/QuestionAndAnswer';
 import ProductVariants from './pages/product-variants/ProductVariants';
 import store from './store';
 import Header from './components/header/Header';
@@ -47,6 +48,11 @@ const App = () => {
                     path='/product-variants/:id/:defaultProduct'
                     component={ProductVariants}
                   />
+                  <Route
+                  exact
+                  path='/sku-info/q&a/:id'
+                  component={QuestionAndAnswer}
+                />
                 </Switch>
               </StyledBody>
             </StoreProvider>

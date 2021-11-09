@@ -29,3 +29,15 @@ export const getQtyInDC = (data = [], storeId) =>
     ?.qtyAvailableInDc;
 export const getQtyOnline = (data = []) =>
   data?.find((o) => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
+
+export const filterQuestionsData = (questionData, newQuestions) => {
+  console.log(questionData);
+  console.log(newQuestions);
+  return {
+    ...newQuestions,
+    questionData: {
+      ...newQuestions.questionData,
+      results: [...questionData.results, ...newQuestions.questionData.results],
+    },
+  };
+};

@@ -9,9 +9,9 @@ import {
   PageContainer,
   Title,
   ErrorWrapper,
-  NoContent
+  NoContent,
 } from './ProductVariants.styles';
-import { getSkuPrice, getQtyInStore } from './../../utils/skuHelpers';
+import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import { getConfig } from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -51,17 +51,19 @@ const ProductVariants = ({ history, match }) => {
 
   useEffect(() => {
     dispatch(fetchSkuVariants(match?.params?.defaultProduct, storeId));
-  }, [dispatch, match?.params?.defaultProduct,storeId]);
+  }, [dispatch, match?.params?.defaultProduct, storeId]);
 
   useEffect(() => {
-    if (skuData?.id !== Number(match?.params?.id)) dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
-  }, [dispatch, match?.params?.id, skuData,storeId]);
+    if (skuData?.id !== Number(match?.params?.id)) {
+      dispatch(fetchSkuDetails(match?.params?.id, storeId, false));
+    }
+  }, [dispatch, match?.params?.id, skuData, storeId]);
 
   const getSkuData = (item) => {
     const ASSET_URL = getConfig('asset_base_url');
     const skuInfo = {
       image: `${ASSET_URL}${item.mediaList?.[0]?.url}`,
-      price: getSkuPrice(item?.productPrice, 'maxRetailPrice'),
+      skuPriceDetails: getSkuPriceDetails(skuData?.skuPrices),
       name: item.name,
       qtyAvailableAtStore: getQtyInStore(
         skuAvailability?.inventoryEstimates,
@@ -92,34 +94,32 @@ const ProductVariants = ({ history, match }) => {
           ratingCount={10}
         />
       )}
-        <Title variant='h6' noContent={variants?.length === 0}>
-          Additional Sizes & Colors{' '}
-          {variants?.length ? `(${variants.length})` : null}
-        </Title>
+      <Title variant='h6' noContent={variants?.length === 0}>
+        Additional Sizes & Colors{' '}
+        {variants?.length ? `(${variants.length})` : null}
+      </Title>
       {/* <Wrapper> */}
-      {
-        loading ? (
-          Array(2)
-            .fill(null)
-            .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
-        ) : variants?.length ? (
-          variants.map((item, i) => {
-            const skuInfo = getSkuData(item);
-            return (
-              <SkuTile
-                key={`key${i}`}
-                skuInfo={skuInfo}
-                skuAvailabilityLoading={skuAvailabilityLoading}
-                skuAvailabilityError={skuAvailabilityError}
-                handleClick={(id) => history.push(`/product-details/${id}`)}
-              />
-            );
-          })
-        ) : (
-        <NoContent >{skuErrorMessages.productVariants.title}</NoContent>
-          // <SkuError {...skuErrorMessages.productVariants} />
-        )
-      }
+      {loading ? (
+        Array(2)
+          .fill(null)
+          .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
+      ) : variants?.length ? (
+        variants.map((item, i) => {
+          const skuInfo = getSkuData(item);
+          return (
+            <SkuTile
+              key={`key${i}`}
+              skuInfo={skuInfo}
+              skuAvailabilityLoading={skuAvailabilityLoading}
+              skuAvailabilityError={skuAvailabilityError}
+              handleClick={(id) => history.push(`/product-details/${id}`)}
+            />
+          );
+        })
+      ) : (
+        <NoContent>{skuErrorMessages.productVariants.title}</NoContent>
+        // <SkuError {...skuErrorMessages.productVariants} />
+      )}
       {/* </Wrapper> */}
     </PageContainer>
   );
