@@ -19,7 +19,7 @@ const mockData = {
       details: {
         nickname: 'beneel',
         location: 'USA',
-        text: 'These bags can be cleaned using a dishwasher or by hand-washing.',
+        text: 'These bags can hand-washing.',
         is_verified: true,
         is_expert: false,
         author_type: 'COMMUNITY',
@@ -34,13 +34,13 @@ const mockData = {
       ugc_id: 380510586,
       answer_id: '7169236',
       details: {
-        nickname: 'beneel',
+        nickname: 'ceneel',
         location: 'USA',
-        text: 'These bags can be cleaned using a dishwasher or by hand-washing.',
+        text: 'These bags dishwasher or by hand-washing.',
         is_verified: true,
         is_expert: false,
         author_type: 'COMMUNITY',
-        created_date: 1631382272000,
+        created_date: 1631382272450,
       },
       metrics: {
         helpful_votes: 0,
@@ -51,13 +51,13 @@ const mockData = {
       ugc_id: 380510586,
       answer_id: '7169237',
       details: {
-        nickname: 'beneel',
+        nickname: 'reneel',
         location: 'USA',
-        text: 'These bags can be cleaned using a dishwasher or by hand-washing.',
+        text: 'These bags can be .',
         is_verified: true,
         is_expert: false,
         author_type: 'COMMUNITY',
-        created_date: 1631382272000,
+        created_date: 1631382272550,
       },
       metrics: {
         helpful_votes: 0,
