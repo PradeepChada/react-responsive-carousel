@@ -47,23 +47,6 @@ const mockData = {
         not_helpful_votes: 0,
       },
     },
-    {
-      ugc_id: 380510586,
-      answer_id: '7169237',
-      details: {
-        nickname: 'reneel',
-        location: 'USA',
-        text: 'These bags can be .',
-        is_verified: true,
-        is_expert: false,
-        author_type: 'COMMUNITY',
-        created_date: 1631382272550,
-      },
-      metrics: {
-        helpful_votes: 0,
-        not_helpful_votes: 0,
-      },
-    },
   ],
   answer_count: 1,
 };
