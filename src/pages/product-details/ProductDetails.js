@@ -175,7 +175,7 @@ const ProductDetails = ({ history, match }) => {
       <ProductCarousel
         images={
           skuData?.mediaList
-            ?.filter((o) => o.name === 'SKU_IMAGE')
+            ?.filter((o) => o.name === 'large')
             ?.map((o) => `${ASSET_URL}${o.url}`) || []
         }
       />
