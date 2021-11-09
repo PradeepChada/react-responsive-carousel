@@ -16,7 +16,6 @@ export const initializeAppConfig = () => {
       console.log('FAILED TO FETCH APP_CONFIG');
       throw err;
     });
-    
 };
 
 export default global.appConfig;

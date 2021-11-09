@@ -30,23 +30,7 @@ const mockData = {
         not_helpful_votes: 0,
       },
     },
-    {
-      ugc_id: 380510587,
-      answer_id: '7169236',
-      details: {
-        nickname: 'ceneel',
-        location: 'USA',
-        text: 'These bags dishwasher or by hand-washing.',
-        is_verified: true,
-        is_expert: false,
-        author_type: 'COMMUNITY',
-        created_date: 1631382272450,
-      },
-      metrics: {
-        helpful_votes: 1,
-        not_helpful_votes: 2,
-      },
-    },
+    
   ],
   answer_count: 2,
 };

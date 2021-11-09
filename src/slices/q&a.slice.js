@@ -1,6 +1,5 @@
 import * as questionService from '../services/q&a.service';
 import { createSlice } from '@reduxjs/toolkit';
-  
 const INITIAL_STATE = {
   loading: false,
   questionsData: null,
