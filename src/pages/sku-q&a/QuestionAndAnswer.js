@@ -23,6 +23,7 @@ import {
 import QATileLoadingSkeletion from './q&aTile/QATileLoadingSkeletion';
 import { Box } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
+import { skuErrorMessages } from '../../constants/errorMessages';
 const options = [
   {
     name: 'Newest',
@@ -47,7 +48,7 @@ const LoadingSkeleton = () => {
         <Skeleton width={34} />
       </Box>
       <QATextSkeletion width={32} />
-      <NoOfQuestionTextSkeletion width={64} />
+      <NoOfQuestionTextSkeletion width={84} />
       <SortBySkeletion height={56} width={330} />
       <QATileLoadingSkeletion />
       <QATileLoadingSkeletion />
@@ -109,7 +110,11 @@ function QuestionAndAnswer({ match }) {
   if (error || skuError) {
     return (
       <ErrorWrapper alignItems='center'>
-        {error ? <SkuError {...error} /> : <SkuError {...skuError} />}
+        {error ? (
+          <SkuError {...skuErrorMessages.unknown} />
+        ) : (
+          <SkuError {...skuError} />
+        )}
       </ErrorWrapper>
     );
   }
@@ -126,8 +131,12 @@ function QuestionAndAnswer({ match }) {
       />
       <Typography className='text'>Q&A</Typography>
       <Typography className='total-question'>
-        1-{questionsData?.results.slice(0, showingQuestions).length} of&nbsp;
-        {questionsData?.paging.total_results} Question
+        {loading ? (
+          <NoOfQuestionTextSkeletion width={84} />
+        ) : (
+          `1-${questionsData?.results.slice(0, showingQuestions).length} of 
+          ${questionsData?.paging.total_results} Question`
+        )}
       </Typography>
       <SelectWrapper value={selectedOption} onChange={sortByClickHandler}>
         {options.map((option) => (

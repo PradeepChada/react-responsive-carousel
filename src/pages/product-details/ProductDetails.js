@@ -97,7 +97,7 @@ const ProductDetails = ({ history, match }) => {
     if (skuData?.id !== Number(match?.params?.id)) {
       dispatch(fetchSkuDetails(match?.params?.id, storeId));
     }
-  }, [dispatch, match?.params?.id, skuData,storeId]);
+  }, [dispatch, match?.params?.id, skuData, storeId]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
@@ -189,8 +189,8 @@ const ProductDetails = ({ history, match }) => {
               Was ${skuPriceDetails?.price}
             </Typography>
             <Typography className='savings'>
-              Save ${skuPriceDetails?.maxSavings} ({skuPriceDetails?.maxPercentOff}
-              % off)
+              Save ${skuPriceDetails?.maxSavings} (
+              {skuPriceDetails?.maxPercentOff}% off)
             </Typography>
           </Box>
         </SalePriceWrapper>
@@ -305,6 +305,12 @@ const ProductDetails = ({ history, match }) => {
           }
         >
           <Typography>Additional Sizes & Colors</Typography>
+          <ChevronRight />
+        </InfoTile>
+        <InfoTile
+          onClick={() => history.push(`/sku-info/q&a/${match?.params?.id}`)}
+        >
+          <Typography>Q&A</Typography>
           <ChevronRight />
         </InfoTile>
       </Box>

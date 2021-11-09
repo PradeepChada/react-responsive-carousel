@@ -1,17 +1,26 @@
 import Axios from '../api';
-import config from '../config';
+import { getConfig } from '../config';
 
 export const getQuestionsData = (productID) => {
-  const url = `https://display.powerreviews.com/m/1466566505/l/en_US/product/${productID}/questions?_noconfig=true&apikey=46891065-a3c9-4388-b98f-b1493ebf3ce7`;
+  const POWER_REVIEW_URL = getConfig('power_review_url');
+  const MERCAHANT_ID = getConfig('merchant_id');
+  const POWER_REVIEW_API_KEY = getConfig('power_review_api_key');
+  const url = `${POWER_REVIEW_URL}/m/${MERCAHANT_ID}/l/en_US/product/${productID}/questions?_noconfig=true&apikey=${POWER_REVIEW_API_KEY}`;
   return Axios.get(url);
 };
 
 export const getQuestionsDataSortBy = (productID, sortBy) => {
-  const url = `https://display.powerreviews.com/m/1466566505/l/en_US/product/${productID}/questions?sort=${sortBy}&_noconfig=true&apikey=46891065-a3c9-4388-b98f-b1493ebf3ce7`;
+  const POWER_REVIEW_URL = getConfig('power_review_url');
+  const MERCAHANT_ID = getConfig('merchant_id');
+  const POWER_REVIEW_API_KEY = getConfig('power_review_api_key');
+  const url = `${POWER_REVIEW_URL}/m/${MERCAHANT_ID}/l/en_US/product/${productID}/questions?sort=${sortBy}&_noconfig=true&apikey=${POWER_REVIEW_API_KEY}`;
   return Axios.get(url);
 };
 
 export const getQuestionDataByPage = (nextPageURL) => {
-  const url = ` https://display.powerreviews.com${nextPageURL}&apikey=46891065-a3c9-4388-b98f-b1493ebf3ce7`;
+  const POWER_REVIEW_URL = getConfig('power_review_url');
+  const MERCAHANT_ID = getConfig('merchant_id');
+  const POWER_REVIEW_API_KEY = getConfig('power_review_api_key');
+  const url = `${POWER_REVIEW_URL}${nextPageURL}&apikey=${POWER_REVIEW_API_KEY}`;
   return Axios.get(url);
 };
