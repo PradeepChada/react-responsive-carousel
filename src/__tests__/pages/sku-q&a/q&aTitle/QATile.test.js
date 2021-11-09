@@ -30,7 +30,6 @@ const mockData = {
         not_helpful_votes: 0,
       },
     },
-    
   ],
   answer_count: 2,
 };
@@ -79,33 +78,6 @@ describe('Testing Search Bar component', () => {
 
   test('view more answer text should be displayed when multiple answer will be available', () => {
     render(<QATile questionInfo={mockData} i={0} />);
-
-    askerNameText = screen.getByText(askerName, {
-      exact: false,
-    });
-    expect(askerNameText).toHaveTextContent(askerName);
-
-    questionTimeText = screen.getByText(askerTime);
-    expect(questionTimeText).toHaveTextContent(askerTime);
-
-    questionText = screen.getByText(question, {
-      exact: false,
-    });
-    expect(questionText).toHaveTextContent(question);
-
-    answererNameText = screen.getByText(answererName, {
-      exact: false,
-    });
-    expect(answererNameText).toHaveTextContent(answererName);
-
-    answerTimeText = screen.getByText(answererTime);
-    expect(answerTimeText).toHaveTextContent(answererTime);
-
-    answerText = screen.getByText(answer, {
-      exact: false,
-    });
-    expect(answerText).toHaveTextContent(answer);
-
     const viewMoreAnswerText = screen.getByText(
       `View ${parseInt(mockData.answer.length - 1)} More Answers`,
       {
