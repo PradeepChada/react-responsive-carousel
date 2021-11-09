@@ -1,4 +1,3 @@
-
 export const skuAvailability = {
   requestStoreNumber: '5',
   inventoryEstimates: [

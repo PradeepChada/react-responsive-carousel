@@ -30,7 +30,7 @@ import {
   getSkuPriceDetails,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import config from './../../config';
+import { getConfig } from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
@@ -166,6 +166,7 @@ const ProductDetails = ({ history, match }) => {
     skuAvailability?.requestStoreNumber
   );
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
+  const ASSET_URL = getConfig('asset_base_url');
 
   return (
     <PageContainer>
@@ -181,7 +182,7 @@ const ProductDetails = ({ history, match }) => {
         images={
           skuData?.mediaList
             ?.filter((o) => o.name === 'large')
-            ?.map((o) => `${config.ASSET_URL}${o.url}`) || []
+            ?.map((o) => `${ASSET_URL}${o.url}`) || []
         }
       />
       {skuPriceDetails?.onSale ? (
@@ -306,20 +307,22 @@ const ProductDetails = ({ history, match }) => {
           <Typography>Additional Sizes & Colors</Typography>
           <ChevronRight />
         </InfoTile>
-        <InfoTile
-          onClick={() =>
-            history.push(
-              `/product-variants/${match?.params?.id}/${skuData?.defaultProductId}`
-            )
-          }
-        >
-          <div className="ratings-wrapper">
-          <Box display="flex"  justifyContent="space-between" >
-          <Typography>Customer Reviews</Typography>
-          <ChevronRight />
-          </Box>
-          <RatingsBar rating={reviewsData?.results?.[0]?.rollup?.average_rating} />
+        <InfoTile onClick={() => history.push(`/reviews/${match?.params?.id}`)}>
+          <div className='ratings-wrapper'>
+            <Box display='flex' justifyContent='space-between'>
+              <Typography>Customer Reviews</Typography>
+              <ChevronRight />
+            </Box>
+            <RatingsBar
+              rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+            />
           </div>
+        </InfoTile>
+        <InfoTile
+          onClick={() => history.push(`/sku-info/q&a/${match?.params?.id}`)}
+        >
+          <Typography>Q&A</Typography>
+          <ChevronRight />
         </InfoTile>
       </Box>
     </PageContainer>
