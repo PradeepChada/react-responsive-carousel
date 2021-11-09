@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container, Typography, Box, Rating } from '@mui/material';
 import { GelleryContainer } from './PhotoGallery.styles';
 
 const PhotoGallery = ({ data = [], handleClick }) => {
@@ -19,7 +18,7 @@ const PhotoGallery = ({ data = [], handleClick }) => {
               <div
                 className='bg-img'
                 style={{ backgroundImage: `url(${item?.uri})` }}
-                onClick={() => handleClick(i+1, item)}
+                onClick={() => handleClick(i + 1, item)}
               >
                 {i === 3 && (
                   <div className='more'>
