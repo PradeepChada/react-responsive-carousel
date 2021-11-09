@@ -4,12 +4,16 @@ import { ToggleLink } from './ReadMore.styles';
 const ReadMore = ({ text, maxLength }) => {
   const [expanded, setExpanded] = useState(false);
 
-  return expanded ? (
-    <>
-      {text}
-      <ToggleLink onClick={() => setExpanded(false)}>Read less</ToggleLink>
-    </>
-  ) : text?.length > maxLength ? (
+  if (expanded) {
+    return (
+      <>
+        {text}
+        <ToggleLink onClick={() => setExpanded(false)}>Read less</ToggleLink>
+      </>
+    );
+  }
+
+  return text?.length > maxLength ? (
     <>
       {text?.substring(0, maxLength)}...
       <ToggleLink onClick={() => setExpanded(true)}>Read more</ToggleLink>
@@ -21,8 +25,7 @@ const ReadMore = ({ text, maxLength }) => {
 
 export default ReadMore;
 
-
 ReadMore.defaultProps = {
-    text: '',
-    maxLength: 178
-}
+  text: '',
+  maxLength: 178,
+};

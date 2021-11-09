@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import config from './../config';
 import { skuErrorMessages } from '../constants/errorMessages';
 import { fetchReviewDetails } from './reviews.slice';
+import { getReviewsApiUrl } from '../utils/skuHelpers';
 
 const INITIAL_STATE = {
   storeId: 49,
@@ -95,7 +96,10 @@ export const fetchSkuDetails =
           };
           fetchQty && dispatch(fetchSkuAvailability(stockBody));
           if (res?.data?.defaultProductId) {
-            const path = `/m/${config.appConfig?.merchant_id}/l/en_US/product/${res?.data?.defaultProductId}/reviews?sort=MostHelpful&_noconfig=true&apikey=${config.appConfig?.power_review_api_key}`;
+            const path = getReviewsApiUrl(
+              res?.data?.defaultProductId,
+              'MostHelpful'
+            );
             dispatch(fetchReviewDetails(path));
           }
           dispatch(actions.success(res?.data));

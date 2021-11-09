@@ -88,11 +88,18 @@ const LoadingSkeleton = () => {
           width={280}
           sx={{ marginTop: 3, transform: 'none' }}
         />
-        <Box sx={{ marginLeft: 1, marginTop: 3 }}>
+        <Box
+          sx={{
+            marginLeft: 1,
+            marginTop: 3,
+            flexWrap: 'wrap',
+            display: 'flex',
+          }}
+        >
           <Skeleton
             height={77}
             width={80}
-            sx={{ marginBottom: 1, transform: 'none', display: 'inline-block' }}
+            sx={{ marginBottom: 1, transform: 'none' }}
           />
           <Skeleton
             height={77}
@@ -101,13 +108,12 @@ const LoadingSkeleton = () => {
               marginBottom: 1,
               marginLeft: 1,
               transform: 'none',
-              display: 'inline-block',
             }}
           />
           <Skeleton
             height={77}
             width={80}
-            sx={{ marginBottom: 1, transform: 'none', display: 'inline-block' }}
+            sx={{ marginBottom: 1, transform: 'none' }}
           />
           <Skeleton
             height={77}
@@ -116,7 +122,6 @@ const LoadingSkeleton = () => {
               marginBottom: 1,
               marginLeft: 1,
               transform: 'none',
-              display: 'inline-block',
             }}
           />
         </Box>
@@ -162,7 +167,9 @@ const Reviews = ({ match }) => {
     dispatch(fetchReviewDetails(url, true));
   };
 
-  if (!reviewsData) return loading ? <LoadingSkeleton /> : null;
+  if (!reviewsData) {
+    return !loading ? <LoadingSkeleton /> : null;
+  }
   const { reviews, rollup } = reviewsData?.results?.[0];
   const ratings = ([...rollup?.rating_histogram] || []).reverse();
   const reviewsRemainig =
