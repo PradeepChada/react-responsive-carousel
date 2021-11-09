@@ -1,6 +1,5 @@
 import * as skuService from '../services/sku.service';
 import { createSlice } from '@reduxjs/toolkit';
-import config from './../config';
 import { skuErrorMessages } from '../constants/errorMessages';
 import { fetchReviewDetails } from './reviews.slice';
 import { getReviewsApiUrl } from '../utils/skuHelpers';
