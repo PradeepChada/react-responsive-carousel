@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { initializeAppConfig } from '../../config';
+import config from '../../config';
 
 const ConfigProvider = ({ children }) => {
   const [configSuccess, setConfigSuccess] = useState(false);
   const [configError, setConfigError] = useState(false);
   const fetchConfig = () => {
-    initializeAppConfig()
+    config
+      .initializeAppConfig()
       .then(() => {
         setConfigSuccess(true);
       })

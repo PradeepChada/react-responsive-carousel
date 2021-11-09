@@ -1,8 +1,7 @@
 import Axios from '../api';
-import { getConfig } from '../config';
+import config from '../config';
 
 export const getSkuVariants = (skuCode) => {
-  const CATELOG_BASE_URL = getConfig('catalog_service_url');
-  const url = `${CATELOG_BASE_URL}/v1/products/${skuCode}`;
+  const url = `${config.appConfig.catalog_service_url}/v1/products/${skuCode}`;
   return Axios.get(url);
 };

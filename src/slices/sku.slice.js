@@ -1,5 +1,6 @@
 import * as skuService from '../services/sku.service';
 import { createSlice } from '@reduxjs/toolkit';
+import config from './../config';
 import { skuErrorMessages } from '../constants/errorMessages';
 import { fetchReviewDetails } from './reviews.slice';
 
@@ -94,8 +95,7 @@ export const fetchSkuDetails =
           };
           fetchQty && dispatch(fetchSkuAvailability(stockBody));
           if (res?.data?.defaultProductId) {
-            // res.data.defaultProductId = 11006558
-            const path = `/m/1093761574/l/en_US/product/${res?.data?.defaultProductId}/reviews?sort=MostHelpful&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc`;
+            const path = `/m/${config.appConfig?.merchant_id}/l/en_US/product/${res?.data?.defaultProductId}/reviews?sort=MostHelpful&_noconfig=true&apikey=${config.appConfig?.power_review_api_key}`;
             dispatch(fetchReviewDetails(path));
           }
           dispatch(actions.success(res?.data));

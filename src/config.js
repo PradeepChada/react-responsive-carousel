@@ -1,21 +1,27 @@
 import { fetchAppConfig } from './services/config.service';
 
-export const getConfig = (key) => global.appConfig[key];
+class AppConfig {
+  appConfig = {};
 
-const setConfig = (data) => {
-  global.appConfig = data;
-};
+  getConfig = (key) => this.appConfig[key];
 
-export const initializeAppConfig = () => {
-  return fetchAppConfig()
-    .then((res) => {
-      setConfig(res?.data);
-      return res.data;
-    })
-    .catch((err) => {
-      console.log('FAILED TO FETCH APP_CONFIG');
-      throw err;
-    });
-};
+  setConfig = (data) => {
+    this.appConfig = data;
+  };
 
-export default global.appConfig;
+  initializeAppConfig = () => {
+    return fetchAppConfig()
+      .then((res) => {
+        this.setConfig(res?.data);
+        return res.data;
+      })
+      .catch((err) => {
+        console.log('FAILED TO FETCH APP_CONFIG');
+        throw err;
+      });
+  };
+}
+
+const config = new AppConfig();
+
+export default config;

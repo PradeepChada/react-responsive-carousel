@@ -13,7 +13,7 @@ import {
 } from './ProductVariants.styles';
 import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import { getConfig } from './../../config';
+import config from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
 
 const LoadingSkeleton = () => {
@@ -61,9 +61,8 @@ const ProductVariants = ({ history, match }) => {
   }, [dispatch, match?.params?.id, skuData, storeId]);
 
   const getSkuData = (item) => {
-    const ASSET_URL = getConfig('asset_base_url');
-    const skuInfo = {
-      image: `${ASSET_URL}${item.mediaList?.[0]?.url}`,
+    return {
+      image: `${config.appConfig.asset_base_url}${item.mediaList?.[0]?.url}`,
       skuPriceDetails: getSkuPriceDetails(skuData?.skuPrices),
       name: item.name,
       qtyAvailableAtStore: getQtyInStore(
@@ -72,7 +71,6 @@ const ProductVariants = ({ history, match }) => {
       ),
       skuId: item.id,
     };
-    return skuInfo;
   };
 
   if (error) {

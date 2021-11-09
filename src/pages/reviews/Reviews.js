@@ -40,6 +40,7 @@ import ReadMore from '../../components/read-more/ReadMore';
 import moment from 'moment';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { getReviewsApiUrl } from '../../utils/skuHelpers';
+import config from './../../config';
 
 const ReviewSkeleton = () => {
   return (
@@ -158,9 +159,8 @@ const Reviews = ({ match }) => {
   };
 
   const onClickNextPage = () => {
-    const url =
-      reviewsData?.paging?.next_page_url +
-      '&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc';
+    const url = `${reviewsData?.paging?.next_page_url}
+      &_noconfig=true&apikey=${config.appConfig.power_review_api_key}`;
     dispatch(fetchReviewDetails(url, true));
   };
 

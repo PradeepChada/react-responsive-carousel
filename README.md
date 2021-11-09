@@ -25,3 +25,4 @@
 1. We can consume graphql services using axios client.
 2. We need to import axios from `/api` when we comsume Graphql services.
 3. All components must be Functional Components.
+5. For development install nodemon globally  `yarn add nodemon -g`.

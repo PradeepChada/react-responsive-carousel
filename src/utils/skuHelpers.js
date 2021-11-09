@@ -1,3 +1,5 @@
+import config from './../config';
+
 export const getSkuPrice = (skuPrices = {}, type) => {
   return skuPrices[type]?.amount;
 };
@@ -30,8 +32,8 @@ export const getQtyInDC = (data = [], storeId) =>
 export const getQtyOnline = (data = []) =>
   data?.find((o) => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 
-export const getReviewsApiUrl = (productId, sort) => {
-  return `/m/1093761574/l/en_US/product/${productId}/reviews?sort=${sort}&_noconfig=true&apikey=1199d38c-7e7c-4b4f-940b-16f6080509fc`;
+export const getReviewsApiUrl = (productId, sort = '') => {
+  return `/m/${config.appConfig?.merchant_id}/l/en_US/product/${productId}/reviews?sort=${sort}&_noconfig=true&apikey=${config?.appConfig?.power_review_api_key}`;
 };
 
 export const filterQuestionsData = (questionData, newQuestions) => {
