@@ -8,7 +8,7 @@ function QATile({ questionInfo, i }) {
 
   useEffect(() => {
     setAnswers(answer?.slice(0, 1));
-  }, []);
+  }, [answer]);
   const viewMoreClick = () => {
     setAnswers(answer);
   };
@@ -39,7 +39,7 @@ function QATile({ questionInfo, i }) {
 
       {answer.length === answers.length ? null : (
         <Typography className='view-more-answerer' onClick={viewMoreClick}>
-          View {answer?.length - answers?.length} More Answer
+          View {answer?.length - answers?.length} More Answers
         </Typography>
       )}
     </BoxWrapper>

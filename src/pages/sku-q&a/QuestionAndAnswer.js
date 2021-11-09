@@ -79,7 +79,7 @@ function QuestionAndAnswer({ match }) {
   useEffect(() => {
     if (skuData != null)
       dispatch(fetchQuestionDetails(skuData?.defaultProductId));
-  }, [skuData]);
+  }, [dispatch, skuData]);
 
   useEffect(() => {
     if (questionsData != null)

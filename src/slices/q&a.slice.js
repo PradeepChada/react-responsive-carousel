@@ -1,7 +1,6 @@
 import * as questionService from '../services/q&a.service';
 import { createSlice } from '@reduxjs/toolkit';
-import { questions } from '../utils/MockData';
-import { filterQuestionsData } from '../utils/skuHelpers';
+  
 const INITIAL_STATE = {
   loading: false,
   questionsData: null,
