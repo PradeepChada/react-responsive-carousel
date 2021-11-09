@@ -56,32 +56,38 @@ const question = mockData.details.text;
 const answererName = mockData.answer[0].details.nickname;
 const answererTime = moment(mockData.answer[0].details.created_date).fromNow();
 const answer = mockData.answer[0].details.text;
+let askerNameText;
+let questionTimeText;
+let questionText;
+let answererNameText;
+let answerTimeText;
+let answerText;
 describe('Testing Search Bar component', () => {
   test('inital Render Condition', () => {
     render(<QATile questionInfo={mockData} i={0} />);
 
-    const askerNameText = screen.getByText(askerName, {
+    askerNameText = screen.getByText(askerName, {
       exact: false,
     });
     expect(askerNameText).toHaveTextContent(askerName);
 
-    const questionTimeText = screen.getByText(askerTime);
+    questionTimeText = screen.getByText(askerTime);
     expect(questionTimeText).toHaveTextContent(askerTime);
 
-    const questionText = screen.getByText(question, {
+    questionText = screen.getByText(question, {
       exact: false,
     });
     expect(questionText).toHaveTextContent(question);
 
-    const answererNameText = screen.getByText(answererName, {
+    answererNameText = screen.getByText(answererName, {
       exact: false,
     });
     expect(answererNameText).toHaveTextContent(answererName);
 
-    const answerTimeText = screen.getByText(answererTime);
+    answerTimeText = screen.getByText(answererTime);
     expect(answerTimeText).toHaveTextContent(answererTime);
 
-    const answerText = screen.getByText(answer, {
+    answerText = screen.getByText(answer, {
       exact: false,
     });
     expect(answerText).toHaveTextContent(answer);
@@ -90,28 +96,28 @@ describe('Testing Search Bar component', () => {
   test('view more answer text should be displayed when multiple answer will be available', () => {
     render(<QATile questionInfo={mockData} i={0} />);
 
-    const askerNameText = screen.getByText(askerName, {
+    askerNameText = screen.getByText(askerName, {
       exact: false,
     });
     expect(askerNameText).toHaveTextContent(askerName);
 
-    const questionTimeText = screen.getByText(askerTime);
+    questionTimeText = screen.getByText(askerTime);
     expect(questionTimeText).toHaveTextContent(askerTime);
 
-    const questionText = screen.getByText(question, {
+    questionText = screen.getByText(question, {
       exact: false,
     });
     expect(questionText).toHaveTextContent(question);
 
-    const answererNameText = screen.getByText(answererName, {
+    answererNameText = screen.getByText(answererName, {
       exact: false,
     });
     expect(answererNameText).toHaveTextContent(answererName);
 
-    const answerTimeText = screen.getByText(answererTime);
+    answerTimeText = screen.getByText(answererTime);
     expect(answerTimeText).toHaveTextContent(answererTime);
 
-    const answerText = screen.getByText(answer, {
+    answerText = screen.getByText(answer, {
       exact: false,
     });
     expect(answerText).toHaveTextContent(answer);
