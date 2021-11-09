@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import QATile from '../../../../pages/sku-q&a/q&aTile/QATile';
 import moment from 'moment';
 const mockData = {
@@ -31,7 +31,7 @@ const mockData = {
       },
     },
     {
-      ugc_id: 380510586,
+      ugc_id: 380510587,
       answer_id: '7169236',
       details: {
         nickname: 'ceneel',
@@ -43,12 +43,12 @@ const mockData = {
         created_date: 1631382272450,
       },
       metrics: {
-        helpful_votes: 0,
-        not_helpful_votes: 0,
+        helpful_votes: 1,
+        not_helpful_votes: 2,
       },
     },
   ],
-  answer_count: 1,
+  answer_count: 2,
 };
 const askerName = mockData.details.nickname;
 const askerTime = moment(mockData.details.created_date).fromNow();

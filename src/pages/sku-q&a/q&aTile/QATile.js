@@ -23,16 +23,16 @@ function QATile({ questionInfo, i }) {
       <Question>
         {i + 1}. {details?.text}
       </Question>
-      {answers?.map((answer) => (
-        <Answer key={answer.answer_id}>
+      {answers?.map((data) => (
+        <Answer key={data.answer_id}>
           <Typography className='answerer'>
             <span style={{ fontWeight: '700' }}>
-              {answer?.details?.nickname} &middot;
-            </span>{' '}
-            {moment(answer?.details?.created_date).fromNow()}
+              {data?.details?.nickname} &middot;
+            </span>
+            {moment(data?.details?.created_date).fromNow()}
           </Typography>
           <Typography className='answerer-text'>
-            {answer?.details?.text}
+            {data?.details?.text}
           </Typography>
         </Answer>
       ))}

@@ -38,7 +38,9 @@ const options = [
     value: 'MostAnswers',
   },
 ];
-
+const getRemainingQuestions = (remainingQuestions) => {
+  return remainingQuestions > 10 ? 10 : remainingQuestions;
+};
 const LoadingSkeleton = () => {
   return (
     <BoxWrapper>
@@ -78,26 +80,29 @@ function QuestionAndAnswer({ match }) {
   }, [dispatch, match?.params?.id, skuData, storeId]);
 
   useEffect(() => {
-    if (skuData != null)
+    if (skuData != null) {
       dispatch(fetchQuestionDetails(skuData?.defaultProductId));
+    }
   }, [dispatch, skuData]);
 
   useEffect(() => {
-    if (questionsData != null)
+    if (questionsData != null) {
       setRemainingQuestions(
         questionsData?.paging.total_results -
           questionsData?.results.slice(0, showingQuestions).length
       );
+    }
   }, [showingQuestions, questionsData]);
 
   const moreQuestionClickHandler = () => {
-    if (questionsData?.paging?.next_page_url != null)
+    if (questionsData?.paging?.next_page_url != null) {
       dispatch(
         fetchQuestionByPage(
           questionsData?.paging?.next_page_url,
           questionsData?.results
         )
       );
+    }
     setShowingQuestions((prevState) => prevState + 10);
   };
   const sortByClickHandler = (e) => {
@@ -168,8 +173,7 @@ function QuestionAndAnswer({ match }) {
             {remainingQuestions} More Questions
           </Typography>
           <ButtonWrapper onClick={moreQuestionClickHandler}>
-            VIEW NEXT {remainingQuestions > 10 ? 10 : remainingQuestions}{' '}
-            QUESTIONS
+            `VIEW NEXT ${getRemainingQuestions(remainingQuestions)} QUESTIONS`
           </ButtonWrapper>
         </>
       ) : null}
