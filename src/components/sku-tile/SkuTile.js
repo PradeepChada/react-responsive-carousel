@@ -58,7 +58,7 @@ const SkuTile = ({
           <Price>${skuInfo?.skuPriceDetails?.price}/ea</Price>
         )}
         <Title data-testid='sku-title'>
-          {skuInfo?.name.substring(0, 25)}...
+          {skuInfo?.name?.substring(0, 25)}...
         </Title>
         {skuAvailabilityLoading ? (
           <StockSkeleton variant='text' data-testid='stock-skeleton' />
