@@ -3,7 +3,6 @@ import {
   Box,
   LinearProgress,
   Skeleton,
-  InputLabel,
   MenuItem,
   FormControl,
 } from '@mui/material';
@@ -18,7 +17,6 @@ import {
   GalleryBox,
   ReviewTitle,
   ReviewFeature,
-  ReviewName,
   ReviewDetails,
   ReviewContent,
   RightIcon,
@@ -227,9 +225,9 @@ const Reviews = ({ match }) => {
         <>
           <ReviewTitle>Most Recommended Review</ReviewTitle>
           <ReviewDetails>
-            <ReviewName>
+            {/* <ReviewName>
               Jessikida, <span>12 days ago</span>
-            </ReviewName>
+            </ReviewName> */}
             <RatingsBar
               className='rating-block'
               rating={rollup?.faceoff_positive?.rating}
@@ -251,9 +249,9 @@ const Reviews = ({ match }) => {
           <ReviewTitle>Most Helpful Critical Review</ReviewTitle>
 
           <ReviewDetails>
-            <ReviewName>
+            {/* <ReviewName>
               Jessikida, <span>12 days ago</span>
-            </ReviewName>
+            </ReviewName> */}
             <RatingsBar
               className='rating-block'
               rating={rollup?.faceoff_negative?.rating}
@@ -272,8 +270,7 @@ const Reviews = ({ match }) => {
 
       <ReviewCount>Reviewed by 80 customers</ReviewCount>
       <FormControl fullWidth>
-        <InputLabel id='demo-simple-select-label'>Most Relevant</InputLabel>
-        <Dropdown label='Most Relevant' value={sort} onChange={onChangeSort}>
+        <Dropdown value={sort} onChange={onChangeSort}>
           <MenuItem value='Newest'>Most Recent</MenuItem>
           <MenuItem value='MostHelpful'>Most Recommended</MenuItem>
         </Dropdown>
@@ -288,7 +285,7 @@ const Reviews = ({ match }) => {
               {' '}
               Submitted{' '}
               <span className='duration'>
-                {moment(item?.details?.updated_date).fromNow()}{' '}
+                {moment(item?.details?.created_date).fromNow()}{' '}
               </span>
               By
               <span className='submitted-by'>{item?.details?.nickname} </span>
@@ -296,6 +293,11 @@ const Reviews = ({ match }) => {
             <ReviewContent>
               <ReadMore text={item?.details?.comments} />
             </ReviewContent>
+            <Box className='review-images'>
+              {item?.media?.map((obj) => (
+                <img src={obj.uri} alt={obj.caption} />
+              ))}
+            </Box>
             <RecommendedContent>
               {item?.details?.bottom_line === 'Yes' ? (
                 <RightIcon />

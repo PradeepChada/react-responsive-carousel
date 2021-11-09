@@ -22,9 +22,9 @@ const StyledBody = styled('div')({
 });
 
 const App = () => {
-  var screenOrientation = window?.screen?.orientation;
-  if (screenOrientation) {
-    screenOrientation.lock('portrait');
+  const screenOrientation = window?.screen?.orientation;
+  if (screenOrientation?.lock) {
+    screenOrientation?.lock('portrait');
   }
   return (
     <Provider store={store}>

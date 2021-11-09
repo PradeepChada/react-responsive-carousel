@@ -1,11 +1,5 @@
 import { styled } from '@mui/styles';
-import {
-  Container,
-  Typography,
-  Box,
-  Button,
-  Select,
-} from '@mui/material';
+import { Container, Typography, Box, Button, Select } from '@mui/material';
 import { colors } from '../../utils/themeUtils';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import CheckIcon from '@mui/icons-material/Check';
@@ -132,7 +126,14 @@ export const ReviewDetails = styled(Box)({
   borderColor: colors.gray90,
   marginBottom: '16px',
   marginTop: '12px',
-  borderWidth: '1px'
+  borderWidth: '1px',
+  '& .review-images': {
+    marginBottom: 10,
+    '& img': {
+      width: 95,
+      marginRight: 10,
+    },
+  },
 });
 export const ReviewContent = styled(Typography)({
   fontSize: '14px',
