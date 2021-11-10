@@ -10,10 +10,14 @@ const ProductTitle = ({ title, skuId, rating, ratingCount, ratingLoading }) => {
     <Box>
       <Title fontWeight={600}>{title}</Title>
       <Box display='flex' justifyContent='space-between' alignItems='center'>
-        {ratingLoading ? <Skeleton width={100} /> : <Box display='flex' alignItems='center'>
-          <RatingsBar rating={rating} />
-          <RatingCount>{ratingCount}</RatingCount>
-        </Box>}
+        {ratingLoading ? (
+          <Skeleton width={100} />
+        ) : (
+          <Box display='flex' alignItems='center'>
+            <RatingsBar rating={rating} />
+            <RatingCount>{ratingCount}</RatingCount>
+          </Box>
+        )}
         <SkuNumber>SKU: #{skuId}</SkuNumber>
       </Box>
     </Box>
@@ -26,9 +30,12 @@ ProductTitle.propTypes = {
   title: PropTypes.string,
   rating: PropTypes.number,
   ratingCount: PropTypes.number,
-  skuId: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  ratingLoading: PropTypes.bool
-}
+  skuId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ratingLoading: PropTypes.bool,
+};
+
+ProductTitle.defaultPropas = {
+  ratingCount: 0,
+  rating: 0,
+  title: '',
+};

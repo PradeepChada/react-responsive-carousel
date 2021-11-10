@@ -22,10 +22,13 @@ const reviewSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    resetReviews: () => {
+      return { ...INITIAL_STATE };
+    },
   },
 });
 
-const actions = reviewSlice.actions;
+export const actions = reviewSlice.actions;
 
 export const fetchReviewDetails = (url, pagination) => (dispatch, getState) => {
   dispatch(actions.reviewsLoading());

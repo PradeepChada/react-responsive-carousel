@@ -1,7 +1,7 @@
 import * as skuService from '../services/sku.service';
 import { createSlice } from '@reduxjs/toolkit';
 import { skuErrorMessages } from '../constants/errorMessages';
-import { fetchReviewDetails } from './reviews.slice';
+import { fetchReviewDetails, actions as reviewsActions } from './reviews.slice';
 import { getReviewsApiUrl } from '../utils/skuHelpers';
 
 const INITIAL_STATE = {
@@ -100,6 +100,8 @@ export const fetchSkuDetails =
               'MostHelpful'
             );
             dispatch(fetchReviewDetails(path));
+          } else {
+            dispatch(reviewsActions?.resetReviews());
           }
           dispatch(actions.success(res?.data));
         }
