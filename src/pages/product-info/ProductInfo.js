@@ -27,6 +27,7 @@ const ProductInfo = ({ match }) => {
   const { loading, skuData, error, storeId } = useSelector(
     (state) => state.sku
   );
+  const { reviewsData } = useSelector((state) => state.reviews);
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id))
@@ -48,8 +49,8 @@ const ProductInfo = ({ match }) => {
       <ProductTitle
         title={skuData?.name}
         skuId={match?.params?.id}
-        rating={4}
-        ratingCount={10}
+        rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+        ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
       />
       <Wrapper>
         <Title variant='h6'>Product Information</Title>

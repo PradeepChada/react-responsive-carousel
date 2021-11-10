@@ -1,25 +1,9 @@
-import { Rating, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { styled } from '@mui/styles';
-import { colors } from '../../utils/themeUtils';
 
 export const Title = styled(Typography)({
   lineHeight: '20px',
   textTransform: 'capitalize',
-});
-
-export const StyledRating = styled(Rating)({
-  '& .MuiRating-iconFilled': {
-    '& svg': {
-      color: colors.starFilled,
-    },
-  },
-  '& .MuiRating-iconEmpty': {
-    '& svg': {
-      color: colors.starEmpty,
-      fill: colors.starEmpty,
-      // backgroundColor: colors.starEmpty
-    },
-  },
 });
 
 export const RatingCount = styled('span')({

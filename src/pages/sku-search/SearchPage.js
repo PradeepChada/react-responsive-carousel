@@ -55,14 +55,19 @@ const SearchPage = ({ history }) => {
     dispatch(actions.reset());
   };
 
-  const skuImg =   skuData?.mediaList?.[0]?.url ? `${config.ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
+  const skuImg = skuData?.mediaList?.[0]?.url
+    ? `${config.appConfig.asset_base_url}${skuData?.mediaList?.[0]?.url}`
+    : null;
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
     skuPriceDetails,
     skuId: skuData?.id,
-    qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
-  }
+    qtyAvailableAtStore: getQtyInStore(
+      skuAvailability?.inventoryEstimates,
+      skuAvailability?.requestStoreNumber
+    ),
+  };
 
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
