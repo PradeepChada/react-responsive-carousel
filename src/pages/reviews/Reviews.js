@@ -179,6 +179,8 @@ const Reviews = ({ match }) => {
   const reviewsRemainig =
     reviewsData?.paging?.total_results -
     reviewsData?.paging?.current_page_number * reviewsData?.paging?.page_size;
+
+  const nextReviewsLength = reviewsRemainig < 10 ? reviewsRemainig : 10;
   return (
     <PageContainer>
       <PhotoCarousel
@@ -240,9 +242,6 @@ const Reviews = ({ match }) => {
             <>
               <ReviewTitle>Most Recommended Review</ReviewTitle>
               <ReviewDetails>
-                {/* <ReviewName>
-              Jessikida, <span>12 days ago</span>
-            </ReviewName> */}
                 <RatingsBar
                   className='rating-block'
                   rating={rollup?.faceoff_positive?.rating}
@@ -260,15 +259,10 @@ const Reviews = ({ match }) => {
               </ReviewDetails>
             </>
           )}
-
           {rollup?.faceoff_negative && (
             <>
               <ReviewTitle>Most Helpful Critical Review</ReviewTitle>
-
               <ReviewDetails>
-                {/* <ReviewName>
-              Jessikida, <span>12 days ago</span>
-            </ReviewName> */}
                 <RatingsBar
                   className='rating-block'
                   rating={rollup?.faceoff_negative?.rating}
@@ -286,7 +280,6 @@ const Reviews = ({ match }) => {
               </ReviewDetails>
             </>
           )}
-
           <ReviewCount>Reviewed by 80 customers</ReviewCount>
           <FormControl fullWidth>
             <Dropdown value={sort} onChange={onChangeSort}>
@@ -294,7 +287,6 @@ const Reviews = ({ match }) => {
               <MenuItem value='MostHelpful'>Most Recommended</MenuItem>
             </Dropdown>
           </FormControl>
-
           {reviews?.map((item) => {
             return (
               <ReviewDetails key={item?.internal_review_id}>
@@ -350,7 +342,7 @@ const Reviews = ({ match }) => {
           )}
           {reviewsData?.paging?.next_page_url && (
             <ViewNextBtn variant='outlined' fullWidth onClick={onClickNextPage}>
-              View next {reviewsRemainig < 10 ? reviewsRemainig : 10} Reviews
+              View next {nextReviewsLength} Reviews
             </ViewNextBtn>
           )}
         </>
