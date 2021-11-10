@@ -131,6 +131,48 @@ const LoadingSkeleton = () => {
   );
 };
 
+const ReviewCard = ({ item }) => {
+  return (
+    <ReviewDetails>
+      <RatingsBar rating={item?.metrics?.rating} />
+      <ReviewFeature>{item?.details?.headline}</ReviewFeature>
+      <SubmittedReview>
+        {' '}
+        Submitted{' '}
+        <span className='duration'>
+          {moment(item?.details?.created_date).fromNow()}{' '}
+        </span>
+        By
+        <span className='submitted-by'>{item?.details?.nickname} </span>
+      </SubmittedReview>
+      <ReviewContent>
+        <ReadMore text={item?.details?.comments} />
+      </ReviewContent>
+      <Box className='review-images'>
+        {item?.media?.map((obj) => (
+          <img src={obj.uri} alt={obj.caption} />
+        ))}
+      </Box>
+      <RecommendedContent>
+        {item?.details?.bottom_line === 'Yes' ? <RightIcon /> : <CrossIcon />}
+        <span>
+          {item?.details?.bottom_line === 'No' ? 'Not' : ''} Recommended Product
+        </span>
+      </RecommendedContent>
+      {item?.details?.merchant_response && (
+        <>
+          <ResponseDuration>
+            {moment(item?.details?.merchant_response_date).fromNow()}
+          </ResponseDuration>
+          <ResponseContent>
+            <ReadMore text={item?.details?.merchant_response} />
+          </ResponseContent>
+        </>
+      )}
+    </ReviewDetails>
+  );
+};
+
 const Reviews = ({ match }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -287,54 +329,9 @@ const Reviews = ({ match }) => {
               <MenuItem value='MostHelpful'>Most Recommended</MenuItem>
             </Dropdown>
           </FormControl>
-          {reviews?.map((item) => {
-            return (
-              <ReviewDetails key={item?.internal_review_id}>
-                <RatingsBar rating={item?.metrics?.rating} />
-                <ReviewFeature>{item?.details?.headline}</ReviewFeature>
-                <SubmittedReview>
-                  {' '}
-                  Submitted{' '}
-                  <span className='duration'>
-                    {moment(item?.details?.created_date).fromNow()}{' '}
-                  </span>
-                  By
-                  <span className='submitted-by'>
-                    {item?.details?.nickname}{' '}
-                  </span>
-                </SubmittedReview>
-                <ReviewContent>
-                  <ReadMore text={item?.details?.comments} />
-                </ReviewContent>
-                <Box className='review-images'>
-                  {item?.media?.map((obj) => (
-                    <img src={obj.uri} alt={obj.caption} />
-                  ))}
-                </Box>
-                <RecommendedContent>
-                  {item?.details?.bottom_line === 'Yes' ? (
-                    <RightIcon />
-                  ) : (
-                    <CrossIcon />
-                  )}
-                  <span>
-                    {item?.details?.bottom_line === 'No' ? 'Not' : ''}{' '}
-                    Recommended Product
-                  </span>
-                </RecommendedContent>
-                {item?.details?.merchant_response && (
-                  <>
-                    <ResponseDuration>
-                      {moment(item?.details?.merchant_response_date).fromNow()}
-                    </ResponseDuration>
-                    <ResponseContent>
-                      <ReadMore text={item?.details?.merchant_response} />
-                    </ResponseContent>
-                  </>
-                )}
-              </ReviewDetails>
-            );
-          })}
+          {reviews?.map((item) => (
+            <ReviewCard key={item?.internal_review_id} item={item} />
+          ))}
           {reviewsData?.paging?.next_page_url && (
             <ReviewTitle className='review-count'>
               {reviewsRemainig} Reviews more
