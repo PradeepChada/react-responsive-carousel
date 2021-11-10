@@ -69,6 +69,7 @@ function QuestionAndAnswer({ match }) {
   const { loading, questionsData, error } = useSelector(
     (state) => state.skuQuestions
   );
+  const { reviewsData } = useSelector((state) => state.reviews);
   const [selectedOption, setSelectedOption] = useState(options[0].name);
   const [showingQuestions, setShowingQuestions] = useState(3);
   const [remainingQuestions, setRemainingQuestions] = useState(0);
@@ -131,8 +132,8 @@ function QuestionAndAnswer({ match }) {
       <ProductTitle
         title={skuData?.name}
         skuId={skuData?.id}
-        rating={4}
-        ratingCount={10}
+        rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+        ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
       />
       <Typography className='text'>Q&A</Typography>
       <Typography className='total-question'>
@@ -173,7 +174,7 @@ function QuestionAndAnswer({ match }) {
             {remainingQuestions} More Questions
           </Typography>
           <ButtonWrapper onClick={moreQuestionClickHandler}>
-            `VIEW NEXT ${getRemainingQuestions(remainingQuestions)} QUESTIONS`
+            VIEW NEXT {getRemainingQuestions(remainingQuestions)} QUESTIONS
           </ButtonWrapper>
         </>
       ) : null}
