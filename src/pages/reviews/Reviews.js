@@ -322,7 +322,9 @@ const Reviews = ({ match }) => {
               </ReviewDetails>
             </>
           )}
-          <ReviewCount>Reviewed by 80 customers</ReviewCount>
+          <ReviewCount>
+            Reviewed by {rollup?.review_count} customers
+          </ReviewCount>
           <FormControl fullWidth>
             <Dropdown value={sort} onChange={onChangeSort}>
               <MenuItem value='Newest'>Most Recent</MenuItem>
