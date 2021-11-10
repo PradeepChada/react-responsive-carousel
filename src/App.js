@@ -14,6 +14,7 @@ import './App.css';
 import Spinner from './components/loading-spinner/Spinner';
 import ConfigProvider from './components/config-provider/ConfigProvider';
 import StoreProvider from './components/store-provider/StoreProvider';
+import Reviews from './pages/reviews/Reviews';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -21,9 +22,9 @@ const StyledBody = styled('div')({
 });
 
 const App = () => {
-  var screenOrientation = window?.screen?.orientation;
-  if (screenOrientation) {
-    screenOrientation.lock('portrait');
+  const screenOrientation = window?.screen?.orientation;
+  if (screenOrientation?.lock) {
+    screenOrientation?.lock('portrait');
   }
   return (
     <Provider store={store}>
@@ -42,17 +43,22 @@ const App = () => {
                     path='/product-details/:id'
                     component={ProductDetails}
                   />
-                  <Route exact path='/product-info/:id' component={ProductInfo} />
+                  <Route
+                    exact
+                    path='/product-info/:id'
+                    component={ProductInfo}
+                  />
                   <Route
                     exact
                     path='/product-variants/:id/:defaultProduct'
                     component={ProductVariants}
                   />
                   <Route
-                  exact
-                  path='/sku-info/q&a/:id'
-                  component={QuestionAndAnswer}
-                />
+                    exact
+                    path='/sku-info/q&a/:id'
+                    component={QuestionAndAnswer}
+                  />
+                  <Route exact path='/reviews/:id' component={Reviews} />
                 </Switch>
               </StyledBody>
             </StoreProvider>

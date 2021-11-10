@@ -52,6 +52,5 @@ const appDetails = (req, res) => {
 };
 
 module.exports = {
-  appDetails
-}
-
+  appDetails,
+};

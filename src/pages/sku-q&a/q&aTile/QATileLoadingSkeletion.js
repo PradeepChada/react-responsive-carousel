@@ -10,7 +10,7 @@ function QATileLoadingSkeletion() {
       <Skeleton variant='text' width={280} />
       <Skeleton className='question' variant='text' width={280} />
       <Answer>
-        <Skeleton className="answerer" variant='text' width={190} />
+        <Skeleton className='answerer' variant='text' width={190} />
         <Skeleton variant='text' />
         <Skeleton variant='text' />
         <Skeleton variant='text' />

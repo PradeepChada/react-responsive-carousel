@@ -1,11 +1,11 @@
 const express = require("express");
 const path = require("path");
-const routes = require('./routes');
+const routes = require("./routes");
 const app = express();
-const consulConfig = require('./helpers/consulConfig');
+const consulConfig = require("./helpers/consulConfig");
 const port = process.env.PORT || 3000;
 
-app.use('/', routes);
+app.use("/", routes);
 
 const serveBuild = () => {
   // Serve any static files
@@ -15,7 +15,6 @@ const serveBuild = () => {
     res.sendFile(path.join(__dirname, "./../build", "index.html"));
   });
 };
-
 
 app.listen(port, (err) => {
   if (err) {

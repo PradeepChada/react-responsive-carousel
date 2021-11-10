@@ -30,9 +30,10 @@ import {
   getSkuPriceDetails,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import { getConfig } from './../../config';
+import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
+import RatingsBar from '../../components/ratings-bar/RatingsBar';
 
 const LoadingSkeleton = () => {
   return (
@@ -90,6 +91,10 @@ const ProductDetails = ({ history, match }) => {
     mktAvailData,
     mktAvailError,
   } = useSelector((state) => state.sku);
+  const { reviewsData, loading: ratingLoading } = useSelector(
+    (state) => state.reviews
+  );
+
   const [showDrawer, setShowDrawer] = useState(false);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
@@ -161,7 +166,6 @@ const ProductDetails = ({ history, match }) => {
     skuAvailability?.requestStoreNumber
   );
   const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
-  const ASSET_URL = getConfig('asset_base_url');
 
   return (
     <PageContainer>
@@ -169,14 +173,15 @@ const ProductDetails = ({ history, match }) => {
       <ProductTitle
         title={skuData?.name}
         skuId={skuData?.id}
-        rating={4}
-        ratingCount={10}
+        rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+        ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
+        ratingLoading={ratingLoading}
       />
       <ProductCarousel
         images={
           skuData?.mediaList
             ?.filter((o) => o.name === 'large')
-            ?.map((o) => `${ASSET_URL}${o.url}`) || []
+            ?.map((o) => `${config.appConfig.asset_base_url}${o.url}`) || []
         }
       />
       {skuPriceDetails?.onSale ? (
@@ -197,16 +202,10 @@ const ProductDetails = ({ history, match }) => {
       ) : (
         <Price>${skuPriceDetails?.price}/ea</Price>
       )}
-
       <div>
         <Spec>
           Dimensions: <span>{skuData?.dimensionDescription}</span>
         </Spec>
-        {/* {!!skuData?.dimension?.weight && (
-          <Spec>
-            Weight: <span>{skuData?.dimension?.weight}</span>
-          </Spec>
-        )} */}
         {skuData?.color && (
           <Spec>
             Color: <span>{skuData?.color}</span>
@@ -306,6 +305,17 @@ const ProductDetails = ({ history, match }) => {
         >
           <Typography>Additional Sizes & Colors</Typography>
           <ChevronRight />
+        </InfoTile>
+        <InfoTile onClick={() => history.push(`/reviews/${match?.params?.id}`)}>
+          <div className='ratings-wrapper'>
+            <Box display='flex' justifyContent='space-between'>
+              <Typography>Customer Reviews</Typography>
+              <ChevronRight />
+            </Box>
+            <RatingsBar
+              rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+            />
+          </div>
         </InfoTile>
         <InfoTile
           onClick={() => history.push(`/sku-info/q&a/${match?.params?.id}`)}

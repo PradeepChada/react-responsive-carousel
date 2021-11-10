@@ -6,7 +6,7 @@ import SearchBar from '../sku-search/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
 import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
-import { getConfig } from './../../config';
+import config from './../../config';
 import {
   Wrapper,
   TextWrapper,
@@ -55,16 +55,19 @@ const SearchPage = ({ history }) => {
     dispatch(actions.reset());
   };
 
-  const ASSET_URL = getConfig('asset_base_url');
-
-  const skuImg = skuData?.mediaList?.[0]?.url ? `${ASSET_URL}${skuData?.mediaList?.[0]?.url}` : null
+  const skuImg = skuData?.mediaList?.[0]?.url
+    ? `${config.appConfig.asset_base_url}${skuData?.mediaList?.[0]?.url}`
+    : null;
   const skuInfo = {
     name: skuData?.name,
     image: skuImg,
     skuPriceDetails,
     skuId: skuData?.id,
-    qtyAvailableAtStore: getQtyInStore(skuAvailability?.inventoryEstimates, skuAvailability?.requestStoreNumber)
-  }
+    qtyAvailableAtStore: getQtyInStore(
+      skuAvailability?.inventoryEstimates,
+      skuAvailability?.requestStoreNumber
+    ),
+  };
 
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
