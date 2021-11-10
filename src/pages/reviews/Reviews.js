@@ -147,7 +147,11 @@ const Reviews = ({ match }) => {
   };
 
   const { reviewsData, loading } = useSelector((state) => state.reviews);
-  const { storeId, skuData } = useSelector((state) => state.sku);
+  const {
+    storeId,
+    skuData,
+    loading: skuLoading,
+  } = useSelector((state) => state.sku);
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id)) {
@@ -167,11 +171,11 @@ const Reviews = ({ match }) => {
     dispatch(fetchReviewDetails(url, true));
   };
 
-  if (!reviewsData) {
-    return !loading ? <LoadingSkeleton /> : null;
+  if (loading || skuLoading) {
+    return <LoadingSkeleton />;
   }
-  const { reviews, rollup } = reviewsData?.results?.[0];
-  const ratings = ([...rollup?.rating_histogram] || []).reverse();
+  const { reviews, rollup } = reviewsData?.results?.[0] || {};
+  const ratings = [...(rollup?.rating_histogram || [])].reverse();
   const reviewsRemainig =
     reviewsData?.paging?.total_results -
     reviewsData?.paging?.current_page_number * reviewsData?.paging?.page_size;
@@ -187,187 +191,173 @@ const Reviews = ({ match }) => {
         title={skuData?.name}
         skuId={skuData?.id}
         rating={rollup?.average_rating}
-        ratingCount={10}
+        ratingCount={rollup?.review_count}
       />
       <Title>Customer Reviews</Title>
-      <RatingContainer>
-        <Typography variant='h4'>
-          {rollup?.average_rating?.toFixed(1)}
-        </Typography>
-        <RatingsBar rating={rollup?.average_rating} />
-        <div className='review-count'>
-          out of {rollup?.review_count} reviews
-        </div>
-        <div className='recomm'>
-          <CheckCircleIcon />
-          <span className='percentage'>{rollup?.recommended_ratio * 100}%</span>
-          <span className='recomm-txt'>
-            Recommend <br /> this product
-          </span>
-        </div>
-        <Box className='rating-bars-container'>
-          {ratings?.map((val, i) => (
-            <Box className='rating-bar'>
-              <span className='rating-type'>{5 - i}</span>
-              <StarIcon />
-              <LinearProgress
-                variant='determinate'
-                value={(val / rollup?.review_count) * 100}
-              />
-              <span className='user-count'>{val}</span>
-            </Box>
-          ))}
-        </Box>
-      </RatingContainer>
-      {reviewsData?.results?.[0]?.rollup?.media?.length > 0 && (
-        <GalleryBox>
-          <Typography fontWeight='bold'>Customer Images</Typography>
-          <PhotoGallery
-            data={reviewsData?.results?.[0]?.rollup?.media}
-            handleClick={handleClickPhoto}
-          />
-        </GalleryBox>
-      )}
-      {rollup?.faceoff_positive && (
+      {reviewsData ? (
         <>
-          <ReviewTitle>Most Recommended Review</ReviewTitle>
-          <ReviewDetails>
-            {/* <ReviewName>
-              Jessikida, <span>12 days ago</span>
-            </ReviewName> */}
-            <RatingsBar
-              className='rating-block'
-              rating={rollup?.faceoff_positive?.rating}
-            />
-            <ReviewFeature>{rollup?.faceoff_positive?.headline}</ReviewFeature>
-            <ReviewContent>
-              <ReadMore text={rollup?.faceoff_positive?.comments} />
-            </ReviewContent>
-            <RecommendedContent>
-              <RightIcon />
-              <span>Recommended Product</span>
-            </RecommendedContent>
-          </ReviewDetails>
-        </>
-      )}
-
-      {rollup?.faceoff_negative && (
-        <>
-          <ReviewTitle>Most Helpful Critical Review</ReviewTitle>
-
-          <ReviewDetails>
-            {/* <ReviewName>
-              Jessikida, <span>12 days ago</span>
-            </ReviewName> */}
-            <RatingsBar
-              className='rating-block'
-              rating={rollup?.faceoff_negative?.rating}
-            />
-            <ReviewFeature>{rollup?.faceoff_negative?.headline}</ReviewFeature>
-            <ReviewContent>
-              <ReadMore text={rollup?.faceoff_negative?.comments} />
-            </ReviewContent>
-            <RecommendedContent>
-              <RightIcon />
-              <span>Recommended Product</span>
-            </RecommendedContent>
-          </ReviewDetails>
-        </>
-      )}
-
-      <ReviewCount>Reviewed by 80 customers</ReviewCount>
-      <FormControl fullWidth>
-        <Dropdown value={sort} onChange={onChangeSort}>
-          <MenuItem value='Newest'>Most Recent</MenuItem>
-          <MenuItem value='MostHelpful'>Most Recommended</MenuItem>
-        </Dropdown>
-      </FormControl>
-
-      {reviews?.map((item) => {
-        return (
-          <ReviewDetails key={item?.internal_review_id}>
-            <RatingsBar rating={item?.metrics?.rating} />
-            <ReviewFeature>{item?.details?.headline}</ReviewFeature>
-            <SubmittedReview>
-              {' '}
-              Submitted{' '}
-              <span className='duration'>
-                {moment(item?.details?.created_date).fromNow()}{' '}
+          <RatingContainer>
+            <Typography variant='h4'>
+              {rollup?.average_rating?.toFixed(1)}
+            </Typography>
+            <RatingsBar rating={rollup?.average_rating} />
+            <div className='review-count'>
+              out of {rollup?.review_count} reviews
+            </div>
+            <div className='recomm'>
+              <CheckCircleIcon />
+              <span className='percentage'>
+                {rollup?.recommended_ratio * 100}%
               </span>
-              By
-              <span className='submitted-by'>{item?.details?.nickname} </span>
-            </SubmittedReview>
-            <ReviewContent>
-              <ReadMore text={item?.details?.comments} />
-            </ReviewContent>
-            <Box className='review-images'>
-              {item?.media?.map((obj) => (
-                <img src={obj.uri} alt={obj.caption} />
+              <span className='recomm-txt'>
+                Recommend <br /> this product
+              </span>
+            </div>
+            <Box className='rating-bars-container'>
+              {ratings?.map((val, i) => (
+                <Box className='rating-bar'>
+                  <span className='rating-type'>{5 - i}</span>
+                  <StarIcon />
+                  <LinearProgress
+                    variant='determinate'
+                    value={(val / rollup?.review_count) * 100}
+                  />
+                  <span className='user-count'>{val}</span>
+                </Box>
               ))}
             </Box>
-            <RecommendedContent>
-              {item?.details?.bottom_line === 'Yes' ? (
-                <RightIcon />
-              ) : (
-                <CrossIcon />
-              )}
-              <span>
-                {item?.details?.bottom_line === 'No' ? 'Not' : ''} Recommended
-                Product
-              </span>
-            </RecommendedContent>
-            {item?.details?.merchant_response && (
-              <>
-                <ResponseDuration>
-                  {moment(item?.details?.merchant_response_date).fromNow()}
-                </ResponseDuration>
-                <ResponseContent>
-                  <ReadMore text={item?.details?.merchant_response} />
-                </ResponseContent>
-              </>
-            )}
-          </ReviewDetails>
-        );
-      })}
-      {/* <ReviewDetails>
-        <Rating
-          className='rating-block'
-          defaultValue={4.5}
-          precision={0.5}
-          readOnly
-          size='small'
-          emptyIcon={<StarIcon className='empty-rating' fontSize='inherit' />}
-        />
+          </RatingContainer>
+          {reviewsData?.results?.[0]?.rollup?.media?.length > 0 && (
+            <GalleryBox>
+              <Typography fontWeight='bold'>Customer Images</Typography>
+              <PhotoGallery
+                data={reviewsData?.results?.[0]?.rollup?.media}
+                handleClick={handleClickPhoto}
+              />
+            </GalleryBox>
+          )}
+          {rollup?.faceoff_positive && (
+            <>
+              <ReviewTitle>Most Recommended Review</ReviewTitle>
+              <ReviewDetails>
+                {/* <ReviewName>
+              Jessikida, <span>12 days ago</span>
+            </ReviewName> */}
+                <RatingsBar
+                  className='rating-block'
+                  rating={rollup?.faceoff_positive?.rating}
+                />
+                <ReviewFeature>
+                  {rollup?.faceoff_positive?.headline}
+                </ReviewFeature>
+                <ReviewContent>
+                  <ReadMore text={rollup?.faceoff_positive?.comments} />
+                </ReviewContent>
+                <RecommendedContent>
+                  <RightIcon />
+                  <span>Recommended Product</span>
+                </RecommendedContent>
+              </ReviewDetails>
+            </>
+          )}
 
-        <ReviewFeature>Super cute and keeps food fresh!</ReviewFeature>
-        <SubmittedReview>
-          {' '}
-          Submitted <span className='duration'>12 days ago </span>By
-          <span className='submitted-by'>Berrtpatch Bunch</span>
-        </SubmittedReview>
-        <ReviewContent>
-          I bought one of these about 6 years ago, lid cracked after my kiddo
-          climbed on it. We looked for a replacement for a long time...{' '}
-          <span>Read More</span>
-        </ReviewContent>
-        <RecommendedContent>
-          <CrossIcon />
-          <span>NoT Recommended Product</span>
-        </RecommendedContent>
-        <ResponseDuration>22 days ago </ResponseDuration>
-        <ResponseContent>
-          We are sorry to disappoint you. While the retail marketplace is ever
-          fluctuating, we always strive to provide our customers quality
-          products that will last at a competitive price.
-        </ResponseContent>
-      </ReviewDetails> */}
-      <ReviewTitle className='review-count'>
-        {reviewsRemainig} Reviews more
-      </ReviewTitle>
-      {reviewsRemainig && (
-        <ViewNextBtn variant='outlined' fullWidth onClick={onClickNextPage}>
-          View next 10 Reviews
-        </ViewNextBtn>
+          {rollup?.faceoff_negative && (
+            <>
+              <ReviewTitle>Most Helpful Critical Review</ReviewTitle>
+
+              <ReviewDetails>
+                {/* <ReviewName>
+              Jessikida, <span>12 days ago</span>
+            </ReviewName> */}
+                <RatingsBar
+                  className='rating-block'
+                  rating={rollup?.faceoff_negative?.rating}
+                />
+                <ReviewFeature>
+                  {rollup?.faceoff_negative?.headline}
+                </ReviewFeature>
+                <ReviewContent>
+                  <ReadMore text={rollup?.faceoff_negative?.comments} />
+                </ReviewContent>
+                <RecommendedContent>
+                  <RightIcon />
+                  <span>Recommended Product</span>
+                </RecommendedContent>
+              </ReviewDetails>
+            </>
+          )}
+
+          <ReviewCount>Reviewed by 80 customers</ReviewCount>
+          <FormControl fullWidth>
+            <Dropdown value={sort} onChange={onChangeSort}>
+              <MenuItem value='Newest'>Most Recent</MenuItem>
+              <MenuItem value='MostHelpful'>Most Recommended</MenuItem>
+            </Dropdown>
+          </FormControl>
+
+          {reviews?.map((item) => {
+            return (
+              <ReviewDetails key={item?.internal_review_id}>
+                <RatingsBar rating={item?.metrics?.rating} />
+                <ReviewFeature>{item?.details?.headline}</ReviewFeature>
+                <SubmittedReview>
+                  {' '}
+                  Submitted{' '}
+                  <span className='duration'>
+                    {moment(item?.details?.created_date).fromNow()}{' '}
+                  </span>
+                  By
+                  <span className='submitted-by'>
+                    {item?.details?.nickname}{' '}
+                  </span>
+                </SubmittedReview>
+                <ReviewContent>
+                  <ReadMore text={item?.details?.comments} />
+                </ReviewContent>
+                <Box className='review-images'>
+                  {item?.media?.map((obj) => (
+                    <img src={obj.uri} alt={obj.caption} />
+                  ))}
+                </Box>
+                <RecommendedContent>
+                  {item?.details?.bottom_line === 'Yes' ? (
+                    <RightIcon />
+                  ) : (
+                    <CrossIcon />
+                  )}
+                  <span>
+                    {item?.details?.bottom_line === 'No' ? 'Not' : ''}{' '}
+                    Recommended Product
+                  </span>
+                </RecommendedContent>
+                {item?.details?.merchant_response && (
+                  <>
+                    <ResponseDuration>
+                      {moment(item?.details?.merchant_response_date).fromNow()}
+                    </ResponseDuration>
+                    <ResponseContent>
+                      <ReadMore text={item?.details?.merchant_response} />
+                    </ResponseContent>
+                  </>
+                )}
+              </ReviewDetails>
+            );
+          })}
+          {reviewsData?.paging?.next_page_url && (
+            <ReviewTitle className='review-count'>
+              {reviewsRemainig} Reviews more
+            </ReviewTitle>
+          )}
+          {reviewsData?.paging?.next_page_url && (
+            <ViewNextBtn variant='outlined' fullWidth onClick={onClickNextPage}>
+              View next {reviewsRemainig < 10 ? reviewsRemainig : 10} Reviews
+            </ViewNextBtn>
+          )}
+        </>
+      ) : (
+        <Typography>
+          Reviews and Ratings are not available for the Sku
+        </Typography>
       )}
     </PageContainer>
   );
