@@ -123,8 +123,13 @@ export const InfoTile = styled(Box)({
   },
   '& .ratings-wrapper': {
     width: '100%',
-    '& .MuiRating-sizeSmall': {
+    '& .rating-info-block': {
       marginTop: 18,
+      display: 'flex',
+      alignItems: 'center',
+      '& span': {
+        verticalAlign: 'middle',
+      },
     },
   },
 });
