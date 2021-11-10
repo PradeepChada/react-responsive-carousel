@@ -34,6 +34,7 @@ import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
+import { RatingCount } from '../../components/product-title/ProductTitle.styles';
 
 const LoadingSkeleton = () => {
   return (
@@ -312,9 +313,14 @@ const ProductDetails = ({ history, match }) => {
               <Typography>Customer Reviews</Typography>
               <ChevronRight />
             </Box>
-            <RatingsBar
-              rating={reviewsData?.results?.[0]?.rollup?.average_rating}
-            />
+            <Box className='rating-info-block'>
+              <RatingsBar
+                rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+              />
+              <RatingCount>
+                {reviewsData?.results?.[0]?.rollup?.review_count || 0}
+              </RatingCount>
+            </Box>
           </div>
         </InfoTile>
         <InfoTile
