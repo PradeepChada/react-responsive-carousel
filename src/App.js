@@ -7,6 +7,7 @@ import SearchContainer from './pages/sku-search/SearchPage';
 import ProductInfo from './pages/product-info/ProductInfo';
 import QuestionAndAnswer from './pages/sku-q&a/QuestionAndAnswer';
 import ProductVariants from './pages/product-variants/ProductVariants';
+import SkuCheckout from './pages/sku-checkout/SKUCheckout';
 import store from './store';
 import Header from './components/header/Header';
 import theme from './theme';
@@ -59,6 +60,7 @@ const App = () => {
                     component={QuestionAndAnswer}
                   />
                   <Route exact path='/reviews/:id' component={Reviews} />
+                  <Route exact path='/sku-checkout' component={SkuCheckout} />
                 </Switch>
               </StyledBody>
             </StoreProvider>

@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import { colors } from '../../../utils/themeUtils';
+import { colors } from '../../utils/themeUtils';
 
 export const ClearText = styled('span')({
   color: colors.primary,

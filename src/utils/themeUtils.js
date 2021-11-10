@@ -10,6 +10,7 @@ export const colors = {
   gray81: '#CFCFCF',
   gray85: '#D9D9D9',
   gray90: '#EAEBEF',
+  gray60: '#999999',
   abbey: '#54565B',
   danger: '#DF2E2F',
   dangerBackground: '#FDF4F5',

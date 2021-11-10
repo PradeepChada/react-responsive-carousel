@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkuDetails, actions } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
-import SearchBar from '../sku-search/searchbar/SearchBar';
+import SearchBar from "../../components/searchbar/SearchBar"
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
 import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
