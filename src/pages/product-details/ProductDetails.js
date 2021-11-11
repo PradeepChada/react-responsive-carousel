@@ -149,6 +149,7 @@ const ProductDetails = ({ history, match }) => {
   };
 
   const _renderDCInfo = () => {
+    if (shipSkuAvailLoading) return <Skeleton />;
     return (
       <div className='stock-details'>
         {dcQty > 0 ? (
@@ -273,9 +274,7 @@ const ProductDetails = ({ history, match }) => {
             </Box>
             <Box className='store-tile other-stores'>
               <img src={DeliveryIcon} alt='Store' />
-              <Box flexGrow={1}>
-                {shipSkuAvailLoading ? <Skeleton /> : _renderDCInfo()}
-              </Box>
+              <Box flexGrow={1}>{_renderDCInfo()}</Box>
             </Box>
           </>
         )}
