@@ -59,7 +59,8 @@ const SearchPage = ({ history }) => {
     ? `${config.appConfig.asset_base_url}${
         skuData?.mediaList?.find((o) =>
           skuData?.defaultProductId
-            ? o.name === 'thumb'
+            //TODO: remove the OR part when latest Catalog Service is deployed in PROD
+            ? o.name === 'thumb' || o.name === 'SKU_SMALL_IMAGE'
             : o.name === 'SKU_SMALL_IMAGE'
         )?.url
       }`
