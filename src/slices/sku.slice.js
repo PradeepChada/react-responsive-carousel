@@ -5,7 +5,7 @@ import { fetchReviewDetails, actions as reviewsActions } from './reviews.slice';
 import { getReviewsApiUrl } from '../utils/skuHelpers';
 
 const INITIAL_STATE = {
-  storeId: 49,
+  storeId: 27,
   loading: false,
   skuData: null,
   error: null,
