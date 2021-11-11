@@ -149,7 +149,9 @@ const ProductDetails = ({ history, match }) => {
   };
 
   const _renderDCInfo = () => {
-    if (shipSkuAvailLoading) return <Skeleton />;
+    if (shipSkuAvailLoading) {
+      return <Skeleton />;
+    }
     return (
       <div className='stock-details'>
         {dcQty > 0 ? (
