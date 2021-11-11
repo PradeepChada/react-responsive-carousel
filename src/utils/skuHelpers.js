@@ -26,9 +26,7 @@ export const getColor = (attributes) => {
 export const getQtyInStore = (data = [], storeId) =>
   data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
     ?.qtyAvailableAtStore;
-export const getQtyInDC = (data = [], storeId) =>
-  data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
-    ?.qtyAvailableInDc;
+export const getQtyInDC = (data = []) => data?.[0]?.qtyAvailable;
 export const getQtyOnline = (data = []) =>
   data?.find((o) => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 

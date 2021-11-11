@@ -26,7 +26,6 @@ import {
 import {
   getQtyInStore,
   getQtyInDC,
-  getQtyOnline,
   getSkuPriceDetails,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
@@ -91,6 +90,8 @@ const ProductDetails = ({ history, match }) => {
     mktAvailLoading,
     mktAvailData,
     mktAvailError,
+    shipSkuAvailData,
+    shipSkuAvailLoading,
   } = useSelector((state) => state.sku);
   const { reviewsData, loading: ratingLoading } = useSelector(
     (state) => state.reviews
@@ -162,11 +163,8 @@ const ProductDetails = ({ history, match }) => {
     skuAvailability?.inventoryEstimates,
     skuAvailability?.requestStoreNumber
   );
-  const onlineQty = getQtyOnline(
-    skuAvailability?.inventoryEstimates,
-    skuAvailability?.requestStoreNumber
-  );
-  const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
+
+  const dcQty = getQtyInDC(shipSkuAvailData?.inventoryEstimates);
 
   return (
     <PageContainer>
@@ -263,30 +261,16 @@ const ProductDetails = ({ history, match }) => {
             <Box className='store-tile other-stores'>
               <img src={DeliveryIcon} alt='Store' />
               <Box flexGrow={1}>
-                {skuAvailabilityLoading ? (
+                {shipSkuAvailLoading ? (
                   <Skeleton />
                 ) : (
                   <div className='stock-details'>
-                    {dcQty ? (
-                      <span className='stock-green'>{dcQty} in Stock</span>
+                    {dcQty > 0 ? (
+                      <span className='stock-green'>Available</span>
                     ) : (
-                      <span className='stock-red'>Out of Stock</span>
+                      <span className='stock-red'>Unavailable</span>
                     )}{' '}
                     in DC
-                    {/* <span className='stock-green'>{qtyAvailableInDc} in Stock</span> in DC */}
-                  </div>
-                )}
-                <Divider />
-                {skuAvailabilityLoading ? (
-                  <Skeleton />
-                ) : (
-                  <div className='stock-details'>
-                    {onlineQty ? (
-                      <span className='stock-green'>{onlineQty} in Stock</span>
-                    ) : (
-                      <span className='stock-red'>Out of Stock</span>
-                    )}{' '}
-                    online
                   </div>
                 )}
               </Box>

@@ -17,6 +17,10 @@ const INITIAL_STATE = {
   mktAvailLoading: false,
   mktAvailData: null,
   mktAvailError: null,
+
+  shipSkuAvailLoading: false,
+  shipSkuAvailData: null,
+  shipSkuAvailError: null,
 };
 
 const skuSlice = createSlice({
@@ -68,10 +72,36 @@ const skuSlice = createSlice({
       state.mktAvailLoading = false;
       state.mktAvailError = action.payload;
     },
+    shipSkuAvailLoading: (state) => {
+      state.shipSkuAvailLoading = true;
+      state.shipSkuAvailData = null;
+      state.shipSkuAvailError = null;
+    },
+    shipSkuAvailSuccess: (state, action) => {
+      state.shipSkuAvailLoading = false;
+      state.shipSkuAvailData = action.payload;
+    },
+    shipSkuAvailFailure: (state, action) => {
+      state.shipSkuAvailLoading = false;
+      state.shipSkuAvailError = action.payload;
+    },
   },
 });
 
 export const actions = skuSlice.actions;
+
+export const getSkuAvailBody = (storeId, data) => {
+  return {
+    sourceStoreNumber: storeId,
+    fulfillmentStoreNumbers: [storeId, 899],
+    skuQtyPairs: [
+      {
+        skuNumber: data?.id,
+        qty: 0,
+      },
+    ],
+  };
+};
 
 export const fetchSkuDetails =
   (skuCode, storeId, fetchQty = true) =>
@@ -83,17 +113,12 @@ export const fetchSkuDetails =
         if (res?.status === 204)
           dispatch(actions.failure(skuErrorMessages.notFound));
         else {
-          const stockBody = {
-            sourceStoreNumber: storeId,
-            fulfillmentStoreNumbers: [storeId, 899],
-            skuQtyPairs: [
-              {
-                skuNumber: res?.data?.id,
-                qty: 0,
-              },
-            ],
-          };
+          const stockBody = getSkuAvailBody(storeId, res?.data);
           fetchQty && dispatch(fetchSkuAvailability(stockBody));
+          const shipSkuBody = {
+            skuNumbers: [res?.data?.id],
+          };
+          dispatch(fetchShipSkuAvailability(shipSkuBody));
           if (res?.data?.defaultProductId) {
             const path = getReviewsApiUrl(
               res?.data?.defaultProductId,
@@ -134,6 +159,18 @@ export const fetchStoreAvailability = (skuId, storeId) => (dispatch) => {
     })
     .catch((err) => {
       dispatch(actions.storeAvailFailure(err));
+    });
+};
+
+export const fetchShipSkuAvailability = (body) => (dispatch) => {
+  dispatch(actions.shipSkuAvailLoading());
+  skuService
+    .getShipSkuAvailability(body)
+    .then((res) => {
+      dispatch(actions.shipSkuAvailSuccess(res?.data));
+    })
+    .catch((err) => {
+      dispatch(actions.shipSkuAvailError(err));
     });
 };
 
