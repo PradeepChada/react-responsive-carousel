@@ -56,7 +56,13 @@ const SearchPage = ({ history }) => {
   };
 
   const skuImg = skuData?.mediaList?.[0]?.url
-    ? `${config.appConfig.asset_base_url}${skuData?.mediaList?.[0]?.url}`
+    ? `${config.appConfig.asset_base_url}${
+        skuData?.mediaList?.find((o) =>
+          skuData?.defaultProductId
+            ? o.name === 'thumb'
+            : o.name === 'SKU_SMALL_IMAGE'
+        )?.url
+      }`
     : null;
   const skuInfo = {
     name: skuData?.name,

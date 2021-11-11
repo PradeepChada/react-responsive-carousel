@@ -181,7 +181,11 @@ const ProductDetails = ({ history, match }) => {
       <ProductCarousel
         images={
           skuData?.mediaList
-            ?.filter((o) => o.name === 'large')
+            ?.filter((o) =>
+              skuData.defaultProductId
+                ? o.name === 'amazon'
+                : o.name === 'SKU_IMAGE'
+            )
             ?.map((o) => `${config.appConfig.asset_base_url}${o.url}`) || []
         }
       />
