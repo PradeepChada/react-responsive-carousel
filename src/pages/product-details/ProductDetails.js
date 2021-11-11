@@ -1,4 +1,4 @@
-import { Typography, Skeleton, Button, Divider, Drawer } from '@mui/material';
+import { Typography, Skeleton, Button, Drawer } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
