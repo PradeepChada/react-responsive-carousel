@@ -148,6 +148,19 @@ const ProductDetails = ({ history, match }) => {
     );
   };
 
+  const _renderDCInfo = (dcQty) => {
+    return (
+      <div className='stock-details'>
+        {dcQty > 0 ? (
+          <span className='stock-green'>Available</span>
+        ) : (
+          <span className='stock-red'>Unavailable</span>
+        )}{' '}
+        in DC
+      </div>
+    );
+  };
+
   if (loading) {
     return <LoadingSkeleton />;
   }
@@ -261,18 +274,7 @@ const ProductDetails = ({ history, match }) => {
             <Box className='store-tile other-stores'>
               <img src={DeliveryIcon} alt='Store' />
               <Box flexGrow={1}>
-                {shipSkuAvailLoading ? (
-                  <Skeleton />
-                ) : (
-                  <div className='stock-details'>
-                    {dcQty > 0 ? (
-                      <span className='stock-green'>Available</span>
-                    ) : (
-                      <span className='stock-red'>Unavailable</span>
-                    )}{' '}
-                    in DC
-                  </div>
-                )}
+                {shipSkuAvailLoading ? <Skeleton /> : _renderDCInfo(dcQty)}
               </Box>
             </Box>
           </>
