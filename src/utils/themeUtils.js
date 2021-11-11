@@ -21,4 +21,5 @@ export const colors = {
   qaTileBorder: '#EAEBEF',
   answerBackground: '#F6F6FA',
   'primary-blue': '#039BE5',
+  orderSummaryTextFontColor: '#191919',
 };

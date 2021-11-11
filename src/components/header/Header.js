@@ -4,10 +4,21 @@ import Toolbar from '@mui/material/Toolbar';
 import { useHistory } from 'react-router-dom';
 import AppLogo from './../../assets/images/logo.svg';
 import HomeIcon from './../../assets/icons/home.svg';
-import { Logo, StyledAppBar, IconWrapper } from './Header.styles';
+import {
+  Logo,
+  StyledAppBar,
+  IconWrapper,
+  TakeCheckout,
+  CancelOrderButton,
+} from './Header.styles';
+import {
+  showCheckoutHeader,
+  showCancelOrderButton,
+} from '../../utils/skuHelpers';
 
 const Header = () => {
   const history = useHistory();
+  console.log(history, showCheckoutHeader(history.location.pathname));
   return (
     <Box sx={{ flexGrow: 1 }}>
       <StyledAppBar position='static'>
@@ -24,8 +35,15 @@ const Header = () => {
             <img src={HomeIcon} alt='Home' />
           </IconWrapper>
           <Box sx={{ flexGrow: 1, justifyContent: 'center', display: 'flex' }}>
-            <Logo src={AppLogo} alt='The Container Store' />
+            {showCheckoutHeader(history.location.pathname) ? (
+              <TakeCheckout>Take Checkout</TakeCheckout>
+            ) : (
+              <Logo src={AppLogo} alt='The Container Store' />
+            )}
           </Box>
+          {showCancelOrderButton(history.location.pathname) && (
+            <CancelOrderButton>Cancel Order</CancelOrderButton>
+          )}
         </Toolbar>
       </StyledAppBar>
     </Box>

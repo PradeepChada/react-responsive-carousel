@@ -47,3 +47,11 @@ export const filterQuestionsData = (questionData, newQuestions) => {
     },
   };
 };
+
+export const showCheckoutHeader = (url) => {
+  return url === '/sku-checkout' ? true : false;
+};
+
+export const showCancelOrderButton = (url) => {
+  return url === '/sku-checkout' ? true : false;
+};

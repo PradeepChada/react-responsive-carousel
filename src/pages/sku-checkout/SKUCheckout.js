@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkuDetails, actions } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -7,13 +7,19 @@ import {
   TextWrapper,
   Title,
   Description,
-  ErrorWrapper
+  ErrorWrapper,
+  CartContainer,
+  RightArrow,
+  DownArrow,
+  UpArrow,
 } from './SKUCheckout.styles';
 import { getQtyInStore, getSkuPriceDetails } from '../../utils/skuHelpers';
 import SearchBar from '../../components/searchbar/SearchBar';
 import SKUTile from './sku-tile/SKUTile';
 import config from './../../config';
 import SkuError from '../../components/sku-error/SkuError';
+import { Box } from '@mui/system';
+import { Typography } from '@mui/material';
 const SearchPageText = () => {
   return (
     <TextWrapper display='flex' flexDirection='column' alignItems='center'>
@@ -27,6 +33,7 @@ const SearchPageText = () => {
 };
 function SkuCheckout() {
   const dispatch = useDispatch();
+  const [openOrderSummary, setOpenOrderSummary] = useState(false);
   const {
     storeId,
     loading,
@@ -62,8 +69,13 @@ function SkuCheckout() {
       dispatch(fetchSkuDetails(skuId, storeId));
     }
   };
+
   const handleClear = () => {
     dispatch(actions.reset());
+  };
+
+  const arrowClickHandler = () => {
+    setOpenOrderSummary((prevState) => !prevState);
   };
   return (
     <>
@@ -82,11 +94,51 @@ function SkuCheckout() {
               loading={loading}
               skuAvailabilityLoading={skuAvailabilityLoading}
               skuAvailabilityError={skuAvailabilityError}
-              
             />
           )
         )}
       </BoxWrapper>
+      <CartContainer>
+        <Box className='order-discount-container'>
+          <Typography className='order-discount-text'>
+            Order Discounts
+          </Typography>
+          <RightArrow />
+        </Box>
+        <Box
+          className='order-summary-container'
+          display={openOrderSummary ? 'flex' : 'none'}
+        >
+          <Typography className='order-summary-text'>Order Summary</Typography>
+          <Box className='subtotal-text'>
+            <Typography>Subtotal</Typography>
+            <Typography>$0.00</Typography>
+          </Box>
+          <Box className='discounts-text'>
+            <Typography>Discounts</Typography>
+            <Typography>$0.00</Typography>
+          </Box>
+          <Box className='tax-text'>
+            <Typography>Tax</Typography>
+            <Typography>$0.00</Typography>
+          </Box>
+        </Box>
+        <Box className='total-price-container'>
+          <Box>
+            <Box display='flex' flexDirection='row' alignItems='center'>
+              <Typography className='total-price-text'>Total</Typography>
+              {openOrderSummary ? (
+                <DownArrow onClick={arrowClickHandler} />
+              ) : (
+                <UpArrow onClick={arrowClickHandler} />
+              )}
+            </Box>
+
+            <Typography className='cart-total-price'>--</Typography>
+          </Box>
+          <Box className='pay-button'>FINISH / PAY</Box>
+        </Box>
+      </CartContainer>
     </>
   );
 }

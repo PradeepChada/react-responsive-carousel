@@ -36,6 +36,10 @@ const appDetails = (req, res) => {
   };
   if (appMetadata) {
     const timestamp = appMetadata["build.timestamp"];
+    console.log(
+      "process.env.DEPLOYMENT_ENVIRONMENT",
+      process.env.DEPLOYMENT_ENVIRONMENT
+    );
     res.status(200).json(
       Object.assign(appMetadata, {
         builtOn: timestamp
