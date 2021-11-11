@@ -213,7 +213,7 @@ const Reviews = ({ match }) => {
     dispatch(fetchReviewDetails(url, true));
   };
 
-  if (loading || skuLoading) {
+  if ((loading || skuLoading) && !reviewsData) {
     return <LoadingSkeleton />;
   }
   const { reviews, rollup } = reviewsData?.results?.[0] || {};
@@ -340,7 +340,12 @@ const Reviews = ({ match }) => {
             </ReviewTitle>
           )}
           {reviewsData?.paging?.next_page_url && (
-            <ViewNextBtn variant='outlined' fullWidth onClick={onClickNextPage}>
+            <ViewNextBtn
+              disabled={loading}
+              variant='outlined'
+              fullWidth
+              onClick={onClickNextPage}
+            >
               View next {nextReviewsLength} Reviews
             </ViewNextBtn>
           )}
