@@ -15,3 +15,8 @@ export const getStoreAvailability = (skuId, storeId) => {
   const url = `${config.appConfig.inventory_service_url}/market-availabilities?sku=${skuId}&store=${storeId}`;
   return Axios.get(url);
 };
+
+export const getShipSkuAvailability = (body) => {
+  const url = `${config.appConfig.inventory_service_url}/ship-sku-availabilities`;
+  return Axios.post(url, body);
+};

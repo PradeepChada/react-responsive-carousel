@@ -61,10 +61,13 @@ export const Availability = styled(Box)({
   },
   '& .store-tile': {
     background: colors.lightBackground,
-    padding: '14px',
-    margin: '4px 0',
+    padding: '10px 14px',
+    margin: '8px 0',
     display: 'flex',
     alignItems: 'center',
+    '&.other-stores': {
+      padding: '18px 14px',
+    },
     '& img': {
       marginRight: 15,
     },
@@ -82,7 +85,6 @@ export const Availability = styled(Box)({
     '& .availability-link': {
       color: colors.primary,
       fontSize: 10,
-      lineHeight: '22px',
       textDecoration: 'underline',
       textTransform: 'unset',
       padding: 0,
@@ -123,8 +125,13 @@ export const InfoTile = styled(Box)({
   },
   '& .ratings-wrapper': {
     width: '100%',
-    '& .MuiRating-sizeSmall': {
+    '& .rating-info-block': {
       marginTop: 18,
+      display: 'flex',
+      alignItems: 'center',
+      '& span': {
+        verticalAlign: 'middle',
+      },
     },
   },
 });
