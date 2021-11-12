@@ -20,7 +20,7 @@ export const BoxWrapper = styled(Box)({
     margin: '16px 0px',
   },
   '& .more-question-test': {
-    fontsize: '14px',
+    fontSize: '14px',
     lineHeight: '17px',
     color: colors.black,
     fontWeight: 'bold',
