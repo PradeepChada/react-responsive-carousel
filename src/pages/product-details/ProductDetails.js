@@ -1,4 +1,4 @@
-import { Typography, Skeleton, Button, Divider, Drawer } from '@mui/material';
+import { Typography, Skeleton, Button, Drawer } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
@@ -26,7 +26,6 @@ import {
 import {
   getQtyInStore,
   getQtyInDC,
-  getQtyOnline,
   getSkuPriceDetails,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
@@ -35,6 +34,7 @@ import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { fetchQuestionDetails } from '../../slices/q&a.slice';
+import { RatingCount } from '../../components/product-title/ProductTitle.styles';
 
 const LoadingSkeleton = () => {
   return (
@@ -91,6 +91,8 @@ const ProductDetails = ({ history, match }) => {
     mktAvailLoading,
     mktAvailData,
     mktAvailError,
+    shipSkuAvailData,
+    shipSkuAvailLoading,
   } = useSelector((state) => state.sku);
   const { reviewsData, loading: ratingLoading } = useSelector(
     (state) => state.reviews
@@ -154,6 +156,22 @@ const ProductDetails = ({ history, match }) => {
     );
   };
 
+  const _renderDCInfo = () => {
+    if (shipSkuAvailLoading) {
+      return <Skeleton />;
+    }
+    return (
+      <div className='stock-details'>
+        {dcQty > 0 ? (
+          <span className='stock-green'>Available</span>
+        ) : (
+          <span className='stock-red'>Unavailable</span>
+        )}{' '}
+        in DC
+      </div>
+    );
+  };
+
   if (loading) {
     return <LoadingSkeleton />;
   }
@@ -169,11 +187,8 @@ const ProductDetails = ({ history, match }) => {
     skuAvailability?.inventoryEstimates,
     skuAvailability?.requestStoreNumber
   );
-  const onlineQty = getQtyOnline(
-    skuAvailability?.inventoryEstimates,
-    skuAvailability?.requestStoreNumber
-  );
-  const dcQty = getQtyInDC(skuAvailability?.inventoryEstimates);
+
+  const dcQty = getQtyInDC(shipSkuAvailData?.inventoryEstimates);
 
   return (
     <PageContainer>
@@ -188,7 +203,12 @@ const ProductDetails = ({ history, match }) => {
       <ProductCarousel
         images={
           skuData?.mediaList
-            ?.filter((o) => o.name === 'large')
+            ?.filter((o) =>
+              skuData.defaultProductId
+                //TODO: remove the OR part when latest Catalog Service is deployed in PROD
+                ? o.name === 'amazon' || o.name === 'SKU_IMAGE'
+                : o.name === 'SKU_IMAGE'
+            )
             ?.map((o) => `${config.appConfig.asset_base_url}${o.url}`) || []
         }
       />
@@ -265,34 +285,7 @@ const ProductDetails = ({ history, match }) => {
             </Box>
             <Box className='store-tile other-stores'>
               <img src={DeliveryIcon} alt='Store' />
-              <Box flexGrow={1}>
-                {skuAvailabilityLoading ? (
-                  <Skeleton />
-                ) : (
-                  <div className='stock-details'>
-                    {dcQty ? (
-                      <span className='stock-green'>{dcQty} in Stock</span>
-                    ) : (
-                      <span className='stock-red'>Out of Stock</span>
-                    )}{' '}
-                    in DC
-                    {/* <span className='stock-green'>{qtyAvailableInDc} in Stock</span> in DC */}
-                  </div>
-                )}
-                <Divider />
-                {skuAvailabilityLoading ? (
-                  <Skeleton />
-                ) : (
-                  <div className='stock-details'>
-                    {onlineQty ? (
-                      <span className='stock-green'>{onlineQty} in Stock</span>
-                    ) : (
-                      <span className='stock-red'>Out of Stock</span>
-                    )}{' '}
-                    online
-                  </div>
-                )}
-              </Box>
+              <Box flexGrow={1}>{_renderDCInfo()}</Box>
             </Box>
           </>
         )}
@@ -320,9 +313,14 @@ const ProductDetails = ({ history, match }) => {
               <Typography>Customer Reviews</Typography>
               <ChevronRight />
             </Box>
-            <RatingsBar
-              rating={reviewsData?.results?.[0]?.rollup?.average_rating}
-            />
+            <Box className='rating-info-block'>
+              <RatingsBar
+                rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+              />
+              <RatingCount>
+                {reviewsData?.results?.[0]?.rollup?.review_count || 0}
+              </RatingCount>
+            </Box>
           </div>
         </InfoTile>
         <InfoTile
