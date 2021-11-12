@@ -34,7 +34,7 @@ const options = [
     value: 'Oldest',
   },
   {
-    name: 'Most Answer',
+    name: 'Most Answers',
     value: 'MostAnswers',
   },
 ];
