@@ -109,7 +109,6 @@ const ProductDetails = ({ history, match }) => {
 
   useEffect(() => {
     if (skuData?.defaultProductId != null) {
-      console.log('default ProductId', skuData?.defaultProductId);
       dispatch(fetchQuestionDetails(skuData?.defaultProductId));
     }
   }, [dispatch, skuData]);
