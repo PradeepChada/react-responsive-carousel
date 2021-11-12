@@ -36,16 +36,16 @@ const appDetails = (req, res) => {
   };
   if (appMetadata) {
     const timestamp = appMetadata["build.timestamp"];
+    const version = appMetadata["build.version"];
+    const commit = appMetadata["build.scmRevision.id"];
     console.log("appMetadata=>>", appMetadata);
-    console.log("version=>>", appMetadata?.build?.version);
-    console.log("commit=>>", appMetadata?.build?.scmRevision.id);
     res.status(200).json({
-      version: appMetadata?.build?.version || "Version not found",
-      commit: appMetadata?.build?.scmRevision.id || "Commit id not found",
+      version,
+      commit,
       buildTime: timestamp
         ? new Date(Number(timestamp)).toUTCString()
         : new Date().toUTCString(),
-      startTime: new Date(),
+      startTime: new Date().toUTCString(),
       _links: {
         health: {
           href: "/health",
