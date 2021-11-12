@@ -36,14 +36,35 @@ const appDetails = (req, res) => {
   };
   if (appMetadata) {
     const timestamp = appMetadata["build.timestamp"];
-    res.status(200).json(
-      Object.assign(appMetadata, {
-        builtOn: timestamp
-          ? new Date(Number(timestamp) * MILLISECONDS_PER_SECOND)
-          : new Date(),
-        currentServerTime: new Date(),
-      })
-    );
+    // Object.assign(appMetadata, {
+    //   builtTime: timestamp
+    //     ? new Date(Number(timestamp) * MILLISECONDS_PER_SECOND)
+    //     : new Date(),
+    //   currentServerTime: new Date(),
+    //   version: process.env.IMAGE_TAG,
+    //   commit: process.env.GIT_REF,
+    //   _links: {
+    //     health: {
+    //       href: "/health",
+    //     },
+    //   },
+    // })
+    console.log("env Variable", process.env);
+    console.log("timeStamp", timestamp);
+    console.log("appMetadata", appMetadata);
+    res.status(200).json({
+      version: process.env.IMAGE_TAG || "Version not found",
+      commit: process.env.GIT_REF || "Commit id not found",
+      buildTime: timestamp
+        ? new Date(Number(timestamp)).toUTCString()
+        : new Date().toUTCString(),
+      startTime: new Date(),
+      _links: {
+        health: {
+          href: "/health",
+        },
+      },
+    });
   } else {
     res
       .status(200)
