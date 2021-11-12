@@ -34,6 +34,7 @@ import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
+import { fetchQuestionDetails } from '../../slices/q&a.slice';
 
 const LoadingSkeleton = () => {
   return (
@@ -94,7 +95,7 @@ const ProductDetails = ({ history, match }) => {
   const { reviewsData, loading: ratingLoading } = useSelector(
     (state) => state.reviews
   );
-
+  const { questionsData } = useSelector((state) => state.skuQuestions);
   const [showDrawer, setShowDrawer] = useState(false);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
@@ -103,6 +104,13 @@ const ProductDetails = ({ history, match }) => {
       dispatch(fetchSkuDetails(match?.params?.id, storeId));
     }
   }, [dispatch, match?.params?.id, skuData, storeId]);
+
+  useEffect(() => {
+    if (skuData?.defaultProductId != null) {
+      console.log('default ProductId', skuData?.defaultProductId);
+      dispatch(fetchQuestionDetails(skuData?.defaultProductId));
+    }
+  }, [dispatch, skuData]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
@@ -320,8 +328,17 @@ const ProductDetails = ({ history, match }) => {
         <InfoTile
           onClick={() => history.push(`/sku-info/q&a/${match?.params?.id}`)}
         >
-          <Typography>Q&A</Typography>
-          <ChevronRight />
+          <Box display='flex' flexDirection='column' width='100%'>
+            <Box display='flex' justifyContent='space-between' flexGrow='1'>
+              <Typography>Q&A</Typography>
+              <ChevronRight />
+            </Box>
+            {questionsData && (
+              <Typography className='total-question-text'>
+                {questionsData?.paging?.total_results} Questions
+              </Typography>
+            )}
+          </Box>
         </InfoTile>
       </Box>
     </PageContainer>

@@ -28,7 +28,7 @@ function QATile({ questionInfo, i }) {
           <Typography className='answerer'>
             <span style={{ fontWeight: '700' }}>
               {data?.details?.nickname} &middot;
-            </span>
+            </span>&nbsp;
             {moment(data?.details?.created_date).fromNow()}
           </Typography>
           <Typography className='answerer-text'>
