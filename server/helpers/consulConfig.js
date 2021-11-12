@@ -4,6 +4,7 @@ class ConsulConfig {
   constructor() {
     this.consulData = {};
     this.consulStackData = {};
+    this.serverStartTime = null;
   }
 
   loadConfig = (envConfig) => {
@@ -16,10 +17,13 @@ class ConsulConfig {
     }
   };
 
+  setServerStartTime = () => {
+    this.serverStartTime = new Date().toUTCString();
+  };
   fetchConsulData = () => {
     console.log("DEPLOYMENT ENV =>", process.env.DEPLOYMENT_ENVIRONMENT);
     console.log("DEPLOYMENT STACK =>", process.env.DEPLOYMENT_STACK);
-
+    this.setServerStartTime();
     const consulClient = consul({
       host: "dfwconsv1.containerstore.com",
     });
