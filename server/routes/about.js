@@ -39,8 +39,6 @@ const appDetails = (req, res) => {
     const version = appMetadata["build.version"];
     const commit = appMetadata["build.scmRevision.id"];
     console.log("appMetadata=>>", appMetadata);
-    console.log("version=>>", appMetadata?.build?.version);
-    console.log("commit=>>", appMetadata?.build?.scmRevision.id);
     res.status(200).json({
       version,
       commit,
