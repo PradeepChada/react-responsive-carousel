@@ -14,6 +14,7 @@ const cartSlice = createSlice({
   reducers: {
     loading: (state) => {
       state.loading = true;
+      state.error = null;
     },
     addItemToCart: (state, action) => {
       state.cartItems.unshift(action.payload);
@@ -28,10 +29,6 @@ const cartSlice = createSlice({
     },
     decreaseItemQuantity: (state, action) => {
       state.cartItems = action.payload;
-    },
-    success: (state, action) => {
-      state.loading = false;
-      state.currencyDetails = action.payload;
     },
     failure: (state, action) => {
       state.loading = false;

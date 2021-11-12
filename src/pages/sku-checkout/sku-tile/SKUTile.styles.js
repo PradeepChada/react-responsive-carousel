@@ -16,10 +16,11 @@ export const Wrapper = styled(Box)({
     textDecoration: 'underline',
   },
   '& .discount-text': {
-    fontSize: '12px !important',
+    fontSize: '12px',
     color: colors.abbey,
     fontStyle: 'italic',
     marginBottom: '11px',
+    paddingRight: '1px',
   },
   '& .plus-button': {
     cursor: 'pointer',

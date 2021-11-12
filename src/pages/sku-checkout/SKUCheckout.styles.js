@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { styled } from '@mui/styles';
-import { Box } from '@mui/system';
+import { Box} from '@mui/system';
 import { colors } from '../../utils/themeUtils';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -136,11 +136,18 @@ export const UpArrow = styled(KeyboardArrowUpIcon)({
 });
 
 export const ErrorWrapper = styled(Box)({
-  '& div': {
+  '& div:first-child': {
     flexDirection: 'row',
-    padding: '16px 0px 16px 20px',
-    "& svg":{
-      margin:"0px"
-    }
+    padding: '16px 0px 16px 5px',
+    borderBottom: `1px solid ${colors.gray85}`,
+    '& svg': {
+      margin: '0px',
+      width: '38px',
+      height: '38px',
+      marginRight: '13px',
+    },
+    '& p:nth-child(2)': {
+      textAlign: 'start',
+    },
   },
 });
