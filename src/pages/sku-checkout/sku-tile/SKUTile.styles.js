@@ -28,6 +28,25 @@ export const Wrapper = styled(Box)({
   '& .minus-button': {
     cursor: 'pointer',
   },
+  '& .image-container': {
+    position: 'relative',
+    height: '70px',
+    width: '70px',
+    marginRight: '16px',
+  },
+  '& .image-sale-text': {
+    width: '31px',
+    height: '15px',
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    fontSize: '12px',
+    fontWeight: '600',
+    backgroundColor: colors.red,
+    color: colors.white,
+    textAlign: 'center',
+    borderRadius: '0px 0px 4px 0px',
+  },
 });
 
 export const ImageSkeleton = styled(Skeleton)({
@@ -57,7 +76,6 @@ export const CodeSkeleton = styled(Skeleton)({
 export const Image = styled('img')({
   height: '70px',
   width: '70px',
-  marginRight: '16px',
 });
 
 export const Price = styled(Typography)({

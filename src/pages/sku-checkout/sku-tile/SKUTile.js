@@ -65,7 +65,13 @@ const SkuTile = ({
   if (loading) return _renderSkeleton();
   return (
     <Wrapper onClick={() => handleClick(skuInfo.skuId)}>
-      <Image src={skuInfo?.image} alt='SKUImage' />
+      <Box className='image-container'>
+        <Image src={skuInfo?.image} alt='SKUImage' />
+        {skuInfo?.skuPriceDetails?.onSale && (
+          <Box className='image-sale-text'>Sale</Box>
+        )}
+      </Box>
+
       <Box flexDirection='column' overflow='hidden' flexGrow={1}>
         <Box display='flex' flexDirection='row' justifyContent='space-between'>
           <Title data-testid='sku-title'>
