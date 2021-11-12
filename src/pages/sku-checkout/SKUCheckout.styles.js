@@ -13,10 +13,6 @@ export const BoxWrapper = styled(Box)({
   padding: '16px 15px 0px 15px',
 });
 
-export const ErrorWrapper = styled(Box)({
-  padding: '29px 0px',
-});
-
 export const TextWrapper = styled(Box)({
   width: '271px',
   marginTop: '30px',
@@ -137,4 +133,14 @@ export const UpArrow = styled(KeyboardArrowUpIcon)({
   color: colors.primary,
   cursor: 'pointer',
   marginTop: '7px',
+});
+
+export const ErrorWrapper = styled(Box)({
+  '& div': {
+    flexDirection: 'row',
+    padding: '16px 0px 16px 20px',
+    "& svg":{
+      margin:"0px"
+    }
+  },
 });

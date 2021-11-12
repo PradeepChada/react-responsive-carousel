@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSkuDetails, actions } from '../../slices/sku.slice';
+import SearchBar from '../../components/searchbar/SearchBar';
+import SKUTile from './sku-tile/SKUTile';
+import SkuError from '../../components/sku-error/SkuError';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  increaseItemQuantityFromCart,
+  decreaseItemQuantityFromCart,
+  actions,
+} from '../../slices/cart.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import {
   BoxWrapper,
@@ -13,11 +22,8 @@ import {
   DownArrow,
   UpArrow,
 } from './SKUCheckout.styles';
-import { getQtyInStore, getSkuPriceDetails } from '../../utils/skuHelpers';
-import SearchBar from '../../components/searchbar/SearchBar';
-import SKUTile from './sku-tile/SKUTile';
-import config from './../../config';
-import SkuError from '../../components/sku-error/SkuError';
+import { getSKUTileInfo, givenItemExits } from '../../utils/skuHelpers';
+
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 const SearchPageText = () => {
@@ -33,73 +39,66 @@ const SearchPageText = () => {
 };
 function SkuCheckout() {
   const dispatch = useDispatch();
+  const { loading, cartItems, error } = useSelector((state) => state.cart);
   const [openOrderSummary, setOpenOrderSummary] = useState(false);
-  const {
-    storeId,
-    loading,
-    skuData,
-    error,
-    skuAvailabilityLoading,
-    skuAvailability,
-    skuAvailabilityError,
-  } = useSelector((state) => state.sku);
 
-  const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
-  useEffect(() => {
-    dispatch(actions.reset());
-  }, [dispatch]);
-
-  const skuImg = skuData?.mediaList?.[0]?.url
-    ? `${config.appConfig.asset_base_url}${skuData?.mediaList?.[0]?.url}`
-    : null;
-
-  const skuInfo = {
-    name: skuData?.name,
-    image: skuImg,
-    skuPriceDetails,
-    skuId: skuData?.id,
-    qtyAvailableAtStore: getQtyInStore(
-      skuAvailability?.inventoryEstimates,
-      skuAvailability?.requestStoreNumber
-    ),
-  };
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
     else {
-      dispatch(fetchSkuDetails(skuId, storeId));
+      if (!givenItemExits(skuId, cartItems)) dispatch(addItemToCart(skuId));
     }
   };
 
-  const handleClear = () => {
-    dispatch(actions.reset());
+  const removeItem = (skuId) => {
+    dispatch(removeItemFromCart(skuId, cartItems));
   };
+  const increaseItemQuantity = (skuId) => {
+    dispatch(increaseItemQuantityFromCart(skuId, cartItems));
+  };
+
+  const decreaseItemQuantity = (skuId, skuQantity) => {
+    if (skuQantity > 1)
+      dispatch(decreaseItemQuantityFromCart(skuId, cartItems));
+    else removeItem(skuId);
+  };
+
+  const handleClick = () => {};
+  const handleClear = () => {};
 
   const arrowClickHandler = () => {
     setOpenOrderSummary((prevState) => !prevState);
   };
+
   return (
     <>
       <BoxWrapper>
         <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
-        {!loading && !error && !skuData && <SearchPageText />}
-        {error ? (
-          <ErrorWrapper alignItems='center'>
+        {cartItems.length === 0 && !loading && error == null && (
+          <SearchPageText />
+        )}
+        {error && (
+          <ErrorWrapper>
             <SkuError {...error} />
           </ErrorWrapper>
-        ) : (
-          (loading || skuData) && (
-            <SKUTile
-              skuInfo={skuInfo}
-              skuAvailability={skuAvailability}
-              loading={loading}
-              skuAvailabilityLoading={skuAvailabilityLoading}
-              skuAvailabilityError={skuAvailabilityError}
-            />
-          )
         )}
+        {loading && <SKUTile loading={loading} />}
+        {cartItems.map((data) => (
+          <SKUTile
+            key={data?.skuData?.id}
+            skuInfo={getSKUTileInfo(data?.skuData)}
+            skuQuantity={data?.skuQantity}
+            removeItem={removeItem}
+            handleClick={handleClick}
+            increaseItemQuantity={increaseItemQuantity}
+            decreaseItemQuantity={decreaseItemQuantity}
+          />
+        ))}
       </BoxWrapper>
       <CartContainer>
-        <Box className='order-discount-container'>
+        <Box
+          className='order-discount-container'
+          display={openOrderSummary ? 'none ' : 'flex'}
+        >
           <Typography className='order-discount-text'>
             Order Discounts
           </Typography>

@@ -21,6 +21,12 @@ export const Wrapper = styled(Box)({
     fontStyle: 'italic',
     marginBottom: '11px',
   },
+  '& .plus-button': {
+    cursor: 'pointer',
+  },
+  '& .minus-button': {
+    cursor: 'pointer',
+  },
 });
 
 export const ImageSkeleton = styled(Skeleton)({
@@ -40,8 +46,6 @@ export const TitleSkeleton = styled(Skeleton)({
   marginBottom: '2px',
   width: '210px',
 });
-
-
 
 export const CodeSkeleton = styled(Skeleton)({
   fontSize: '12px',
@@ -112,6 +116,7 @@ export const ClearIconWrapper = styled(ClearIcon)({
   width: '13px',
   height: '13px',
   marginLeft: '12px',
+  cursor: 'pointer',
 });
 
 export const ClearIconSkeleton = styled(Skeleton)({
@@ -131,6 +136,8 @@ export const ButtonGroupWrapper = styled(Box)({
   border: `1px solid ${colors.gray60}`,
   '& p': {
     fontSize: '16px',
+    flexGrow: '1',
+    textAlign: 'center',
   },
 });
 

@@ -17,15 +17,16 @@ import {
   ButtonGroupWrapper,
   ButtonGroupSkeleton,
 } from './SKUTile.styles';
-import { skuErrorMessages } from '../../../constants/errorMessages';
 import { Skeleton, Typography } from '@mui/material';
 
 const SkuTile = ({
   skuInfo,
+  skuQuantity,
   loading,
-  skuAvailabilityLoading,
-  skuAvailabilityError,
   handleClick,
+  removeItem,
+  increaseItemQuantity,
+  decreaseItemQuantity,
 }) => {
   const _renderSkeleton = () => {
     return (
@@ -70,14 +71,24 @@ const SkuTile = ({
           <Title data-testid='sku-title'>
             {skuInfo?.name?.substring(0, 25)}...
           </Title>
-          <ClearIconWrapper />
+          <ClearIconWrapper onClick={() => removeItem(skuInfo.skuId)} />
         </Box>
         <Code>SKU: #{skuInfo?.skuId}</Code>
         <Box display='flex' flexDirection='row' justifyContent='space-between'>
           <ButtonGroupWrapper>
-            <Typography>+</Typography>
-            <Typography>1</Typography>
-            <Typography>-</Typography>
+            <Typography
+              className='plus-button'
+              onClick={() => increaseItemQuantity(skuInfo.skuId)}
+            >
+              +
+            </Typography>
+            <Typography>{skuQuantity}</Typography>
+            <Typography
+              className='minus-button'
+              onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
+            >
+              -
+            </Typography>
           </ButtonGroupWrapper>
           <Box display='flex' flexDirection='column' alignItems='flex-end'>
             {skuInfo?.skuPriceDetails?.onSale ? (
@@ -110,7 +121,9 @@ export default SkuTile;
 SkuTile.propTypes = {
   skuInfo: PropTypes.object,
   loading: PropTypes.bool,
-  skuAvailabilityLoading: PropTypes.bool,
-  skuAvailabilityError: PropTypes.object,
   handleClick: PropTypes.func,
+  skuQantity: PropTypes.number,
+  removeItem: PropTypes.func,
+  increaseItemQuantity: PropTypes.func,
+  decreaseItemQuantity: PropTypes.func,
 };
