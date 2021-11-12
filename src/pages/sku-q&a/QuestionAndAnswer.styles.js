@@ -49,6 +49,7 @@ export const SelectWrapper = styled(Select)({
 });
 
 export const ButtonWrapper = styled(Button)({
+  fontSize: '14px',
   height: '48px',
   marginTop: '24px',
   color: colors['primary-blue'],

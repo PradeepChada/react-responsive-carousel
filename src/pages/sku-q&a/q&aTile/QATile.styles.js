@@ -23,7 +23,7 @@ export const BoxWrapper = styled(Box)({
   border: `1px solid ${colors.qaTileBorder}`,
   '& .view-more-answerer': {
     color: colors.primary,
-    fontsize: '14px',
+    fontSize: '14px',
     lineHeight: '18px ',
     marginTop: '16px',
     textDecoration: 'underline',
