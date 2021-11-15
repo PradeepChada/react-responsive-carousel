@@ -4,6 +4,23 @@ import Select from '@mui/material/Select';
 import { colors } from '../../utils/themeUtils';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
+export const NotFoundQA = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  marginTop: '25px',
+  '& p:nth-child(1)': {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: colors.fontColor,
+    marginBottom: '8px',
+  },
+  '& p:nth-child(2)': {
+    fontSize: '14px',
+    fontWeight: 'normal',
+    color: colors.abbey,
+  },
+});
 export const BoxWrapper = styled(Box)({
   padding: '8px 15px 0px 15px',
   '& .text': {
@@ -20,7 +37,7 @@ export const BoxWrapper = styled(Box)({
     margin: '16px 0px',
   },
   '& .more-question-test': {
-    fontsize: '14px',
+    fontSize: '14px',
     lineHeight: '17px',
     color: colors.black,
     fontWeight: 'bold',
@@ -49,6 +66,7 @@ export const SelectWrapper = styled(Select)({
 });
 
 export const ButtonWrapper = styled(Button)({
+  fontSize: '14px',
   height: '48px',
   marginTop: '24px',
   color: colors['primary-blue'],

@@ -7,6 +7,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 export const PageContainer = styled(Container)({
   padding: '9px 15px',
+  '& .empty-reviews-message': {
+    fontSize: 14,
+  },
 });
 
 export const Wrapper = styled(Box)({

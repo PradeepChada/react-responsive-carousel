@@ -134,6 +134,12 @@ export const InfoTile = styled(Box)({
       },
     },
   },
+  "& .total-question-text":{
+    fontSize:"14px",
+    color:colors.primary,
+    marginTop:"13px",
+    textDecoration:"underline"
+  }
 });
 
 export const ErrorWrapper = styled(Box)({

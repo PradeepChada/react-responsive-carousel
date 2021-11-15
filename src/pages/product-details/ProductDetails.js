@@ -33,6 +33,7 @@ import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
+import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
 
 const LoadingSkeleton = () => {
@@ -96,7 +97,7 @@ const ProductDetails = ({ history, match }) => {
   const { reviewsData, loading: ratingLoading } = useSelector(
     (state) => state.reviews
   );
-
+  const { questionsData } = useSelector((state) => state.skuQuestions);
   const [showDrawer, setShowDrawer] = useState(false);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
@@ -105,6 +106,14 @@ const ProductDetails = ({ history, match }) => {
       dispatch(fetchSkuDetails(match?.params?.id, storeId));
     }
   }, [dispatch, match?.params?.id, skuData, storeId]);
+
+  useEffect(() => {
+    if (skuData?.defaultProductId != null) {
+      dispatch(fetchQuestionDetails(skuData?.defaultProductId));
+    } else {
+      dispatch(resetQA());
+    }
+  }, [dispatch, skuData]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
@@ -197,8 +206,8 @@ const ProductDetails = ({ history, match }) => {
           skuData?.mediaList
             ?.filter((o) =>
               skuData.defaultProductId
-                //TODO: remove the OR part when latest Catalog Service is deployed in PROD
-                ? o.name === 'amazon' || o.name === 'SKU_IMAGE'
+                ? //TODO: remove the OR part when latest Catalog Service is deployed in PROD
+                  o.name === 'amazon' || o.name === 'SKU_IMAGE'
                 : o.name === 'SKU_IMAGE'
             )
             ?.map((o) => `${config.appConfig.asset_base_url}${o.url}`) || []
@@ -318,8 +327,17 @@ const ProductDetails = ({ history, match }) => {
         <InfoTile
           onClick={() => history.push(`/sku-info/q&a/${match?.params?.id}`)}
         >
-          <Typography>Q&A</Typography>
-          <ChevronRight />
+          <Box display='flex' flexDirection='column' width='100%'>
+            <Box display='flex' justifyContent='space-between' flexGrow='1'>
+              <Typography>Q&A</Typography>
+              <ChevronRight />
+            </Box>
+            {questionsData && (
+              <Typography className='total-question-text'>
+                {questionsData?.paging?.total_results} Questions
+              </Typography>
+            )}
+          </Box>
         </InfoTile>
       </Box>
     </PageContainer>

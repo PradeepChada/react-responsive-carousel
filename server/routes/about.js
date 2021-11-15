@@ -1,8 +1,7 @@
 const PropertiesReader = require("properties-reader");
 const fs = require("fs");
 const path = require("path");
-
-const MILLISECONDS_PER_SECOND = 1000;
+const consulConfig = require("../helpers/consulConfig");
 
 const defaultDependenciesFirst = {
   fileSystem: fs,
@@ -36,18 +35,21 @@ const appDetails = (req, res) => {
   };
   if (appMetadata) {
     const timestamp = appMetadata["build.timestamp"];
-    console.log(
-      "process.env.DEPLOYMENT_ENVIRONMENT",
-      process.env.DEPLOYMENT_ENVIRONMENT
-    );
-    res.status(200).json(
-      Object.assign(appMetadata, {
-        builtOn: timestamp
-          ? new Date(Number(timestamp) * MILLISECONDS_PER_SECOND)
-          : new Date(),
-        currentServerTime: new Date(),
-      })
-    );
+    const version = appMetadata["build.version"];
+    const commit = appMetadata["build.scmRevision.id"];
+    res.status(200).json({
+      version,
+      commit,
+      buildTime: timestamp
+        ? new Date(Number(timestamp)).toUTCString()
+        : new Date().toUTCString(),
+      startTime: consulConfig.serverStartTime,
+      _links: {
+        health: {
+          href: "/health",
+        },
+      },
+    });
   } else {
     res
       .status(200)

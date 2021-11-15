@@ -6,18 +6,25 @@ import RatingsBar from '../ratings-bar/RatingsBar';
 import { Skeleton } from '@mui/material';
 
 const ProductTitle = ({ title, skuId, rating, ratingCount, ratingLoading }) => {
+  const _renderRatingsBar = () => {
+    if (ratingLoading) {
+      return <Skeleton width={100} />;
+    } else {
+      return ratingCount > 0 ? (
+        <Box display='flex' alignItems='center'>
+          <RatingsBar rating={rating} />
+          <RatingCount>{ratingCount}</RatingCount>
+        </Box>
+      ) : (
+        <span />
+      );
+    }
+  };
   return (
     <Box>
       <Title fontWeight={600}>{title}</Title>
       <Box display='flex' justifyContent='space-between' alignItems='center'>
-        {ratingLoading ? (
-          <Skeleton width={100} />
-        ) : (
-          <Box display='flex' alignItems='center'>
-            <RatingsBar rating={rating} />
-            <RatingCount>{ratingCount}</RatingCount>
-          </Box>
-        )}
+        {_renderRatingsBar()}
         <SkuNumber>SKU: #{skuId}</SkuNumber>
       </Box>
     </Box>
