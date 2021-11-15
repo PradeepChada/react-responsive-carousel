@@ -177,7 +177,7 @@ const Reviews = ({ match }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(1);
-  const [sort, setSort] = useState('MostHelpful');
+  const [sort, setSort] = useState('Newest');
 
   const handleClickPhoto = (index) => {
     setPhotoIndex(index);
@@ -328,7 +328,8 @@ const Reviews = ({ match }) => {
           <FormControl fullWidth>
             <Dropdown value={sort} onChange={onChangeSort}>
               <MenuItem value='Newest'>Most Recent</MenuItem>
-              <MenuItem value='MostHelpful'>Most Recommended</MenuItem>
+              <MenuItem value='MostHelpful'>Most Helpful</MenuItem>
+              <MenuItem value='Oldest'>Oldest</MenuItem>
             </Dropdown>
           </FormControl>
           {reviews?.map((item) => (
@@ -351,8 +352,8 @@ const Reviews = ({ match }) => {
           )}
         </>
       ) : (
-        <Typography>
-          Reviews and Ratings are not available for the Sku
+        <Typography className='empty-reviews-message'>
+          No customer reviews or ratings linked to this product.
         </Typography>
       )}
     </PageContainer>
