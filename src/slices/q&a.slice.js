@@ -25,6 +25,11 @@ const questionSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    reset: (state, action) => {
+      state.loading = false;
+      state.questionsData = null;
+      state.error = null;
+    },
   },
 });
 
@@ -69,6 +74,10 @@ export const fetchQuestionByPage = (nextPageURL, results) => (dispatch) => {
     .catch((err) => {
       dispatch(actions.questionsFailure(err));
     });
+};
+
+export const resetQA = () => (dispatch) => {
+  dispatch(actions.reset());
 };
 
 export default questionSlice;

@@ -28,7 +28,8 @@ function QATile({ questionInfo, i }) {
           <Typography className='answerer'>
             <span style={{ fontWeight: '700' }}>
               {data?.details?.nickname} &middot;
-            </span>&nbsp;
+            </span>
+            &nbsp;
             {moment(data?.details?.created_date).fromNow()}
           </Typography>
           <Typography className='answerer-text'>
@@ -39,7 +40,8 @@ function QATile({ questionInfo, i }) {
 
       {answer.length === answers.length ? null : (
         <Typography className='view-more-answerer' onClick={viewMoreClick}>
-          View {answer?.length - answers?.length} More Answers
+          View {answer?.length - answers?.length} More Answer
+          {answers.length > 1 && 's'}
         </Typography>
       )}
     </BoxWrapper>

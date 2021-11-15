@@ -353,7 +353,7 @@ const Reviews = ({ match }) => {
         </>
       ) : (
         <Typography className='empty-reviews-message'>
-          No customer reviews or ratings linked to this product.
+          No reviews yet.
         </Typography>
       )}
     </PageContainer>
