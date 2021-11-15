@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { styled } from '@mui/styles';
-import { Box} from '@mui/system';
+import { Box } from '@mui/system';
 import { colors } from '../../utils/themeUtils';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -11,6 +11,11 @@ export const BoxWrapper = styled(Box)({
   flexDirection: 'column',
   alignItems: 'center',
   padding: '16px 15px 0px 15px',
+  '& .cart-items-container': {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
 });
 
 export const TextWrapper = styled(Box)({
@@ -38,6 +43,7 @@ export const CartContainer = styled(Box)({
   position: 'fixed',
   bottom: '0',
   width: '100%',
+  backgroundColor: colors.white,
   borderTop: `1px solid ${colors.gray85}`,
   '& .order-discount-container': {
     height: '40px',

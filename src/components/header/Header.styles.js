@@ -2,7 +2,6 @@ import { Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/styles';
-import { Box } from '@mui/system';
 import { colors } from './../../utils/themeUtils';
 
 export const Logo = styled('img')({
@@ -26,6 +25,7 @@ export const TakeCheckout = styled(Typography)({
   fontWeight: 'bold',
   color: colors.black,
 });
+
 export const CancelOrderButton = styled(Typography)({
   fontSize: '12px',
   color: colors.primary,

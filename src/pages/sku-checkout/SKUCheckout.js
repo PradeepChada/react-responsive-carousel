@@ -23,7 +23,6 @@ import {
   UpArrow,
 } from './SKUCheckout.styles';
 import { getSKUTileInfo, givenItemExits } from '../../utils/skuHelpers';
-
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 const SearchPageText = () => {
@@ -62,8 +61,12 @@ function SkuCheckout() {
     else removeItem(skuId);
   };
 
-  const handleClick = () => {};
-  const handleClear = () => {};
+  const handleClick = () => {
+    console.log('Handle Click');
+  };
+  const handleClear = () => {
+    console.log('Handle Clear');
+  };
 
   const arrowClickHandler = () => {
     setOpenOrderSummary((prevState) => !prevState);
@@ -76,34 +79,42 @@ function SkuCheckout() {
         {cartItems.length === 0 && !loading && error == null && (
           <SearchPageText />
         )}
-        {error && (
-          <ErrorWrapper>
-            <SkuError {...error} />
-          </ErrorWrapper>
-        )}
-        {loading && <SKUTile loading={loading} />}
-        {cartItems.map((data) => (
-          <SKUTile
-            key={data?.skuData?.id}
-            skuInfo={getSKUTileInfo(data?.skuData)}
-            skuQuantity={data?.skuQantity}
-            removeItem={removeItem}
-            handleClick={handleClick}
-            increaseItemQuantity={increaseItemQuantity}
-            decreaseItemQuantity={decreaseItemQuantity}
-          />
-        ))}
+        <Box
+          className='cart-items-container'
+          marginBottom={openOrderSummary ? '205px' : '110px'}
+        >
+          {error && (
+            <ErrorWrapper>
+              <SkuError {...error} />
+            </ErrorWrapper>
+          )}
+          {loading && <SKUTile loading={loading} />}
+          {cartItems.map((data) => (
+            <SKUTile
+              key={data?.skuData?.id}
+              skuInfo={getSKUTileInfo(data?.skuData)}
+              skuQuantity={data?.skuQantity}
+              removeItem={removeItem}
+              handleClick={handleClick}
+              increaseItemQuantity={increaseItemQuantity}
+              decreaseItemQuantity={decreaseItemQuantity}
+            />
+          ))}
+        </Box>
       </BoxWrapper>
       <CartContainer>
-        <Box
-          className='order-discount-container'
-          display={openOrderSummary ? 'none ' : 'flex'}
-        >
-          <Typography className='order-discount-text'>
-            Order Discounts
-          </Typography>
-          <RightArrow />
-        </Box>
+        {!openOrderSummary && (
+          <Box
+            className='order-discount-container'
+            display={openOrderSummary ? 'none ' : 'flex'}
+          >
+            <Typography className='order-discount-text'>
+              Order Discounts
+            </Typography>
+            <RightArrow />
+          </Box>
+        )}
+
         <Box
           className='order-summary-container'
           display={openOrderSummary ? 'flex' : 'none'}
@@ -132,7 +143,6 @@ function SkuCheckout() {
                 <UpArrow onClick={arrowClickHandler} />
               )}
             </Box>
-
             <Typography className='cart-total-price'>--</Typography>
           </Box>
           <Box className='pay-button'>FINISH / PAY</Box>
