@@ -44,7 +44,7 @@ const SkuTile = ({
             justifyContent='space-between'
           >
             <TitleSkeleton variant='text' data-testid='title-skeleton' />
-            <ClearIconSkeleton variant='rectangular' />
+            <ClearIconSkeleton variant='rectangular' data-testid='clear-icon-skeleton' />
           </Box>
           <CodeSkeleton variant='text' data-testid='code-skeleton' />
           <Box
@@ -54,8 +54,8 @@ const SkuTile = ({
           >
             <ButtonGroupSkeleton />
             <Box display='flex' flexDirection='column'>
-              <PriceSkeleton />
-              <Skeleton className='options' widh={50} />
+              <PriceSkeleton data-testid='price-skeleton' />
+              <Skeleton className='options' widh={50} data-testid='option-text-skeleton' />
             </Box>
           </Box>
         </Box>
