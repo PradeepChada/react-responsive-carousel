@@ -68,6 +68,14 @@ const NotFound = () => {
     </NotFoundQA>
   );
 };
+const noOfTotalQuestion = (loading,questionsData,showingQuestions) => {
+  return loading ? (
+    <NoOfQuestionTextSkeletion width={84} />
+  ) : (
+    `1-${questionsData?.results.slice(0, showingQuestions).length} of 
+  ${questionsData?.paging.total_results} Question`
+  );
+};
 function QuestionAndAnswer({ match }) {
   const dispatch = useDispatch();
   const {
@@ -146,18 +154,13 @@ function QuestionAndAnswer({ match }) {
         rating={reviewsData?.results?.[0]?.rollup?.average_rating}
         ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
       />
-      {questionsData?.paging?.total_results===0 ? (
+      {questionsData?.paging?.total_results === 0 ? (
         <NotFound />
       ) : (
         <>
           <Typography className='text'>Q&A</Typography>
           <Typography className='total-question'>
-            {loading ? (
-              <NoOfQuestionTextSkeletion width={84} />
-            ) : (
-              `1-${questionsData?.results.slice(0, showingQuestions).length} of 
-            ${questionsData?.paging.total_results} Question`
-            )}
+            {noOfTotalQuestion(loading,questionsData,showingQuestions)}
           </Typography>
           <SelectWrapper value={selectedOption} onChange={sortByClickHandler}>
             {options.map((option) => (
@@ -187,7 +190,7 @@ function QuestionAndAnswer({ match }) {
               />
             ))}
           {loading && <QATileLoadingSkeletion />}
-          {remainingQuestions > 0 ? (
+          {remainingQuestions > 0 && (
             <>
               <Typography className='more-question-test'>
                 {remainingQuestions} More Questions
@@ -196,7 +199,7 @@ function QuestionAndAnswer({ match }) {
                 VIEW NEXT {getRemainingQuestions(remainingQuestions)} QUESTIONS
               </ButtonWrapper>
             </>
-          ) : null}
+          )}
 
           <hr />
         </>
