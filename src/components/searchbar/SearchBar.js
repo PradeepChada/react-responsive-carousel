@@ -34,7 +34,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
   };
 
   return (
-    <PaperWrapper component='form'>
+    <PaperWrapper component='form' data-testid='search-bar-component'>
       <InputBaseWrapper
         placeholder='Scan barcode or enter SKU'
         inputProps={{ 'aria-label': 'sku-input' }}

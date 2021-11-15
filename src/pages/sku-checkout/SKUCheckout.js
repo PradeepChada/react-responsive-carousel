@@ -138,9 +138,9 @@ function SkuCheckout() {
             <Box display='flex' flexDirection='row' alignItems='center'>
               <Typography className='total-price-text'>Total</Typography>
               {openOrderSummary ? (
-                <DownArrow onClick={arrowClickHandler} />
+                <DownArrow onClick={arrowClickHandler} data-testid="total-down-arrow" />
               ) : (
-                <UpArrow onClick={arrowClickHandler} />
+                <UpArrow onClick={arrowClickHandler} data-testid="total-up-arrow" />
               )}
             </Box>
             <Typography className='cart-total-price'>--</Typography>
