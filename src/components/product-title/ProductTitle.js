@@ -12,11 +12,13 @@ const ProductTitle = ({ title, skuId, rating, ratingCount, ratingLoading }) => {
       <Box display='flex' justifyContent='space-between' alignItems='center'>
         {ratingLoading ? (
           <Skeleton width={100} />
-        ) : (
+        ) : ratingCount > 0 ? (
           <Box display='flex' alignItems='center'>
             <RatingsBar rating={rating} />
             <RatingCount>{ratingCount}</RatingCount>
           </Box>
+        ) : (
+          <span />
         )}
         <SkuNumber>SKU: #{skuId}</SkuNumber>
       </Box>
