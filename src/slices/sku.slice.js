@@ -120,10 +120,7 @@ export const fetchSkuDetails =
           };
           dispatch(fetchShipSkuAvailability(shipSkuBody));
           if (res?.data?.defaultProductId) {
-            const path = getReviewsApiUrl(
-              res?.data?.defaultProductId,
-              'MostHelpful'
-            );
+            const path = getReviewsApiUrl(res?.data?.defaultProductId, '');
             dispatch(fetchReviewDetails(path));
           } else {
             dispatch(reviewsActions?.resetReviews());
