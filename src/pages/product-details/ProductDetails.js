@@ -33,7 +33,7 @@ import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
-import { fetchQuestionDetails } from '../../slices/q&a.slice';
+import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
 
 const LoadingSkeleton = () => {
@@ -110,6 +110,8 @@ const ProductDetails = ({ history, match }) => {
   useEffect(() => {
     if (skuData?.defaultProductId != null) {
       dispatch(fetchQuestionDetails(skuData?.defaultProductId));
+    } else {
+      dispatch(resetQA());
     }
   }, [dispatch, skuData]);
 
