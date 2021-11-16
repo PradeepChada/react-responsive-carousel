@@ -1,6 +1,7 @@
 import { styled } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import InputBase from '@mui/material/InputBase';
 import Skeleton from '@mui/material/Skeleton';
 import ClearIcon from '@mui/icons-material/Clear';
 import { colors } from '../../../utils/themeUtils';
@@ -108,7 +109,6 @@ export const SalePriceWrapper = styled(Box)({
 
 export const Title = styled(Typography)({
   fontSize: '14px',
-  lineHeight: '18px',
   color: colors.fontColor,
   fontWeight: '400',
   marginBottom: '2px',
@@ -163,4 +163,14 @@ export const ButtonGroupWrapper = styled(Box)({
 export const ButtonGroupSkeleton = styled(Skeleton)({
   width: '80px',
   height: '36px',
+});
+
+export const InputWrapper = styled(InputBase)({
+  flex: 2,
+  fontSize: '16px',
+  color: colors.fontColor,
+  fontWeight: '400',
+  '& input': {
+    textAlign: 'center',
+  },
 });

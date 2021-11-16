@@ -8,6 +8,7 @@ import {
   removeItemFromCart,
   increaseItemQuantityFromCart,
   decreaseItemQuantityFromCart,
+  setItemQuantityByGivenQuantityFromCart,
   actions,
 } from '../../slices/cart.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -41,26 +42,32 @@ function SkuCheckout() {
   const { loading, cartItems, error } = useSelector((state) => state.cart);
   const [openOrderSummary, setOpenOrderSummary] = useState(false);
 
-  const handleSearch = (skuId) => {
-    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
-    else {
-      if (!givenItemExits(skuId, cartItems)) dispatch(addItemToCart(skuId));
-    }
-  };
-
   const removeItem = (skuId) => {
     dispatch(removeItemFromCart(skuId, cartItems));
   };
   const increaseItemQuantity = (skuId) => {
     dispatch(increaseItemQuantityFromCart(skuId, cartItems));
   };
-
+  const setItemQuantity = (skuId, skuQuantity) => {
+    dispatch(
+      setItemQuantityByGivenQuantityFromCart(skuId, cartItems, skuQuantity)
+    );
+  };
   const decreaseItemQuantity = (skuId, skuQantity) => {
     if (skuQantity > 1)
       dispatch(decreaseItemQuantityFromCart(skuId, cartItems));
     else removeItem(skuId);
   };
-
+  const handleSearch = (skuId) => {
+    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
+    else {
+      if (givenItemExits(skuId, cartItems)) {
+        dispatch(increaseItemQuantityFromCart(skuId, cartItems));
+      } else {
+        dispatch(addItemToCart(skuId));
+      }
+    }
+  };
   const handleClick = () => {
     console.log('Handle Click');
   };
@@ -98,6 +105,7 @@ function SkuCheckout() {
               handleClick={handleClick}
               increaseItemQuantity={increaseItemQuantity}
               decreaseItemQuantity={decreaseItemQuantity}
+              setItemQuantity={setItemQuantity}
             />
           ))}
         </Box>
@@ -138,9 +146,15 @@ function SkuCheckout() {
             <Box display='flex' flexDirection='row' alignItems='center'>
               <Typography className='total-price-text'>Total</Typography>
               {openOrderSummary ? (
-                <DownArrow onClick={arrowClickHandler} data-testid="total-down-arrow" />
+                <DownArrow
+                  onClick={arrowClickHandler}
+                  data-testid='total-down-arrow'
+                />
               ) : (
-                <UpArrow onClick={arrowClickHandler} data-testid="total-up-arrow" />
+                <UpArrow
+                  onClick={arrowClickHandler}
+                  data-testid='total-up-arrow'
+                />
               )}
             </Box>
             <Typography className='cart-total-price'>--</Typography>

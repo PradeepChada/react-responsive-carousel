@@ -73,9 +73,24 @@ export const removeItemFromCart = (skuId, cartItems) => (dispatch) => {
 export const increaseItemQuantityFromCart =
   (skuId, cartItems) => (dispatch) => {
     const newCartItems = [];
+
+    cartItems.forEach((item) => {
+      if (item.skuData.id === Number(skuId)) {
+        newCartItems.push({ ...item, skuQantity: item.skuQantity + 1 });
+      } else newCartItems.push(item);
+    });
+    dispatch(actions.increaseItemQuantity(newCartItems));
+  };
+
+export const setItemQuantityByGivenQuantityFromCart =
+  (skuId, cartItems, givenQuantity) => (dispatch) => {
+    const newCartItems = [];
     cartItems.forEach((item) => {
       if (item.skuData.id === skuId)
-        newCartItems.push({ ...item, skuQantity: item.skuQantity + 1 });
+        newCartItems.push({
+          ...item,
+          skuQantity: Number(givenQuantity),
+        });
       else newCartItems.push(item);
     });
     dispatch(actions.increaseItemQuantity(newCartItems));

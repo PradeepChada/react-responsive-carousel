@@ -16,6 +16,7 @@ import {
   ClearIconSkeleton,
   ButtonGroupWrapper,
   ButtonGroupSkeleton,
+  InputWrapper,
 } from './SKUTile.styles';
 import { Skeleton, Typography } from '@mui/material';
 
@@ -27,6 +28,7 @@ const SkuTile = ({
   removeItem,
   increaseItemQuantity,
   decreaseItemQuantity,
+  setItemQuantity,
 }) => {
   const _renderSkeleton = () => {
     return (
@@ -44,7 +46,10 @@ const SkuTile = ({
             justifyContent='space-between'
           >
             <TitleSkeleton variant='text' data-testid='title-skeleton' />
-            <ClearIconSkeleton variant='rectangular' data-testid='clear-icon-skeleton' />
+            <ClearIconSkeleton
+              variant='rectangular'
+              data-testid='clear-icon-skeleton'
+            />
           </Box>
           <CodeSkeleton variant='text' data-testid='code-skeleton' />
           <Box
@@ -55,12 +60,23 @@ const SkuTile = ({
             <ButtonGroupSkeleton />
             <Box display='flex' flexDirection='column'>
               <PriceSkeleton data-testid='price-skeleton' />
-              <Skeleton className='options' widh={50} data-testid='option-text-skeleton' />
+              <Skeleton
+                className='options'
+                widh={50}
+                data-testid='option-text-skeleton'
+              />
             </Box>
           </Box>
         </Box>
       </Wrapper>
     );
+  };
+  const onChangeQuantity = (input) => {
+    if (input.target.value < 1000)
+      setItemQuantity(skuInfo.skuId, input.target.value);
+  };
+  const onBlurQuantityInput = () => {
+    if (Number(skuQuantity) === 0) increaseItemQuantity(skuInfo.skuId);
   };
   if (loading) return _renderSkeleton();
   return (
@@ -88,7 +104,11 @@ const SkuTile = ({
             >
               +
             </Typography>
-            <Typography>{skuQuantity}</Typography>
+            <InputWrapper
+              value={skuQuantity}
+              onChange={onChangeQuantity}
+              onBlur={onBlurQuantityInput}
+            />
             <Typography
               className='minus-button'
               onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
@@ -101,10 +121,10 @@ const SkuTile = ({
               <>
                 <SalePriceWrapper>
                   <Typography className='sale-price'>
-                    ${skuInfo?.skuPriceDetails?.salePrice}
+                    ${skuQuantity * Number(skuInfo?.skuPriceDetails?.salePrice)}
                   </Typography>
                   <Typography className='normal-price'>
-                    ${skuInfo?.skuPriceDetails?.price}
+                    ${skuQuantity * Number(skuInfo?.skuPriceDetails?.price)}
                   </Typography>
                 </SalePriceWrapper>
                 <Typography className='discount-text'>
@@ -112,7 +132,9 @@ const SkuTile = ({
                 </Typography>
               </>
             ) : (
-              <Price>${skuInfo?.skuPriceDetails?.price}/ea</Price>
+              <Price>
+                ${skuQuantity * Number(skuInfo?.skuPriceDetails?.price)}/ea
+              </Price>
             )}
             <Typography className='options'>Options</Typography>
           </Box>
@@ -132,4 +154,5 @@ SkuTile.propTypes = {
   removeItem: PropTypes.func,
   increaseItemQuantity: PropTypes.func,
   decreaseItemQuantity: PropTypes.func,
+  setItemQuantity: PropTypes.func,
 };

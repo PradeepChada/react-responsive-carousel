@@ -6,10 +6,10 @@ import {
   IconButtonWrapper,
   SearchIconWraper,
 } from './SearchBar.styles';
-
+import { useHistory } from 'react-router-dom';
 const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
-
+  const history = useHistory();
   const onChangeHandler = (event) => {
     let input = event.target.value;
     if (input.includes('\n')) {
@@ -30,7 +30,9 @@ const SearchBar = ({ handleSearch, handleClear }) => {
   };
 
   const onBlurInput = ({ target }) => {
-    target.focus();
+    if (history.location.pathname === '/sku-search') {
+      target.focus();
+    }
   };
 
   return (
