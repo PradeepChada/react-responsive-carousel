@@ -7,10 +7,12 @@ import CloseRounded from '@mui/icons-material/CloseRounded';
 import { Modal, PhotoContent, Slider } from './PhotoCarousel.styles';
 import { Rating, Typography } from '@mui/material';
 import moment from 'moment';
+import { ThumbUpOutlined } from '@mui/icons-material';
+import { UpVoteBtn } from '../Reviews.styles';
 
 const PhotoCarousel = ({ data, showModal, handleClose, photoIndex = 0 }) => {
   return (
-    <Modal open={showModal} onClose={handleClose} >
+    <Modal open={showModal} onClose={handleClose}>
       <IconButton className='close-btn' color='error' onClick={handleClose}>
         <CloseRounded />
       </IconButton>
@@ -62,6 +64,15 @@ const PhotoCarousel = ({ data, showModal, handleClose, photoIndex = 0 }) => {
                 <Typography className='time-ago'>
                   {moment(item?.created_date).fromNow()}
                 </Typography>
+                {item?.helpful_votes > 0 && (
+                  <UpVoteBtn
+                    className='up-vote'
+                    variant='contained'
+                    startIcon={<ThumbUpOutlined />}
+                  >
+                    Helpful ({item?.helpful_votes})
+                  </UpVoteBtn>
+                )}
               </PhotoContent>
             </div>
           ))}
