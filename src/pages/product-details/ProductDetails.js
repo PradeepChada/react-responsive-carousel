@@ -33,7 +33,7 @@ import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
-import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
+import { fetchQuestionDetails } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
 
 const LoadingSkeleton = () => {
@@ -110,8 +110,6 @@ const ProductDetails = ({ history, match }) => {
   useEffect(() => {
     if (skuData?.defaultProductId != null) {
       dispatch(fetchQuestionDetails(skuData?.defaultProductId));
-    } else {
-      dispatch(resetQA());
     }
   }, [dispatch, skuData]);
 
@@ -216,20 +214,20 @@ const ProductDetails = ({ history, match }) => {
       {skuPriceDetails?.onSale ? (
         <SalePriceWrapper>
           <Typography className='sale-price'>
-            ${skuPriceDetails?.salePrice}
+            ${skuPriceDetails?.salePrice?.toFixed(2)}
           </Typography>
           <Box marginLeft={'10px'}>
             <Typography className='normal-price'>
-              Was ${skuPriceDetails?.price}
+              Was ${skuPriceDetails?.price?.toFixed(2)}
             </Typography>
             <Typography className='savings'>
-              Save ${skuPriceDetails?.maxSavings} (
+              Save ${skuPriceDetails?.maxSavings?.toFixed(2)} (
               {skuPriceDetails?.maxPercentOff}% off)
             </Typography>
           </Box>
         </SalePriceWrapper>
       ) : (
-        <Price>${skuPriceDetails?.price}/ea</Price>
+        <Price>${skuPriceDetails?.price?.toFixed(2)}/ea</Price>
       )}
       <div>
         <Spec>
