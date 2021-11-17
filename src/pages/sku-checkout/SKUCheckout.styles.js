@@ -10,7 +10,7 @@ export const BoxWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: '16px 15px 0px 15px',
+  padding: '1rem 1rem 0px 1rem',
   '& .cart-items-container': {
     display: 'flex',
     flexDirection: 'column',
@@ -20,19 +20,18 @@ export const BoxWrapper = styled(Box)({
 
 export const TextWrapper = styled(Box)({
   width: '271px',
-  marginTop: '30px',
+  marginTop: '1.8rem',
 });
 
 export const Title = styled(Typography)({
-  fontSize: '22px',
+  fontSize: '1.3rem',
   lineHeight: '33px',
   fontWeight: '700',
   color: colors.fontColor,
 });
 
 export const Description = styled(Typography)({
-  fontSize: '16px',
-  lineHeight: '24px',
+  fontSize: '1rem',
   fontWeight: '400',
   textAlign: 'center',
   color: colors.fontColor,
@@ -50,66 +49,66 @@ export const CartContainer = styled(Box)({
     display: 'flex',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    padding: '11px 15px',
+    padding: '0.7rem 1rem',
   },
   '& .order-summary-container': {
     flexDirection: 'column',
     boxSizing: 'border-box',
     backgroundColor: colors.lightBackground,
-    padding: '12px 15px 0px 15px',
+    padding: '0.7rem 1rem 0px 1rem',
     height: '135px',
     transition: 'all 1s',
     '& .order-summary-text': {
-      fontSize: '18px',
+      fontSize: '1.1rem',
       fontWeight: 'bold',
       color: colors.black,
     },
     '& .subtotal-text': {
       display: 'flex',
       justifyContent: 'space-between',
-      fontSize: '14px',
+      fontSize: '0.8rem',
       fontWeight: 'bold',
       color: colors.black,
-      marginTop: '16px',
+      marginTop: '1rem',
     },
     '& .discounts-text': {
       display: 'flex',
       justifyContent: 'space-between',
-      fontSize: '14px',
+      fontSize: '0.8rem',
       fontWeight: 'normal',
       color: colors.orderSummaryTextFontColor,
-      marginTop: '4px',
+      marginTop: '.2rem',
     },
     '& .tax-text': {
       display: 'flex',
       justifyContent: 'space-between',
-      fontSize: '14px',
+      fontSize: '0.8rem',
       fontWeight: 'normal',
       color: colors.orderSummaryTextFontColor,
-      marginTop: '4px',
+      marginTop: '0.2rem',
     },
   },
   '& .order-discount-text': {
-    fontSize: '14px',
+    fontSize: '0.8rem',
     color: colors.fontColor,
     fontWeight: '700',
   },
   '& .total-price-container': {
     boxSizing: 'border-box',
     height: '70px',
-    padding: '0px 15px',
+    padding: '0px 1rem',
     display: 'flex',
     justifyContent: 'space-between',
     backgroundColor: colors.lightBackground,
   },
   '& .cart-total-price': {
-    fontSize: '27px',
+    fontSize: '1.7rem',
     color: colors.black,
   },
   '& .total-price-text': {
-    fontSize: '12px',
+    fontSize: '0.7rem',
     color: colors.black,
-    marginTop: '7px',
+    marginTop: '0.5rem',
   },
   '& .pay-button': {
     width: '165px',
@@ -119,9 +118,9 @@ export const CartContainer = styled(Box)({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '14px',
+    fontSize: '0.8rem',
     color: colors.white,
-    marginTop: '13px',
+    marginTop: '0.8rem',
   },
 });
 
@@ -132,25 +131,25 @@ export const RightArrow = styled(ChevronRight)({
 export const DownArrow = styled(KeyboardArrowDownIcon)({
   color: colors.primary,
   cursor: 'pointer',
-  marginTop: '7px',
+  marginTop: '0.5rem',
 });
 
 export const UpArrow = styled(KeyboardArrowUpIcon)({
   color: colors.primary,
   cursor: 'pointer',
-  marginTop: '7px',
+  marginTop: '0.5rem',
 });
 
 export const ErrorWrapper = styled(Box)({
   '& div:first-child': {
     flexDirection: 'row',
-    padding: '16px 0px 16px 5px',
+    padding: '1rem 0px 1rem 0.3rem',
     borderBottom: `1px solid ${colors.gray85}`,
     '& svg': {
       margin: '0px',
       width: '38px',
       height: '38px',
-      marginRight: '13px',
+      marginRight: '0.8rem',
     },
     '& p:nth-child(2)': {
       textAlign: 'start',
