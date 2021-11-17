@@ -18,7 +18,6 @@ import Reviews from './pages/reviews/Reviews';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
-  minHeight: 'calc(100vh - 60px)',
 });
 
 const App = () => {
