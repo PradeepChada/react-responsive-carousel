@@ -8,8 +8,7 @@ export const Logo = styled('img')({
 
 export const StyledAppBar = styled(AppBar)({
   backgroundColor: colors.white,
-  boxShadow: 'none !important',
-  borderBottom: `4px solid ${colors.bgGray}`,
+  marginBottom: 4,
   '& .MuiToolbar-regular': {
     '& .home-icon': {
       position: 'absolute',
