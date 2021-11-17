@@ -2,6 +2,7 @@ import { styled } from '@mui/styles';
 import { Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { colors } from './../../utils/themeUtils';
+import InputBase from '@mui/material/InputBase';
 
 export const PageContainer = styled(Container)({
   padding: '9px 15px',
@@ -134,12 +135,12 @@ export const InfoTile = styled(Box)({
       },
     },
   },
-  "& .total-question-text":{
-    fontSize:"14px",
-    color:colors.primary,
-    marginTop:"13px",
-    textDecoration:"underline"
-  }
+  '& .total-question-text': {
+    fontSize: '14px',
+    color: colors.primary,
+    marginTop: '13px',
+    textDecoration: 'underline',
+  },
 });
 
 export const ErrorWrapper = styled(Box)({
@@ -166,4 +167,45 @@ export const StockError = styled(Box)({
     fontWeight: '600',
     padding: '0px 5px',
   },
+});
+
+export const ButtonGroupWrapper = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
+  width: '80px',
+  height: '36px',
+  boxSizing: 'border-box',
+  borderRadius: '4px',
+  backgroundColor: colors.white,
+  border: `1px solid ${colors.gray60}`,
+  '& p': {
+    fontSize: '1rem',
+    flexGrow: '1',
+    textAlign: 'center',
+  },
+});
+
+export const InputWrapper = styled(InputBase)({
+  flex: 2,
+  fontSize: '1rem',
+  color: colors.fontColor,
+  fontWeight: '400',
+  '& input': {
+    textAlign: 'center',
+  },
+});
+
+export const SaveButton = styled(Box)({
+  height: '3rem',
+  display: 'flex',
+  flexGrow: '1',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '0.875rem',
+  fontWeight: 'bold',
+  color: colors.white,
+  backgroundColor: colors.lightBlue,
+  textTransform: 'uppercase',
+  borderRadius: '4px',
 });

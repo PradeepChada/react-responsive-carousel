@@ -11,6 +11,9 @@ import {
   ErrorWrapper,
   StockError,
   SalePriceWrapper,
+  ButtonGroupWrapper,
+  InputWrapper,
+  SaveButton,
 } from './ProductDetails.styles';
 import StoreIcon from './../../assets/icons/store.svg';
 import DeliveryIcon from './../../assets/icons/delivery.svg';
@@ -283,6 +286,29 @@ const ProductDetails = ({ history, match }) => {
                   </Button>
                 )}
               </Box>
+              {history.location.pathname.includes(
+                '/sku-checkout/product-details'
+              ) && (
+                <ButtonGroupWrapper>
+                  <Typography
+                    className='plus-button'
+                    //onClick={() => increaseItemQuantity(skuInfo.skuId)}
+                  >
+                    -
+                  </Typography>
+                  <InputWrapper
+                    value={1}
+                    //onChange={onChangeQuantity}
+                    //onBlur={onBlurQuantityInput}
+                  />
+                  <Typography
+                    className='minus-button'
+                    //onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
+                  >
+                    +
+                  </Typography>
+                </ButtonGroupWrapper>
+              )}
             </Box>
             <Box className='store-tile other-stores'>
               <img src={DeliveryIcon} alt='Store' />
@@ -340,6 +366,9 @@ const ProductDetails = ({ history, match }) => {
           </Box>
         </InfoTile>
       </Box>
+      {history.location.pathname.includes('/sku-checkout/product-details') && (
+        <SaveButton>Save Changes</SaveButton>
+      )}
     </PageContainer>
   );
 };
