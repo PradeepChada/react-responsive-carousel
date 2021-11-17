@@ -172,6 +172,9 @@ const ReviewCard = ({ item }) => {
       )}
       {item?.details?.merchant_response && (
         <>
+          <Typography className='tcs-response'>
+            Response from The Container Store:
+          </Typography>
           <ResponseDuration>
             {moment(item?.details?.merchant_response_date).fromNow()}
           </ResponseDuration>
