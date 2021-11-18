@@ -5,7 +5,6 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { colors } from '../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
-  height: '100vh',
   padding: '13px 15px',
 });
 

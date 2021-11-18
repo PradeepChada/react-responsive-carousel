@@ -48,14 +48,14 @@ const SkuTile = ({
         {skuInfo?.skuPriceDetails?.onSale ? (
           <SalePriceWrapper>
             <Typography className='sale-price'>
-              ${skuInfo?.skuPriceDetails?.salePrice}
+              ${skuInfo?.skuPriceDetails?.salePrice?.toFixed(2)}
             </Typography>
             <Typography className='normal-price'>
-              ${skuInfo?.skuPriceDetails?.price}
+              ${skuInfo?.skuPriceDetails?.price?.toFixed(2)}
             </Typography>
           </SalePriceWrapper>
         ) : (
-          <Price>${skuInfo?.skuPriceDetails?.price}/ea</Price>
+          <Price>${skuInfo?.skuPriceDetails?.price?.toFixed(2)}/ea</Price>
         )}
         <Title data-testid='sku-title'>
           {skuInfo?.name?.substring(0, 25)}...

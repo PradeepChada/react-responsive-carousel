@@ -137,7 +137,27 @@ export const ReviewDetails = styled(Box)({
       marginRight: 10,
     },
   },
+  '& .tcs-response': {
+    fontWeight: 700,
+    marginTop: '1rem',
+  },
 });
+
+export const UpVoteBtn = styled(Button)({
+  backgroundColor: colors.brandDarkBlue,
+  boxShadow: 'none',
+  marginTop: '1rem',
+  fontSize: '0.8rem',
+  padding: '4px 12px',
+  textTransform: 'none',
+  '& svg': {
+    fontSize: '1rem',
+  },
+  '&:hover': {
+    backgroundColor: colors.brandDarkBlue,
+  },
+});
+
 export const ReviewContent = styled(Typography)({
   fontSize: '14px',
   fontWeight: 400,
