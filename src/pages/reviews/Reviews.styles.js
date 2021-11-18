@@ -153,6 +153,9 @@ export const UpVoteBtn = styled(Button)({
   '& svg': {
     fontSize: '1rem',
   },
+  '&:hover': {
+    backgroundColor: colors.brandDarkBlue,
+  },
 });
 
 export const ReviewContent = styled(Typography)({
