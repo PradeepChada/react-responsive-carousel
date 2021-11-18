@@ -216,20 +216,20 @@ const ProductDetails = ({ history, match }) => {
       {skuPriceDetails?.onSale ? (
         <SalePriceWrapper>
           <Typography className='sale-price'>
-            ${skuPriceDetails?.salePrice}
+            ${skuPriceDetails?.salePrice?.toFixed(2)}
           </Typography>
           <Box marginLeft={'10px'}>
             <Typography className='normal-price'>
-              Was ${skuPriceDetails?.price}
+              Was ${skuPriceDetails?.price?.toFixed(2)}
             </Typography>
             <Typography className='savings'>
-              Save ${skuPriceDetails?.maxSavings} (
+              Save ${skuPriceDetails?.maxSavings?.toFixed(2)} (
               {skuPriceDetails?.maxPercentOff}% off)
             </Typography>
           </Box>
         </SalePriceWrapper>
       ) : (
-        <Price>${skuPriceDetails?.price}/ea</Price>
+        <Price>${skuPriceDetails?.price?.toFixed(2)}/ea</Price>
       )}
       <div>
         <Spec>

@@ -137,6 +137,10 @@ export const ReviewDetails = styled(Box)({
       marginRight: 10,
     },
   },
+  '& .tcs-response': {
+    fontWeight: 700,
+    marginTop: '1rem',
+  },
 });
 
 export const UpVoteBtn = styled(Button)({
