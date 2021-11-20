@@ -19,9 +19,11 @@ import Spinner from './components/loading-spinner/Spinner';
 import ConfigProvider from './components/config-provider/ConfigProvider';
 import StoreProvider from './components/store-provider/StoreProvider';
 import Reviews from './pages/reviews/Reviews';
+import PopSignup from './pages/pop-signup/PopSignup';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
+  flexGrow: 1,
 });
 
 const App = () => {
@@ -67,6 +69,7 @@ const App = () => {
                       component={QuestionAndAnswer}
                     />
                     <Route exact path='/reviews/:id' component={Reviews} />
+                    <Route exact path='/pop-signup' component={PopSignup} />
                   </Switch>
                 </StyledBody>
               </StoreProvider>

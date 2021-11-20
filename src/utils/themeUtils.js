@@ -46,3 +46,15 @@ export const colors = {
   red: '#D72230',
   green: '#128400',
 };
+
+export const fontSizes = {
+  f10: '.625rem',
+  f12: '.75rem',
+  f14: '.875rem',
+  f16: '1rem',
+  f18: '1.125rem',
+  f20: '1.25rem',
+  f22: '1.375rem',
+  f24: '1.5rem',
+  f26: '1.625rem',
+};

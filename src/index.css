@@ -35,6 +35,12 @@ body {
   background-color: #F6F6FA;
 }
 
+.page-container {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
