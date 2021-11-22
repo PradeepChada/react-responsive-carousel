@@ -9,18 +9,18 @@ import { colors } from '../../../utils/themeUtils';
 export const Wrapper = styled(Box)({
   display: 'flex',
   borderBottom: `1px solid ${colors.gray85}`,
-  padding: '1.5rem 0px 1rem 0px',
+  padding: '1.5rem 0 1rem 0',
   width: '100%',
   '& .options': {
-    fontSize: '0.8rem',
-    color: colors.primary,
+    fontSize: '0.875rem',
+    color: colors.brandBlue,
     textDecoration: 'underline',
   },
   '& .discount-text': {
-    fontSize: '0.7rem',
-    color: colors.abbey,
+    fontSize: '0.75rem',
+    color: colors.selectGray,
     fontStyle: 'italic',
-    marginBottom: '.7rem',
+    marginBottom: '.75rem',
     paddingRight: '1px',
   },
   '& .plus-button': {
@@ -39,14 +39,14 @@ export const Wrapper = styled(Box)({
     width: '31px',
     height: '15px',
     position: 'absolute',
-    top: '0px',
-    left: '0px',
-    fontSize: '0.7rem',
+    top: '0',
+    left: '0',
+    fontSize: '0.75rem',
     fontWeight: '600',
     backgroundColor: colors.red,
     color: colors.white,
     textAlign: 'center',
-    borderRadius: '0px 0px 0.2rem 0px',
+    borderRadius: '0 0 0.25rem 0',
   },
 });
 
@@ -58,20 +58,20 @@ export const ImageSkeleton = styled(Skeleton)({
 
 export const PriceSkeleton = styled(Skeleton)({
   fontSize: '1rem',
-  marginBottom: '1.7px',
+  marginBottom: '1.75rem',
   width: '80px',
 });
 
 export const TitleSkeleton = styled(Skeleton)({
-  fontSize: '0.8rem',
-  marginBottom: '.1rem',
+  fontSize: '0.875rem',
+  marginBottom: '.125rem',
   width: '210px',
 });
 
 export const CodeSkeleton = styled(Skeleton)({
-  fontSize: '0.7rem',
+  fontSize: '0.75rem',
   width: '90px',
-  marginBottom: '.8px',
+  marginBottom: '.875rem',
 });
 
 export const Image = styled('img')({
@@ -81,9 +81,9 @@ export const Image = styled('img')({
 
 export const Price = styled(Typography)({
   fontSize: '1rem',
-  color: colors.fontColor,
+  color: colors.textBlack,
   fontWeight: '700',
-  marginBottom: '1.7rem',
+  marginBottom: '1.75rem',
 
 });
 
@@ -96,49 +96,49 @@ export const SalePriceWrapper = styled(Box)({
     
     color: colors.danger,
     fontWeight: '700',
-    marginRight: '.3rem',
+    marginRight: '.375rem',
   },
   '& .normal-price': {
     fontSize: '0.75rem',
-    color: colors.abbey,
+    color: colors.selectGray,
     fontWeight: '400',
     textDecoration: 'line-through',
   },
 });
 
 export const Title = styled(Typography)({
-  fontSize: '0.8rem',
-  color: colors.fontColor,
+  fontSize: '0.875rem',
+  color: colors.textBlack,
   fontWeight: '400',
-  marginBottom: '.1rem',
+  marginBottom: '.125rem',
   textTransform: 'capitalize',
 });
 
 export const OutOfStock = styled(Typography)({
-  fontSize: '0.8rem',
+  fontSize: '0.875rem',
   color: colors.red,
   fontWeight: '700',
-  marginBottom: '1.8rem',
+  marginBottom: '1.875rem',
 });
 
 export const Code = styled(Typography)({
-  fontSize: '0.7rem',
-  color: colors.abbey,
+  fontSize: '0.75rem',
+  color: colors.selectGray,
   fontWeight: '400',
-  marginBottom: '0.8rem',
+  marginBottom: '0.875rem',
 });
 
 export const ClearIconWrapper = styled(ClearIcon)({
   width: '13px',
   height: '13px',
-  marginLeft: '.7rem',
+  marginLeft: '.75rem',
   cursor: 'pointer',
 });
 
 export const ClearIconSkeleton = styled(Skeleton)({
   width: '13px',
   height: '13px',
-  marginLeft: '0.7rem ',
+  marginLeft: '0.75rem',
 });
 
 export const ButtonGroupWrapper = styled(Box)({
@@ -149,7 +149,7 @@ export const ButtonGroupWrapper = styled(Box)({
   height: '36px',
   boxSizing: 'border-box',
   borderRadius: '4px',
-  border: `1px solid ${colors.gray60}`,
+  border: `1px solid ${colors.black40}`,
   '& p': {
     fontSize: '1rem',
     flexGrow: '1',
@@ -165,7 +165,7 @@ export const ButtonGroupSkeleton = styled(Skeleton)({
 export const InputWrapper = styled(InputBase)({
   flex: 2,
   fontSize: '1rem',
-  color: colors.fontColor,
+  color: colors.textBlack,
   fontWeight: '400',
   '& input': {
     textAlign: 'center',

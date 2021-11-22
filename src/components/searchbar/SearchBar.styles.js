@@ -6,12 +6,11 @@ import InputBase from '@mui/material/InputBase';
 import { colors } from '../../utils/themeUtils';
 
 export const ClearText = styled('span')({
-  color: colors.primary,
+  color: colors.brandBlue,
   textDecoration: 'underline',
   cursor: 'pointer',
-  fontSize: '12px',
-  marginRight: '8.04px',
-  lineHeight: '18px',
+  fontSize: '0.75rem',
+  marginRight: '0.5rem',
 });
 
 export const PaperWrapper = styled(Paper)({
@@ -27,7 +26,7 @@ export const PaperWrapper = styled(Paper)({
 export const IconButtonWrapper = styled(IconButton)({
   backgroundColor: colors.lightGray,
   borderRadius: '0 4px 4px 0',
-  color: colors.primary,
+  color: colors.brandBlue,
   height: '35px',
   '&:enabled': {
     backgroundColor: colors.lightGray,
@@ -42,9 +41,8 @@ export const SearchIconWraper = styled(SearchIcon)({
 export const InputBaseWrapper = styled(InputBase)({
   ml: 1,
   flex: 1,
-  fontSize: '14px',
-  marginLeft: '11px',
-  color: colors.fontColor,
+  fontSize: '0.875rem',
+  marginLeft: '0.75rem',
+  color: colors.textBlack,
   fontWeight: '400',
-  lineHeight: '18px',
 });

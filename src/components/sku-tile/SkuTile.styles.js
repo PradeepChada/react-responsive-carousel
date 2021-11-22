@@ -6,118 +6,109 @@ import { colors } from '../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
   display: 'flex',
-  marginTop: '32px',
+  marginTop: '2rem',
   borderBottom: `1px solid ${colors.gray85}`,
-  paddingBottom: '24px',
+  paddingBottom: '1.5rem',
   width: '100%',
 });
 
 export const ImageSkeleton = styled(Skeleton)({
   width: '116px',
   height: '116px',
-  marginRight: '16px',
+  marginRight: '1rem',
 });
 
 export const PriceSkeleton = styled(Skeleton)({
-  fontSize: '16px',
-  marginBottom: '5px',
+  fontSize: '1rem',
+  marginBottom: '0.375rem',
   width: '80px',
 });
 
 export const TitleSkeleton = styled(Skeleton)({
-  fontSize: '14px',
-  marginBottom: '12px',
+  fontSize: '0.875rem',
+  marginBottom: '0.75rem',
   width: '210px',
 });
 
 export const StockSkeleton = styled(Skeleton)({
-  fontSize: '14px',
-  marginBottom: '30px',
+  fontSize: '0.875rem',
+  marginBottom: '1.875rem',
   width: '90px',
 });
 
 export const CodeSkeleton = styled(Skeleton)({
-  fontSize: '12px',
+  fontSize: '0.75rem',
   width: '90px',
 });
 
 export const Image = styled('img')({
   height: '116px',
   width: '116px',
-  marginRight: '16px',
+  marginRight: '1rem',
 });
 
 export const Price = styled(Typography)({
-  fontSize: '16px',
-  color: colors.fontColor,
+  fontSize: '1rem',
+  color: colors.textBlack,
   fontWeight: '700',
-  marginBottom: '4px',
-  lineHeight: '20px',
+  marginBottom: '0.25rem',
 });
 
 export const SalePriceWrapper = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '4px',
+  marginBottom: '0.25rem',
   '& .sale-price': {
-    fontSize: '16px',
-    lineHeight: '20px',
+    fontSize: '1rem',
     color: colors.danger,
     fontWeight: '700',
-    marginRight: '6px',
+    marginRight: '0.375rem',
   },
   '& .normal-price': {
-    fontSize: '12px',
-    lineHeight: '14px',
-    color: colors.abbey,
+    fontSize: '0.75rem',
+    color: colors.selectGray,
     fontWeight: '400',
     textDecoration: 'line-through',
   },
 });
 
 export const Title = styled(Typography)({
-  fontSize: '14px',
-  lineHeight: '18px',
-  color: colors.fontColor,
+  fontSize: '0.875rem',
+  color: colors.textBlack,
   fontWeight: '400',
-  marginBottom: '12px',
+  marginBottom: '0.75rem',
   textTransform: 'capitalize',
 });
 
 export const Stock = styled(Typography)({
-  fontSize: '14px',
-  lineHeight: '18px',
+  fontSize: '0.875rem',
   color: colors.green,
   fontWeight: '700',
-  marginBottom: '30px',
+  marginBottom: '1.875rem',
 });
 
 export const StockError = styled(Box)({
-  width: '198px',
-  height: '86px',
   boxSizing: 'border-box',
-  backgroundColor: colors.dangerBackground,
-  fontSize: '14px',
+  backgroundColor: colors.bgDanger,
+  fontSize: '0.875rem',
   color: colors.danger,
   border: `1px solid ${colors.dangerBorder}`,
-  borderRadius: '4px',
+  borderRadius: '0.25rem',
   fontWeight: '400',
-  marginTop: '-3px',
-  marginBottom: '9px',
-  padding: '7px 10px 0px',
+  marginTop: '-0.25rem',
+  marginBottom: '0.625rem',
+  padding: '0.625rem',
 });
 
 export const OutOfStock = styled(Typography)({
-  fontSize: '14px',
-  lineHeight: '18px',
+  fontSize: '0.875rem',
   color: colors.red,
   fontWeight: '700',
-  marginBottom: '30px',
+  marginBottom: '1.875rem',
 });
 
 export const Code = styled(Typography)({
-  fontSize: '12px',
-  lineHeight: '14px',
-  color: colors.abbey,
+  fontSize: '0.75rem',
+  color: colors.selectGray,
   fontWeight: '400',
 });
