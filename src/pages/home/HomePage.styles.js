@@ -3,4 +3,9 @@ import { Container } from '@mui/material';
 
 export const PageContainer = styled(Container)({
   padding: '1.5rem 1rem',
+  '& .inventory-tile': {
+    '& img': {
+      marginLeft: '.25rem',
+    },
+  },
 });
