@@ -93,7 +93,6 @@ export const SalePriceWrapper = styled(Box)({
   marginBottom: '1rem',
   '& .sale-price': {
     fontSize: '1rem',
-    
     color: colors.danger,
     fontWeight: '700',
     marginRight: '.375rem',

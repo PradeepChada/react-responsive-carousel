@@ -6,6 +6,8 @@ import ChevronRight from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
+const boxSizing = 'border-box';
+const spaceBetween="space-between"
 export const BoxWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
@@ -37,7 +39,7 @@ export const Description = styled(Typography)({
 });
 
 export const CartContainer = styled(Box)({
-  boxSizing: 'border-box',
+  boxSizing: boxSizing,
   position: 'fixed',
   bottom: '0',
   width: '100%',
@@ -46,13 +48,13 @@ export const CartContainer = styled(Box)({
   '& .order-discount-container': {
     height: '40px',
     display: 'flex',
-    justifyContent: 'space-between',
-    boxSizing: 'border-box',
+    justifyContent: spaceBetween,
+    boxSizing: boxSizing,
     padding: '0.75rem 1rem',
   },
   '& .order-summary-container': {
     flexDirection: 'column',
-    boxSizing: 'border-box',
+    boxSizing: boxSizing,
     backgroundColor: colors.bgGray,
     padding: '0.75rem 1rem 0 1rem',
     height: '135px',
@@ -64,7 +66,7 @@ export const CartContainer = styled(Box)({
     },
     '& .subtotal-text': {
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: spaceBetween,
       fontSize: '0.875rem',
       fontWeight: 'bold',
       color: colors.black,
@@ -72,7 +74,7 @@ export const CartContainer = styled(Box)({
     },
     '& .discounts-text': {
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: spaceBetween,
       fontSize: '0.875rem',
       fontWeight: 'normal',
       color: colors.black90,
@@ -80,7 +82,7 @@ export const CartContainer = styled(Box)({
     },
     '& .tax-text': {
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: spaceBetween,
       fontSize: '0.875rem',
       fontWeight: 'normal',
       color: colors.black90,
@@ -93,11 +95,11 @@ export const CartContainer = styled(Box)({
     fontWeight: '700',
   },
   '& .total-price-container': {
-    boxSizing: 'border-box',
+    boxSizing: boxSizing,
     height: '70px',
     padding: '0 1rem',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent:spaceBetween,
     backgroundColor: colors.bgGray,
   },
   '& .cart-total-price': {

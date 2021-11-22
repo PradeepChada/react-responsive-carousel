@@ -71,13 +71,18 @@ const SkuTile = ({
     );
   };
   const onChangeQuantity = (input) => {
-    if (input.target.value < 1000)
+    if (input.target.value < 1000) {
       setItemQuantity(skuInfo.skuId, input.target.value);
+    }
   };
   const onBlurQuantityInput = () => {
-    if (Number(skuQuantity) === 0) increaseItemQuantity(skuInfo.skuId);
+    if (Number(skuQuantity) === 0) {
+      increaseItemQuantity(skuInfo.skuId);
+    }
   };
-  if (loading) return _renderSkeleton();
+  if (loading) {
+    return _renderSkeleton();
+  }
   return (
     <Wrapper onClick={() => handleClick(skuInfo.skuId)}>
       <Box className='image-container'>

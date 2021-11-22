@@ -54,13 +54,16 @@ function SkuCheckout() {
     );
   };
   const decreaseItemQuantity = (skuId, skuQantity) => {
-    if (skuQantity > 1)
+    if (skuQantity > 1) {
       dispatch(decreaseItemQuantityFromCart(skuId, cartItems));
-    else removeItem(skuId);
+    } else {
+      removeItem(skuId);
+    }
   };
   const handleSearch = (skuId) => {
-    if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
-    else {
+    if (!skuId) {
+      dispatch(actions.failure(skuErrorMessages.malfunction));
+    } else {
       if (givenItemExits(skuId, cartItems)) {
         dispatch(increaseItemQuantityFromCart(skuId, cartItems));
       } else {
