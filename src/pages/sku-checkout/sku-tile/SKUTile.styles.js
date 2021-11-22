@@ -95,13 +95,15 @@ export const SalePriceWrapper = styled(Box)({
     fontSize: '1rem',
     color: colors.danger,
     fontWeight: '700',
-    marginRight: '.375rem',
+    marginRight: '0.375rem',
+    textAlign: 'center',
   },
   '& .normal-price': {
-    fontSize: '.75rem',
+    fontSize: '0.75rem',
     color: colors.selectGray,
     fontWeight: '400',
     textDecoration: 'line-through',
+    textAlign: 'center',
   },
 });
 
@@ -109,7 +111,7 @@ export const Title = styled(Typography)({
   fontSize: '0.875rem',
   color: colors.textBlack,
   fontWeight: '400',
-  marginBottom: '.125rem',
+  marginBottom: '0.125rem',
   textTransform: 'capitalize',
 });
 
