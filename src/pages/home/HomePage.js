@@ -8,14 +8,17 @@ const HomePage = ({ history }) => {
   return (
     <PageContainer>
       <HomeTile
+        className='inventory-tile'
         icon={ScanIcon}
         title='Price & Inventory Check'
         handleClick={() => history.push('/sku-search')}
+        data-testId='price-and-inventory'
       />
       <HomeTile
         icon={CartIcon}
         title='Take Checkout'
         handleClick={() => history.push('/take-checkout')}
+        data-testId='take-checkout'
       />
     </PageContainer>
   );
