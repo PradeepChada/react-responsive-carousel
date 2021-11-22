@@ -54,6 +54,7 @@ export const ImageSkeleton = styled(Skeleton)({
   width: '70px',
   height: '70px',
   marginRight: '1rem',
+  boxSizing: 'border-box',
 });
 
 export const PriceSkeleton = styled(Skeleton)({
@@ -84,7 +85,6 @@ export const Price = styled(Typography)({
   color: colors.textBlack,
   fontWeight: '700',
   marginBottom: '1.75rem',
-
 });
 
 export const SalePriceWrapper = styled(Box)({
@@ -98,7 +98,7 @@ export const SalePriceWrapper = styled(Box)({
     marginRight: '.375rem',
   },
   '& .normal-price': {
-    fontSize: '0.75rem',
+    fontSize: '.75rem',
     color: colors.selectGray,
     fontWeight: '400',
     textDecoration: 'line-through',
@@ -111,13 +111,6 @@ export const Title = styled(Typography)({
   fontWeight: '400',
   marginBottom: '.125rem',
   textTransform: 'capitalize',
-});
-
-export const OutOfStock = styled(Typography)({
-  fontSize: '0.875rem',
-  color: colors.red,
-  fontWeight: '700',
-  marginBottom: '1.875rem',
 });
 
 export const Code = styled(Typography)({
