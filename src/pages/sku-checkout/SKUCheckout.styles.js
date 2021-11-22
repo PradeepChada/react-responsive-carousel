@@ -150,6 +150,9 @@ export const ErrorWrapper = styled(Box)({
       height: '38px',
       marginRight: '0.875rem',
     },
+    '& p:nth-child(1)': {
+      textAlign: 'start',
+    },
     '& p:nth-child(2)': {
       textAlign: 'start',
     },

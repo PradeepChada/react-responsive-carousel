@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/styles';
-import { colors, fontSizes } from './../../utils/themeUtils';
+import { colors} from './../../utils/themeUtils';
 
 export const Logo = styled('img')({
   height: 21,
