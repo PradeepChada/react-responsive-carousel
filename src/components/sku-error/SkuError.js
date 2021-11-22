@@ -7,7 +7,7 @@ const SkuError = ({ title, description }) => {
   return (
     <TextWrapper display='flex' flexDirection='column' alignItems='center'>
       <ErrorIcon />
-      <Box>
+      <Box textAlign='center'>
         <Title>{title}</Title>
         {description && <Description>{description}</Description>}
       </Box>

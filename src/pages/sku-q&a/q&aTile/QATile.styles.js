@@ -4,66 +4,62 @@ import { Box } from '@mui/system';
 import { colors } from '../../../utils/themeUtils';
 
 export const LoadingBoxWrapper = styled(Box)({
-  padding: '24px',
-  border: `1px solid ${colors.qaTileBorder}`,
+  padding: '1.5rem',
+  border: `1px solid ${colors.gray90}`,
   '& .asker': {
-    marginBottom: '8px',
+    marginBottom: '0.5rem',
   },
   '& .question': {
-    marginBottom: '16px',
+    marginBottom: '1rem',
   },
   '& .view-more-answerer': {
-    marginTop: '16px',
+    marginTop: '1rem',
   },
-  marginBottom: '16px',
+  marginBottom: '1rem',
 });
 
 export const BoxWrapper = styled(Box)({
-  padding: '23px',
-  border: `1px solid ${colors.qaTileBorder}`,
+  padding: '1.5rem',
+  border: `1px solid ${colors.gray90}`,
   '& .view-more-answerer': {
-    color: colors.primary,
-    fontSize: '14px',
-    lineHeight: '18px ',
-    marginTop: '16px',
+    color: colors.brandBlue,
+    fontSize: '0.875rem',
+    marginTop: '1rem',
     textDecoration: 'underline',
   },
-  marginBottom: '16px',
+  marginBottom: '1rem',
 });
 
 export const Asker = styled(Typography)({
-  fontSize: '14px',
-  color: colors.primary,
-  marginBottom: '8px',
+  fontSize: '0.875rem',
+  color: colors.brandBlue,
+  marginBottom: '0.5rem',
   textTransform: 'capitalize',
 });
 
 export const Question = styled(Typography)({
-  fontSize: '18px',
-  lineHeight: '22px',
+  fontSize: '1.125rem',
   fontWeight: 'bold',
   color: colors.black,
-  marginBottom: '16px',
+  marginBottom: '1rem',
   wordBreak: 'break-all',
 });
 
 export const Answer = styled(Box)({
-  backgroundColor: colors.answerBackground,
-  padding: '16px',
+  backgroundColor: colors.bgGray,
+  padding: '1rem',
   '& .answerer': {
-    fontSize: '16px',
-    lineHeight: '24px',
+    fontSize: '1rem',
     fontWeight: '400',
     color: colors.black,
-    marginBottom: '8px',
+    marginBottom: '0.5rem',
     textTransform: 'capitalize',
   },
   '& .answerer-text': {
-    fontSize: '16px',
-    lineHeight: '20px',
+    fontSize: '1rem',
     fontWeight: '400',
     color: colors.black,
     wordBreak: 'break-all',
   },
-  marginBottom: '8px',
+  marginBottom: '0.5rem',
 });

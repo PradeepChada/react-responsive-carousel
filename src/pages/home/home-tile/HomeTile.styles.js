@@ -4,11 +4,11 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { colors } from './../../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
-  padding: 16,
-  background: colors.lightBackground,
-  border: `1px solid ${colors.lightBackground}`,
+  padding: '1rem',
+  background: colors.bgGray,
+  border: `1px solid ${colors.bgGray}`,
   borderRadius: '4px',
-  marginBottom: 8,
+  marginBottom: '0.5rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -16,14 +16,12 @@ export const Wrapper = styled(Box)({
 });
 
 export const Icon = styled('img')({
-  marginRight: 15,
+  marginRight: '1rem',
 });
 
 export const Chevron = styled(ChevronRightIcon)(({ theme }) => ({
   color: theme.palette?.primary?.main,
-  fontSize: 18,
+  fontSize: '1.125rem',
 }));
 
-export const Title = styled(Typography)({
-  lineHeight: "22px"
-})
+export const Title = styled(Typography)({});

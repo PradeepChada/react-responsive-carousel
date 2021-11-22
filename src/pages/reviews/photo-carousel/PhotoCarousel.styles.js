@@ -12,7 +12,7 @@ export const Modal = styled(Dialog)({
         zIndex: 9,
         padding: 5,
         '& svg': {
-            fontSize: 20
+            fontSize: "1.25rem"
         }
       },
 })
@@ -38,19 +38,19 @@ export const Slider = styled(Carousel)({
     height: 30,
     cursor: 'pointer',
     backgroundColor: colors.white,
-    padding: 18,
-    boxShadow: '0 0 5px #ccc',
+    padding: "1.125rem",
+    boxShadow: '0 0 0.375 #ccc',
     '& svg': {
-        fontSize: 30
+        fontSize: "1.875rem"
     }
   }
 });
 
 export const PhotoContent = styled('div')({
-    padding: '20px 15px',
+    padding: '1.25rem 1rem',
     textAlign: 'left',
     '& .rating-bar': {
-        marginBottom: 10,
+        marginBottom: "0.625rem",
         '& .MuiRating-iconFilled': {
             '& svg': {
               color: colors.ratingColor,
@@ -58,12 +58,12 @@ export const PhotoContent = styled('div')({
           },
     },
     '& .title': {
-        margin: '5px 0',
+        margin: '0.375rem 0',
         fontWeight: 'bold'
     },
     '& .time-ago': {
-        margin: '10px 0',
+        margin: '0.625rem 0',
         fontWeight: '300',
-        fontSize: 14
+        fontSize: "0.875rem"
     }
 })

@@ -7,6 +7,7 @@ import {
   SearchIconWraper,
 } from './SearchBar.styles';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
   const history = useHistory();
@@ -15,6 +16,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
     if (input.includes('\n')) {
       input = input.replace('\n', '');
       handleSearch(input.trim());
+      setSKUCode('');
     }
     setSKUCode(input);
   };
@@ -27,6 +29,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
   const handleSearchButtonClick = (e) => {
     e.preventDefault();
     handleSearch(SKUCode.trim());
+    setSKUCode('');
   };
 
   const onBlurInput = ({ target }) => {
@@ -41,6 +44,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
         placeholder='Scan barcode or enter SKU'
         inputProps={{ 'aria-label': 'sku-input' }}
         type='text'
+        pattern='\d*'
         value={SKUCode}
         onChange={onChangeHandler}
         onBlur={onBlurInput}
@@ -62,6 +66,6 @@ const SearchBar = ({ handleSearch, handleClear }) => {
 export default SearchBar;
 
 SearchBar.defaultProps = {
-  handleSearch: () => {},
-  handleClear: () => {},
+  handleSearch: PropTypes.func,
+  handleClear: PropTypes.func,
 };

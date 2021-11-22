@@ -2,18 +2,18 @@ import { styled } from '@mui/styles';
 import { Carousel } from 'react-responsive-carousel';
 
 export const Slider = styled(Carousel)(({ theme }) => ({
-  marginTop: 10,
+  marginTop: '0.625rem',
   minHeight: 270,
   '& .slider-wrapper': {
     '& .slide': {
       minWidth: '208px !important',
       width: '208px !important',
-      marginRight: 20,
-      minHeight: 207
+      marginRight: '1.25rem',
+      minHeight: 207,
     },
   },
   '& .thumbs-wrapper': {
-    margin: '8px 0 0 0',
+    margin: '0.5rem 0 0 0',
     '& .thumbs': {
       margin: 0,
       padding: 0,
@@ -26,7 +26,7 @@ export const Slider = styled(Carousel)(({ theme }) => ({
       },
     },
   },
-  '& .carousel-status':{
-    display: 'none'
-  }
+  '& .carousel-status': {
+    display: 'none',
+  },
 }));

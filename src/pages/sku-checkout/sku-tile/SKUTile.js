@@ -19,7 +19,6 @@ import {
   InputWrapper,
 } from './SKUTile.styles';
 import { Skeleton, Typography } from '@mui/material';
-
 const SkuTile = ({
   skuInfo,
   skuQuantity,
@@ -72,13 +71,18 @@ const SkuTile = ({
     );
   };
   const onChangeQuantity = (input) => {
-    if (input.target.value < 1000)
+    if (input.target.value < 1000) {
       setItemQuantity(skuInfo.skuId, input.target.value);
+    }
   };
   const onBlurQuantityInput = () => {
-    if (Number(skuQuantity) === 0) increaseItemQuantity(skuInfo.skuId);
+    if (Number(skuQuantity) === 0) {
+      increaseItemQuantity(skuInfo.skuId);
+    }
   };
-  if (loading) return _renderSkeleton();
+  if (loading) {
+    return _renderSkeleton();
+  }
   return (
     <Wrapper onClick={() => handleClick(skuInfo.skuId)}>
       <Box className='image-container'>
@@ -99,10 +103,10 @@ const SkuTile = ({
         <Box display='flex' flexDirection='row' justifyContent='space-between'>
           <ButtonGroupWrapper>
             <Typography
-              className='plus-button'
-              onClick={() => increaseItemQuantity(skuInfo.skuId)}
+              className='minus-button'
+              onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
             >
-              +
+              -
             </Typography>
             <InputWrapper
               value={skuQuantity}
@@ -110,10 +114,10 @@ const SkuTile = ({
               onBlur={onBlurQuantityInput}
             />
             <Typography
-              className='minus-button'
-              onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
+              className='plus-button'
+              onClick={() => increaseItemQuantity(skuInfo.skuId)}
             >
-              -
+              +
             </Typography>
           </ButtonGroupWrapper>
           <Box display='flex' flexDirection='column' alignItems='flex-end'>
@@ -121,10 +125,16 @@ const SkuTile = ({
               <>
                 <SalePriceWrapper>
                   <Typography className='sale-price'>
-                    ${skuQuantity * Number(skuInfo?.skuPriceDetails?.salePrice)}
+                    $
+                    {Number(
+                      skuQuantity * skuInfo?.skuPriceDetails?.salePrice
+                    ).toFixed(2)}
                   </Typography>
                   <Typography className='normal-price'>
-                    ${skuQuantity * Number(skuInfo?.skuPriceDetails?.price)}
+                    $
+                    {Number(
+                      skuQuantity * skuInfo?.skuPriceDetails?.price
+                    ).toFixed(2)}
                   </Typography>
                 </SalePriceWrapper>
                 <Typography className='discount-text'>
@@ -133,7 +143,10 @@ const SkuTile = ({
               </>
             ) : (
               <Price>
-                ${skuQuantity * Number(skuInfo?.skuPriceDetails?.price)}/ea
+                $
+                {Number(skuQuantity * skuInfo?.skuPriceDetails?.price).toFixed(
+                  2
+                )}
               </Price>
             )}
             <Typography className='options'>Options</Typography>

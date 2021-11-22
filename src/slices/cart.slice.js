@@ -44,9 +44,9 @@ export const addItemToCart = (skuCode) => (dispatch) => {
   skuService
     .getSkuInfo(skuCode)
     .then((res) => {
-      if (res?.status === 204)
+      if (res?.status === 204) {
         dispatch(actions.failure(skuErrorMessages.notFound));
-      else {
+      } else {
         dispatch(
           actions.addItemToCart({
             skuQantity: 1,
@@ -56,16 +56,20 @@ export const addItemToCart = (skuCode) => (dispatch) => {
       }
     })
     .catch(({ response }) => {
-      if (response?.status === 400)
+      if (response?.status === 400) {
         dispatch(actions.failure(skuErrorMessages.notFound));
-      else dispatch(actions.failure(skuErrorMessages.unknown));
+      } else {
+        dispatch(actions.failure(skuErrorMessages.unknown));
+      }
     });
 };
 
 export const removeItemFromCart = (skuId, cartItems) => (dispatch) => {
   const newCartItems = [];
   cartItems.forEach((item) => {
-    if (item.skuData.id !== skuId) newCartItems.push(item);
+    if (item.skuData.id !== skuId) {
+      newCartItems.push(item);
+    }
   });
   dispatch(actions.removeItemFromCart(newCartItems));
 };
@@ -77,7 +81,9 @@ export const increaseItemQuantityFromCart =
     cartItems.forEach((item) => {
       if (item.skuData.id === Number(skuId)) {
         newCartItems.push({ ...item, skuQantity: item.skuQantity + 1 });
-      } else newCartItems.push(item);
+      } else {
+        newCartItems.push(item);
+      }
     });
     dispatch(actions.increaseItemQuantity(newCartItems));
   };
@@ -86,12 +92,14 @@ export const setItemQuantityByGivenQuantityFromCart =
   (skuId, cartItems, givenQuantity) => (dispatch) => {
     const newCartItems = [];
     cartItems.forEach((item) => {
-      if (item.skuData.id === skuId)
+      if (item.skuData.id === skuId) {
         newCartItems.push({
           ...item,
           skuQantity: Number(givenQuantity),
         });
-      else newCartItems.push(item);
+      } else {
+        newCartItems.push(item);
+      }
     });
     dispatch(actions.increaseItemQuantity(newCartItems));
   };
@@ -100,9 +108,11 @@ export const decreaseItemQuantityFromCart =
   (skuId, cartItems) => (dispatch) => {
     const newCartItems = [];
     cartItems.forEach((item) => {
-      if (item.skuData.id === skuId)
+      if (item.skuData.id === skuId) {
         newCartItems.push({ ...item, skuQantity: item.skuQantity - 1 });
-      else newCartItems.push(item);
+      } else {
+        newCartItems.push(item);
+      }
     });
     dispatch(actions.removeItemFromCart(newCartItems));
   };
