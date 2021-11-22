@@ -64,11 +64,11 @@ export const getSKUTileInfo = (skuData) => {
   };
 };
 
-export const givenItemExits = (skuId, cartItems) => {
-  let exits = false;
-  cartItems.forEach((data) => {
+export const givenItemExitsInCart = (skuId, cartItems) => {
+  let exits = -1;
+  cartItems.forEach((data, index) => {
     if (data?.skuData?.id === parseInt(skuId)) {
-      exits = true;
+      exits = index;
     }
   });
   return exits;

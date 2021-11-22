@@ -30,6 +30,7 @@ import {
   getQtyInStore,
   getQtyInDC,
   getSkuPriceDetails,
+  givenItemExitsInCart,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
@@ -38,6 +39,7 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
+import { setItemQuantityByGivenQuantityFromCart } from '../../slices/cart.slice';
 
 const LoadingSkeleton = () => {
   return (
@@ -101,7 +103,9 @@ const ProductDetails = ({ history, match }) => {
     (state) => state.reviews
   );
   const { questionsData } = useSelector((state) => state.skuQuestions);
+  const { cartItems } = useSelector((state) => state.cart);
   const [showDrawer, setShowDrawer] = useState(false);
+  const [skuQuantity, setSkuQuantity] = useState(1);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
   useEffect(() => {
@@ -117,6 +121,17 @@ const ProductDetails = ({ history, match }) => {
       dispatch(resetQA());
     }
   }, [dispatch, skuData]);
+
+  useEffect(() => {
+    if (history.location.pathname.includes('/sku-checkout/sku-details')) {
+      const isExits = givenItemExitsInCart(match?.params?.id, cartItems);
+      if (isExits <= -1) {
+        history.replace('/sku-checkout');
+      } else {
+        setSkuQuantity(cartItems[isExits].skuQuantity);
+      }
+    }
+  }, [match?.params?.id]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
@@ -194,6 +209,37 @@ const ProductDetails = ({ history, match }) => {
 
   const dcQty = getQtyInDC(shipSkuAvailData?.inventoryEstimates);
 
+  const plusButtonHandler = () => {
+    setSkuQuantity((prevQuantity) => {
+      if (prevQuantity < 999) return prevQuantity + 1;
+      else return prevQuantity;
+    });
+  };
+  const minusButtonHandler = () => {
+    setSkuQuantity((prevQuantity) => {
+      if (prevQuantity > 1) return prevQuantity - 1;
+      else return prevQuantity;
+    });
+  };
+  const saveChangesButtonHandler = () => {
+    dispatch(
+      setItemQuantityByGivenQuantityFromCart(
+        match?.params?.id,
+        cartItems,
+        skuQuantity
+      )
+    );
+    history.push('/sku-checkout');
+  };
+  const onChangeQuantity = (event) => {
+    if (event.target.value < 1000) {
+      setSkuQuantity(event.target.value);
+    }
+  };
+
+  const onBlurQuantityInput = () => {
+    if (skuQuantity <= 0) setSkuQuantity(1);
+  };
   return (
     <PageContainer>
       {_renderDrawer()}
@@ -270,10 +316,11 @@ const ProductDetails = ({ history, match }) => {
                       <span className='stock-green'>{inStoreQty} in Stock</span>
                     ) : (
                       <span className='stock-red'>Out of Stock</span>
-                    )}{' '}
+                    )}
                     in this store
                   </div>
                 )}
+
                 {skuAvailabilityLoading ? (
                   <Skeleton width={200} />
                 ) : (
@@ -287,23 +334,23 @@ const ProductDetails = ({ history, match }) => {
                 )}
               </Box>
               {history.location.pathname.includes(
-                '/sku-checkout/product-details'
+                '/sku-checkout/sku-details'
               ) && (
                 <ButtonGroupWrapper>
                   <Typography
                     className='plus-button'
-                    //onClick={() => increaseItemQuantity(skuInfo.skuId)}
+                    onClick={minusButtonHandler}
                   >
                     -
                   </Typography>
                   <InputWrapper
-                    value={1}
-                    //onChange={onChangeQuantity}
-                    //onBlur={onBlurQuantityInput}
+                    value={skuQuantity}
+                    onChange={onChangeQuantity}
+                    onBlur={onBlurQuantityInput}
                   />
                   <Typography
                     className='minus-button'
-                    //onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
+                    onClick={plusButtonHandler}
                   >
                     +
                   </Typography>
@@ -366,8 +413,8 @@ const ProductDetails = ({ history, match }) => {
           </Box>
         </InfoTile>
       </Box>
-      {history.location.pathname.includes('/sku-checkout/product-details') && (
-        <SaveButton>Save Changes</SaveButton>
+      {history.location.pathname.includes('/sku-checkout/sku-details') && (
+        <SaveButton onClick={saveChangesButtonHandler}>Save Changes</SaveButton>
       )}
     </PageContainer>
   );

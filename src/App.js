@@ -69,6 +69,11 @@ const App = () => {
                     />
                     <Route exact path='/reviews/:id' component={Reviews} />
                     <Route exact path='/sku-checkout' component={SkuCheckout} />
+                    <Route
+                      exact
+                      path='/sku-checkout/sku-details/:id'
+                      component={ProductDetails}
+                    />
                   </Switch>
                 </StyledBody>
               </StoreProvider>

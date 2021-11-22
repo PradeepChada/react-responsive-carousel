@@ -49,7 +49,7 @@ export const addItemToCart = (skuCode) => (dispatch) => {
       } else {
         dispatch(
           actions.addItemToCart({
-            skuQantity: 1,
+            skuQuantity: 1,
             skuData: res?.data,
           })
         );
@@ -80,7 +80,7 @@ export const increaseItemQuantityFromCart =
 
     cartItems.forEach((item) => {
       if (item.skuData.id === Number(skuId)) {
-        newCartItems.push({ ...item, skuQantity: item.skuQantity + 1 });
+        newCartItems.push({ ...item, skuQuantity: item.skuQuantity + 1 });
       } else {
         newCartItems.push(item);
       }
@@ -92,10 +92,10 @@ export const setItemQuantityByGivenQuantityFromCart =
   (skuId, cartItems, givenQuantity) => (dispatch) => {
     const newCartItems = [];
     cartItems.forEach((item) => {
-      if (item.skuData.id === skuId) {
+      if (Number(item.skuData.id) === Number(skuId)) {
         newCartItems.push({
           ...item,
-          skuQantity: Number(givenQuantity),
+          skuQuantity: Number(givenQuantity),
         });
       } else {
         newCartItems.push(item);
@@ -109,7 +109,7 @@ export const decreaseItemQuantityFromCart =
     const newCartItems = [];
     cartItems.forEach((item) => {
       if (item.skuData.id === skuId) {
-        newCartItems.push({ ...item, skuQantity: item.skuQantity - 1 });
+        newCartItems.push({ ...item, skuQuantity: item.skuQuantity - 1 });
       } else {
         newCartItems.push(item);
       }
