@@ -6,7 +6,8 @@ import { useHistory } from 'react-router-dom';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import AppLogo from './../../assets/images/logo.svg';
 import HomeIcon from './../../assets/icons/home.svg';
-import { Logo, StyledAppBar } from './Header.styles';
+import { Logo, StyledAppBar, TakeCheckout } from './Header.styles';
+import { showCheckoutHeader } from '../../utils/skuHelpers';
 import PropTypes from 'prop-types';
 
 function ElevationScroll(props) {
@@ -46,7 +47,11 @@ const Header = () => {
             <img src={HomeIcon} alt='Home' />
           </IconButton>
           <Box sx={{ flexGrow: 1, justifyContent: 'center', display: 'flex' }}>
-            <Logo src={AppLogo} alt='The Container Store' />
+            {showCheckoutHeader(history.location.pathname) ? (
+              <TakeCheckout>Take Checkout</TakeCheckout>
+            ) : (
+              <Logo src={AppLogo} alt='The Container Store' />
+            )}
           </Box>
         </Toolbar>
       </StyledAppBar>

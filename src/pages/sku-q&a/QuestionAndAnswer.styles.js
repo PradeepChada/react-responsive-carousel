@@ -8,44 +8,42 @@ export const NotFoundQA = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  marginTop: '25px',
+  marginTop: '1.625rem',
   '& p:nth-child(1)': {
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontWeight: 'bold',
-    color: colors.fontColor,
-    marginBottom: '8px',
+    color: colors.textBlack,
+    marginBottom: '0.5rem',
   },
   '& p:nth-child(2)': {
-    fontSize: '14px',
+    fontSize: '0.875rem',
     fontWeight: 'normal',
-    color: colors.abbey,
+    color: colors.textBlack,
   },
 });
 export const BoxWrapper = styled(Box)({
-  padding: '8px 15px 0px 15px',
+  padding: '0.5rem 1rem 0 1rem',
   '& .text': {
-    fontSize: '18px',
-    lineHeight: '22px',
+    fontSize: '1.125rem',
     fontWeight: '700',
-    color: colors.fontColor,
-    marginTop: '25px',
+    color: colors.textBlack,
+    marginTop: '1.625rem',
   },
   '& .total-question': {
-    fontSize: '16px',
+    fontSize: '1rem',
     fontWeight: '400',
     color: colors.black,
-    margin: '16px 0px',
+    margin: '1rem 0',
   },
   '& .more-question-test': {
-    fontSize: '14px',
-    lineHeight: '17px',
+    fontSize: '0.875rem',
     color: colors.black,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: '16px',
+    marginTop: '1rem',
   },
   '& .select': {
-    border: '1px solid red',
+    border: `1px solid ${colors.red}`,
   },
   '& hr': {
     border: `1px solid ${colors.gray85}`,
@@ -58,43 +56,43 @@ export const SelectWrapper = styled(Select)({
   flexGrow: '1',
   boxSizing: 'border-box',
   border: `1px solid ${colors.black}`,
-  borderRadius: '4px',
-  marginBottom: '16px',
+  borderRadius: '0.25rem',
+  marginBottom: '1rem',
   '& fieldset': {
     border: 'none',
   },
 });
 
 export const ButtonWrapper = styled(Button)({
-  fontSize: '14px',
+  fontSize: '0.875rem',
   height: '48px',
-  marginTop: '24px',
-  color: colors['primary-blue'],
-  border: `2px solid ${colors['primary-blue']}`,
+  marginTop: '1.5rem',
+  color: colors.lightBlue,
+  border: `2px solid ${colors.lightBlue}`,
   textTransform: 'capitalize',
   width: '100%',
-  marginBottom: '33px',
+  marginBottom: '2.125rem',
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 0px',
+  padding: '1.875rem 0',
 });
 
 export const SKUNameSkeletion = styled(Skeleton)({
-  fontSize: '16px',
-  marginBottom: '2px',
+  fontSize: '1rem',
+  marginBottom: '0.125rem',
 });
 
 export const QATextSkeletion = styled(Skeleton)({
-  marginTop: '25px',
-  fontSize: '18px',
+  marginTop: '1.625rem',
+  fontSize: '1.125rem',
 });
 
 export const NoOfQuestionTextSkeletion = styled(Skeleton)({
-  marginTop: '16px',
-  fontSize: '16px',
+  marginTop: '1rem',
+  fontSize: '1rem',
 });
 
 export const SortBySkeletion = styled(Skeleton)({
-  marginTop: '0px 16px',
+  marginTop: '0 1rem',
 });
