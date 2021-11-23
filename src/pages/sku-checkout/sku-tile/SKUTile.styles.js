@@ -8,6 +8,7 @@ import { colors } from '../../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
   display: 'flex',
+  flexDirection: 'column',
   borderBottom: `1px solid ${colors.gray85}`,
   padding: '1.5rem 0 1rem 0',
   width: '100%',
@@ -47,6 +48,11 @@ export const Wrapper = styled(Box)({
     color: colors.white,
     textAlign: 'center',
     borderRadius: '0 0 0.25rem 0',
+  },
+  '& .quantity-error': {
+    marginTop: '0.5rem',
+    fontSize: '0.875rem',
+    color: colors.danger,
   },
 });
 
