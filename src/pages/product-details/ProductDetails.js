@@ -82,7 +82,36 @@ const LoadingSkeleton = () => {
     </Box>
   );
 };
+const showStockDetails = (skuAvailabilityLoading, inStoreQty) => {
+  if (skuAvailabilityLoading) {
+    return <Skeleton />;
+  }
+  return (
+    <div className='stock-details'>
+      {inStoreQty ? (
+        <span className='stock-green'>{inStoreQty} in Stock</span>
+      ) : (
+        <span className='stock-red'>Out of Stock</span>
+      )}
+      in this store
+    </div>
+  );
+};
 
+const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
+  if (skuAvailabilityLoading) {
+    return <Skeleton width={200} />;
+  }
+  return (
+    <Button
+      className='availability-link'
+      variant='text'
+      onClick={() => toggleDrawer(true)}
+    >
+      View availability in other stores
+    </Button>
+  );
+};
 const ProductDetails = ({ history, match }) => {
   const SKUCheckoutDetailsURL = '/sku-checkout/sku-details';
   const dispatch = useDispatch();
@@ -100,6 +129,7 @@ const ProductDetails = ({ history, match }) => {
     shipSkuAvailData,
     shipSkuAvailLoading,
   } = useSelector((state) => state.sku);
+
   const { reviewsData, loading: ratingLoading } = useSelector(
     (state) => state.reviews
   );
@@ -317,29 +347,10 @@ const ProductDetails = ({ history, match }) => {
             <Box className='store-tile'>
               <img src={StoreIcon} alt='Store' />
               <Box flexGrow={1}>
-                {skuAvailabilityLoading ? (
-                  <Skeleton />
-                ) : (
-                  <div className='stock-details'>
-                    {inStoreQty ? (
-                      <span className='stock-green'>{inStoreQty} in Stock</span>
-                    ) : (
-                      <span className='stock-red'>Out of Stock</span>
-                    )}
-                    in this store
-                  </div>
-                )}
-
-                {skuAvailabilityLoading ? (
-                  <Skeleton width={200} />
-                ) : (
-                  <Button
-                    className='availability-link'
-                    variant='text'
-                    onClick={() => toggleDrawer(true)}
-                  >
-                    View availability in other stores
-                  </Button>
+                {showStockDetails(skuAvailabilityLoading, inStoreQty)}
+                {showAvailabilityInOtherStore(
+                  skuAvailabilityLoading,
+                  toggleDrawer
                 )}
               </Box>
               {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
