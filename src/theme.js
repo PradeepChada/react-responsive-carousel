@@ -1,4 +1,4 @@
-import { colors } from './utils/themeUtils';
+import { colors, font } from './utils/themeUtils';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -23,6 +23,33 @@ const theme = createTheme({
   palette: {
     primary: {
       main: colors.brandBlue,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          height: '3rem',
+          fontsize: font.size[14],
+        },
+        contained: {
+          boxShadow: 'none',
+          backgroundColor: colors.lightBlue,
+          fontWeight: 'bold',
+        },
+        outlined: {
+          borderColor: colors.lightBlue,
+          fontWeight: 'bold',
+          color: colors.lightBlue,
+        },
+        text: {
+          padding: 0,
+        },
+        sizeSmall: {
+          height: '2.5rem',
+        },
+      },
     },
   },
 });

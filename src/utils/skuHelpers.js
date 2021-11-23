@@ -45,12 +45,12 @@ export const filterQuestionsData = (questionData, newQuestions) => {
   };
 };
 
-export const showCheckoutHeader = (url) => {
-  return url === '/sku-checkout' ? true : false;
+export const showCheckoutHeader = (path) => {
+  return ['/sku-checkout', '/payment-details'].includes(path);
 };
 
-export const showCancelOrderButton = (url) => {
-  return url === '/sku-checkout' ? true : false;
+export const showCancelOrderButton = (path) => {
+  return ['/sku-checkout', '/payment-details'].includes(path);
 };
 
 export const getSKUTileInfo = (skuData) => {

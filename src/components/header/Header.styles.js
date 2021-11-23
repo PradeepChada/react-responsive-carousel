@@ -20,7 +20,7 @@ export const StyledAppBar = styled(AppBar)({
 });
 
 export const TakeCheckout = styled(Typography)({
-  fontSize: '1.375rm',
+  fontSize: '1.375rem',
   fontWeight: 'bold',
   color: colors.black,
 });
@@ -29,4 +29,6 @@ export const CancelOrderButton = styled(Typography)({
   fontSize: '0.75rem',
   color: colors.brandBlue,
   textDecoration: 'underline',
+  position: 'absolute',
+  right: 16,
 });

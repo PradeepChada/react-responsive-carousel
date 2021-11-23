@@ -54,7 +54,7 @@ export const PaymentInfo = styled(Box)({
     '& p:nth-child(2)': {
       fontSize: '0.875rem',
       fontWeight: 'normal',
-      color: colors.primary,
+      color: colors.brandBlue,
       textDecoration: 'underline',
     },
   },
@@ -73,7 +73,7 @@ export const PaymentInfo = styled(Box)({
     '& p:nth-child(2)': {
       fontSize: '0.875rem',
       fontWeight: 'normal',
-      color: colors.primary,
+      color: colors.brandBlue,
       textDecoration: 'underline',
     },
   },
@@ -141,6 +141,7 @@ export const OrderSummary = styled(Box)({
     display: 'flex',
     justifyContent: styles.justify.between,
     marginBottom: '1rem',
+    alignItems: styles.align.center,
     '& > p:nth-child(1)': {
       fontSize: '0.875rem',
       fontWeight: 600,
