@@ -8,6 +8,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const boxSizing = 'border-box';
 const spaceBetween = 'space-between';
+
 export const BoxWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
@@ -111,18 +112,6 @@ export const CartContainer = styled(Box)({
     color: colors.black,
     marginTop: '0.5rem',
   },
-  '& .pay-button': {
-    width: '165px',
-    height: '43px',
-    borderRadius: '4px',
-    backgroundColor: colors.textBlack,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '0.875rem',
-    color: colors.white,
-    marginTop: '0.875rem',
-  },
 });
 
 export const RightArrow = styled(ChevronRight)({
@@ -159,4 +148,18 @@ export const ErrorWrapper = styled(Box)({
       textAlign: 'start',
     },
   },
+});
+export const PayButton = styled(Box)({
+  width: '165px',
+  height: '43px',
+  fontWeight: 'bold',
+  borderRadius: '4px',
+  backgroundColor: (props) =>
+    props.disable ? colors.textBlack : colors.brandBlue,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '0.875rem',
+  color: colors.white,
+  marginTop: '0.875rem',
 });

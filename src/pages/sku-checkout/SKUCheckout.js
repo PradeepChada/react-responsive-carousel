@@ -22,6 +22,7 @@ import {
   RightArrow,
   DownArrow,
   UpArrow,
+  PayButton,
 } from './SKUCheckout.styles';
 import { getSKUTileInfo, givenItemExitsInCart } from '../../utils/skuHelpers';
 import { Box } from '@mui/system';
@@ -158,12 +159,12 @@ function SkuCheckout({ history }) {
             </Box>
             <Typography className='cart-total-price'>--</Typography>
           </Box>
-          <Box
+          <PayButton
+            disable={cartItems.length === 0 ? true : false}
             onClick={() => history.push('/payment-details')}
-            className='pay-button'
           >
             FINISH / PAY
-          </Box>
+          </PayButton>
         </Box>
       </CartContainer>
     </>
