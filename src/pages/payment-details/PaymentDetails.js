@@ -11,7 +11,7 @@ import {
   OrderSummary,
 } from './PaymentDetails.styles';
 
-function PaymentDetails() {
+function PaymentDetails({ history }) {
   return (
     <PageContainer>
       <PaymentInfo>
@@ -24,7 +24,9 @@ function PaymentDetails() {
         </Box>
         <Box>
           <Typography>POP! Member</Typography>
-          <Typography>Carol Smith</Typography>
+          <Typography onClick={() => history.push('/pop-signup')}>
+            Carol Smith
+          </Typography>
         </Box>
         <Box>
           <Typography>Order Discounts</Typography>
