@@ -162,7 +162,6 @@ function SkuCheckout({ history }) {
           <PayButton
             disable={cartItems.length === 0 ? true : false}
             onClick={() => history.push('/payment-details')}
-            className='pay-button'
           >
             FINISH / PAY
           </PayButton>
