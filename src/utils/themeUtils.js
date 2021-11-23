@@ -37,3 +37,25 @@ export const colors = {
   red: '#D72230',
   green: '#128400',
 };
+
+export const styles = {
+  display: {
+    flex: 'flex',
+    block: 'block',
+    inline: 'inline',
+    inlineBlock: 'inline-block',
+  },
+  justify: {
+    center: 'center',
+    start: 'flex-start',
+    end: 'flex-end',
+    between: 'space-between',
+    around: 'space-around',
+  },
+  align: {
+    center: 'center',
+    start: 'flex-start',
+    end: 'flex-end',
+    stretch: 'stretch',
+  },
+};

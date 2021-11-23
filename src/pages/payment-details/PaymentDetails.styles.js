@@ -1,17 +1,18 @@
 import { styled } from '@mui/styles';
-import { colors } from '../../utils/themeUtils';
+import { colors, styles } from '../../utils/themeUtils';
 import { Box } from '@mui/system';
+
 export const PageContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  justifyContent: styles.justify.between,
 });
 export const PaymentInfo = styled(Box)({
   padding: '0 1rem',
   '& > div:nth-child(1)': {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     alignItems: 'end',
     paddingBottom: '1.375rem',
     borderBottom: `1px solid ${colors.gray85}`,
@@ -41,7 +42,7 @@ export const PaymentInfo = styled(Box)({
   '& > div:nth-child(2)': {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     alignItems: 'center',
     padding: '0.75rem 0',
     borderBottom: `1px solid ${colors.gray85}`,
@@ -60,7 +61,7 @@ export const PaymentInfo = styled(Box)({
   '& > div:nth-child(3)': {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     alignItems: 'center',
     padding: '0.75rem 0',
     borderBottom: `1px solid ${colors.gray85}`,
@@ -103,7 +104,7 @@ export const OrderSummary = styled(Box)({
   },
   '& .subtotal-text': {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     marginBottom: '0.25rem',
     '& > p': {
       fontSize: '0.875rem',
@@ -113,7 +114,7 @@ export const OrderSummary = styled(Box)({
   },
   '& .discounts-text': {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     marginBottom: '0.25rem',
     '& > p:nth-child(1)': {
       fontSize: '0.875rem',
@@ -128,7 +129,7 @@ export const OrderSummary = styled(Box)({
   },
   '& .tax-text': {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     marginBottom: '1.625rem',
     '& > p': {
       fontSize: '0.875rem',
@@ -138,7 +139,7 @@ export const OrderSummary = styled(Box)({
   },
   '& .total-price-text': {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: styles.justify.between,
     marginBottom: '1rem',
     '& > p:nth-child(1)': {
       fontSize: '0.875rem',
