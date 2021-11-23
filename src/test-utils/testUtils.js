@@ -9,11 +9,11 @@ import theme from '../theme';
 function Wrapper({ children }) {
   return (
     <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <StoreProvider>{children}</StoreProvider>
-          </BrowserRouter>
-        </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <StoreProvider>{children}</StoreProvider>
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   );
 }

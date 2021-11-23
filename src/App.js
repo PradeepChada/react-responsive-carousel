@@ -12,6 +12,7 @@ import ProductInfo from './pages/product-info/ProductInfo';
 import QuestionAndAnswer from './pages/sku-q&a/QuestionAndAnswer';
 import ProductVariants from './pages/product-variants/ProductVariants';
 import SkuCheckout from './pages/sku-checkout/SKUCheckout';
+import PaymentDetails from './pages/payment-details/PaymentDetails';
 import store from './store';
 import Header from './components/header/Header';
 import theme from './theme';
@@ -73,6 +74,8 @@ const App = () => {
                       exact
                       path='/sku-checkout/sku-details/:id'
                       component={ProductDetails}
+                      path='/payment-details'
+                      component={PaymentDetails}
                     />
                   </Switch>
                 </StyledBody>

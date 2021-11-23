@@ -8,6 +8,10 @@ export const colors = {
   spinnerBackground: '#2e50a7',
   ratingColor: '#EC8423',
   lightBlue: '#039BE5',
+  qaTileBorder: '#EAEBEF',
+  answerBackground: '#F6F6FA',
+  'primary-blue': '#039BE5',
+  orderSummaryTextFontColor: '#191919',
 
   //TCS Colors
   brandBlue: '#005DAB',
@@ -34,3 +38,24 @@ export const colors = {
   green: '#128400',
 };
 
+export const styles = {
+  display: {
+    flex: 'flex',
+    block: 'block',
+    inline: 'inline',
+    inlineBlock: 'inline-block',
+  },
+  justify: {
+    center: 'center',
+    start: 'flex-start',
+    end: 'flex-end',
+    between: 'space-between',
+    around: 'space-around',
+  },
+  align: {
+    center: 'center',
+    start: 'flex-start',
+    end: 'flex-end',
+    stretch: 'stretch',
+  },
+};

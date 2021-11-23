@@ -7,7 +7,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const boxSizing = 'border-box';
-const spaceBetween="space-between"
+const spaceBetween = 'space-between';
 export const BoxWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
@@ -99,7 +99,7 @@ export const CartContainer = styled(Box)({
     height: '70px',
     padding: '0 1rem',
     display: 'flex',
-    justifyContent:spaceBetween,
+    justifyContent: spaceBetween,
     backgroundColor: colors.bgGray,
   },
   '& .cart-total-price': {
