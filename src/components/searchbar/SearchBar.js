@@ -7,6 +7,7 @@ import {
   SearchIconWraper,
 } from './SearchBar.styles';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
   const history = useHistory();
@@ -65,6 +66,6 @@ const SearchBar = ({ handleSearch, handleClear }) => {
 export default SearchBar;
 
 SearchBar.defaultProps = {
-  handleSearch: () => {},
-  handleClear: () => {},
+  handleSearch: PropTypes.func,
+  handleClear: PropTypes.func,
 };

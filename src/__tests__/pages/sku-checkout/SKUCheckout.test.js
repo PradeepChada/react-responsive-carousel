@@ -1,16 +1,5 @@
 import { render, screen, fireEvent } from '../../../test-utils/testUtils';
 import SKUCheckout from '../../../pages/sku-checkout/SKUCheckout';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import { skuDetailsResponse } from '../../../utils/MockData';
-const handlers = [
-  //   rest.get('/v1/sku', (req, res, ctx) => {
-  //     console.log('req', req);
-  //     return res(ctx.json(skuDetailsResponse), ctx.delay(150));
-  //   }),
-];
-
-// const server = setupServer(...handlers);
 
 describe('Testing SKU Checkout Page', () => {
   test('inital Condition', () => {

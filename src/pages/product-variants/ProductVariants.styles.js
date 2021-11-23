@@ -3,29 +3,26 @@ import { Container, Typography, Box } from '@mui/material';
 import { colors } from '../../utils/themeUtils';
 
 export const PageContainer = styled(Container)({
-  padding: '9px 15px',
+  padding: '0.625rem 1rem',
 });
 
 export const Wrapper = styled(Box)({
-  marginTop: 24,
-  marginBottom: 16,
-  // borderBottom: '1px solid #D9D9D9',
+  marginTop: '1.5rem',
+  marginBottom: '1rem',
 });
 
 export const Title = styled(Typography)({
-  fontSize: 18,
-  lineHeight: '22px',
+  fontSize: '1.125rem',
   fontWeight: 600,
-  marginTop: 25,
-  marginBottom: props => props.noContent ? 8 : 16,
+  marginTop: '1.625rem',
+  marginBottom: (props) => (props.noContent ? '0.5rem' : '1rem'),
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 0px'
-})
+  padding: '1.875rem 0',
+});
 
 export const NoContent = styled(Typography)({
-  fontSize: 14,
-  lineHeight: '21px',
-  color: colors.abbey
-})
+  fontSize: '0.875rem',
+  color: colors.selectGray,
+});

@@ -9,7 +9,7 @@ export const Logo = styled('img')({
 
 export const StyledAppBar = styled(AppBar)({
   backgroundColor: colors.white,
-  marginBottom: 4,
+  marginBottom: '0.25rem',
   '& .MuiToolbar-regular': {
     '& .home-icon': {
       position: 'absolute',
@@ -20,13 +20,13 @@ export const StyledAppBar = styled(AppBar)({
 });
 
 export const TakeCheckout = styled(Typography)({
-  fontSize: '22px',
+  fontSize: '1.375rm',
   fontWeight: 'bold',
   color: colors.black,
 });
 
 export const CancelOrderButton = styled(Typography)({
-  fontSize: '12px',
-  color: colors.primary,
+  fontSize: '0.75rem',
+  color: colors.brandBlue,
   textDecoration: 'underline',
 });

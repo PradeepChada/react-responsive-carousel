@@ -67,7 +67,9 @@ export const getSKUTileInfo = (skuData) => {
 export const givenItemExits = (skuId, cartItems) => {
   let exits = false;
   cartItems.forEach((data) => {
-    if (data?.skuData?.id === parseInt(skuId)) exits = true;
+    if (data?.skuData?.id === parseInt(skuId)) {
+      exits = true;
+    }
   });
   return exits;
 };

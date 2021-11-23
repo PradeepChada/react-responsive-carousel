@@ -9,18 +9,18 @@ import { colors } from '../../../utils/themeUtils';
 export const Wrapper = styled(Box)({
   display: 'flex',
   borderBottom: `1px solid ${colors.gray85}`,
-  padding: '24px 0px 16px 0px',
+  padding: '1.5rem 0 1rem 0',
   width: '100%',
   '& .options': {
-    fontSize: '14px',
-    color: colors.primary,
+    fontSize: '0.875rem',
+    color: colors.brandBlue,
     textDecoration: 'underline',
   },
   '& .discount-text': {
-    fontSize: '12px',
-    color: colors.abbey,
+    fontSize: '0.75rem',
+    color: colors.selectGray,
     fontStyle: 'italic',
-    marginBottom: '11px',
+    marginBottom: '.75rem',
     paddingRight: '1px',
   },
   '& .plus-button': {
@@ -33,45 +33,46 @@ export const Wrapper = styled(Box)({
     position: 'relative',
     height: '70px',
     width: '70px',
-    marginRight: '16px',
+    marginRight: '1rem',
   },
   '& .image-sale-text': {
     width: '31px',
     height: '15px',
     position: 'absolute',
-    top: '0px',
-    left: '0px',
-    fontSize: '12px',
+    top: '0',
+    left: '0',
+    fontSize: '0.75rem',
     fontWeight: '600',
     backgroundColor: colors.red,
     color: colors.white,
     textAlign: 'center',
-    borderRadius: '0px 0px 4px 0px',
+    borderRadius: '0 0 0.25rem 0',
   },
 });
 
 export const ImageSkeleton = styled(Skeleton)({
   width: '70px',
   height: '70px',
-  marginRight: '16px',
+  marginRight: '1rem',
+  boxSizing: 'border-box',
 });
 
 export const PriceSkeleton = styled(Skeleton)({
-  fontSize: '16px',
-  marginBottom: '27px',
+  fontSize: '1rem',
+  marginBottom: '1.75rem',
   width: '80px',
 });
 
 export const TitleSkeleton = styled(Skeleton)({
-  fontSize: '14px',
-  marginBottom: '2px',
+  fontSize: '0.875rem',
+  marginBottom: '.125rem',
   width: '210px',
 });
 
 export const CodeSkeleton = styled(Skeleton)({
-  fontSize: '12px',
+  fontSize: '0.75rem',
   width: '90px',
-  marginBottom: '14px',
+  marginBottom: '.875rem',
 });
 
 export const Image = styled('img')({
@@ -80,68 +81,58 @@ export const Image = styled('img')({
 });
 
 export const Price = styled(Typography)({
-  fontSize: '16px',
-  color: colors.fontColor,
+  fontSize: '1rem',
+  color: colors.textBlack,
   fontWeight: '700',
-  marginBottom: '27px',
-  lineHeight: '20px',
+  marginBottom: '1.75rem',
 });
 
 export const SalePriceWrapper = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '2px',
+  marginBottom: '1rem',
   '& .sale-price': {
-    fontSize: '16px',
-    lineHeight: '20px',
+    fontSize: '1rem',
     color: colors.danger,
     fontWeight: '700',
-    marginRight: '6px',
+    marginRight: '0.375rem',
+    textAlign: 'center',
   },
   '& .normal-price': {
-    fontSize: '12px',
-    lineHeight: '14px',
-    color: colors.abbey,
+    fontSize: '0.75rem',
+    color: colors.selectGray,
     fontWeight: '400',
     textDecoration: 'line-through',
+    textAlign: 'center',
   },
 });
 
 export const Title = styled(Typography)({
-  fontSize: '14px',
-  color: colors.fontColor,
+  fontSize: '0.875rem',
+  color: colors.textBlack,
   fontWeight: '400',
-  marginBottom: '2px',
+  marginBottom: '0.125rem',
   textTransform: 'capitalize',
 });
 
-export const OutOfStock = styled(Typography)({
-  fontSize: '14px',
-  lineHeight: '18px',
-  color: colors.red,
-  fontWeight: '700',
-  marginBottom: '30px',
-});
-
 export const Code = styled(Typography)({
-  fontSize: '12px',
-  lineHeight: '14px',
-  color: colors.abbey,
+  fontSize: '0.75rem',
+  color: colors.selectGray,
   fontWeight: '400',
-  marginBottom: '14px',
+  marginBottom: '0.875rem',
 });
 
 export const ClearIconWrapper = styled(ClearIcon)({
   width: '13px',
   height: '13px',
-  marginLeft: '12px',
+  marginLeft: '.75rem',
   cursor: 'pointer',
 });
 
 export const ClearIconSkeleton = styled(Skeleton)({
   width: '13px',
   height: '13px',
-  marginLeft: '12px',
+  marginLeft: '0.75rem',
 });
 
 export const ButtonGroupWrapper = styled(Box)({
@@ -152,9 +143,9 @@ export const ButtonGroupWrapper = styled(Box)({
   height: '36px',
   boxSizing: 'border-box',
   borderRadius: '4px',
-  border: `1px solid ${colors.gray60}`,
+  border: `1px solid ${colors.black40}`,
   '& p': {
-    fontSize: '16px',
+    fontSize: '1rem',
     flexGrow: '1',
     textAlign: 'center',
   },
@@ -167,8 +158,8 @@ export const ButtonGroupSkeleton = styled(Skeleton)({
 
 export const InputWrapper = styled(InputBase)({
   flex: 2,
-  fontSize: '16px',
-  color: colors.fontColor,
+  fontSize: '1rem',
+  color: colors.textBlack,
   fontWeight: '400',
   '& input': {
     textAlign: 'center',
