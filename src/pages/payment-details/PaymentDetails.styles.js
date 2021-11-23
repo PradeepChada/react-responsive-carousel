@@ -2,7 +2,6 @@ import { styled } from '@mui/styles';
 import { colors } from '../../utils/themeUtils';
 import { Box } from '@mui/system';
 export const PageContainer = styled(Box)({
-  height: '100vh',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -18,7 +17,7 @@ export const PaymentInfo = styled(Box)({
     borderBottom: `1px solid ${colors.gray85}`,
     '& p:nth-child(1)': {
       fontSize: '1.125rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.fontColor,
     },
     '& > div': {
@@ -33,7 +32,8 @@ export const PaymentInfo = styled(Box)({
       },
       '& p:nth-child(2)': {
         fontSize: '1.75rem',
-        fontWeight: 'bold',
+        lineHeight: 1,
+        fontWeight: 600,
         color: colors.black,
       },
     },
@@ -47,7 +47,7 @@ export const PaymentInfo = styled(Box)({
     borderBottom: `1px solid ${colors.gray85}`,
     '& p:nth-child(1)': {
       fontSize: '0.875rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.fontColor,
     },
     '& p:nth-child(2)': {
@@ -66,7 +66,7 @@ export const PaymentInfo = styled(Box)({
     borderBottom: `1px solid ${colors.gray85}`,
     '& p:nth-child(1)': {
       fontSize: '0.875rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.fontColor,
     },
     '& p:nth-child(2)': {
@@ -79,7 +79,7 @@ export const PaymentInfo = styled(Box)({
   '& > div:nth-child(4)': {
     '& legend': {
       fontSize: '0.875rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.fontColor,
       marginTop: '0.75rem',
     },
@@ -94,9 +94,10 @@ export const OrderSummary = styled(Box)({
   width: '100%',
   backgroundColor: colors.answerBackground,
   padding: '1rem',
+  marginTop: '.5rem',
   '& > p': {
     fontSize: '1.125rem',
-    fontWeight: 'bold',
+    fontWeight: 600,
     color: colors.fontColor,
     marginBottom: '1rem',
   },
@@ -106,7 +107,7 @@ export const OrderSummary = styled(Box)({
     marginBottom: '0.25rem',
     '& > p': {
       fontSize: '0.875rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.black,
     },
   },
@@ -138,15 +139,15 @@ export const OrderSummary = styled(Box)({
   '& .total-price-text': {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '2.125rem',
+    marginBottom: '1rem',
     '& > p:nth-child(1)': {
       fontSize: '0.875rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.black,
     },
     '& > p:nth-child(2)': {
       fontSize: '2.375rem',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: colors.fontColor,
     },
   },
@@ -159,7 +160,7 @@ export const OrderSummary = styled(Box)({
     backgroundColor: colors.lightBlue,
     color: colors.white,
     fontSize: '0.875rem',
-    fontWeight: 'bold',
+    fontWeight: 600,
     borderRadius: '4px',
   },
 });
