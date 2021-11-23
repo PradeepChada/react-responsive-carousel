@@ -70,15 +70,24 @@ const SkuTile = ({
       </Wrapper>
     );
   };
-  const onChangeQuantity = (input) => {
-    if (input.target.value < 1000) {
-      setItemQuantity(skuInfo.skuId, input.target.value);
+  const onChangeQuantity = (event) => {
+    event.stopPropagation();
+    if (event.target.value < 1000) {
+      setItemQuantity(skuInfo.skuId, event.target.value);
     }
   };
   const onBlurQuantityInput = () => {
     if (Number(skuQuantity) === 0) {
       increaseItemQuantity(skuInfo.skuId);
     }
+  };
+  const plusButtonHandler = (event) => {
+    event.stopPropagation();
+    increaseItemQuantity(skuInfo.skuId);
+  };
+  const minusButtonHandler = (event) => {
+    event.stopPropagation();
+    decreaseItemQuantity(skuInfo.skuId, skuQuantity);
   };
   if (loading) {
     return _renderSkeleton();
@@ -101,11 +110,8 @@ const SkuTile = ({
         </Box>
         <Code>SKU: #{skuInfo?.skuId}</Code>
         <Box display='flex' flexDirection='row' justifyContent='space-between'>
-          <ButtonGroupWrapper>
-            <Typography
-              className='minus-button'
-              onClick={() => decreaseItemQuantity(skuInfo.skuId, skuQuantity)}
-            >
+          <ButtonGroupWrapper onClick={(event) => event.stopPropagation()}>
+            <Typography className='minus-button' onClick={minusButtonHandler}>
               -
             </Typography>
             <InputWrapper
@@ -113,10 +119,7 @@ const SkuTile = ({
               onChange={onChangeQuantity}
               onBlur={onBlurQuantityInput}
             />
-            <Typography
-              className='plus-button'
-              onClick={() => increaseItemQuantity(skuInfo.skuId)}
-            >
+            <Typography className='plus-button' onClick={plusButtonHandler}>
               +
             </Typography>
           </ButtonGroupWrapper>
@@ -163,7 +166,7 @@ SkuTile.propTypes = {
   skuInfo: PropTypes.object,
   loading: PropTypes.bool,
   handleClick: PropTypes.func,
-  skuQantity: PropTypes.number,
+  skuQuantity: PropTypes.number,
   removeItem: PropTypes.func,
   increaseItemQuantity: PropTypes.func,
   decreaseItemQuantity: PropTypes.func,

@@ -23,7 +23,7 @@ import {
   DownArrow,
   UpArrow,
 } from './SKUCheckout.styles';
-import { getSKUTileInfo, givenItemExits } from '../../utils/skuHelpers';
+import { getSKUTileInfo, givenItemExitsInCart } from '../../utils/skuHelpers';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 const SearchPageText = () => {
@@ -37,7 +37,7 @@ const SearchPageText = () => {
     </TextWrapper>
   );
 };
-function SkuCheckout() {
+function SkuCheckout({ history }) {
   const dispatch = useDispatch();
   const { loading, cartItems, error } = useSelector((state) => state.cart);
   const [openOrderSummary, setOpenOrderSummary] = useState(false);
@@ -53,8 +53,8 @@ function SkuCheckout() {
       setItemQuantityByGivenQuantityFromCart(skuId, cartItems, skuQuantity)
     );
   };
-  const decreaseItemQuantity = (skuId, skuQantity) => {
-    if (skuQantity > 1) {
+  const decreaseItemQuantity = (skuId, skuQuantity) => {
+    if (skuQuantity > 1) {
       dispatch(decreaseItemQuantityFromCart(skuId, cartItems));
     } else {
       removeItem(skuId);
@@ -64,18 +64,12 @@ function SkuCheckout() {
     if (!skuId) {
       dispatch(actions.failure(skuErrorMessages.malfunction));
     } else {
-      if (givenItemExits(skuId, cartItems)) {
+      if (givenItemExitsInCart(skuId, cartItems) > -1) {
         dispatch(increaseItemQuantityFromCart(skuId, cartItems));
       } else {
         dispatch(addItemToCart(skuId));
       }
     }
-  };
-  const handleClick = () => {
-    console.log('Handle Click');
-  };
-  const handleClear = () => {
-    console.log('Handle Clear');
   };
 
   const arrowClickHandler = () => {
@@ -85,7 +79,7 @@ function SkuCheckout() {
   return (
     <>
       <BoxWrapper>
-        <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
+        <SearchBar handleSearch={handleSearch} />
         {cartItems.length === 0 && !loading && error == null && (
           <SearchPageText />
         )}
@@ -103,9 +97,11 @@ function SkuCheckout() {
             <SKUTile
               key={data?.skuData?.id}
               skuInfo={getSKUTileInfo(data?.skuData)}
-              skuQuantity={data?.skuQantity}
+              skuQuantity={data?.skuQuantity}
               removeItem={removeItem}
-              handleClick={handleClick}
+              handleClick={() =>
+                history.push(`/sku-checkout/sku-details/${data?.skuData?.id}`)
+              }
               increaseItemQuantity={increaseItemQuantity}
               decreaseItemQuantity={decreaseItemQuantity}
               setItemQuantity={setItemQuantity}
