@@ -1,17 +1,17 @@
-import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import React from 'react';
+import { Button, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
 import FormLabel from '@mui/material/FormLabel';
 import {
   PageContainer,
   PaymentInfo,
   OrderSummary,
 } from './PaymentDetails.styles';
-function PaymentDetails() {
+
+function PaymentDetails({ history }) {
   return (
     <PageContainer>
       <PaymentInfo>
@@ -24,7 +24,9 @@ function PaymentDetails() {
         </Box>
         <Box>
           <Typography>POP! Member</Typography>
-          <Typography>Carol Smith</Typography>
+          <Typography onClick={() => history.push('/pop-signup')}>
+            Carol Smith
+          </Typography>
         </Box>
         <Box>
           <Typography>Order Discounts</Typography>
@@ -68,7 +70,9 @@ function PaymentDetails() {
           <Typography>Total</Typography>
           <Typography>$12.90</Typography>
         </Box>
-        <Box className='pay-button'>Pay Now</Box>
+        <Button fullWidth variant='contained'>
+          PAY NOW
+        </Button>
       </OrderSummary>
     </PageContainer>
   );

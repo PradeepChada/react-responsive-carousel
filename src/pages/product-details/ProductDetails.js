@@ -162,7 +162,7 @@ const ProductDetails = ({ history, match }) => {
         setSkuQuantity(cartItems[isExits].skuQuantity);
       }
     }
-  }, [match?.params?.id,cartItems,history]);
+  }, [match?.params?.id, cartItems, history]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));

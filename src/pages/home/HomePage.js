@@ -22,7 +22,7 @@ const HomePage = ({ history }) => {
         <HomeTile
           icon={CartIcon}
           title='Take Checkout'
-          handleClick={() => history.push('/take-checkout')}
+          handleClick={() => history.push('/pop-signup')}
           data-testId='take-checkout'
           data-feature='take_checkout'
         />

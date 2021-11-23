@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkuDetails, actions } from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
-import SearchBar from "../../components/searchbar/SearchBar"
+import SearchBar from '../../components/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
 import SkuError from '../../components/sku-error/SkuError';
 import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
@@ -59,8 +59,8 @@ const SearchPage = ({ history }) => {
     ? `${config.appConfig.asset_base_url}${
         skuData?.mediaList?.find((o) =>
           skuData?.defaultProductId
-            //TODO: remove the OR part when latest Catalog Service is deployed in PROD
-            ? o.name === 'thumb' || o.name === 'SKU_SMALL_IMAGE'
+            ? //TODO: remove the OR part when latest Catalog Service is deployed in PROD
+              o.name === 'thumb' || o.name === 'SKU_SMALL_IMAGE'
             : o.name === 'SKU_SMALL_IMAGE'
         )?.url
       }`

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -6,9 +6,18 @@ import { useHistory } from 'react-router-dom';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import AppLogo from './../../assets/images/logo.svg';
 import HomeIcon from './../../assets/icons/home.svg';
-import { Logo, StyledAppBar, TakeCheckout } from './Header.styles';
-import { showCheckoutHeader } from '../../utils/skuHelpers';
+import {
+  Logo,
+  StyledAppBar,
+  TakeCheckout,
+  CancelOrderButton,
+} from './Header.styles';
+import {
+  showCheckoutHeader,
+  showCancelOrderButton,
+} from '../../utils/skuHelpers';
 import PropTypes from 'prop-types';
+import CancelOrderPopup from '../cancel-order-popup/CancelOrderPopup';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -30,9 +39,23 @@ ElevationScroll.propTypes = {
 
 const Header = () => {
   const history = useHistory();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <ElevationScroll>
       <StyledAppBar position='sticky' color='inherit'>
+        <CancelOrderPopup
+          showModal={showModal}
+          handleClose={handleCloseModal}
+        />
         <Toolbar sx={{ alignItems: 'center' }}>
           <IconButton
             size='large'
@@ -53,6 +76,11 @@ const Header = () => {
               <Logo src={AppLogo} alt='The Container Store' />
             )}
           </Box>
+          {showCancelOrderButton(history.location.pathname) && (
+            <CancelOrderButton onClick={handleOpenModal}>
+              Cancel Order
+            </CancelOrderButton>
+          )}
         </Toolbar>
       </StyledAppBar>
     </ElevationScroll>

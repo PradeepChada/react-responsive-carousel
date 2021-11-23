@@ -38,6 +38,26 @@ export const colors = {
   green: '#128400',
 };
 
+export const font = {
+  size: {
+    10: '.625rem',
+    12: '.75rem',
+    14: '.875rem',
+    16: '1rem',
+    18: '1.125rem',
+    20: '1.25rem',
+    22: '1.375rem',
+    24: '1.5rem',
+    26: '1.625rem',
+  },
+  weight: {
+    600: '600',
+    700: '700',
+    bold: 'bold',
+    normal: 'normal',
+  },
+};
+
 export const styles = {
   display: {
     flex: 'flex',
