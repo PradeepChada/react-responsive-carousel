@@ -21,7 +21,7 @@ import {
 import { Skeleton, Typography } from '@mui/material';
 const _renderSkeleton = () => {
   return (
-    <Wrapper>
+    <Box display='flex' flexDirection='row' padding='1.5rem 0 1rem 0'>
       <ImageSkeleton variant='rectangular' data-testid='image-skeleton' />
       <Box display='flex' flexDirection='column' overflow='hidden' flexGrow={1}>
         <Box display='flex' flexDirection='row' justifyContent='space-between'>
@@ -44,7 +44,7 @@ const _renderSkeleton = () => {
           </Box>
         </Box>
       </Box>
-    </Wrapper>
+    </Box>
   );
 };
 const SkuTile = ({
