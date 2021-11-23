@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { colors } from '../../../utils/themeUtils';
 
 export const GelleryContainer = styled(Box)({
-  marginTop: 15,
+  marginTop: '1rem',
   display: 'flex',
   '& .first-image': {
     width: 160,
@@ -14,7 +14,7 @@ export const GelleryContainer = styled(Box)({
     flexGrow: 1,
     width: 160,
     '& .bg-img': {
-      marginLeft: 5,
+      marginLeft: '0.375rem',
       backgroundSize: 'cover',
       width: 80,
       height: 78,
@@ -26,8 +26,7 @@ export const GelleryContainer = styled(Box)({
         width: '100%',
         backgroundColor: '#005DABCC',
         color: colors.white,
-        fontSize: 12,
-        lineHeight: '14px',
+        fontSize: '0.75rem',
         textAlign: 'center',
         display: 'flex',
         justifyContent: 'center',

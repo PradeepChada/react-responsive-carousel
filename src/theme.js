@@ -17,12 +17,12 @@ const theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
     allVariants: {
-      color: colors.fontColor,
+      color: colors.textBlack,
     },
   },
   palette: {
     primary: {
-      main: colors.primary,
+      main: colors.brandBlue,
     },
   },
   components: {

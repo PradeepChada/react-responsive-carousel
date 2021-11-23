@@ -163,6 +163,8 @@ const ReviewCard = ({ item }) => {
       </RecommendedContent>
       {item?.metrics?.helpful_votes > 0 && (
         <UpVoteBtn
+          disableRipple
+          disableElevation
           className='up-vote'
           variant='contained'
           startIcon={<ThumbUpOutlined />}

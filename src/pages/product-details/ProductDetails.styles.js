@@ -2,79 +2,73 @@ import { styled } from '@mui/styles';
 import { Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { colors } from './../../utils/themeUtils';
+import InputBase from '@mui/material/InputBase';
 
 export const PageContainer = styled(Container)({
-  padding: '9px 15px',
+  padding: '0.625rem 1rem',
 });
 
 export const SalePriceWrapper = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   '& .sale-price': {
-    fontSize: '32px',
-    lineHeight: '18px',
+    fontSize: '2rem',
     fontWeight: '700',
     color: colors.danger,
   },
   '& .normal-price': {
-    fontSize: '12px',
-    lineHeight: '14px',
+    fontSize: '0.75rem',
     fontWeight: '400',
-    color: colors.fontColor,
-    marginBottom: '1.5px',
+    color: colors.textBlack,
+    marginBottom: '0.125rem',
   },
   '& .savings': {
-    fontSize: '14px',
-    lineHeight: '14px',
+    fontSize: '0.875rem',
     fontWeight: '700',
     color: colors.green,
   },
 });
 export const Price = styled('div')({
-  fontSize: '32px',
+  fontSize: '2rem',
   color: colors.fontColor,
-  margin: '18px 0 0 0',
-  lineHeight: '18px',
+  margin: '1.125rem 0 0 0',
   fontWeight: 600,
 });
 
 export const Spec = styled(Typography)({
-  fontSize: 14,
-  lineHeight: '18px',
+  fontSize: '0.875rem',
   fontWeight: 600,
-  marginTop: 3,
+  marginTop: '0.25rem',
   '& span': {
     fontWeight: 400,
   },
   '&:first-child': {
-    marginTop: 24,
+    marginTop: '1.5rem',
   },
 });
 
 export const Availability = styled(Box)({
-  marginTop: 20,
+  marginTop: '1.25rem',
   '& .sub-head': {
-    fontSize: 14,
-    lineHeight: '18px',
+    fontSize: '0.875rem',
     fontWeight: 600,
-    marginBottom: 7,
+    marginBottom: '0.5rem',
   },
   '& .store-tile': {
-    background: colors.lightBackground,
-    padding: '10px 14px',
-    margin: '8px 0',
+    background: colors.bgGray,
+    padding: '0.625rem 0.875rem',
+    margin: '0.5rem 0',
     display: 'flex',
     alignItems: 'center',
     '&.other-stores': {
-      padding: '18px 14px',
+      padding: '1.125rem 0.875',
     },
     '& img': {
-      marginRight: 15,
+      marginRight: '1rem',
     },
     '& .stock-details': {
       fontWeight: 600,
-      fontSize: 12,
-      lineHeight: '16px',
+      fontSize: '0.75rem',
       '& .stock-green': {
         color: colors.green,
       },
@@ -83,8 +77,8 @@ export const Availability = styled(Box)({
       },
     },
     '& .availability-link': {
-      color: colors.primary,
-      fontSize: 10,
+      color: colors.brandBlue,
+      fontSize: '0.625rem',
       textDecoration: 'underline',
       textTransform: 'unset',
       padding: 0,
@@ -93,7 +87,7 @@ export const Availability = styled(Box)({
   '& .other-stores': {
     alignItems: 'flex-start',
     '& .stock-details': {
-      padding: '6px 0',
+      padding: '0.375rem 0',
       '&:first-child': {
         paddingTop: 0,
       },
@@ -109,15 +103,15 @@ export const Availability = styled(Box)({
 });
 
 export const InfoTile = styled(Box)({
-  padding: '17px 0',
+  padding: '1.125rem 0',
   display: 'flex',
   justifyContent: 'space-between',
-  fontSize: 16,
-  lineHeight: '22px',
+  fontSize: '1rem',
+  lineHeight: '1.375rem',
   borderBottom: `1px solid ${colors.gray85} `,
   '& p': {
-    fontSize: 16,
-    lineHeight: '22px',
+    fontSize: '1rem',
+    lineHeight: '1.375rem',
     color: colors.black,
   },
   '& svg[data-testid=ChevronRightIcon]': {
@@ -126,7 +120,7 @@ export const InfoTile = styled(Box)({
   '& .ratings-wrapper': {
     width: '100%',
     '& .rating-info-block': {
-      marginTop: 18,
+      marginTop: '1.125rem',
       display: 'flex',
       alignItems: 'center',
       '& span': {
@@ -134,26 +128,26 @@ export const InfoTile = styled(Box)({
       },
     },
   },
-  "& .total-question-text":{
-    fontSize:"14px",
-    color:colors.primary,
-    marginTop:"13px",
-    textDecoration:"underline"
-  }
+  '& .total-question-text': {
+    fontSize: '0.875rem',
+    color: colors.brandBlue,
+    marginTop: '0.875rem',
+    textDecoration: 'underline',
+  },
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 0px',
+  padding: '1.875rem 0',
 });
 
 export const StockError = styled(Box)({
-  backgroundColor: colors.dangerBackground,
-  fontSize: '14px',
+  backgroundColor: colors.bgDanger,
+  fontSize: '0.875rem',
   color: colors.danger,
   border: `1px solid ${colors.dangerBorder}`,
-  borderRadius: '4px',
+  borderRadius: '0.25rem',
   fontWeight: '400',
-  padding: '5px 10px 12px 10px',
+  padding: '0.375rem 0.625rem 0.75rem 0.625rem',
   '& .refresh-btn': {
     display: 'flex',
     alignItems: 'center',
@@ -164,6 +158,47 @@ export const StockError = styled(Box)({
     color: colors.danger,
     textDecoration: 'underline',
     fontWeight: '600',
-    padding: '0px 5px',
+    padding: '0 0.375rem',
   },
+});
+
+export const ButtonGroupWrapper = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
+  width: '80px',
+  height: '36px',
+  boxSizing: 'border-box',
+  borderRadius: '4px',
+  backgroundColor: colors.white,
+  border: `1px solid ${colors.gray60}`,
+  '& p': {
+    fontSize: '1rem',
+    flexGrow: '1',
+    textAlign: 'center',
+  },
+});
+
+export const InputWrapper = styled(InputBase)({
+  flex: 2,
+  fontSize: '1rem',
+  color: colors.fontColor,
+  fontWeight: '400',
+  '& input': {
+    textAlign: 'center',
+  },
+});
+
+export const SaveButton = styled(Box)({
+  height: '3rem',
+  display: 'flex',
+  flexGrow: '1',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '0.875rem',
+  fontWeight: 'bold',
+  color: colors.white,
+  backgroundColor: colors.lightBlue,
+  textTransform: 'uppercase',
+  borderRadius: '4px',
 });

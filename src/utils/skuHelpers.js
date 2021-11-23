@@ -1,5 +1,4 @@
 import config from './../config';
-
 export const getSkuPrice = (skuPrices = {}, type) => {
   return skuPrices[type]?.amount;
 };
@@ -44,4 +43,33 @@ export const filterQuestionsData = (questionData, newQuestions) => {
       results: [...questionData.results, ...newQuestions.questionData.results],
     },
   };
+};
+
+export const showCheckoutHeader = (url) => {
+  return url === '/sku-checkout' ? true : false;
+};
+
+export const showCancelOrderButton = (url) => {
+  return url === '/sku-checkout' ? true : false;
+};
+
+export const getSKUTileInfo = (skuData) => {
+  return {
+    name: skuData?.name,
+    image: skuData?.mediaList?.[0]?.url
+      ? `${config.appConfig.asset_base_url}${skuData?.mediaList?.[0]?.url}`
+      : null,
+    skuPriceDetails: getSkuPriceDetails(skuData?.skuPrices),
+    skuId: skuData?.id,
+  };
+};
+
+export const givenItemExitsInCart = (skuId, cartItems) => {
+  let exits = -1;
+  cartItems.forEach((data, index) => {
+    if (data?.skuData?.id === parseInt(skuId)) {
+      exits = index;
+    }
+  });
+  return exits;
 };

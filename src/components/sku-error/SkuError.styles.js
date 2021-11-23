@@ -13,19 +13,18 @@ export const ErrorIcon = styled(ErrorOutlineIcon)({
   color: colors.red,
   width: '48px',
   height: '48px',
-  marginBottom: '16px',
+  marginBottom: '1rem',
 });
 
 export const Title = styled(Typography)({
-  fontSize: '22px',
-  lineHeight: '33px',
+  fontSize: '1.375rem',
   fontWeight: '700',
-  color: colors.fontColor,
+  color: colors.textBlack,
 });
 
 export const Description = styled(Typography)({
-  fontSize: '16px',
+  fontSize: '1rem',
   fontWeight: '400',
   textAlign: 'center',
-  color: colors.fontColor,
+  color: colors.textBlack,
 });

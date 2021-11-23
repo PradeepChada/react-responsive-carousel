@@ -5,71 +5,69 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { colors } from '../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
-  padding: '13px 15px',
+  padding: '0.75rem 1rem',
 });
 
 export const TextWrapper = styled(Box)({
   width: '271px',
-  marginTop: '30px',
+  marginTop: '1.875rem',
 });
 
 export const Title = styled(Typography)({
-  fontSize: '22px',
-  lineHeight: '33px',
+  fontSize: '1.375rem',
   fontWeight: '700',
-  color: colors.fontColor,
+  color: colors.textBlack,
 });
 
 export const Description = styled(Typography)({
-  fontSize: '16px',
-  lineHeight: '24px',
+  fontSize: '1rem',
   fontWeight: '400',
   textAlign: 'center',
-  color: colors.fontColor,
+  color: colors.textBlack,
 });
 
 export const ErrorWrapper = styled(Box)({
-  padding: '29px 0px',
+  padding: '1.875rem 0',
 });
 
 export const SKUMalfunctionWrapper = styled(Box)({
-  marginTop: '29px',
+  marginTop: '1.875rem',
 });
 
 export const ErrorIconWrapper = styled(ErrorOutlineIcon)({
   color: colors.red,
   width: '40px',
   height: '40px',
-  marginBottom: '23px',
+  marginBottom: '1.5rem',
 });
 
 export const SKUMalfunctionText = styled(Typography)({
-  fontSize: '22px',
-  color: colors.fontColor,
+  fontSize: '1.375rem',
+  color: colors.textBlack,
   fontWeight: '700',
 });
 
 export const SKUMalfunctionDescription = styled(Typography)({
-  fontSize: '16px',
-  color: colors.fontColor,
+  fontSize: '1rem',
+  color: colors.textBlack,
   fontWeight: '400',
   textAlign: 'center',
   width: '200px',
 });
 
 export const UnknownErrorWrapper = styled(Box)({
-  marginTop: '29px',
+  marginTop: '1.875rem',
 });
 
 export const UnknownErrorText = styled(Typography)({
-  fontSize: '22px',
-  color: colors.fontColor,
+  fontSize: '1.375rem',
+  color: colors.textBlack,
   fontWeight: '700',
 });
 
 export const UnknownErrorDescription = styled(Typography)({
-  ontSize: '16px',
-  color: colors.fontColor,
+  fontSize: '1rem',
+  color: colors.textBlack,
   fontWeight: '400',
   textAlign: 'center',
   width: '200px',

@@ -1,18 +1,9 @@
 export const colors = {
-  primary: '#005DAB',
-  fontColor: '#333337',
-  // white: '#FFFFFF',
-  // black: '#000000',
-  // red: '#D72230',
-  // green: '#128400',
-  lightBackground: '#F6F6FA',
   lightGray: '#F4F4F4',
   gray81: '#CFCFCF',
   gray85: '#D9D9D9',
   gray90: '#EAEBEF',
-  abbey: '#54565B',
   danger: '#DF2E2F',
-  dangerBackground: '#FDF4F5',
   dangerBorder: 'rgba(223, 46, 47, 0.1)',
   spinnerBackground: '#2e50a7',
   ratingColor: '#EC8423',
@@ -20,13 +11,13 @@ export const colors = {
   qaTileBorder: '#EAEBEF',
   answerBackground: '#F6F6FA',
   'primary-blue': '#039BE5',
+  orderSummaryTextFontColor: '#191919',
 
   //TCS Colors
   brandBlue: '#005DAB',
   brandDarkBlue: '#004F90',
   primaryBlue: '#2E98D4',
   // lightBlue: '#CEEEFC',
-  bhBlue: '#F2F7FB',
   textBlack: '#333337',
   white: '#FFFFFF',
   bgGray: '#F6F6FA',
@@ -57,4 +48,26 @@ export const fontSizes = {
   f22: '1.375rem',
   f24: '1.5rem',
   f26: '1.625rem',
+};
+
+export const styles = {
+  display: {
+    flex: 'flex',
+    block: 'block',
+    inline: 'inline',
+    inlineBlock: 'inline-block',
+  },
+  justify: {
+    center: 'center',
+    start: 'flex-start',
+    end: 'flex-end',
+    between: 'space-between',
+    around: 'space-around',
+  },
+  align: {
+    center: 'center',
+    start: 'flex-start',
+    end: 'flex-end',
+    stretch: 'stretch',
+  },
 };
