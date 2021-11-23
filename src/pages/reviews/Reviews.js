@@ -28,6 +28,7 @@ import {
   ResponseContent,
   ViewNextBtn,
   Dropdown,
+  UpVoteBtn,
 } from './Reviews.styles';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarIcon from '@mui/icons-material/Star';
@@ -39,6 +40,7 @@ import moment from 'moment';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { getReviewsApiUrl } from '../../utils/skuHelpers';
 import config from './../../config';
+import { ThumbUpOutlined } from '@mui/icons-material';
 
 const ReviewSkeleton = () => {
   return (
@@ -159,8 +161,22 @@ const ReviewCard = ({ item }) => {
           {item?.details?.bottom_line === 'No' ? 'Not' : ''} Recommended Product
         </span>
       </RecommendedContent>
+      {item?.metrics?.helpful_votes > 0 && (
+        <UpVoteBtn
+          disableRipple
+          disableElevation
+          className='up-vote'
+          variant='contained'
+          startIcon={<ThumbUpOutlined />}
+        >
+          Helpful ({item?.metrics?.helpful_votes})
+        </UpVoteBtn>
+      )}
       {item?.details?.merchant_response && (
         <>
+          <Typography className='tcs-response'>
+            Response from The Container Store:
+          </Typography>
           <ResponseDuration>
             {moment(item?.details?.merchant_response_date).fromNow()}
           </ResponseDuration>
