@@ -84,6 +84,7 @@ const LoadingSkeleton = () => {
 };
 
 const ProductDetails = ({ history, match }) => {
+  const SKUCheckoutDetailsURL = '/sku-checkout/sku-details';
   const dispatch = useDispatch();
   const {
     storeId,
@@ -123,7 +124,7 @@ const ProductDetails = ({ history, match }) => {
   }, [dispatch, skuData]);
 
   useEffect(() => {
-    if (history.location.pathname.includes('/sku-checkout/sku-details')) {
+    if (history.location.pathname.includes(SKUCheckoutDetailsURL)) {
       const isExits = givenItemExitsInCart(match?.params?.id, cartItems);
       if (isExits <= -1) {
         history.replace('/sku-checkout');
@@ -211,14 +212,20 @@ const ProductDetails = ({ history, match }) => {
 
   const plusButtonHandler = () => {
     setSkuQuantity((prevQuantity) => {
-      if (prevQuantity < 999) return prevQuantity + 1;
-      else return prevQuantity;
+      if (prevQuantity < 999) {
+        return prevQuantity + 1;
+      } else {
+        return prevQuantity;
+      }
     });
   };
   const minusButtonHandler = () => {
     setSkuQuantity((prevQuantity) => {
-      if (prevQuantity > 1) return prevQuantity - 1;
-      else return prevQuantity;
+      if (prevQuantity > 1) {
+        return prevQuantity - 1;
+      } else {
+        return prevQuantity;
+      }
     });
   };
   const saveChangesButtonHandler = () => {
@@ -238,7 +245,9 @@ const ProductDetails = ({ history, match }) => {
   };
 
   const onBlurQuantityInput = () => {
-    if (skuQuantity <= 0) setSkuQuantity(1);
+    if (skuQuantity <= 0) {
+      setSkuQuantity(1);
+    }
   };
   return (
     <PageContainer>
@@ -333,9 +342,7 @@ const ProductDetails = ({ history, match }) => {
                   </Button>
                 )}
               </Box>
-              {history.location.pathname.includes(
-                '/sku-checkout/sku-details'
-              ) && (
+              {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
                 <ButtonGroupWrapper>
                   <Typography
                     className='plus-button'
@@ -413,7 +420,7 @@ const ProductDetails = ({ history, match }) => {
           </Box>
         </InfoTile>
       </Box>
-      {history.location.pathname.includes('/sku-checkout/sku-details') && (
+      {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
         <SaveButton onClick={saveChangesButtonHandler}>Save Changes</SaveButton>
       )}
     </PageContainer>
