@@ -1,4 +1,4 @@
-import { colors, fontSizes } from './utils/themeUtils';
+import { colors, font } from './utils/themeUtils';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -31,11 +31,11 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           height: '3rem',
+          fontsize: font.size[14],
         },
         contained: {
           boxShadow: 'none',
           backgroundColor: colors.lightBlue,
-          fontsize: fontSizes.f14,
           fontWeight: 'bold',
         },
         outlined: {
@@ -45,6 +45,9 @@ const theme = createTheme({
         },
         text: {
           padding: 0,
+        },
+        sizeSmall: {
+          height: '2.5rem',
         },
       },
     },

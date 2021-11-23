@@ -38,16 +38,24 @@ export const colors = {
   green: '#128400',
 };
 
-export const fontSizes = {
-  f10: '.625rem',
-  f12: '.75rem',
-  f14: '.875rem',
-  f16: '1rem',
-  f18: '1.125rem',
-  f20: '1.25rem',
-  f22: '1.375rem',
-  f24: '1.5rem',
-  f26: '1.625rem',
+export const font = {
+  size: {
+    10: '.625rem',
+    12: '.75rem',
+    14: '.875rem',
+    16: '1rem',
+    18: '1.125rem',
+    20: '1.25rem',
+    22: '1.375rem',
+    24: '1.5rem',
+    26: '1.625rem',
+  },
+  weight: {
+    600: '600',
+    700: '700',
+    bold: 'bold',
+    normal: 'normal',
+  },
 };
 
 export const styles = {

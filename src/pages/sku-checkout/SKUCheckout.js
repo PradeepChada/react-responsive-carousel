@@ -158,7 +158,12 @@ function SkuCheckout({ history }) {
             </Box>
             <Typography className='cart-total-price'>--</Typography>
           </Box>
-          <Box className='pay-button'>FINISH / PAY</Box>
+          <Box
+            onClick={() => history.push('/payment-details')}
+            className='pay-button'
+          >
+            FINISH / PAY
+          </Box>
         </Box>
       </CartContainer>
     </>
