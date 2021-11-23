@@ -74,6 +74,9 @@ const App = () => {
                       exact
                       path='/sku-checkout/sku-details/:id'
                       component={ProductDetails}
+                    />
+                    <Route
+                      exact
                       path='/payment-details'
                       component={PaymentDetails}
                     />
