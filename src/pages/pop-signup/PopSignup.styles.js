@@ -1,7 +1,5 @@
 import { styled } from '@mui/styles';
-import { Container, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import { colors } from './../../utils/themeUtils';
+import { Container } from '@mui/material';
 
 export const PageContainer = styled(Container)({
   padding: '1rem',

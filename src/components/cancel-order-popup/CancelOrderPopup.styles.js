@@ -1,8 +1,6 @@
-import { Typography } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/styles';
-import { colors, font } from './../../utils/themeUtils';
+import { colors, font } from '../../utils/themeUtils';
 
 export const DialogPopup = styled(Dialog)({
   '& .MuiPaper-elevation': {

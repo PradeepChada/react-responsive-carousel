@@ -17,7 +17,7 @@ import {
   showCancelOrderButton,
 } from '../../utils/skuHelpers';
 import PropTypes from 'prop-types';
-import CancelOrderPopup from '../cancel-order-popup/CanceOrderPopup';
+import CancelOrderPopup from '../cancel-order-popup/CancelOrderPopup';
 
 function ElevationScroll(props) {
   const { children, window } = props;
