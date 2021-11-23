@@ -3,7 +3,7 @@ import { PageContainer } from './PopSignup.styles';
 import TextField from '@mui/material/TextField';
 import { Button, Grid, Typography } from '@mui/material';
 
-const PopSignup = () => {
+const PopSignup = ({ history }) => {
   return (
     <PageContainer>
       <Grid
@@ -19,7 +19,13 @@ const PopSignup = () => {
               <Typography>POP Account</Typography>
             </Grid>
             <Grid item>
-              <Button variant='text'> SKIP</Button>
+              <Button
+                variant='text'
+                onClick={() => history.push('/sku-checkout')}
+              >
+                {' '}
+                SKIP
+              </Button>
             </Grid>
           </Grid>
 
