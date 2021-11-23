@@ -45,6 +45,7 @@ const theme = createTheme({
         },
         text: {
           padding: 0,
+          height: 'auto',
         },
         sizeSmall: {
           height: '2.5rem',
