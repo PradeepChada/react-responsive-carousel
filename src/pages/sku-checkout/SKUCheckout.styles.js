@@ -27,7 +27,7 @@ export const TextWrapper = styled(Box)({
 });
 
 export const Title = styled(Typography)({
-  fontSize: '1.375rem',
+  fontSize: '1.125rem',
   fontWeight: '700',
   color: colors.textBlack,
 });
