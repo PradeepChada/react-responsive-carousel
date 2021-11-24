@@ -47,7 +47,7 @@ export const font = {
     18: '1.125rem',
     20: '1.25rem',
     22: '1.375rem',
-    24: '1.5rem',
+    24: '1.5rem1',
     26: '1.625rem',
   },
   weight: {
@@ -77,5 +77,23 @@ export const styles = {
     start: 'flex-start',
     end: 'flex-end',
     stretch: 'stretch',
+  },
+  padding: {
+    0: 0,
+    1: '.25rem',
+    2: '.5rem',
+    3: '1rem',
+    4: '1.5rem',
+    5: '3rem',
+    auto: 'auto',
+  },
+  margin: {
+    0: 0,
+    1: '.25rem',
+    2: '.5rem',
+    3: '1rem',
+    4: '1.5rem',
+    5: '3rem',
+    auto: 'auto',
   },
 };
