@@ -4,7 +4,8 @@ import { Slider } from './ProductCarousel.styles';
 
 const ProductCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const handleSwipeEnd = (val, cal) => {
+
+  const handleChangeSlide = (val) => {
     setCurrentIndex(val);
     const x = 228 * val;
     const property = `translate3d(${-x}px, 0px, 0px)`;
@@ -12,14 +13,15 @@ const ProductCarousel = ({ images }) => {
       document.getElementsByClassName('slider')[0].style.transform = property;
     }, 0);
   };
+
   return (
     <Slider
       thumbWidth={48}
       showArrows={false}
       showIndicators={false}
-      onChange={handleSwipeEnd}
-      onClickItem={handleSwipeEnd}
-      onClickThumb={handleSwipeEnd}
+      onChange={handleChangeSlide}
+      onClickItem={handleChangeSlide}
+      onClickThumb={handleChangeSlide}
       currentIndex={currentIndex}
     >
       {images.map((val) => (
