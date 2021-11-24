@@ -96,7 +96,7 @@ export const Price = styled(Typography)({
 export const SalePriceWrapper = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '1rem',
+  marginBottom: '2px',
   '& .sale-price': {
     fontSize: '1rem',
     color: colors.danger,

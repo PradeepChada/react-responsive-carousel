@@ -115,17 +115,17 @@ export const CartContainer = styled(Box)({
 });
 
 export const RightArrow = styled(ChevronRight)({
-  color: colors.primary,
+  color: colors.brandBlue,
 });
 
 export const DownArrow = styled(KeyboardArrowDownIcon)({
-  color: colors.primary,
+  color: colors.brandBlue,
   cursor: 'pointer',
   marginTop: '0.5rem',
 });
 
 export const UpArrow = styled(KeyboardArrowUpIcon)({
-  color: colors.primary,
+  color: colors.brandBlue,
   cursor: 'pointer',
   marginTop: '0.5rem',
 });
