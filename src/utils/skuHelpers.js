@@ -70,7 +70,7 @@ export const filterQuestionsData = (questionData, newQuestions) => {
 };
 
 export const showCheckoutHeader = (path) => {
-  return ['/sku-checkout', '/payment-details'].includes(path);
+  return ['/sku-checkout', '/payment-details', '/pop-signup'].includes(path);
 };
 
 export const showCancelOrderButton = (path) => {
