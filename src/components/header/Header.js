@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import AppLogo from './../../assets/images/logo.svg';
 import HomeIcon from './../../assets/icons/home.svg';
@@ -39,7 +39,7 @@ ElevationScroll.propTypes = {
 
 const Header = () => {
   const history = useHistory();
-
+  const location = useLocation();
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -70,13 +70,13 @@ const Header = () => {
             <img src={HomeIcon} alt='Home' />
           </IconButton>
           <Box sx={{ flexGrow: 1, justifyContent: 'center', display: 'flex' }}>
-            {showCheckoutHeader(history.location.pathname) ? (
+            {showCheckoutHeader(location.pathname) ? (
               <TakeCheckout>Take Checkout</TakeCheckout>
             ) : (
               <Logo src={AppLogo} alt='The Container Store' />
             )}
           </Box>
-          {showCancelOrderButton(history.location.pathname) && (
+          {showCancelOrderButton(location.pathname) && (
             <CancelOrderButton onClick={handleOpenModal}>
               Cancel Order
             </CancelOrderButton>

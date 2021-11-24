@@ -14,7 +14,7 @@ const HomePage = ({ history }) => {
           icon={ScanIcon}
           title='Price & Inventory Check'
           handleClick={() => history.push('/sku-search')}
-          data-testId='price-and-inventory'
+          data-testid='price-and-inventory'
           data-feature='price_check'
         />
       </FeatureFlag>
@@ -23,7 +23,7 @@ const HomePage = ({ history }) => {
           icon={CartIcon}
           title='Take Checkout'
           handleClick={() => history.push('/pop-signup')}
-          data-testId='take-checkout'
+          data-testid='take-checkout'
           data-feature='take_checkout'
         />
       </FeatureFlag>
