@@ -78,4 +78,22 @@ export const styles = {
     end: 'flex-end',
     stretch: 'stretch',
   },
+  padding: {
+    0: 0,
+    1: '.25rem',
+    2: '.5rem',
+    3: '1rem',
+    4: '1.5rem',
+    5: '3rem',
+    auto: 'auto',
+  },
+  margin: {
+    0: 0,
+    1: '.25rem',
+    2: '.5rem',
+    3: '1rem',
+    4: '1.5rem',
+    5: '3rem',
+    auto: 'auto',
+  },
 };

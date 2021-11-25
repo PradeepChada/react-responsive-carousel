@@ -31,9 +31,9 @@ import {
   getQtyInDC,
   getSkuPriceDetails,
   givenItemExitsInCart,
+  getProductImages,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
-import config from './../../config';
 import NetworkInventory from './network-inventory/NetworkInventory';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
@@ -289,18 +289,7 @@ const ProductDetails = ({ history, match }) => {
         ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
         ratingLoading={ratingLoading}
       />
-      <ProductCarousel
-        images={
-          skuData?.mediaList
-            ?.filter((o) =>
-              skuData.defaultProductId
-                ? //TODO: remove the OR part when latest Catalog Service is deployed in PROD
-                  o.name === 'amazon' || o.name === 'SKU_IMAGE'
-                : o.name === 'SKU_IMAGE'
-            )
-            ?.map((o) => `${config.appConfig.asset_base_url}${o.url}`) || []
-        }
-      />
+      <ProductCarousel images={getProductImages(skuData || {})} />
       {skuPriceDetails?.onSale ? (
         <SalePriceWrapper>
           <Typography className='sale-price'>
@@ -320,9 +309,11 @@ const ProductDetails = ({ history, match }) => {
         <Price>${skuPriceDetails?.price?.toFixed(2)}/ea</Price>
       )}
       <div>
-        <Spec>
-          Dimensions: <span>{skuData?.dimensionDescription}</span>
-        </Spec>
+        {skuData?.dimensionDescription && (
+          <Spec>
+            Dimensions: <span>{skuData?.dimensionDescription}</span>
+          </Spec>
+        )}
         {skuData?.color && (
           <Spec>
             Color: <span>{skuData?.color}</span>

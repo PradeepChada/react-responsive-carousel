@@ -1,4 +1,5 @@
 import config from './../config';
+
 export const getSkuPrice = (skuPrices = {}, type) => {
   return skuPrices[type]?.amount;
 };
@@ -22,10 +23,33 @@ export const getSkuPriceDetails = (skuPrices = {}) => {
 export const getColor = (attributes) => {
   return attributes?.find((o) => o.id === 'COLOR')?.name;
 };
+
+export const getProductImages = ({
+  defaultProductId,
+  mediaList,
+  productVisuals,
+} = {}) => {
+  if (defaultProductId) {
+    return (
+      productVisuals
+        ?.filter((o) => !o.isVideo)
+        ?.map((o) => `${config.appConfig.asset_base_url}${o.src}`) || []
+    );
+  } else {
+    return (
+      mediaList
+        ?.filter((o) => o.name === 'amazon' || o.name === 'SKU_IMAGE')
+        ?.map((o) => `${config.appConfig.asset_base_url}${o.url}`) || []
+    );
+  }
+};
+
 export const getQtyInStore = (data = [], storeId) =>
   data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
     ?.qtyAvailableAtStore;
+
 export const getQtyInDC = (data = []) => data?.[0]?.qtyAvailable;
+
 export const getQtyOnline = (data = []) =>
   data?.find((o) => o.fulfillmentStoreNumber === '899')?.qtyAvailableInDc;
 

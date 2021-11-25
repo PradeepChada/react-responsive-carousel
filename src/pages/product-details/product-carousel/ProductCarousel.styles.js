@@ -1,9 +1,18 @@
 import { styled } from '@mui/styles';
 import { Carousel } from 'react-responsive-carousel';
+import { colors } from './../../../utils/themeUtils';
 
 export const Slider = styled(Carousel)(({ theme }) => ({
   marginTop: '0.625rem',
   minHeight: 270,
+  '& .slider': {
+    // transform: props => {
+    //   console.log("PROPS =>", props);
+    //   const x = 208 * props.currentIndex;
+    //   const property = `translate3d(${-x}px, 0px, 0px) !important`;
+    //   return property
+    // }
+  },
   '& .slider-wrapper': {
     '& .slide': {
       minWidth: '208px !important',
@@ -23,6 +32,20 @@ export const Slider = styled(Carousel)(({ theme }) => ({
         '&.selected': {
           border: `1px solid ${theme?.palette?.primary?.main}`,
         },
+      },
+    },
+  },
+  '& .control-arrow': {
+    '&.control-next': {
+      opacity: 1,
+      '&:before': {
+        borderLeft: `8px solid ${colors.brandBlue}`,
+      },
+    },
+    '&.control-prev': {
+      opacity: 1,
+      '&:before': {
+        borderRight: `8px solid ${colors.brandBlue}`,
       },
     },
   },
