@@ -22,10 +22,10 @@ export const DialogPopup = styled(Dialog)({
     },
   },
   '& .MuiDialogContent-root': {
-    fontSize: font.size[14],
     textAlign: 'center',
     '& p': {
       color: colors.black,
+      fontSize: font.size[14],
     },
   },
 });

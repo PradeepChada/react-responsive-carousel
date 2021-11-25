@@ -31,7 +31,7 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           height: '3rem',
-          fontsize: font.size[14],
+          fontSize: font.size[14],
         },
         contained: {
           boxShadow: 'none',

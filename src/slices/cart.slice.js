@@ -30,6 +30,9 @@ const cartSlice = createSlice({
     decreaseItemQuantity: (state, action) => {
       state.cartItems = action.payload;
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
     failure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
