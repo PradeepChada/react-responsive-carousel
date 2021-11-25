@@ -309,9 +309,11 @@ const ProductDetails = ({ history, match }) => {
         <Price>${skuPriceDetails?.price?.toFixed(2)}/ea</Price>
       )}
       <div>
-        <Spec>
-          Dimensions: <span>{skuData?.dimensionDescription}</span>
-        </Spec>
+        {skuData?.dimensionDescription && (
+          <Spec>
+            Dimensions: <span>{skuData?.dimensionDescription}</span>
+          </Spec>
+        )}
         {skuData?.color && (
           <Spec>
             Color: <span>{skuData?.color}</span>
