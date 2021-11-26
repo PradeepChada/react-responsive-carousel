@@ -83,7 +83,12 @@ function SkuCheckout({ history }) {
   return (
     <>
       <BoxWrapper>
-        <SearchBar handleSearch={handleSearch} />
+        <SearchBar
+          handleSearch={handleSearch}
+          handleClear={() => {
+            console.log('Handler clear');
+          }}
+        />
         {cartItems.length === 0 && !loading && error == null && (
           <SearchPageText />
         )}
