@@ -12,7 +12,7 @@ import {
   Wrapper,
   Title,
   ContentWrapper,
-  Title2,
+  Price,
   Image,
 } from './PaymentSuccess.styles';
 
@@ -30,7 +30,7 @@ const PaymentTotal = () => {
     <PaymentWrapper display='flex' flexDirection='column' alignItems='center'>
       <Image src={SuccessIcon} alt='Success' />
       <Title>Payment Successful</Title>
-      <Title2>$12.90</Title2>
+      <Price>$12.90</Price>
     </PaymentWrapper>
   );
 };

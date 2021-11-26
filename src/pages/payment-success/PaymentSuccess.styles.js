@@ -64,11 +64,10 @@ export const Title = styled(Typography)({
   marginBottom: '4px',
 });
 
-export const Title2 = styled(Typography)({
+export const Price = styled(Typography)({
   fontSize: '37px',
   fontWeight: '700',
   textAlign: 'center',
-  color: '#333337',
   lineHeight: '39px',
 });
 
@@ -76,7 +75,6 @@ export const Amount = styled(Typography)({
   fontSize: '37px',
   fontWeight: font.weight[600],
   textAlign: 'center',
-  color: '#333337',
   lineHeight: '39px',
 });
 
@@ -93,7 +91,6 @@ export const Description = styled(Typography)({
   fontSize: '27px',
   fontWeight: font.weight[600],
   textAlign: 'center',
-  color: '#333337',
   marginTop: '27px',
   paddingLeft: '54px',
   paddingRight: '54px',
