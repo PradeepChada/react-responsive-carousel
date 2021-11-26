@@ -22,6 +22,8 @@ import ConfigProvider from './components/config-provider/ConfigProvider';
 import StoreProvider from './components/store-provider/StoreProvider';
 import Reviews from './pages/reviews/Reviews';
 import PopSignup from './pages/pop-signup/PopSignup';
+import CardSwipe from './pages/card-swipe/CardSwipe';
+import PaymentFailure from './pages/payment-failure/PaymentFailure';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -82,6 +84,12 @@ const App = () => {
                       exact
                       path='/payment-details'
                       component={PaymentDetails}
+                    />
+                    <Route exact path='/card-swipe' component={CardSwipe} />
+                    <Route
+                      exact
+                      path='/payment-failure'
+                      component={PaymentFailure}
                     />
                   </Switch>
                 </StyledBody>

@@ -70,7 +70,11 @@ function PaymentDetails({ history }) {
           <Typography>Total</Typography>
           <Typography>$12.90</Typography>
         </Box>
-        <Button fullWidth variant='contained'>
+        <Button
+          fullWidth
+          variant='contained'
+          onClick={() => history.push('/card-swipe')}
+        >
           PAY NOW
         </Button>
       </OrderSummary>

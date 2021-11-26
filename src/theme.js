@@ -36,11 +36,11 @@ const theme = createTheme({
         contained: {
           boxShadow: 'none',
           backgroundColor: colors.lightBlue,
-          fontWeight: 'bold',
+          fontWeight: '600',
         },
         outlined: {
           borderColor: colors.lightBlue,
-          fontWeight: 'bold',
+          fontWeight: '600',
           color: colors.lightBlue,
         },
         text: {
