@@ -1,4 +1,4 @@
-import { colors, font } from './utils/themeUtils';
+import { colors, font, styles } from './utils/themeUtils';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -44,7 +44,7 @@ const theme = createTheme({
           color: colors.lightBlue,
         },
         text: {
-          padding: 0,
+          padding: styles.padding[0],
           height: 'auto',
         },
         sizeSmall: {

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/styles';
-import { colors } from './../../utils/themeUtils';
+import { colors, font, styles } from './../../utils/themeUtils';
 
 export const Logo = styled('img')({
   height: 21,
@@ -9,24 +9,24 @@ export const Logo = styled('img')({
 
 export const StyledAppBar = styled(AppBar)({
   backgroundColor: colors.white,
-  marginBottom: '0.25rem',
+  marginBottom: styles.margin[1],
   '& .MuiToolbar-regular': {
     '& .home-icon': {
       position: 'absolute',
-      margin: 'auto',
+      margin: styles.margin['auto'],
       cursor: 'pointer',
     },
   },
 });
 
 export const TakeCheckout = styled(Typography)({
-  fontSize: '1.375rem',
-  fontWeight: 'bold',
+  fontSize: font.size[22],
+  fontWeight: font.weight['bold'],
   color: colors.black,
 });
 
 export const CancelOrderButton = styled(Typography)({
-  fontSize: '0.75rem',
+  fontSize: font.size[12],
   color: colors.brandBlue,
   textDecoration: 'underline',
   position: 'absolute',

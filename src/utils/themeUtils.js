@@ -49,8 +49,13 @@ export const font = {
     22: '1.375rem',
     24: '1.5rem',
     26: '1.625rem',
+    28: '1.75rem',
+    30: '1.875rem',
+    32: '2rem',
+    38: '2.375rem',
   },
   weight: {
+    400: '400',
     600: '600',
     700: '700',
     bold: 'bold',
@@ -71,6 +76,7 @@ export const styles = {
     end: 'flex-end',
     between: 'space-between',
     around: 'space-around',
+    evenly: 'space-evenly',
   },
   align: {
     center: 'center',

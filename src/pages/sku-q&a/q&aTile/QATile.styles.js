@@ -1,65 +1,65 @@
 import { Typography } from '@mui/material';
 import { styled } from '@mui/styles';
 import { Box } from '@mui/system';
-import { colors } from '../../../utils/themeUtils';
+import { colors, styles, font } from '../../../utils/themeUtils';
 
 export const LoadingBoxWrapper = styled(Box)({
-  padding: '1.5rem',
+  padding: styles.padding[4],
   border: `1px solid ${colors.gray90}`,
   '& .asker': {
-    marginBottom: '0.5rem',
+    marginBottom: styles.margin[2],
   },
   '& .question': {
-    marginBottom: '1rem',
+    marginBottom: styles.margin[3],
   },
   '& .view-more-answerer': {
-    marginTop: '1rem',
+    marginTop: styles.margin[3],
   },
-  marginBottom: '1rem',
+  marginBottom: styles.margin[3],
 });
 
 export const BoxWrapper = styled(Box)({
-  padding: '1.5rem',
+  padding: styles.padding[4],
   border: `1px solid ${colors.gray90}`,
   '& .view-more-answerer': {
     color: colors.brandBlue,
-    fontSize: '0.875rem',
-    marginTop: '1rem',
+    fontSize: font.size[14],
+    marginTop: styles.margin[3],
     textDecoration: 'underline',
   },
-  marginBottom: '1rem',
+  marginBottom: styles.margin[3],
 });
 
 export const Asker = styled(Typography)({
-  fontSize: '0.875rem',
+  fontSize: font.size[14],
   color: colors.brandBlue,
-  marginBottom: '0.5rem',
+  marginBottom: styles.margin[2],
   textTransform: 'capitalize',
 });
 
 export const Question = styled(Typography)({
-  fontSize: '1.125rem',
-  fontWeight: 'bold',
+  fontSize: font.size[18],
+  fontWeight: font.weight['bold'],
   color: colors.black,
-  marginBottom: '1rem',
+  marginBottom: styles.margin[3],
   wordBreak: 'break-all',
 });
 
 export const Answer = styled(Box)({
   backgroundColor: colors.bgGray,
-  padding: '1rem',
+  padding: styles.padding[3],
   '& .answerer': {
-    fontSize: '1rem',
-    fontWeight: '400',
+    fontSize: font.size[16],
+    fontWeight: font.weight[400],
     color: colors.black,
-    marginBottom: '0.5rem',
+    marginBottom: styles.margin[2],
     textTransform: 'capitalize',
   },
   '& .answerer-text': {
-    fontSize: '1rem',
-    fontWeight: '400',
+    fontSize: font.size[16],
+    fontWeight: font.weight[400],
     color: colors.black,
     wordBreak: 'break-all',
   },
-  marginBottom: '0.5rem',
+  marginBottom: styles.margin[2],
 });
