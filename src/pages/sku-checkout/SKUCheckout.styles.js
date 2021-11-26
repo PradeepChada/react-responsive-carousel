@@ -165,5 +165,5 @@ export const PayButton = styled(Box)({
   fontSize: '0.875rem',
   color: colors.white,
   marginTop: '0.875rem',
-  opacity: '0.5',
+  opacity: (props) => (props.disable ? '0.5' : '1'),
 });
