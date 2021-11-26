@@ -65,7 +65,7 @@ function SkuCheckout({ history }) {
     if (!skuId) {
       dispatch(actions.failure(skuErrorMessages.malfunction));
     } else {
-      let exitItemIndex = givenItemExitsInCart(skuId, cartItems);
+      const exitItemIndex = givenItemExitsInCart(skuId, cartItems);
       if (exitItemIndex > -1) {
         if (cartItems[exitItemIndex].skuQuantity < 999) {
           dispatch(increaseItemQuantityFromCart(skuId, cartItems));
