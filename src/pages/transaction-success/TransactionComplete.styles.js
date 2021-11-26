@@ -1,5 +1,5 @@
 import { styled } from '@mui/styles';
-import { colors } from './../../utils/themeUtils';
+import { colors } from '../../utils/themeUtils';
 import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
 import { Box } from '@mui/system';
 import { Container, Typography, Button } from '@mui/material';

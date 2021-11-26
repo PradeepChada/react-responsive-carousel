@@ -4,7 +4,7 @@ import {
   Title,
   PageContainer,
   ButtonDone,
-} from './TransactionSuccess.styles';
+} from './TransactionComplete.styles';
 import { Box } from '@mui/system';
 import { Button, Grid } from '@mui/material';
 import SuccessIcon from './../../assets/icons/success.svg';

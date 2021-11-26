@@ -25,7 +25,7 @@ import PopSignup from './pages/pop-signup/PopSignup';
 import CardSwipe from './pages/card-swipe/CardSwipe';
 import PaymentFailure from './pages/payment-failure/PaymentFailure';
 import PaymentSuccess from './pages/payment-success/PaymentSuccess';
-import TransactionComplete from './pages/transaction-success/TransactionSuccess';
+import TransactionComplete from './pages/transaction-success/TransactionComplete';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
