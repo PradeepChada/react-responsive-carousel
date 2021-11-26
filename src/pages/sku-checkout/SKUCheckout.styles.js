@@ -72,6 +72,9 @@ export const CartContainer = styled(Box)({
       fontWeight: 'bold',
       color: colors.black,
       marginTop: '1rem',
+      '& > p': {
+        fontWeight: 'bold',
+      },
     },
     '& .discounts-text': {
       display: 'flex',
@@ -162,4 +165,5 @@ export const PayButton = styled(Box)({
   fontSize: '0.875rem',
   color: colors.white,
   marginTop: '0.875rem',
+  opacity: '0.5',
 });
