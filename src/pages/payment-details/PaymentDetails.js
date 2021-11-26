@@ -55,7 +55,7 @@ function PaymentDetails({ history }) {
       <OrderSummary>
         <Typography>Order Summary</Typography>
         <Box className='subtotal-text'>
-          <Typography>SubTotal</Typography>
+          <Typography>Subtotal</Typography>
           <Typography>$12.00</Typography>
         </Box>
         <Box className='discounts-text'>

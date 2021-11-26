@@ -71,6 +71,10 @@ export const CartContainer = styled(Box)({
       fontWeight: font.weight['bold'],
       color: colors.black,
       marginTop: styles.margin[3],
+      '& > p': {
+        fontWeight: 'bold',
+        color: colors.black,
+      },
     },
     '& .discounts-text': {
       display: styles.display.flex,
@@ -154,11 +158,13 @@ export const PayButton = styled(Box)({
   fontWeight: 'bold',
   borderRadius: '4px',
   backgroundColor: (props) =>
-    props.disable ? colors.textBlack : colors.brandBlue,
+    props.disable ? colors.textBlack : colors.lightBlue,
   display: styles.display.flex,
   justifyContent: styles.justify.center,
   alignItems: styles.align.center,
   fontSize: font.size[14],
   color: colors.white,
   marginTop: '0.875rem',
+  letterSpacing: '1px',
+  opacity: (props) => (props.disable ? '0.5' : '1'),
 });

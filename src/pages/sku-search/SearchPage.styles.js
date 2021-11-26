@@ -2,7 +2,7 @@ import { styled } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { colors, styles } from '../../utils/themeUtils';
+import { colors, styles ,font} from '../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
   padding: `0.75rem ${styles.padding[3]}`,

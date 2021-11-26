@@ -65,8 +65,11 @@ function SkuCheckout({ history }) {
     if (!skuId) {
       dispatch(actions.failure(skuErrorMessages.malfunction));
     } else {
-      if (givenItemExitsInCart(skuId, cartItems) > -1) {
-        dispatch(increaseItemQuantityFromCart(skuId, cartItems));
+      const exitItemIndex = givenItemExitsInCart(skuId, cartItems);
+      if (exitItemIndex > -1) {
+        if (cartItems[exitItemIndex].skuQuantity < 999) {
+          dispatch(increaseItemQuantityFromCart(skuId, cartItems));
+        }
       } else {
         dispatch(addItemToCart(skuId));
       }
@@ -80,7 +83,12 @@ function SkuCheckout({ history }) {
   return (
     <>
       <BoxWrapper>
-        <SearchBar handleSearch={handleSearch} />
+        <SearchBar
+          handleSearch={handleSearch}
+          handleClear={() => {
+            console.log('Handler clear');
+          }}
+        />
         {cartItems.length === 0 && !loading && error == null && (
           <SearchPageText />
         )}
@@ -146,14 +154,14 @@ function SkuCheckout({ history }) {
             <Box display='flex' flexDirection='row' alignItems='center'>
               <Typography className='total-price-text'>Total</Typography>
               {openOrderSummary ? (
-                <DownArrow
-                  onClick={arrowClickHandler}
-                  data-testid='total-down-arrow'
-                />
-              ) : (
                 <UpArrow
                   onClick={arrowClickHandler}
                   data-testid='total-up-arrow'
+                />
+              ) : (
+                <DownArrow
+                  onClick={arrowClickHandler}
+                  data-testid='total-down-arrow'
                 />
               )}
             </Box>

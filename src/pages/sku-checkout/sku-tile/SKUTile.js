@@ -71,7 +71,9 @@ const SkuTile = ({
   };
   const plusButtonHandler = (event) => {
     event.stopPropagation();
-    increaseItemQuantity(skuInfo.skuId);
+    if (skuQuantity < 999) {
+      increaseItemQuantity(skuInfo.skuId);
+    }
   };
   const minusButtonHandler = (event) => {
     event.stopPropagation();
