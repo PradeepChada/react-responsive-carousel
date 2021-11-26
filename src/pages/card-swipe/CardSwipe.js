@@ -47,7 +47,7 @@ const CardSwipe = ({ history }) => {
     setTimeout(() => {
       history.push('/payment-failure');
     }, 5000);
-  }, []);
+  }, [history]);
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
       <PaymentTotal />
