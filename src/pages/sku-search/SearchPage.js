@@ -17,7 +17,7 @@ import {
 
 const SearchPageText = () => {
   return (
-    <TextWrapper display='flex' flexDirection='column' alignItems='center'>
+    <TextWrapper display='flex' flexDirection='column'>
       <Title>Scan Barcode or Type SKU</Title>
       <Description>
         Use the trigger on the device to scan a barcode or enter a SKU in the
@@ -77,7 +77,7 @@ const SearchPage = ({ history }) => {
   };
 
   return (
-    <Wrapper display='flex' flexDirection='column' alignItems='center'>
+    <Wrapper>
       <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
       {!loading && !error && !skuData && <SearchPageText />}
       {error ? (

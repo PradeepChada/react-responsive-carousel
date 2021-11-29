@@ -1,11 +1,14 @@
 import { styled } from '@mui/styles';
 import { colors, styles, font } from '../../utils/themeUtils';
 import { Box } from '@mui/system';
+import { Container } from '@mui/material';
 
-export const PageContainer = styled(Box)({
+export const PageContainer = styled(Container)({
   display: styles.display.flex,
   flexDirection: 'column',
   justifyContent: styles.justify.between,
+  padding: styles.padding[3],
+  height: '100%',
 });
 export const PaymentInfo = styled(Box)({
   padding: `0 ${styles.padding[3]}`,
@@ -92,8 +95,8 @@ export const PaymentInfo = styled(Box)({
 export const OrderSummary = styled(Box)({
   boxSizing: 'border-box',
   width: '100%',
-  backgroundColor: colors.answerBackground,
   padding: styles.padding[3],
+  backgroundColor: colors.answerBackground,
   marginTop: styles.margin[2],
   '& > p': {
     fontSize: font.size[18],

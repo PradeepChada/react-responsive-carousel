@@ -93,7 +93,7 @@ const ProductVariants = ({ history, match }) => {
           ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
         />
       )}
-      <Title variant='h6' noContent={variants?.length === 0}>
+      <Title variant='h6' nocontent={variants?.length === 0 ? 'true' : 'false'}>
         Additional Sizes & Colors{' '}
         {variants?.length ? `(${variants.length})` : null}
       </Title>

@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/styles';
 import { Box } from '@mui/system';
 import { colors, styles, font } from '../../utils/themeUtils';
@@ -8,11 +8,17 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const boxSizing = 'border-box';
 
+export const PageConatiner = styled(Container)({
+  padding: `${styles.padding[3]} ${styles.padding[3]} 0 ${styles.padding[3]}`,
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+});
 export const BoxWrapper = styled(Box)({
   display: styles.display.flex,
   flexDirection: 'column',
   alignItems: styles.align.center,
-  padding: `${styles.padding[3]} ${styles.padding[3]} 0 ${styles.padding[3]}`,
   '& .cart-items-container': {
     display: styles.display.flex,
     flexDirection: 'column',
@@ -40,8 +46,6 @@ export const Description = styled(Typography)({
 
 export const CartContainer = styled(Box)({
   boxSizing: boxSizing,
-  position: 'fixed',
-  bottom: '0',
   width: '100%',
   backgroundColor: colors.white,
   borderTop: `1px solid ${colors.gray85}`,

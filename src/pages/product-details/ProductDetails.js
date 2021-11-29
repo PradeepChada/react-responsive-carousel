@@ -1,4 +1,4 @@
-import { Typography, Skeleton, Button, Drawer } from '@mui/material';
+import { Typography, Skeleton, Button, Drawer, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
@@ -43,7 +43,7 @@ import { setItemQuantityByGivenQuantityFromCart } from '../../slices/cart.slice'
 
 const LoadingSkeleton = () => {
   return (
-    <Box padding={1}>
+    <Container padding={1}>
       <Skeleton variant='rectangular' height={16} />
       <Box
         display='flex'
@@ -79,7 +79,7 @@ const LoadingSkeleton = () => {
       <Skeleton height={80} sx={{ marginTop: 1, transform: 'none' }} />
       <Skeleton height={40} sx={{ marginTop: 2 }} />
       <Skeleton height={40} sx={{ marginBottom: '5px' }} />
-    </Box>
+    </Container>
   );
 };
 const showStockDetails = (skuAvailabilityLoading, inStoreQty) => {

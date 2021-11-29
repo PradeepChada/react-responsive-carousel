@@ -16,6 +16,7 @@ const PhotoGallery = ({ data = [], handleClick }) => {
           .map((item, i) => {
             return (
               <div
+                key={i}
                 className='bg-img'
                 style={{ backgroundImage: `url(${item?.uri})` }}
                 onClick={() => handleClick(i + 1, item)}

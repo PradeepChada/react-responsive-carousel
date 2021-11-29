@@ -4,6 +4,7 @@ import Select from '@mui/material/Select';
 import { colors, styles, font } from '../../utils/themeUtils';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
+import { Container } from '@mui/material';
 export const NotFoundQA = styled(Box)({
   display: styles.display.flex,
   justifyContent: styles.justify.center,
@@ -21,7 +22,7 @@ export const NotFoundQA = styled(Box)({
     color: colors.textBlack,
   },
 });
-export const BoxWrapper = styled(Box)({
+export const BoxWrapper = styled(Container)({
   padding: `${styles.padding[2]} ${styles.padding[3]} 0 ${styles.padding[3]}`,
   '& .text': {
     fontSize: font.size[18],

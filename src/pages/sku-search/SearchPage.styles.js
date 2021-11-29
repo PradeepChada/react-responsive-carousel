@@ -2,15 +2,18 @@ import { styled } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { colors, styles ,font} from '../../utils/themeUtils';
+import { colors, styles, font } from '../../utils/themeUtils';
+import { Container } from '@mui/material';
 
-export const Wrapper = styled(Box)({
+export const Wrapper = styled(Container)({
   padding: `0.75rem ${styles.padding[3]}`,
 });
 
 export const TextWrapper = styled(Box)({
   width: '271px',
   marginTop: '1.875rem',
+  marginLeft: styles.margin['auto'],
+  marginRight: styles.margin['auto'],
 });
 
 export const Title = styled(Typography)({
