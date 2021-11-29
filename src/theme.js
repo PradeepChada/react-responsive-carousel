@@ -26,6 +26,31 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.white,
+          color: colors.textBlack,
+          '& .MuiInputLabel-root': {
+            '&.Mui-focused': {
+              color: colors.selectGray,
+            },
+          },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              // borderColor: colors.selectGray,
+            },
+            '&:hover fieldset': {
+              borderColor: colors.selectGray,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: colors.selectGray,
+              borderWidth: 1,
+            },
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -36,11 +61,11 @@ const theme = createTheme({
         contained: {
           boxShadow: 'none',
           backgroundColor: colors.lightBlue,
-          fontWeight: 'bold',
+          fontWeight: '600',
         },
         outlined: {
           borderColor: colors.lightBlue,
-          fontWeight: 'bold',
+          fontWeight: '600',
           color: colors.lightBlue,
         },
         text: {
