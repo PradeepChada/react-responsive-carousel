@@ -77,6 +77,7 @@ export const PaymentInfo = styled(Box)({
       fontWeight: font.weight['normal'],
       color: colors.brandBlue,
       textDecoration: 'underline',
+      textTransform:"capitalize"
     },
   },
   '& > div:nth-child(4)': {

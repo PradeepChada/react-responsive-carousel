@@ -95,7 +95,7 @@ export const StockError = styled(Box)({
   border: `1px solid ${colors.dangerBorder}`,
   borderRadius: '0.25rem',
   fontWeight: font.weight[400],
-  marginTop: -styles.margin[1],
+  marginTop: -Number(styles.margin[1]),
   marginBottom: '0.625rem',
   padding: '0.625rem',
 });
