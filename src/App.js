@@ -21,7 +21,7 @@ import Spinner from './components/loading-spinner/Spinner';
 import ConfigProvider from './components/config-provider/ConfigProvider';
 import StoreProvider from './components/store-provider/StoreProvider';
 import Reviews from './pages/reviews/Reviews';
-import PopSignup from './pages/pop-signup/PopSignup';
+import PopSignin from './pages/pop-signin/PopSignin';
 import CardSwipe from './pages/card-swipe/CardSwipe';
 import PaymentFailure from './pages/payment-failure/PaymentFailure';
 import PaymentSuccess from './pages/payment-success/PaymentSuccess';
@@ -75,7 +75,7 @@ const App = () => {
                       component={QuestionAndAnswer}
                     />
                     <Route exact path='/reviews/:id' component={Reviews} />
-                    <Route exact path='/pop-signup' component={PopSignup} />
+                    <Route exact path='/pop-signin' component={PopSignin} />
                     <Route exact path='/sku-checkout' component={SkuCheckout} />
                     <Route
                       exact

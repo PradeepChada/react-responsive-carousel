@@ -97,3 +97,11 @@ export const givenItemExitsInCart = (skuId, cartItems) => {
   });
   return exits;
 };
+
+export const getFirstPOPMemeber = (accountDetails) => {
+  let _account = null;
+  accountDetails.forEach((data) => {
+    if (data.popMember === true) _account = data;
+  });
+  return _account;
+};

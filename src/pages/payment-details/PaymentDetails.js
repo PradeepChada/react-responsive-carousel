@@ -10,8 +10,10 @@ import {
   PaymentInfo,
   OrderSummary,
 } from './PaymentDetails.styles';
+import { useSelector } from 'react-redux';
 
 function PaymentDetails({ history }) {
+  const { mainAccount } = useSelector((state) => state.popAccount);
   return (
     <PageContainer>
       <PaymentInfo>
@@ -22,11 +24,14 @@ function PaymentDetails({ history }) {
             <Typography>$12.90</Typography>
           </Box>
         </Box>
+
         <Box>
           <Typography>POP! Member</Typography>
-          <Typography onClick={() => history.push('/pop-signup')}>
-            Carol Smith
-          </Typography>
+          {mainAccount && (
+            <Typography onClick={() => history.push('/pop-signin')}>
+              {mainAccount}
+            </Typography>
+          )}
         </Box>
         <Box>
           <Typography>Order Discounts</Typography>
