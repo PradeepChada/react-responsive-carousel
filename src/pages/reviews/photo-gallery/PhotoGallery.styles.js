@@ -1,10 +1,10 @@
 import { styled } from '@mui/styles';
 import { Box } from '@mui/material';
-import { colors } from '../../../utils/themeUtils';
+import { colors, styles, font } from '../../../utils/themeUtils';
 
 export const GelleryContainer = styled(Box)({
-  marginTop: '1rem',
-  display: 'flex',
+  marginTop: styles.margin[3],
+  display: styles.display.flex,
   '& .first-image': {
     width: 160,
     height: 160,
@@ -26,12 +26,12 @@ export const GelleryContainer = styled(Box)({
         width: '100%',
         backgroundColor: '#005DABCC',
         color: colors.white,
-        fontSize: '0.75rem',
+        fontSize: font.size[12],
         textAlign: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontWeight: 'bold',
+        display: styles.display.flex,
+        justifyContent: styles.justify.center,
+        alignItems: styles.align.center,
+        fontWeight: font.weight['bold'],
         textTransform: 'uppercase',
       },
     },

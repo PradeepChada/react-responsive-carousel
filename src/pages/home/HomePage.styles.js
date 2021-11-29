@@ -1,11 +1,11 @@
 import { styled } from '@mui/styles';
 import { Container } from '@mui/material';
-
+import { styles } from '../../utils/themeUtils';
 export const PageContainer = styled(Container)({
-  padding: '1.5rem 1rem',
+  padding: `${styles.margin[4]} ${styles.margin[3]}`,
   '& .inventory-tile': {
     '& img': {
-      marginLeft: '.25rem',
+      marginLeft: styles.margin[1],
     },
   },
 });

@@ -1,21 +1,26 @@
-import { Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/styles';
 import { Box } from '@mui/system';
-import { colors } from '../../utils/themeUtils';
+import { colors, styles, font } from '../../utils/themeUtils';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const boxSizing = 'border-box';
-const spaceBetween = 'space-between';
 
-export const BoxWrapper = styled(Box)({
+export const PageConatiner = styled(Container)({
+  padding: `${styles.padding[3]} ${styles.padding[3]} 0 ${styles.padding[3]}`,
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
-  padding: '1rem 1rem 0 1rem',
+  justifyContent: 'space-between',
+});
+export const BoxWrapper = styled(Box)({
+  display: styles.display.flex,
+  flexDirection: 'column',
+  alignItems: styles.align.center,
   '& .cart-items-container': {
-    display: 'flex',
+    display: styles.display.flex,
     flexDirection: 'column',
     width: '100%',
   },
@@ -27,94 +32,92 @@ export const TextWrapper = styled(Box)({
 });
 
 export const Title = styled(Typography)({
-  fontSize: '1.125rem',
-  fontWeight: '700',
+  fontSize: font.size[18],
+  fontWeight: font.weight[700],
   color: colors.textBlack,
 });
 
 export const Description = styled(Typography)({
-  fontSize: '1rem',
-  fontWeight: '400',
+  fontSize: font.size[16],
+  fontWeight: font.weight[400],
   textAlign: 'center',
   color: colors.textBlack,
 });
 
 export const CartContainer = styled(Box)({
   boxSizing: boxSizing,
-  position: 'fixed',
-  bottom: '0',
   width: '100%',
   backgroundColor: colors.white,
   borderTop: `1px solid ${colors.gray85}`,
   '& .order-discount-container': {
     height: '40px',
-    display: 'flex',
-    justifyContent: spaceBetween,
+    display: styles.display.flex,
+    justifyContent: styles.justify.between,
     boxSizing: boxSizing,
-    padding: '0.75rem 1rem',
+    padding: `0.75rem ${styles.padding[3]}`,
   },
   '& .order-summary-container': {
     flexDirection: 'column',
     boxSizing: boxSizing,
     backgroundColor: colors.bgGray,
-    padding: '0.75rem 1rem 0 1rem',
+    padding: `0.75rem ${styles.padding[3]} 0 ${styles.padding[3]}`,
     height: '135px',
     transition: 'all 1s',
     '& .order-summary-text': {
-      fontSize: '1.1rem',
-      fontWeight: 'bold',
+      fontSize: font.size[18],
+      fontWeight: font.weight['bold'],
       color: colors.black,
     },
     '& .subtotal-text': {
-      display: 'flex',
-      justifyContent: spaceBetween,
-      fontSize: '0.875rem',
-      fontWeight: 'bold',
+      display: styles.display.flex,
+      justifyContent: styles.justify.between,
+      fontSize: font.size[14],
+      fontWeight: font.weight['bold'],
       color: colors.black,
-      marginTop: '1rem',
+      marginTop: styles.margin[3],
       '& > p': {
         fontWeight: 'bold',
         color: colors.black,
       },
     },
     '& .discounts-text': {
-      display: 'flex',
-      justifyContent: spaceBetween,
-      fontSize: '0.875rem',
-      fontWeight: 'normal',
+      display: styles.display.flex,
+      justifyContent: styles.justify.between,
+      fontSize: font.size[14],
+      fontWeight: font.weight['normal'],
       color: colors.black90,
-      marginTop: '.25rem',
+      marginTop: styles.margin[1],
     },
     '& .tax-text': {
-      display: 'flex',
-      justifyContent: spaceBetween,
-      fontSize: '0.875rem',
-      fontWeight: 'normal',
+      display: styles.display.flex,
+      justifyContent: styles.justify.between,
+      fontSize: font.size[14],
+      fontWeight: font.weight['normal'],
       color: colors.black90,
-      marginTop: '0.25rem',
+      marginTop: styles.margin[1],
     },
   },
   '& .order-discount-text': {
-    fontSize: '0.875rem',
+    fontSize: font.size[14],
     color: colors.textBlack,
-    fontWeight: '700',
+    fontWeight: font.weight[700],
   },
   '& .total-price-container': {
     boxSizing: boxSizing,
     height: '70px',
-    padding: '0 1rem',
-    display: 'flex',
-    justifyContent: spaceBetween,
+    padding: `0 ${styles.padding[3]}`,
+    display: styles.display.flex,
+    justifyContent: styles.justify.between,
     backgroundColor: colors.bgGray,
   },
   '& .cart-total-price': {
-    fontSize: '1.75rem',
+    fontSize: font.size[28],
     color: colors.black,
   },
   '& .total-price-text': {
-    fontSize: '0.75rem',
+    fontSize: font.size[12],
     color: colors.black,
-    marginTop: '0.5rem',
+    marginTop: styles.margin[2],
   },
 });
 
@@ -125,19 +128,19 @@ export const RightArrow = styled(ChevronRight)({
 export const DownArrow = styled(KeyboardArrowDownIcon)({
   color: colors.brandBlue,
   cursor: 'pointer',
-  marginTop: '0.5rem',
+  marginTop: styles.margin[2],
 });
 
 export const UpArrow = styled(KeyboardArrowUpIcon)({
   color: colors.brandBlue,
   cursor: 'pointer',
-  marginTop: '0.5rem',
+  marginTop: styles.margin[2],
 });
 
 export const ErrorWrapper = styled(Box)({
   '& div:first-child': {
     flexDirection: 'row',
-    padding: '1rem 0 1rem 0.375rem',
+    padding: `${styles.padding[3]} 0 ${styles.padding[3]} 0.375rem`,
     borderBottom: `1px solid ${colors.gray85}`,
     '& svg': {
       margin: '0',
@@ -160,10 +163,10 @@ export const PayButton = styled(Box)({
   borderRadius: '4px',
   backgroundColor: (props) =>
     props.disable ? colors.textBlack : colors.lightBlue,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontSize: '0.875rem',
+  display: styles.display.flex,
+  justifyContent: styles.justify.center,
+  alignItems: styles.align.center,
+  fontSize: font.size[14],
   color: colors.white,
   marginTop: '0.875rem',
   letterSpacing: '1px',

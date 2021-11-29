@@ -3,19 +3,19 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import { colors } from '../../utils/themeUtils';
+import { colors, font, styles } from '../../utils/themeUtils';
 
 export const ClearText = styled('span')({
   color: colors.brandBlue,
   textDecoration: 'underline',
   cursor: 'pointer',
-  fontSize: '0.75rem',
-  marginRight: '0.5rem',
+  fontSize: font.size[12],
+  marginRight: styles.margin[2],
 });
 
 export const PaperWrapper = styled(Paper)({
-  display: 'flex',
-  alignItems: 'center',
+  display: styles.display.flex,
+  alignItems: styles.align.center,
   width: '100%',
   border: `1px solid ${colors.gray81}`,
   boxShadow: 'none',
@@ -41,8 +41,8 @@ export const SearchIconWraper = styled(SearchIcon)({
 export const InputBaseWrapper = styled(InputBase)({
   ml: 1,
   flex: 1,
-  fontSize: '0.875rem',
+  fontSize: font.size[14],
   marginLeft: '0.75rem',
   color: colors.textBlack,
-  fontWeight: '400',
+  fontWeight: font.weight[400],
 });

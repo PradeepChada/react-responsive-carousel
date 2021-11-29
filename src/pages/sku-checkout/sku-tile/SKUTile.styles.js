@@ -4,21 +4,21 @@ import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import Skeleton from '@mui/material/Skeleton';
 import ClearIcon from '@mui/icons-material/Clear';
-import { colors } from '../../../utils/themeUtils';
+import { colors, styles, font } from '../../../utils/themeUtils';
 
 export const Wrapper = styled(Box)({
-  display: 'flex',
+  display: styles.display.flex,
   flexDirection: 'column',
   borderBottom: `1px solid ${colors.gray85}`,
-  padding: '1.5rem 0 1rem 0',
+  padding: `${styles.padding[4]} 0 ${styles.padding[3]} 0`,
   width: '100%',
   '& .options': {
-    fontSize: '0.875rem',
+    fontSize: font.size[14],
     color: colors.brandBlue,
     textDecoration: 'underline',
   },
   '& .discount-text': {
-    fontSize: '0.75rem',
+    fontSize: font.size[12],
     color: colors.selectGray,
     fontStyle: 'italic',
     marginBottom: '.75rem',
@@ -34,7 +34,7 @@ export const Wrapper = styled(Box)({
     position: 'relative',
     height: '70px',
     width: '70px',
-    marginRight: '1rem',
+    marginRight: styles.margin[3],
   },
   '& .image-sale-text': {
     width: '31px',
@@ -42,16 +42,16 @@ export const Wrapper = styled(Box)({
     position: 'absolute',
     top: '0',
     left: '0',
-    fontSize: '0.75rem',
-    fontWeight: '600',
+    fontSize: font.size[12],
+    fontWeight: font.weight[600],
     backgroundColor: colors.red,
     color: colors.white,
     textAlign: 'center',
     borderRadius: '0 0 0.25rem 0',
   },
   '& .quantity-error': {
-    marginTop: '0.5rem',
-    fontSize: '0.875rem',
+    marginTop: styles.margin[2],
+    fontSize: font.size[14],
     color: colors.danger,
   },
 });
@@ -59,24 +59,24 @@ export const Wrapper = styled(Box)({
 export const ImageSkeleton = styled(Skeleton)({
   width: '70px',
   height: '70px',
-  marginRight: '1rem',
+  marginRight: styles.margin[3],
   boxSizing: 'border-box',
 });
 
 export const PriceSkeleton = styled(Skeleton)({
-  fontSize: '1rem',
+  fontSize: font.size[16],
   marginBottom: '1.75rem',
   width: '80px',
 });
 
 export const TitleSkeleton = styled(Skeleton)({
-  fontSize: '0.875rem',
+  fontSize: font.size[14],
   marginBottom: '.125rem',
   width: '210px',
 });
 
 export const CodeSkeleton = styled(Skeleton)({
-  fontSize: '0.75rem',
+  fontSize: font.size[12],
   width: '90px',
   marginBottom: '.875rem',
 });
@@ -87,44 +87,44 @@ export const Image = styled('img')({
 });
 
 export const Price = styled(Typography)({
-  fontSize: '1rem',
+  fontSize: font.size[16],
   color: colors.textBlack,
-  fontWeight: '700',
+  fontWeight: font.weight[700],
   marginBottom: '1.75rem',
 });
 
 export const SalePriceWrapper = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
+  display: styles.display.flex,
+  alignItems: styles.align.center,
   marginBottom: '2px',
   '& .sale-price': {
-    fontSize: '1rem',
+    fontSize: font.size[16],
     color: colors.danger,
-    fontWeight: '700',
+    fontWeight: font.weight[700],
     marginRight: '0.375rem',
     textAlign: 'center',
   },
   '& .normal-price': {
-    fontSize: '0.75rem',
+    fontSize: font.size[12],
     color: colors.selectGray,
-    fontWeight: '400',
+    fontWeight: font.weight[400],
     textDecoration: 'line-through',
     textAlign: 'center',
   },
 });
 
 export const Title = styled(Typography)({
-  fontSize: '0.875rem',
+  fontSize: font.size[14],
   color: colors.textBlack,
-  fontWeight: '400',
+  fontWeight: font.weight[400],
   marginBottom: '0.125rem',
   textTransform: 'capitalize',
 });
 
 export const Code = styled(Typography)({
-  fontSize: '0.75rem',
+  fontSize: font.size[12],
   color: colors.selectGray,
-  fontWeight: '400',
+  fontWeight: font.weight[400],
   marginBottom: '0.875rem',
 });
 
@@ -142,16 +142,16 @@ export const ClearIconSkeleton = styled(Skeleton)({
 });
 
 export const ButtonGroupWrapper = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-evenly',
-  alignItems: 'center',
+  display: styles.display.flex,
+  justifyContent: styles.justify.evenly,
+  alignItems: styles.align.center,
   width: '80px',
   height: '36px',
   boxSizing: 'border-box',
   borderRadius: '4px',
   border: `1px solid ${colors.black40}`,
   '& p': {
-    fontSize: '1rem',
+    fontSize: font.size[16],
     flexGrow: '1',
     textAlign: 'center',
   },
@@ -164,9 +164,9 @@ export const ButtonGroupSkeleton = styled(Skeleton)({
 
 export const InputWrapper = styled(InputBase)({
   flex: 2,
-  fontSize: '1rem',
+  fontSize: font.size[16],
   color: colors.textBlack,
-  fontWeight: '400',
+  fontWeight: font.weight[400],
   '& input': {
     textAlign: 'center',
   },

@@ -1,24 +1,24 @@
 import Dialog from '@mui/material/Dialog';
 import { styled } from '@mui/styles';
-import { colors, font } from '../../utils/themeUtils';
+import { colors, font, styles } from '../../utils/themeUtils';
 
 export const DialogPopup = styled(Dialog)({
   '& .MuiPaper-elevation': {
     width: 'calc(100% - 32px)',
-    margin: 16,
-    padding: 8,
+    margin: styles.margin[3],
+    padding: styles.padding[2],
   },
   '& .MuiDialogTitle-root': {
     fontWeight: font.weight[600],
     fontSize: font.size[20],
     textAlign: 'center',
     color: colors.black,
-    padding: 8,
+    padding: styles.padding[2],
   },
   '& .MuiDialogActions-root': {
     justifyContent: 'space-between',
     '&>:not(:first-of-type)': {
-      marginLeft: 16,
+      marginLeft: styles.margin[3],
     },
   },
   '& .MuiDialogContent-root': {
