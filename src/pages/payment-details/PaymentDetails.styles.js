@@ -59,7 +59,6 @@ export const PaymentInfo = styled(Box)({
       fontWeight: font.weight['normal'],
       color: colors.brandBlue,
       textDecoration: 'underline',
-      
     },
   },
   '& > div:nth-child(3)': {
