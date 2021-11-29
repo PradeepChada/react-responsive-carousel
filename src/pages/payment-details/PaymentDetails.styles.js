@@ -52,12 +52,14 @@ export const PaymentInfo = styled(Box)({
       fontSize: font.size[14],
       fontWeight: font.weight[600],
       color: colors.textBlack,
+      textTransform:"capitalize"
     },
     '& p:nth-child(2)': {
       fontSize: font.size[14],
       fontWeight: font.weight['normal'],
       color: colors.brandBlue,
       textDecoration: 'underline',
+      
     },
   },
   '& > div:nth-child(3)': {
