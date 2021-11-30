@@ -33,6 +33,7 @@ export const ContentWrapper = styled(Box)({
   minHeight: 330,
   '& .tab-content': {
     height: '100%',
+    marginTop: 0,
     '& .MuiGrid-item': {
       '&:first-child': {
         flexGrow: 1,

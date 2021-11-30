@@ -32,6 +32,7 @@ import {
   getSkuPriceDetails,
   givenItemExitsInCart,
   getProductImages,
+  getProductVideos,
 } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import NetworkInventory from './network-inventory/NetworkInventory';
@@ -40,6 +41,7 @@ import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
 import { setItemQuantityByGivenQuantityFromCart } from '../../slices/cart.slice';
+import ProductVideos from './product-videos/ProductVideos';
 
 const LoadingSkeleton = () => {
   return (
@@ -92,7 +94,7 @@ const showStockDetails = (skuAvailabilityLoading, inStoreQty) => {
         <span className='stock-green'>{inStoreQty} in Stock</span>
       ) : (
         <span className='stock-red'>Out of Stock</span>
-      )}
+      )}{' '}
       in this store
     </div>
   );
@@ -114,6 +116,7 @@ const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
 };
 const ProductDetails = ({ history, match }) => {
   const SKUCheckoutDetailsURL = '/sku-checkout/sku-details';
+  const [showVideos, setShowVideos] = useState(false);
   const dispatch = useDispatch();
   const {
     storeId,
@@ -279,9 +282,18 @@ const ProductDetails = ({ history, match }) => {
       setSkuQuantity(1);
     }
   };
+
+  const videos = getProductVideos(skuData || {});
   return (
     <PageContainer>
       {_renderDrawer()}
+      {showVideos && (
+        <ProductVideos
+          showModal={showVideos}
+          handleClose={() => setShowVideos(false)}
+          data={[...videos, ...videos]}
+        />
+      )}
       <ProductTitle
         title={skuData?.name}
         skuId={skuData?.id}
@@ -374,6 +386,12 @@ const ProductDetails = ({ history, match }) => {
         )}
       </Availability>
       <Box>
+        {videos.length > 0 && (
+          <InfoTile onClick={() => setShowVideos(true)}>
+            <Typography>Product Videos</Typography>
+            <ChevronRight />
+          </InfoTile>
+        )}
         <InfoTile
           onClick={() => history.push(`/product-info/${match?.params?.id}`)}
         >

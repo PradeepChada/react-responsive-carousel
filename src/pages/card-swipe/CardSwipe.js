@@ -45,7 +45,7 @@ const PaymentPageText = ({ handleClick }) => {
 const CardSwipe = ({ history }) => {
   useEffect(() => {
     setTimeout(() => {
-      history.push('/payment-failure');
+      history.push('/payment-success');
     }, 5000);
   }, [history]);
   return (
