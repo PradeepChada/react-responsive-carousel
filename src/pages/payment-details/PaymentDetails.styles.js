@@ -134,7 +134,7 @@ export const OrderSummary = styled(Box)({
   '& .tax-text': {
     display: styles.display.flex,
     justifyContent: styles.justify.between,
-    marginBottom: '1.625rem',
+    marginBottom: styles.margin[3],
     '& > p': {
       fontSize: font.size[14],
       fontWeight: font.weight['normal'],

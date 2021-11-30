@@ -8,6 +8,8 @@ import {
 import { Box } from '@mui/system';
 import { Button, Grid } from '@mui/material';
 import SuccessIcon from './../../assets/icons/success.svg';
+import { useDispatch } from 'react-redux';
+import { actions } from './../../slices/cart.slice';
 
 const Transaction = () => {
   return (
@@ -21,6 +23,13 @@ const Transaction = () => {
 };
 
 const TransactionComplete = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const onClickNewCheckout = () => {
+    dispatch(actions.clearCart());
+    history.push('/sku-checkout');
+  };
+
   return (
     <PageContainer>
       <Grid
@@ -31,14 +40,13 @@ const TransactionComplete = ({ history }) => {
         flex={1}
       >
         <Transaction />
-
         <Grid container rowSpacing={2} alignSelf='flex-end'>
           <Grid item xs={12}>
             <Button
               size='large'
               fullWidth
               variant='contained'
-              onClick={() => history.push('/sku-checkout')}
+              onClick={onClickNewCheckout}
             >
               {' '}
               NEW TAKE CHECKOUT
