@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  TextWrapper,
+  Content,
   Title,
   PageContainer,
   ButtonDone,
@@ -11,12 +11,12 @@ import SuccessIcon from './../../assets/icons/success.svg';
 
 const Transaction = () => {
   return (
-    <TextWrapper display='flex' flexDirection='column' alignItems='center'>
+    <Content display='flex' flexDirection='column' alignItems='center'>
       <img src={SuccessIcon} alt='Success' />
       <Box textAlign='center'>
         <Title>Transaction Complete</Title>
       </Box>
-    </TextWrapper>
+    </Content>
   );
 };
 
@@ -38,7 +38,7 @@ const TransactionComplete = ({ history }) => {
               size='large'
               fullWidth
               variant='contained'
-              onClick={() => history.pushState('/sku-checkout')}
+              onClick={() => history.push('/sku-checkout')}
             >
               {' '}
               NEW TAKE CHECKOUT

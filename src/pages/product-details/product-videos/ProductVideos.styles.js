@@ -2,6 +2,7 @@ import { styled } from '@mui/styles';
 import { Carousel } from 'react-responsive-carousel';
 import Dialog from '@mui/material/Dialog';
 import { colors, styles } from '../../../utils/themeUtils';
+import ReactPlayer from 'react-player';
 
 export const Modal = styled(Dialog)({
   '& .MuiBackdrop-root': {
@@ -11,7 +12,7 @@ export const Modal = styled(Dialog)({
     position: 'unset',
     backgroundColor: 'transparent',
     boxShadow: 'none',
-    margin: '1rem',
+    margin: styles.margin[3],
     width: '100%',
   },
   '& .close-btn': {
@@ -34,10 +35,10 @@ export const Slider = styled(Carousel)({
     '& .control-dots': {
       position: 'relative',
       '& .dot': {
-        marginTop: '1rem',
+        marginTop: styles.margin[3],
         boxShadow: 'none',
         margin: '0 4px',
-        padding: 5,
+        padding: styles.padding[1],
         backgroundColor: colors.gray81,
         '&.selected': {
           backgroundColor: colors.selectGray,
@@ -57,19 +58,12 @@ export const Slider = styled(Carousel)({
   '& .carousel-status': {
     display: 'none',
   },
+});
 
-  '& .arrow-btn': {
-    position: 'absolute',
-    zIndex: 2,
-    top: 'calc(50% - 15px)',
-    width: 30,
-    height: 30,
-    cursor: 'pointer',
-    backgroundColor: colors.white,
-    padding: '1.125rem',
-    boxShadow: '0 0 0.375 #ccc',
-    '& svg': {
-      fontSize: '1.875rem',
+export const Player = styled(ReactPlayer)({
+  '& .w-big-play-button': {
+    '& div': {
+      backgroundColor: `${colors.brandBlue} !important`,
     },
   },
 });

@@ -7,7 +7,7 @@ export const PageContainer = styled(Container)({
   display: styles.display.flex,
   flexDirection: 'column',
   justifyContent: styles.justify.between,
-  padding: styles.padding[3],
+  padding: styles.padding[0],
   height: '100%',
 });
 export const PaymentInfo = styled(Box)({
@@ -99,7 +99,7 @@ export const OrderSummary = styled(Box)({
   width: '100%',
   padding: styles.padding[3],
   backgroundColor: colors.answerBackground,
-  marginTop: styles.margin[2],
+  // marginTop: styles.margin[2],
   '& > p': {
     fontSize: font.size[18],
     fontWeight: font.weight[600],

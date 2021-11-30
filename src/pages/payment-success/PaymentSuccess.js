@@ -138,7 +138,7 @@ function PaymentSuccess({ history }) {
   return (
     <Wrapper display='flex' flexDirection='column'>
       <PaymentTotal />
-      <PaymentPageText />
+      <PaymentPageText history={history} />
     </Wrapper>
   );
 }

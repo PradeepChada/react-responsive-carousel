@@ -2,8 +2,7 @@ import * as React from 'react';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseRounded from '@mui/icons-material/CloseRounded';
-import { Modal, Slider } from './ProductVideos.styles';
-import ReactPlayer from 'react-player';
+import { Modal, Slider, Player } from './ProductVideos.styles';
 
 const ProductVideos = ({ data, showModal, handleClose }) => {
   const [currentIndex, setCurrentIndex] = React.useState();
@@ -34,7 +33,7 @@ const ProductVideos = ({ data, showModal, handleClose }) => {
           {data?.map((item, i) => {
             return (
               <div>
-                <ReactPlayer
+                <Player
                   width='100%'
                   url={item.url}
                   poster={item.thumbnail}
