@@ -2,11 +2,8 @@ import * as React from 'react';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseRounded from '@mui/icons-material/CloseRounded';
-import { Modal, Slider, Video } from './ProductVideos.styles';
+import { Modal, Slider } from './ProductVideos.styles';
 import ReactPlayer from 'react-player';
-import 'video-react/dist/video-react.css';
-
-window._wq = window._wq || [];
 
 const ProductVideos = ({ data, showModal, handleClose }) => {
   const [currentIndex, setCurrentIndex] = React.useState();
@@ -32,6 +29,7 @@ const ProductVideos = ({ data, showModal, handleClose }) => {
           autoPlay={false}
           onChange={onChangeSlide}
           showThumbs={false}
+          showIndicators={data?.length > 1}
         >
           {data?.map((item, i) => {
             return (
