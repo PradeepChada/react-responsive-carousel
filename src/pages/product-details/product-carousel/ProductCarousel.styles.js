@@ -1,6 +1,6 @@
 import { styled } from '@mui/styles';
 import { Carousel } from 'react-responsive-carousel';
-import { colors } from './../../../utils/themeUtils';
+import { colors, styles } from './../../../utils/themeUtils';
 
 export const Slider = styled(Carousel)(({ theme }) => ({
   marginTop: '0.625rem',
@@ -22,7 +22,7 @@ export const Slider = styled(Carousel)(({ theme }) => ({
     },
   },
   '& .thumbs-wrapper': {
-    margin: '0.5rem 0 0 0',
+    margin: `${styles.margin[2]} 0 0 0`,
     '& .thumbs': {
       margin: 0,
       padding: 0,

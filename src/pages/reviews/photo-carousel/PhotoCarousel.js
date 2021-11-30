@@ -48,8 +48,8 @@ const PhotoCarousel = ({ data, showModal, handleClose, photoIndex = 0 }) => {
             )
           }
         >
-          {data?.map((item) => (
-            <div>
+          {data?.map((item, i) => (
+            <div key={i}>
               <img className='slide-image' src={item?.uri} alt={item?.uri} />
               <PhotoContent>
                 <Rating

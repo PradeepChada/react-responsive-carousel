@@ -151,8 +151,8 @@ const ReviewCard = ({ item }) => {
         <ReadMore text={item?.details?.comments} />
       </ReviewContent>
       <Box className='review-images'>
-        {item?.media?.map((obj) => (
-          <img src={obj.uri} alt={obj.caption} />
+        {item?.media?.map((obj, i) => (
+          <img key={i} src={obj.uri} alt={obj.caption} />
         ))}
       </Box>
       <RecommendedContent>
@@ -275,7 +275,7 @@ const Reviews = ({ match }) => {
             </div>
             <Box className='rating-bars-container'>
               {ratings?.map((val, i) => (
-                <Box className='rating-bar'>
+                <Box key={i} className='rating-bar'>
                   <span className='rating-type'>{5 - i}</span>
                   <StarIcon />
                   <LinearProgress
@@ -348,8 +348,8 @@ const Reviews = ({ match }) => {
               <MenuItem value='Oldest'>Oldest</MenuItem>
             </Dropdown>
           </FormControl>
-          {reviews?.map((item) => (
-            <ReviewCard key={item?.internal_review_id} item={item} />
+          {reviews?.map((item, i) => (
+            <ReviewCard key={i} item={item} />
           ))}
           {reviewsData?.paging?.next_page_url && (
             <ReviewTitle className='review-count'>

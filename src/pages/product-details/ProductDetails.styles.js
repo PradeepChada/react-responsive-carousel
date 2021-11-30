@@ -1,74 +1,74 @@
 import { styled } from '@mui/styles';
 import { Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { colors } from './../../utils/themeUtils';
+import { colors, styles, font } from './../../utils/themeUtils';
 import InputBase from '@mui/material/InputBase';
 
 export const PageContainer = styled(Container)({
-  padding: '0.625rem 1rem',
+  padding: `0.625rem ${styles.padding[3]}`,
 });
 
 export const SalePriceWrapper = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
+  display: styles.display.flex,
+  alignItems: styles.align.center,
   '& .sale-price': {
-    fontSize: '2rem',
-    fontWeight: '700',
+    fontSize: font.size[32],
+    fontWeight: font.weight[700],
     color: colors.danger,
   },
   '& .normal-price': {
-    fontSize: '0.75rem',
-    fontWeight: '400',
+    fontSize: font.size[12],
+    fontWeight: font.weight[400],
     color: colors.textBlack,
     marginBottom: '0.125rem',
   },
   '& .savings': {
-    fontSize: '0.875rem',
-    fontWeight: '700',
+    fontSize: font.size[14],
+    fontWeight: font.weight[700],
     color: colors.green,
   },
 });
 export const Price = styled('div')({
-  fontSize: '2rem',
-  color: colors.fontColor,
+  fontSize: font.size[32],
+  color: colors.textBlack,
   margin: '1.125rem 0 0 0',
-  fontWeight: 600,
+  fontWeight: font.weight[600],
 });
 
 export const Spec = styled(Typography)({
-  fontSize: '0.875rem',
-  fontWeight: 600,
-  marginTop: '0.25rem',
+  fontSize: font.size[14],
+  fontWeight: font.weight[600],
+  marginTop: styles.margin[1],
   '& span': {
-    fontWeight: 400,
+    fontWeight: font.weight[400],
   },
   '&:first-child': {
-    marginTop: '1.5rem',
+    marginTop: styles.margin[4],
   },
 });
 
 export const Availability = styled(Box)({
   marginTop: '1.25rem',
   '& .sub-head': {
-    fontSize: '0.875rem',
-    fontWeight: 600,
-    marginBottom: '0.5rem',
+    fontSize: font.size[14],
+    fontWeight: font.weight[600],
+    marginBottom: styles.margin[2],
   },
   '& .store-tile': {
     background: colors.bgGray,
     padding: '0.625rem 0.875rem',
-    margin: '0.5rem 0',
-    display: 'flex',
-    alignItems: 'center',
+    margin: `${styles.margin[2]} 0`,
+    display: styles.display.flex,
+    alignItems: styles.align.center,
     '&.other-stores': {
       padding: '1.125rem 0.875rem',
     },
     '& img': {
-      marginRight: '1rem',
+      marginRight: styles.margin[3],
     },
     '& .stock-details': {
-      fontWeight: 600,
-      fontSize: '0.75rem',
+      fontWeight: font.weight[600],
+      fontSize: font.size[12],
       '& .stock-green': {
         color: colors.green,
       },
@@ -78,21 +78,21 @@ export const Availability = styled(Box)({
     },
     '& .availability-link': {
       color: colors.brandBlue,
-      fontSize: '0.625rem',
+      fontSize: font.size[10],
       textDecoration: 'underline',
       textTransform: 'unset',
-      padding: 0,
+      padding: styles.padding[0],
     },
   },
   '& .other-stores': {
-    alignItems: 'center',
+    alignItems: styles.align.center,
     '& .stock-details': {
       padding: '0.375rem 0',
       '&:first-child': {
-        paddingTop: 0,
+        paddingTop: styles.padding[0],
       },
       '&:last-child': {
-        paddingBottom: 0,
+        paddingBottom: styles.padding[0],
       },
     },
     '& hr': {
@@ -104,14 +104,12 @@ export const Availability = styled(Box)({
 
 export const InfoTile = styled(Box)({
   padding: '1.125rem 0',
-  display: 'flex',
-  justifyContent: 'space-between',
-  fontSize: '1rem',
-  lineHeight: '1.375rem',
+  display: styles.display.flex,
+  justifyContent: styles.justify.between,
+  fontSize: font.size[16],
   borderBottom: `1px solid ${colors.gray85} `,
   '& p': {
-    fontSize: '1rem',
-    lineHeight: '1.375rem',
+    fontSize: font.size[16],
     color: colors.black,
     fontWeight: 600,
   },
@@ -122,15 +120,15 @@ export const InfoTile = styled(Box)({
     width: '100%',
     '& .rating-info-block': {
       marginTop: '1.125rem',
-      display: 'flex',
-      alignItems: 'center',
+      display: styles.display.flex,
+      alignItems: styles.align.center,
       '& span': {
         verticalAlign: 'middle',
       },
     },
   },
   '& .total-question-text': {
-    fontSize: '0.875rem',
+    fontSize: font.size[14],
     color: colors.brandBlue,
     marginTop: '0.875rem',
     textDecoration: 'underline',
@@ -143,30 +141,30 @@ export const ErrorWrapper = styled(Box)({
 
 export const StockError = styled(Box)({
   backgroundColor: colors.bgDanger,
-  fontSize: '0.875rem',
+  fontSize: font.size[14],
   color: colors.danger,
   border: `1px solid ${colors.dangerBorder}`,
   borderRadius: '0.25rem',
-  fontWeight: '400',
+  fontWeight: font.weight[400],
   padding: '0.375rem 0.625rem 0.75rem 0.625rem',
   '& .refresh-btn': {
-    display: 'flex',
-    alignItems: 'center',
-    fontWeight: 'bold',
+    display: styles.display.flex,
+    alignItems: styles.align.center,
+    fontWeight: font.weight['bold'],
   },
   '& button': {
     textTransform: 'none',
     color: colors.danger,
     textDecoration: 'underline',
-    fontWeight: '600',
+    fontWeight: font.weight[600],
     padding: '0 0.375rem',
   },
 });
 
 export const ButtonGroupWrapper = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-evenly',
-  alignItems: 'center',
+  display: styles.display.flex,
+  justifyContent: styles.justify.evenly,
+  alignItems: styles.align.center,
   width: '80px',
   height: '36px',
   boxSizing: 'border-box',
@@ -174,7 +172,7 @@ export const ButtonGroupWrapper = styled(Box)({
   backgroundColor: colors.white,
   border: `1px solid ${colors.gray60}`,
   '& p': {
-    fontSize: '1rem',
+    fontSize: font.size[16],
     flexGrow: '1',
     textAlign: 'center',
   },
@@ -182,9 +180,9 @@ export const ButtonGroupWrapper = styled(Box)({
 
 export const InputWrapper = styled(InputBase)({
   flex: 2,
-  fontSize: '1rem',
-  color: colors.fontColor,
-  fontWeight: '400',
+  fontSize: font.size[16],
+  color: colors.textBlack,
+  fontWeight: font.weight[400],
   '& input': {
     textAlign: 'center',
   },
@@ -192,12 +190,12 @@ export const InputWrapper = styled(InputBase)({
 
 export const SaveButton = styled(Box)({
   height: '3rem',
-  display: 'flex',
+  display: styles.display.flex,
   flexGrow: '1',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontSize: '0.875rem',
-  fontWeight: 'bold',
+  justifyContent: styles.justify.center,
+  alignItems: styles.align.center,
+  fontSize: font.size[14],
+  fontWeight: font.weight['bold'],
   color: colors.white,
   backgroundColor: colors.lightBlue,
   textTransform: 'uppercase',

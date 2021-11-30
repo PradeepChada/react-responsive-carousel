@@ -25,5 +25,8 @@ export default SkuError;
 SkuError.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
+};
+
+SkuError.defaultProps = {
   size: 'medium',
 };

@@ -1,21 +1,22 @@
 import { styled } from '@mui/styles';
 import { Container, Typography, Box } from '@mui/material';
-import { colors } from '../../utils/themeUtils';
+import { colors, styles, font } from '../../utils/themeUtils';
 
 export const PageContainer = styled(Container)({
-  padding: '0.625rem 1rem',
+  padding: `0.625rem ${styles.margin[3]}`,
 });
 
 export const Wrapper = styled(Box)({
-  marginTop: '1.5rem',
-  marginBottom: '1rem',
+  marginTop: styles.margin[4],
+  marginBottom: styles.margin[3],
 });
 
 export const Title = styled(Typography)({
-  fontSize: '1.125rem',
-  fontWeight: 600,
+  fontSize: font.size[18],
+  fontWeight: font.weight[600],
   marginTop: '1.625rem',
-  marginBottom: (props) => (props.noContent ? '0.5rem' : '1rem'),
+  marginBottom: (props) =>
+    props.noContent ? styles.margin[2] : styles.margin[3],
 });
 
 export const ErrorWrapper = styled(Box)({
@@ -23,6 +24,6 @@ export const ErrorWrapper = styled(Box)({
 });
 
 export const NoContent = styled(Typography)({
-  fontSize: '0.875rem',
+  fontSize: font.size[14],
   color: colors.selectGray,
 });

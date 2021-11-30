@@ -23,6 +23,7 @@ import {
   DownArrow,
   UpArrow,
   PayButton,
+  PageConatiner,
 } from './SKUCheckout.styles';
 import { getSKUTileInfo, givenItemExitsInCart } from '../../utils/skuHelpers';
 import { Box } from '@mui/system';
@@ -81,7 +82,7 @@ function SkuCheckout({ history }) {
   };
 
   return (
-    <>
+    <PageConatiner>
       <BoxWrapper>
         <SearchBar
           handleSearch={handleSearch}
@@ -175,7 +176,7 @@ function SkuCheckout({ history }) {
           </PayButton>
         </Box>
       </CartContainer>
-    </>
+    </PageConatiner>
   );
 }
 
