@@ -33,6 +33,7 @@ export const ContentWrapper = styled(Box)({
   minHeight: 330,
   '& .tab-content': {
     height: '100%',
+    marginTop: 0,
     '& .MuiGrid-item': {
       '&:first-child': {
         flexGrow: 1,
@@ -58,40 +59,15 @@ export const ContentWrapper = styled(Box)({
 export const Title = styled(Typography)({
   fontSize: font.size[14],
   lineHeight: '22px',
-  fontWeight: '700',
+  fontWeight: font.weight[600],
   color: colors.black,
   letterSpacing: 0.2,
-  marginBottom: '4px',
+  marginBottom: styles.margin[1],
 });
 
 export const Price = styled(Typography)({
-  fontSize: '37px',
-  fontWeight: '700',
-  textAlign: 'center',
-  lineHeight: '39px',
-});
-
-export const Amount = styled(Typography)({
-  fontSize: '37px',
+  fontSize: '2.25rem',
   fontWeight: font.weight[600],
   textAlign: 'center',
   lineHeight: '39px',
-});
-
-export const Decoration = styled(Typography)({
-  color: '#005DAB',
-  fontSize: '14px',
-  lineHeight: '18px ',
-  marginTop: '17px',
-  textDecoration: 'underline',
-  letterSpacing: 0.2,
-});
-
-export const Description = styled(Typography)({
-  fontSize: '27px',
-  fontWeight: font.weight[600],
-  textAlign: 'center',
-  marginTop: '27px',
-  paddingLeft: '54px',
-  paddingRight: '54px',
 });

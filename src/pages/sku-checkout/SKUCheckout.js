@@ -23,11 +23,11 @@ import {
   DownArrow,
   UpArrow,
   PayButton,
-  PageConatiner
+  PageConatiner,
 } from './SKUCheckout.styles';
 import { getSKUTileInfo, givenItemExitsInCart } from '../../utils/skuHelpers';
 import { Box } from '@mui/system';
-import {  Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 const SearchPageText = () => {
   return (
     <TextWrapper display='flex' flexDirection='column' alignItems='center'>

@@ -7,7 +7,7 @@ export const PageContainer = styled(Container)({
   display: styles.display.flex,
   flexDirection: 'column',
   justifyContent: styles.justify.between,
-  padding: styles.padding[3],
+  padding: styles.padding[0],
   height: '100%',
 });
 export const PaymentInfo = styled(Box)({
@@ -52,7 +52,7 @@ export const PaymentInfo = styled(Box)({
       fontSize: font.size[14],
       fontWeight: font.weight[600],
       color: colors.textBlack,
-      textTransform:"capitalize"
+      textTransform: 'capitalize',
     },
     '& p:nth-child(2)': {
       fontSize: font.size[14],
@@ -78,7 +78,7 @@ export const PaymentInfo = styled(Box)({
       fontWeight: font.weight['normal'],
       color: colors.brandBlue,
       textDecoration: 'underline',
-      textTransform:"capitalize"
+      textTransform: 'capitalize',
     },
   },
   '& > div:nth-child(4)': {
@@ -99,7 +99,7 @@ export const OrderSummary = styled(Box)({
   width: '100%',
   padding: styles.padding[3],
   backgroundColor: colors.answerBackground,
-  marginTop: styles.margin[2],
+  // marginTop: styles.margin[2],
   '& > p': {
     fontSize: font.size[18],
     fontWeight: font.weight[600],
@@ -134,7 +134,7 @@ export const OrderSummary = styled(Box)({
   '& .tax-text': {
     display: styles.display.flex,
     justifyContent: styles.justify.between,
-    marginBottom: '1.625rem',
+    marginBottom: styles.margin[3],
     '& > p': {
       fontSize: font.size[14],
       fontWeight: font.weight['normal'],

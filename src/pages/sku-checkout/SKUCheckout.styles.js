@@ -9,15 +9,16 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 const boxSizing = 'border-box';
 
 export const PageConatiner = styled(Container)({
-  padding: `${styles.padding[3]} ${styles.padding[3]} 0 ${styles.padding[3]}`,
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  padding: 0,
 });
 export const BoxWrapper = styled(Box)({
   display: styles.display.flex,
   flexDirection: 'column',
+  padding: `${styles.padding[3]} ${styles.padding[3]} 0 ${styles.padding[3]}`,
   alignItems: styles.align.center,
   '& .cart-items-container': {
     display: styles.display.flex,

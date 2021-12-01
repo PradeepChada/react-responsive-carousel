@@ -2,7 +2,7 @@ import { styled } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { colors, font ,styles } from '../../utils/themeUtils';
+import { colors, font, styles } from '../../utils/themeUtils';
 
 const sizes = {
   medium: {
