@@ -291,7 +291,7 @@ const ProductDetails = ({ history, match }) => {
         <ProductVideos
           showModal={showVideos}
           handleClose={() => setShowVideos(false)}
-          data={[...videos, ...videos, ...videos]}
+          data={videos}
         />
       )}
       <ProductTitle
