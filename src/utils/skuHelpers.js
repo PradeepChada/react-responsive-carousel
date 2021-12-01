@@ -105,3 +105,13 @@ export const getFirstPOPMemeber = (accountDetails) => {
   });
   return _account;
 };
+
+export const getPOPAccountFullName = (accountDetails, emailAddress) => {
+  let _fullname = null;
+  accountDetails.forEach((data) => {
+    if (data.emailAddress === emailAddress) {
+      _fullname = data.firstName + ' ' + data.lastName;
+    }
+  });
+  return _fullname;
+};

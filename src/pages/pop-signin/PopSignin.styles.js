@@ -51,6 +51,7 @@ export const PageContainer = styled(Container)({
     fontSize: font.size[14],
     fontWeight: font.weight['bold'],
     textTransform: 'uppercase',
+    marginBottom: styles.margin[3],
   },
   '& legend': {
     fontSize: font.size[16],
@@ -60,5 +61,17 @@ export const PageContainer = styled(Container)({
   },
   '& span': {
     fontSize: font.size[16],
+  },
+  '& .error': {
+    fontSize: font.size[14],
+    fontWeight: font.weight['normal'],
+    color: colors.danger,
+    marginTop: styles.margin[3],
+    marginBottom: styles.margin[2],
+  },
+  '& .errorInput': {
+    '& fieldset': {
+      borderColor: colors.danger,
+    },
   },
 });

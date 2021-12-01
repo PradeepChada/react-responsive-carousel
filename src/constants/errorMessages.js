@@ -11,10 +11,16 @@ export const skuErrorMessages = {
     description: 'Please try to scan or search again',
   },
   inventory: {
-    description: 'Availability information is unavailable at this time. Please rescan or enter SKU manually.',
+    description:
+      'Availability information is unavailable at this time. Please rescan or enter SKU manually.',
     shortDescription: 'Availability information is unavailable at this time.',
   },
   productVariants: {
-    title: 'No additional sizes or colors linked to this product.'
-  }
+    title: 'No additional sizes or colors linked to this product.',
+  },
+};
+export const popAccountNotFound = {
+  email: 'Email was invalid / not associated to POP Account',
+  phone: 'Phone was invalid / not associated to POP Account',
+  unknown: 'Unknown Error',
 };
