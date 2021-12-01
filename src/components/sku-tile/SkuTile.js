@@ -18,14 +18,18 @@ import {
   Code,
 } from './SkuTile.styles';
 import { skuErrorMessages } from '../../constants/errorMessages';
-import { Typography } from '@mui/material';
+import { Button, Skeleton, Typography } from '@mui/material';
+import RatingsBar from '../ratings-bar/RatingsBar';
 
 const SkuTile = ({
   skuInfo,
+  rating,
+  showNearAvailability,
   loading,
   skuAvailabilityLoading,
   skuAvailabilityError,
   handleClick,
+  toggleDrawer,
 }) => {
   const _renderSkeleton = () => {
     return (
@@ -34,7 +38,9 @@ const SkuTile = ({
         <Box display='flex' flexDirection='column' overflow='hidden'>
           <PriceSkeleton variant='text' data-testid='price-skeleton' />
           <TitleSkeleton variant='text' data-testid='title-skeleton' />
+          <Skeleton variant='text' className='availability-link' />
           <StockSkeleton variant='text' data-testid='stock-skeleton' />
+          <Skeleton variant='text' />
           <CodeSkeleton variant='text' data-testid='code-skeleton' />
         </Box>
       </Wrapper>
@@ -60,6 +66,7 @@ const SkuTile = ({
         <Title data-testid='sku-title'>
           {skuInfo?.name?.substring(0, 25)}...
         </Title>
+        <RatingsBar rating={rating} />
         {skuAvailabilityLoading ? (
           <StockSkeleton variant='text' data-testid='stock-skeleton' />
         ) : skuAvailabilityError ? (
@@ -68,6 +75,18 @@ const SkuTile = ({
           <Stock>{skuInfo?.qtyAvailableAtStore} in Stock</Stock>
         ) : (
           <OutOfStock>Out of Stock</OutOfStock>
+        )}
+        {showNearAvailability && (
+          <Button
+            className='availability-link'
+            variant='text'
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleDrawer(true);
+            }}
+          >
+            Show availability in other stores
+          </Button>
         )}
         <Code>SKU: #{skuInfo?.skuId}</Code>
       </Box>
@@ -79,8 +98,11 @@ export default SkuTile;
 
 SkuTile.propTypes = {
   skuInfo: PropTypes.object,
+  rating: PropTypes.number,
   loading: PropTypes.bool,
+  showNearAvailability: PropTypes.bool,
   skuAvailabilityLoading: PropTypes.bool,
   skuAvailabilityError: PropTypes.object,
   handleClick: PropTypes.func,
+  toggleDrawer: PropTypes.func,
 };
