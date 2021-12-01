@@ -66,7 +66,7 @@ export const PageContainer = styled(Container)({
     fontSize: font.size[14],
     fontWeight: font.weight['normal'],
     color: colors.danger,
-    marginTop: styles.margin[3],
+    marginTop: styles.margin[2],
     marginBottom: styles.margin[2],
   },
   '& .errorInput': {
