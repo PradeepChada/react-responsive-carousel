@@ -63,7 +63,7 @@ const ProductVariants = ({ history, match }) => {
   const getSkuData = (item) => {
     return {
       image: `${config.appConfig.asset_base_url}${item.mediaList?.[0]?.url}`,
-      skuPriceDetails: getSkuPriceDetails(skuData?.skuPrices),
+      skuPriceDetails: getSkuPriceDetails(item?.productPrice),
       name: item.name,
       qtyAvailableAtStore: getQtyInStore(
         skuAvailability?.inventoryEstimates,
