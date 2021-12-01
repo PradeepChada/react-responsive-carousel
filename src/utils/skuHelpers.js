@@ -101,7 +101,9 @@ export const givenItemExitsInCart = (skuId, cartItems) => {
 export const getFirstPOPMemeber = (accountDetails) => {
   let _account = null;
   accountDetails.forEach((data) => {
-    if (data.popMember === true) _account = data;
+    if (data.popMember === true) {
+      _account = data;
+    }
   });
   return _account;
 };
@@ -110,7 +112,7 @@ export const getPOPAccountFullName = (accountDetails, emailAddress) => {
   let _fullname = null;
   accountDetails.forEach((data) => {
     if (data.emailAddress === emailAddress) {
-      _fullname = data.firstName + ' ' + data.lastName;
+      _fullname = `${data.firstName} ${data.lastName}`;
     }
   });
   return _fullname;
