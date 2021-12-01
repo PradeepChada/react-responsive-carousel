@@ -85,7 +85,7 @@ export const Availability = styled(Box)({
     },
   },
   '& .other-stores': {
-    alignItems: styles.align.start,
+    alignItems: styles.align.center,
     '& .stock-details': {
       padding: '0.375rem 0',
       '&:first-child': {
@@ -111,6 +111,7 @@ export const InfoTile = styled(Box)({
   '& p': {
     fontSize: font.size[16],
     color: colors.black,
+    fontWeight: 600,
   },
   '& svg[data-testid=ChevronRightIcon]': {
     color: colors.lightBlue,

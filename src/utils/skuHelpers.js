@@ -115,3 +115,22 @@ export const getPOPAccountFullName = (accountDetails, emailAddress) => {
   });
   return _fullname;
 };
+export const generateVideoUrl = (provider, videoId) => {
+  if (provider === 'WISTIA') {
+    return `${config.appConfig.wistia_embed_url}${videoId}`;
+  } else {
+    return `${config.appConfig.youtube_embed_url}${videoId}`;
+  }
+};
+
+export const getProductVideos = ({ productVisuals }) => {
+  return (
+    productVisuals
+      ?.filter((o) => o.isVideo)
+      ?.map((o) => ({
+        url: generateVideoUrl(o.providerName, o.videoId),
+        thumbnail: o.thumbnailSrc,
+        videoId: o.videoId,
+      })) || []
+  );
+};

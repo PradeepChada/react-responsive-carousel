@@ -1,38 +1,28 @@
 import { styled } from '@mui/styles';
-import { colors } from '../../utils/themeUtils';
-import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
+import { colors, font, styles } from '../../utils/themeUtils';
 import { Box } from '@mui/system';
 import { Container, Typography, Button } from '@mui/material';
 
-export const TextWrapper = styled(Box)({
-  // width: '260px',
-  // marginTop: '30px',
-  padding: '6.438rem 0',
-});
-
-export const SuccessIcon = styled(CheckBoxRoundedIcon)({
-  color: '#128400',
-  width: '65px',
-  height: '65px',
-  marginBottom: '1rem',
-  borderRadius: '80px',
+export const Content = styled(Box)({
+  flexGrow: 1,
+  justifyContent: 'center',
 });
 
 export const Title = styled(Typography)({
-  fontSize: '27px',
-  fontWeight: '700',
+  fontSize: font.size[28],
+  fontWeight: font.weight[600],
   color: colors.textBlack,
+  marginTop: styles.margin[2],
 });
 
 export const PageContainer = styled(Container)({
-  padding: '1rem',
+  padding: '0 1rem 1rem 1rem',
   height: '100%',
 });
 
 export const ButtonDone = styled(Button)({
-  fontColor: '#333337',
-  color: 'black',
-  fontWeight: '700',
-  marginBottom: '16px',
-  marginTop: '16px',
+  color: colors.textBlack,
+  fontWeight: font.weight[600],
+  marginBottom: styles.margin[2],
+  marginTop: styles.margin[2],
 });

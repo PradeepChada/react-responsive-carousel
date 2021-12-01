@@ -1,11 +1,11 @@
 import { styled, keyframes } from '@mui/system';
-import { colors ,styles} from './../../utils/themeUtils';
+import { colors, styles } from './../../utils/themeUtils';
 
 export const Wrapper = styled('div')({
   position: 'absolute',
   display: styles.display.flex,
-  justifyContent: styles.justify.center ,
-  alignItems: styles.align.center ,
+  justifyContent: styles.justify.center,
+  alignItems: styles.align.center,
   width: '100vw',
   height: '100vh',
   background: colors.white,
@@ -16,7 +16,7 @@ export const Wrapper = styled('div')({
 export const SpinnerParent = styled('div')({
   width: '197px',
   height: '197px',
-  display: styles.display.inlineBlock ,
+  display: styles.display.inlineBlock,
   overflow: 'hidden',
   background: 'none',
 });
