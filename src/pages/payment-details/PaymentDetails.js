@@ -10,8 +10,12 @@ import {
   PaymentInfo,
   OrderSummary,
 } from './PaymentDetails.styles';
-
+import { useSelector } from 'react-redux';
+import { getPOPAccountFullName } from '../../utils/skuHelpers';
 function PaymentDetails({ history }) {
+  const { mainAccount, accountDetails } = useSelector(
+    (state) => state.popAccount
+  );
   return (
     <PageContainer>
       <PaymentInfo>
@@ -22,11 +26,14 @@ function PaymentDetails({ history }) {
             <Typography>$12.90</Typography>
           </Box>
         </Box>
+
         <Box>
           <Typography>POP! Member</Typography>
-          <Typography onClick={() => history.push('/pop-signup')}>
-            Carol Smith
-          </Typography>
+          {mainAccount && (
+            <Typography onClick={() => history.push('/pop-signin')}>
+              {getPOPAccountFullName(accountDetails, mainAccount)}
+            </Typography>
+          )}
         </Box>
         <Box>
           <Typography>Order Discounts</Typography>
