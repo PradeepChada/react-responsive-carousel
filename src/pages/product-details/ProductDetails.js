@@ -287,13 +287,12 @@ const ProductDetails = ({ history, match }) => {
   return (
     <PageContainer>
       {_renderDrawer()}
-      {showVideos && (
-        <ProductVideos
-          showModal={showVideos}
-          handleClose={() => setShowVideos(false)}
-          data={videos}
-        />
-      )}
+
+      <ProductVideos
+        showModal={showVideos}
+        handleClose={() => setShowVideos(false)}
+        data={videos}
+      />
       <ProductTitle
         title={skuData?.name}
         skuId={skuData?.id}

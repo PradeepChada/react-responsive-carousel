@@ -15,16 +15,21 @@ const ProductVideos = ({ data, showModal, handleClose }) => {
     setPlaying(false);
     setCurrentIndex();
   };
+
+  const onCloseModal = () => {
+    setCurrentIndex();
+    setPlaying(false);
+    handleClose();
+  };
   return (
-    <Modal fullWidth open={showModal} onClose={handleClose}>
-      <IconButton className='close-btn' color='error' onClick={handleClose}>
+    <Modal fullWidth open={showModal} onClose={onCloseModal}>
+      <IconButton className='close-btn' color='error' onClick={onCloseModal}>
         <CloseRounded />
       </IconButton>
       <DialogContent sx={{ padding: 0 }}>
         <Slider
           hasMount={false}
           showArrows={false}
-          swipeable
           autoPlay={false}
           onChange={onChangeSlide}
           showThumbs={false}
