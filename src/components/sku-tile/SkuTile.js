@@ -21,6 +21,19 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import { Button, Skeleton, Typography } from '@mui/material';
 import RatingsBar from '../ratings-bar/RatingsBar';
 
+const showStock = (skuAvailabilityLoading, skuAvailabilityError, skuInfo) => {
+  if (skuAvailabilityLoading) {
+    return <StockSkeleton variant='text' data-testid='stock-skeleton' />;
+  } else if (skuAvailabilityError) {
+    return <StockError>{skuErrorMessages.inventory?.description}</StockError>;
+  } else {
+    return skuInfo?.qtyAvailableAtStore > 0 ? (
+      <Stock>{skuInfo?.qtyAvailableAtStore} in Stock</Stock>
+    ) : (
+      <OutOfStock>Out of Stock</OutOfStock>
+    );
+  }
+};
 const SkuTile = ({
   skuInfo,
   rating,
@@ -67,15 +80,7 @@ const SkuTile = ({
           {skuInfo?.name?.substring(0, 25)}...
         </Title>
         <RatingsBar rating={rating} />
-        {skuAvailabilityLoading ? (
-          <StockSkeleton variant='text' data-testid='stock-skeleton' />
-        ) : skuAvailabilityError ? (
-          <StockError>{skuErrorMessages.inventory?.description}</StockError>
-        ) : skuInfo?.qtyAvailableAtStore > 0 ? (
-          <Stock>{skuInfo?.qtyAvailableAtStore} in Stock</Stock>
-        ) : (
-          <OutOfStock>Out of Stock</OutOfStock>
-        )}
+        {showStock(skuAvailabilityLoading, skuAvailabilityError, skuInfo)}
         {showNearAvailability && (
           <Button
             className='availability-link'

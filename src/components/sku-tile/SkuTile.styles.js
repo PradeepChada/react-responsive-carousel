@@ -102,8 +102,7 @@ export const StockError = styled(Box)({
   border: `1px solid ${colors.dangerBorder}`,
   borderRadius: '0.25rem',
   fontWeight: font.weight[400],
-  marginTop: -Number(styles.margin[1]),
-  marginBottom: '0.625rem',
+  marginTop: styles.margin[1],
   padding: '0.625rem',
 });
 
@@ -111,7 +110,7 @@ export const OutOfStock = styled(Typography)({
   fontSize: font.size[14],
   color: colors.red,
   fontWeight: font.weight[700],
-  marginBottom: '1.875rem',
+  marginTop: styles.margin[4],
 });
 
 export const Code = styled(Typography)({
