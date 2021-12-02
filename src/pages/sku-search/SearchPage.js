@@ -66,7 +66,7 @@ const SearchPage = ({ history }) => {
   const toggleDrawer = (open) => {
     setShowDrawer(open);
   };
-  const _renderDrawer = () => {
+  const _renderAvailabilityDrawer = () => {
     return (
       <Drawer
         anchor={'left'}
@@ -124,7 +124,7 @@ const SearchPage = ({ history }) => {
   return (
     <Wrapper>
       <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
-      {_renderDrawer()}
+      {_renderAvailabilityDrawer()}
       {!loading && !error && !skuData && <SearchPageText />}
       {error ? (
         <ErrorWrapper alignItems='center'>
