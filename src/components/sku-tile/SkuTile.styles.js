@@ -8,8 +8,15 @@ export const Wrapper = styled(Box)({
   display: styles.display.flex,
   marginTop: '2rem',
   borderBottom: `1px solid ${colors.gray85}`,
-  paddingBottom: styles.padding[4],
+  paddingBottom: styles.padding[3],
   width: '100%',
+  '& .availability-link': {
+    fontSize: font.size[12],
+    color: colors.darkBlue,
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    marginBottom: styles.margin[3],
+  },
 });
 
 export const ImageSkeleton = styled(Skeleton)({
@@ -26,14 +33,14 @@ export const PriceSkeleton = styled(Skeleton)({
 
 export const TitleSkeleton = styled(Skeleton)({
   fontSize: font.size[14],
-  marginBottom: '0.75rem',
+  marginBottom: styles.margin[1],
   width: '210px',
 });
 
 export const StockSkeleton = styled(Skeleton)({
   fontSize: font.size[14],
-  marginBottom: '1.875rem',
   width: '90px',
+  marginTop: styles.margin[4],
 });
 
 export const CodeSkeleton = styled(Skeleton)({
@@ -76,7 +83,7 @@ export const Title = styled(Typography)({
   fontSize: font.size[14],
   color: colors.textBlack,
   fontWeight: font.weight[400],
-  marginBottom: '0.75rem',
+  marginBottom: styles.margin[1],
   textTransform: 'capitalize',
 });
 
@@ -84,7 +91,7 @@ export const Stock = styled(Typography)({
   fontSize: font.size[14],
   color: colors.green,
   fontWeight: font.weight[700],
-  marginBottom: '1.875rem',
+  marginTop: styles.margin[4],
 });
 
 export const StockError = styled(Box)({
@@ -95,8 +102,7 @@ export const StockError = styled(Box)({
   border: `1px solid ${colors.dangerBorder}`,
   borderRadius: '0.25rem',
   fontWeight: font.weight[400],
-  marginTop: -Number(styles.margin[1]),
-  marginBottom: '0.625rem',
+  marginTop: styles.margin[1],
   padding: '0.625rem',
 });
 
@@ -104,7 +110,7 @@ export const OutOfStock = styled(Typography)({
   fontSize: font.size[14],
   color: colors.red,
   fontWeight: font.weight[700],
-  marginBottom: '1.875rem',
+  marginTop: styles.margin[4],
 });
 
 export const Code = styled(Typography)({

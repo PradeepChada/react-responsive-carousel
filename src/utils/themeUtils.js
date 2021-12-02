@@ -18,6 +18,7 @@ export const colors = {
   brandDarkBlue: '#004F90',
   primaryBlue: '#2E98D4',
   // lightBlue: '#CEEEFC',
+  darkBlue: '#004F91',
   textBlack: '#333337',
   white: '#FFFFFF',
   bgGray: '#F6F6FA',

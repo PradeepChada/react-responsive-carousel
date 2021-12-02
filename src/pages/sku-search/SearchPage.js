@@ -1,6 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSkuDetails, actions } from '../../slices/sku.slice';
+import {
+  fetchSkuDetails,
+  actions,
+  fetchStoreAvailability,
+} from '../../slices/sku.slice';
 import { skuErrorMessages } from '../../constants/errorMessages';
 import SearchBar from '../../components/searchbar/SearchBar';
 import SkuTile from './../../components/sku-tile/SkuTile';
@@ -14,7 +18,12 @@ import {
   Description,
   ErrorWrapper,
 } from './SearchPage.styles';
+import { Drawer } from '@mui/material';
+import NetworkInventory from '../product-details/network-inventory/NetworkInventory';
 
+const showNearAvailability = (storeAvailabilities) => {
+  return storeAvailabilities?.length <= 1 ? false : true;
+};
 const SearchPageText = () => {
   return (
     <TextWrapper display='flex' flexDirection='column'>
@@ -34,15 +43,51 @@ const SearchPage = ({ history }) => {
     loading,
     skuData,
     error,
+    mktAvailData,
     skuAvailabilityLoading,
     skuAvailability,
+    mktAvailLoading,
+    mktAvailError,
     skuAvailabilityError,
   } = useSelector((state) => state.sku);
 
+  const { reviewsData } = useSelector((state) => state.reviews);
+  const [showDrawer, setShowDrawer] = useState(false);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
   useEffect(() => {
     dispatch(actions.reset());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (skuData != null) {
+      dispatch(fetchStoreAvailability(skuData?.id, storeId));
+    }
+  }, [skuData, dispatch, storeId]);
+  const toggleDrawer = (open) => {
+    setShowDrawer(open);
+  };
+  const _renderAvailabilityDrawer = () => {
+    return (
+      <Drawer
+        anchor={'left'}
+        open={showDrawer}
+        onClose={() => toggleDrawer(false)}
+      >
+        <NetworkInventory
+          anchor={'left'}
+          toggleDrawer={toggleDrawer}
+          data={mktAvailData?.storeAvailabilities?.filter(
+            (o) =>
+              ![899, Number(skuAvailability?.requestStoreNumber)].includes(
+                o.storeNumber
+              )
+          )}
+          loading={mktAvailLoading}
+          error={mktAvailError}
+        />
+      </Drawer>
+    );
+  };
 
   const handleSearch = (skuId) => {
     if (!skuId) dispatch(actions.failure(skuErrorMessages.malfunction));
@@ -79,6 +124,7 @@ const SearchPage = ({ history }) => {
   return (
     <Wrapper>
       <SearchBar handleSearch={handleSearch} handleClear={handleClear} />
+      {_renderAvailabilityDrawer()}
       {!loading && !error && !skuData && <SearchPageText />}
       {error ? (
         <ErrorWrapper alignItems='center'>
@@ -88,10 +134,15 @@ const SearchPage = ({ history }) => {
         (loading || skuData) && (
           <SkuTile
             skuInfo={skuInfo}
+            rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+            showNearAvailability={showNearAvailability(
+              mktAvailData?.storeAvailabilities
+            )}
             skuAvailability={skuAvailability}
             loading={loading}
             skuAvailabilityLoading={skuAvailabilityLoading}
             skuAvailabilityError={skuAvailabilityError}
+            toggleDrawer={toggleDrawer}
             handleClick={(id) => history.push(`/product-details/${id}`)}
           />
         )
