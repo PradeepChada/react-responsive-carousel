@@ -11,11 +11,13 @@ export const Wrapper = styled(Box)({
   paddingBottom: styles.padding[3],
   width: '100%',
   '& .availability-link': {
-    fontSize: font.size[12],
+    fontSize: font.size[14],
+    fontWeight: font.weight['bold'],
     color: colors.darkBlue,
-    textDecoration: 'underline',
     cursor: 'pointer',
     marginBottom: styles.margin[3],
+    textAlign: 'inherit',
+    lineHeight: '1',
   },
 });
 

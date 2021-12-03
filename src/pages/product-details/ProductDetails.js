@@ -105,13 +105,16 @@ const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
     return <Skeleton width={200} />;
   }
   return (
-    <Button
-      className='availability-link'
-      variant='text'
-      onClick={() => toggleDrawer(true)}
-    >
-      View availability in other stores
-    </Button>
+    <>
+      <Button
+        className='availability-link'
+        variant='text'
+        onClick={() => toggleDrawer(true)}
+      >
+        Show availability in other stores
+        <ChevronRight />
+      </Button>
+    </>
   );
 };
 const ProductDetails = ({ history, match }) => {
@@ -219,8 +222,8 @@ const ProductDetails = ({ history, match }) => {
           <span className='stock-green'>Available</span>
         ) : (
           <span className='stock-red'>Unavailable</span>
-        )}{' '}
-        in DC
+        )}
+        &nbsp;in DC
       </div>
     );
   };
@@ -347,7 +350,11 @@ const ProductDetails = ({ history, match }) => {
         ) : (
           <>
             <Box className='store-tile'>
-              <img src={StoreIcon} alt='Store' />
+              <img
+                src={StoreIcon}
+                alt='Store'
+                style={{ alignSelf: 'flex-start' }}
+              />
               <Box flexGrow={1}>
                 {showStockDetails(skuAvailabilityLoading, inStoreQty)}
                 {showAvailabilityInOtherStore(
