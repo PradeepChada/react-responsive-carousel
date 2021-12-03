@@ -353,7 +353,6 @@ const ProductDetails = ({ history, match }) => {
               <img
                 src={StoreIcon}
                 alt='Store'
-                style={{ alignSelf: 'flex-start' }}
               />
               <Box flexGrow={1}>
                 {showStockDetails(skuAvailabilityLoading, inStoreQty)}
