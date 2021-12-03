@@ -36,7 +36,6 @@ const PopSignin = ({ history }) => {
   const { accountDetails, loading, error, mainAccount } = useSelector(
     (state) => state.popAccount
   );
-
   const nextButtonHandler = () => {
     if (email.trim() !== '') {
       if (validateEmail(email.trim())) {
@@ -51,12 +50,13 @@ const PopSignin = ({ history }) => {
       setShowForm((prevState) => !prevState);
     }
   };
-
   const phoneInputChangeHandler = (e) => {
     const phoneValue = e.target.value;
-    if (e.nativeEvent.inputType !== 'deleteContentBackward')
+    if (e.nativeEvent.inputType !== 'deleteContentBackward') {
       setPhone(reFormPhone(phoneValue));
-    else setPhone(phoneValue);
+    } else {
+      setPhone(phoneValue);
+    }
   };
   const confirmButtonHandler = () => {
     dispatch(setMainPOPAccount(popAccount));
@@ -65,6 +65,7 @@ const PopSignin = ({ history }) => {
   useEffect(() => {
     if (accountDetails.length > 0) {
       setShowForm(false);
+      setPOPAccount(getFirstPOPMemeber(accountDetails).emailAddress);
     }
   }, [accountDetails]);
   useEffect(() => {
@@ -72,11 +73,7 @@ const PopSignin = ({ history }) => {
       setShowForm(true);
     }
   }, [error]);
-  useEffect(() => {
-    if (accountDetails.length !== 0) {
-      setPOPAccount(getFirstPOPMemeber(accountDetails).emailAddress);
-    }
-  }, [accountDetails]);
+
   const showLoading = () => {
     return (
       <Box
@@ -191,7 +188,6 @@ const PopSignin = ({ history }) => {
                       control={<Radio />}
                       label={
                         <Typography>
-                          
                           {getPOPAccountFullName(
                             accountDetails,
                             data.emailAddress

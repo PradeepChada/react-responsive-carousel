@@ -143,30 +143,28 @@ export const capitalizeFirstLetter = (str) => {
   return arr.join(' ');
 };
 
-export const getDigitOnly = (value) => {
-  let _newData = value.split('');
-  _newData = _newData.filter((data) => {
+const filterDigitOnly = (value) => {
+  return value.filter((data) => {
     if (data >= '0' && data <= '9') {
       return true;
     }
     return false;
   });
+};
+export const getDigitOnly = (value) => {
+  let _newData = value.split('');
+  _newData =filterDigitOnly(_newData);
   return _newData.join('');
 };
 
 export const validateEmail = (email) => {
-  let re = /\S+@\S+\.\S+/;
+  const re = /\S+@\S+\.\S+/;
   return re.test(email);
 };
 
 export const reFormPhone = (phone) => {
   let _newPhone = phone.split('');
-  _newPhone = _newPhone.filter((data) => {
-    if (data >= '0' && data <= '9') {
-      return true;
-    }
-    return false;
-  });
+  _newPhone = filterDigitOnly(_newPhone);
 
   if (_newPhone.length > 10) {
     _newPhone = _newPhone.slice(0, 10);
