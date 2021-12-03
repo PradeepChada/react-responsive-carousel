@@ -62,6 +62,11 @@ export const PageContainer = styled(Container)({
   '& span': {
     fontSize: font.size[16],
   },
+  '& label': {
+    '& p': {
+      wordBreak: 'break-all',
+    },
+  },
   '& .error': {
     fontSize: font.size[14],
     fontWeight: font.weight['normal'],

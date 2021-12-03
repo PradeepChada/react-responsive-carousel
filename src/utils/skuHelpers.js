@@ -58,8 +58,6 @@ export const getReviewsApiUrl = (productId, sort = '') => {
 };
 
 export const filterQuestionsData = (questionData, newQuestions) => {
-  console.log(questionData);
-  console.log(newQuestions);
   return {
     ...newQuestions,
     questionData: {
@@ -70,7 +68,7 @@ export const filterQuestionsData = (questionData, newQuestions) => {
 };
 
 export const showCheckoutHeader = (path) => {
-  return ['/sku-checkout', '/payment-details', '/pop-signup'].includes(path);
+  return ['/sku-checkout', '/payment-details', '/pop-signin'].includes(path);
 };
 
 export const showCancelOrderButton = (path) => {
@@ -115,7 +113,7 @@ export const getPOPAccountFullName = (accountDetails, emailAddress) => {
       _fullname = `${data.firstName} ${data.lastName}`;
     }
   });
-  return _fullname;
+  return capitalizeFirstLetter(_fullname);
 };
 export const generateVideoUrl = (provider, videoId) => {
   if (provider === 'WISTIA') {
@@ -135,4 +133,52 @@ export const getProductVideos = ({ productVisuals }) => {
         videoId: o.videoId,
       })) || []
   );
+};
+
+export const capitalizeFirstLetter = (str) => {
+  const arr = str.split(' ');
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+  }
+  return arr.join(' ');
+};
+
+export const getDigitOnly = (value) => {
+  let _newData = value.split('');
+  _newData = _newData.filter((data) => {
+    if (data >= '0' && data <= '9') {
+      return true;
+    }
+    return false;
+  });
+  return _newData.join('');
+};
+
+export const validateEmail = (email) => {
+  let re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
+
+export const reFormPhone = (phone) => {
+  let _newPhone = phone.split('');
+  _newPhone = _newPhone.filter((data) => {
+    if (data >= '0' && data <= '9') {
+      return true;
+    }
+    return false;
+  });
+
+  if (_newPhone.length > 10) {
+    _newPhone = _newPhone.slice(0, 10);
+  }
+  if (_newPhone.length > 0) {
+    _newPhone.splice(0, 0, '(');
+  }
+  if (_newPhone.length > 3) {
+    _newPhone.splice(4, 0, ') ');
+  }
+  if (_newPhone.length > 8) {
+    _newPhone.splice(8, 0, ' - ');
+  }
+  return _newPhone.join('');
 };

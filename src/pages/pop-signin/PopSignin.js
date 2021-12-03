@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PageContainer } from './PopSignin.styles';
 import TextField from '@mui/material/TextField';
 import {
+  Button,
   FormControlLabel,
   FormLabel,
   Radio,
@@ -14,8 +15,16 @@ import {
   fetchPOPAccountDetailsByEmail,
   fetchPOPAccountDetailsByPhone,
   setMainPOPAccount,
+  actions,
 } from '../../slices/pop.slice';
-import { getFirstPOPMemeber } from '../../utils/skuHelpers';
+import {
+  capitalizeFirstLetter,
+  getDigitOnly,
+  getFirstPOPMemeber,
+  getPOPAccountFullName,
+  reFormPhone,
+  validateEmail,
+} from '../../utils/skuHelpers';
 import { popAccountNotFound } from '../../constants/errorMessages';
 import { useDispatch, useSelector } from 'react-redux';
 const PopSignin = ({ history }) => {
@@ -24,21 +33,31 @@ const PopSignin = ({ history }) => {
   const [phone, setPhone] = useState('');
   const [popAccount, setPOPAccount] = useState(null);
   const dispatch = useDispatch();
-  const { accountDetails, loading, error } = useSelector(
+  const { accountDetails, loading, error, mainAccount } = useSelector(
     (state) => state.popAccount
   );
 
   const nextButtonHandler = () => {
     if (email.trim() !== '') {
-      dispatch(fetchPOPAccountDetailsByEmail(email.trim()));
-      setShowForm((prevState) => !prevState);
+      if (validateEmail(email.trim())) {
+        dispatch(fetchPOPAccountDetailsByEmail(email.trim()));
+        setShowForm((prevState) => !prevState);
+      } else {
+        dispatch(actions.failure(popAccountNotFound.email));
+      }
     }
     if (phone.trim() !== '') {
-      dispatch(fetchPOPAccountDetailsByPhone(phone.trim()));
+      dispatch(fetchPOPAccountDetailsByPhone(getDigitOnly(phone.trim())));
       setShowForm((prevState) => !prevState);
     }
   };
 
+  const phoneInputChangeHandler = (e) => {
+    const phoneValue = e.target.value;
+    if (e.nativeEvent.inputType !== 'deleteContentBackward')
+      setPhone(reFormPhone(phoneValue));
+    else setPhone(phoneValue);
+  };
   const confirmButtonHandler = () => {
     dispatch(setMainPOPAccount(popAccount));
     history.push('/sku-checkout');
@@ -118,8 +137,8 @@ const PopSignin = ({ history }) => {
               fullWidth
               placeholder='Customer Phone Number'
               value={phone}
-              type='number'
-              onChange={(e) => setPhone(e.target.value)}
+              type='text'
+              onChange={phoneInputChangeHandler}
               onFocus={() => setEmail('')}
             />
             {error === popAccountNotFound.phone && (
@@ -156,7 +175,11 @@ const PopSignin = ({ history }) => {
             <RadioGroup
               aria-label='accounts'
               name='radio-buttons-group'
-              defaultValue={getFirstPOPMemeber(accountDetails)?.emailAddress}
+              defaultValue={
+                mainAccount
+                  ? mainAccount
+                  : getFirstPOPMemeber(accountDetails)?.emailAddress
+              }
               onChange={(e) => setPOPAccount(e.target.value)}
             >
               {accountDetails.map((data) => {
@@ -166,7 +189,16 @@ const PopSignin = ({ history }) => {
                       key={data.evId}
                       value={data.emailAddress}
                       control={<Radio />}
-                      label={data.emailAddress}
+                      label={
+                        <Typography>
+                          
+                          {getPOPAccountFullName(
+                            accountDetails,
+                            data.emailAddress
+                          )}
+                          : {capitalizeFirstLetter(data.emailAddress)}
+                        </Typography>
+                      }
                     />
                   );
                 } else {
@@ -176,15 +208,15 @@ const PopSignin = ({ history }) => {
             </RadioGroup>
           </Box>
           <Box>
-            <Box className='next-button' onClick={confirmButtonHandler}>
+            <Button className='next-button' onClick={confirmButtonHandler}>
               CONFIRM
-            </Box>
-            <Box
+            </Button>
+            <Button
               className='signup-button'
               onClick={() => setShowForm((prevState) => !prevState)}
             >
               BACK
-            </Box>
+            </Button>
           </Box>
         </Box>
       );

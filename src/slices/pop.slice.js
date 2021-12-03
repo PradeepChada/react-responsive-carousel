@@ -32,7 +32,7 @@ const popAccountSlice = createSlice({
   },
 });
 
-const actions = popAccountSlice.actions;
+export const actions = popAccountSlice.actions;
 
 export const fetchPOPAccountDetailsByPhone = (phone) => (dispatch) => {
   dispatch(actions.loading());
@@ -71,3 +71,4 @@ export const setMainPOPAccount = (account) => (dispatch) => {
 };
 
 export default popAccountSlice;
+
