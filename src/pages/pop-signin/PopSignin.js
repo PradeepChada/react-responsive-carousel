@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PageContainer } from './PopSignin.styles';
+import { PageContainer, BoxWrapper } from './PopSignin.styles';
 import TextField from '@mui/material/TextField';
 import {
   Button,
@@ -9,8 +9,8 @@ import {
   RadioGroup,
   Skeleton,
   Typography,
+  Box,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import {
   fetchPOPAccountDetailsByEmail,
   fetchPOPAccountDetailsByPhone,
@@ -76,12 +76,7 @@ const PopSignin = ({ history }) => {
 
   const showLoading = () => {
     return (
-      <Box
-        display='flex'
-        flexDirection='column'
-        justifyContent='space-between'
-        height='100%'
-      >
+      <BoxWrapper>
         <Box>
           <FormLabel component='legend'>
             <Skeleton variant='text' height={16} />
@@ -93,17 +88,12 @@ const PopSignin = ({ history }) => {
           <Box className='next-button'>CONFIRM</Box>
           <Box className='signup-button'>BACK</Box>
         </Box>
-      </Box>
+      </BoxWrapper>
     );
   };
   const showForm = () => {
     return (
-      <Box
-        display='flex'
-        flexDirection='column'
-        justifyContent='space-between'
-        height='100%'
-      >
+      <BoxWrapper>
         <Box>
           <Box>
             <TextField
@@ -151,7 +141,7 @@ const PopSignin = ({ history }) => {
           </Box>
           <Box className='signup-button'>SIGNUP</Box>
         </Box>
-      </Box>
+      </BoxWrapper>
     );
   };
   const showPOPAccount = () => {
@@ -159,12 +149,7 @@ const PopSignin = ({ history }) => {
       return showLoading();
     } else {
       return (
-        <Box
-          display='flex'
-          flexDirection='column'
-          justifyContent='space-between'
-          height='100%'
-        >
+        <BoxWrapper>
           <Box>
             <FormLabel component='legend'>
               Please confirm the customer’s email address.
@@ -214,7 +199,7 @@ const PopSignin = ({ history }) => {
               BACK
             </Button>
           </Box>
-        </Box>
+        </BoxWrapper>
       );
     }
   };
@@ -234,5 +219,4 @@ const PopSignin = ({ history }) => {
     </PageContainer>
   );
 };
-
 export default PopSignin;

@@ -1,6 +1,7 @@
 import { styled } from '@mui/styles';
 import { Container } from '@mui/material';
 import { styles, font, colors } from '../../utils/themeUtils';
+import { Box } from '@mui/system';
 
 export const PageContainer = styled(Container)({
   padding: styles.padding[3],
@@ -79,4 +80,11 @@ export const PageContainer = styled(Container)({
       borderColor: colors.danger,
     },
   },
+});
+
+export const BoxWrapper = styled(Box)({
+  display: styles.display.flex,
+  flexDirection: 'column',
+  justifyContent: styles.justify.between,
+  height: '100%',
 });
