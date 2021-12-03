@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { PageContainer } from './PopSignin.styles';
+import { PageContainer, BoxWrapper } from './PopSignin.styles';
 import TextField from '@mui/material/TextField';
 import {
+  Button,
   FormControlLabel,
   FormLabel,
   Radio,
   RadioGroup,
   Skeleton,
   Typography,
+  Box,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import {
   fetchPOPAccountDetailsByEmail,
   fetchPOPAccountDetailsByPhone,
   setMainPOPAccount,
+  actions,
 } from '../../slices/pop.slice';
-import { getFirstPOPMemeber } from '../../utils/skuHelpers';
+import {
+  capitalizeFirstLetter,
+  getDigitOnly,
+  getFirstPOPMemeber,
+  getPOPAccountFullName,
+  reFormPhone,
+  validateEmail,
+} from '../../utils/skuHelpers';
 import { popAccountNotFound } from '../../constants/errorMessages';
 import { useDispatch, useSelector } from 'react-redux';
 const PopSignin = ({ history }) => {
@@ -24,21 +33,31 @@ const PopSignin = ({ history }) => {
   const [phone, setPhone] = useState('');
   const [popAccount, setPOPAccount] = useState(null);
   const dispatch = useDispatch();
-  const { accountDetails, loading, error } = useSelector(
+  const { accountDetails, loading, error, mainAccount } = useSelector(
     (state) => state.popAccount
   );
-
   const nextButtonHandler = () => {
     if (email.trim() !== '') {
-      dispatch(fetchPOPAccountDetailsByEmail(email.trim()));
-      setShowForm((prevState) => !prevState);
+      if (validateEmail(email.trim())) {
+        dispatch(fetchPOPAccountDetailsByEmail(email.trim()));
+        setShowForm((prevState) => !prevState);
+      } else {
+        dispatch(actions.failure(popAccountNotFound.email));
+      }
     }
     if (phone.trim() !== '') {
-      dispatch(fetchPOPAccountDetailsByPhone(phone.trim()));
+      dispatch(fetchPOPAccountDetailsByPhone(getDigitOnly(phone.trim())));
       setShowForm((prevState) => !prevState);
     }
   };
-
+  const phoneInputChangeHandler = (e) => {
+    const phoneValue = e.target.value;
+    if (e.nativeEvent.inputType !== 'deleteContentBackward') {
+      setPhone(reFormPhone(phoneValue));
+    } else {
+      setPhone(phoneValue);
+    }
+  };
   const confirmButtonHandler = () => {
     dispatch(setMainPOPAccount(popAccount));
     history.push('/sku-checkout');
@@ -46,6 +65,7 @@ const PopSignin = ({ history }) => {
   useEffect(() => {
     if (accountDetails.length > 0) {
       setShowForm(false);
+      setPOPAccount(getFirstPOPMemeber(accountDetails).emailAddress);
     }
   }, [accountDetails]);
   useEffect(() => {
@@ -53,19 +73,10 @@ const PopSignin = ({ history }) => {
       setShowForm(true);
     }
   }, [error]);
-  useEffect(() => {
-    if (accountDetails.length !== 0) {
-      setPOPAccount(getFirstPOPMemeber(accountDetails).emailAddress);
-    }
-  }, [accountDetails]);
+
   const showLoading = () => {
     return (
-      <Box
-        display='flex'
-        flexDirection='column'
-        justifyContent='space-between'
-        height='100%'
-      >
+      <BoxWrapper>
         <Box>
           <FormLabel component='legend'>
             <Skeleton variant='text' height={16} />
@@ -77,17 +88,12 @@ const PopSignin = ({ history }) => {
           <Box className='next-button'>CONFIRM</Box>
           <Box className='signup-button'>BACK</Box>
         </Box>
-      </Box>
+      </BoxWrapper>
     );
   };
   const showForm = () => {
     return (
-      <Box
-        display='flex'
-        flexDirection='column'
-        justifyContent='space-between'
-        height='100%'
-      >
+      <BoxWrapper>
         <Box>
           <Box>
             <TextField
@@ -118,8 +124,8 @@ const PopSignin = ({ history }) => {
               fullWidth
               placeholder='Customer Phone Number'
               value={phone}
-              type='number'
-              onChange={(e) => setPhone(e.target.value)}
+              type='text'
+              onChange={phoneInputChangeHandler}
               onFocus={() => setEmail('')}
             />
             {error === popAccountNotFound.phone && (
@@ -135,7 +141,7 @@ const PopSignin = ({ history }) => {
           </Box>
           <Box className='signup-button'>SIGNUP</Box>
         </Box>
-      </Box>
+      </BoxWrapper>
     );
   };
   const showPOPAccount = () => {
@@ -143,12 +149,7 @@ const PopSignin = ({ history }) => {
       return showLoading();
     } else {
       return (
-        <Box
-          display='flex'
-          flexDirection='column'
-          justifyContent='space-between'
-          height='100%'
-        >
+        <BoxWrapper>
           <Box>
             <FormLabel component='legend'>
               Please confirm the customer’s email address.
@@ -156,7 +157,11 @@ const PopSignin = ({ history }) => {
             <RadioGroup
               aria-label='accounts'
               name='radio-buttons-group'
-              defaultValue={getFirstPOPMemeber(accountDetails)?.emailAddress}
+              defaultValue={
+                mainAccount
+                  ? mainAccount
+                  : getFirstPOPMemeber(accountDetails)?.emailAddress
+              }
               onChange={(e) => setPOPAccount(e.target.value)}
             >
               {accountDetails.map((data) => {
@@ -166,7 +171,15 @@ const PopSignin = ({ history }) => {
                       key={data.evId}
                       value={data.emailAddress}
                       control={<Radio />}
-                      label={data.emailAddress}
+                      label={
+                        <Typography>
+                          {getPOPAccountFullName(
+                            accountDetails,
+                            data.emailAddress
+                          )}
+                          : {capitalizeFirstLetter(data.emailAddress)}
+                        </Typography>
+                      }
                     />
                   );
                 } else {
@@ -176,17 +189,17 @@ const PopSignin = ({ history }) => {
             </RadioGroup>
           </Box>
           <Box>
-            <Box className='next-button' onClick={confirmButtonHandler}>
+            <Button className='next-button' onClick={confirmButtonHandler}>
               CONFIRM
-            </Box>
-            <Box
+            </Button>
+            <Button
               className='signup-button'
               onClick={() => setShowForm((prevState) => !prevState)}
             >
               BACK
-            </Box>
+            </Button>
           </Box>
-        </Box>
+        </BoxWrapper>
       );
     }
   };
@@ -206,5 +219,4 @@ const PopSignin = ({ history }) => {
     </PageContainer>
   );
 };
-
 export default PopSignin;

@@ -56,7 +56,7 @@ export const Availability = styled(Box)({
   },
   '& .store-tile': {
     background: colors.bgGray,
-    padding: '0.625rem 0.875rem',
+    padding: '0.75rem 0.875rem',
     margin: `${styles.margin[2]} 0`,
     display: styles.display.flex,
     alignItems: styles.align.center,
@@ -68,7 +68,7 @@ export const Availability = styled(Box)({
     },
     '& .stock-details': {
       fontWeight: font.weight[600],
-      fontSize: font.size[12],
+      fontSize: font.size[16],
       '& .stock-green': {
         color: colors.green,
       },
@@ -78,10 +78,11 @@ export const Availability = styled(Box)({
     },
     '& .availability-link': {
       color: colors.brandBlue,
-      fontSize: font.size[10],
-      textDecoration: 'underline',
+      fontSize: font.size[14],
+      fontWeight: font.weight['bold'],
       textTransform: 'unset',
       padding: styles.padding[0],
+      marginTop: styles.margin[1],
     },
   },
   '& .other-stores': {
