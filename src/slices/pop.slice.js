@@ -30,6 +30,9 @@ const popAccountSlice = createSlice({
       state.mainAccount = null;
       state.error = action.payload;
     },
+    setErrorNull: (state, action) => {
+      state.error = null;
+    },
   },
 });
 
