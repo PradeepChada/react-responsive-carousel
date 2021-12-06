@@ -77,6 +77,10 @@ const PopSignin = ({ history }) => {
     }
   }, [error]);
 
+  useEffect(() => {
+    dispatch(actions.setErrorNull());
+  }, [dispatch]);
+
   const showLoading = () => {
     return (
       <BoxWrapper>
