@@ -1,7 +1,7 @@
 import { styled } from '@mui/styles';
 import { Carousel } from 'react-responsive-carousel';
 import Dialog from '@mui/material/Dialog';
-import { colors, styles } from '../../../utils/themeUtils';
+import { colors, styles, font } from '../../../utils/themeUtils';
 import ReactPlayer from 'react-player';
 
 export const Modal = styled(Dialog)({
@@ -17,14 +17,11 @@ export const Modal = styled(Dialog)({
   },
   '& .close-btn': {
     position: 'absolute',
-    right: 5,
-    top: 5,
+    right: 10,
+    top: 10,
     color: colors.lightBlue,
     zIndex: 9,
     padding: styles.padding[1],
-    '& svg': {
-      fontSize: '1.75rem',
-    },
   },
 });
 
@@ -53,6 +50,20 @@ export const Slider = styled(Carousel)({
         margin: 0,
         minHeight: '13rem',
       },
+    },
+  },
+  '& .arrow-btn': {
+    position: 'absolute',
+    zIndex: 2,
+    top: 'calc(50% - 35px)',
+    width: 30,
+    height: 30,
+    cursor: 'pointer',
+    backgroundColor: colors.white,
+    padding: '1.125rem',
+    boxShadow: '0 0 0.375 #ccc',
+    '& svg': {
+      fontSize: font.size[30],
     },
   },
   '& .carousel-status': {
