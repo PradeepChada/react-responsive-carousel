@@ -39,14 +39,16 @@ const PopSignin = ({ history }) => {
   const nextButtonHandler = () => {
     if (email.trim() !== '') {
       if (validateEmail(email.trim())) {
-        dispatch(fetchPOPAccountDetailsByEmail(email.trim()));
         setShowForm((prevState) => !prevState);
+        dispatch(fetchPOPAccountDetailsByEmail(email.trim(), history));
       } else {
         dispatch(actions.failure(popAccountNotFound.email));
       }
     }
     if (phone.trim() !== '') {
-      dispatch(fetchPOPAccountDetailsByPhone(getDigitOnly(phone.trim())));
+      dispatch(
+        fetchPOPAccountDetailsByPhone(getDigitOnly(phone.trim()), history)
+      );
       setShowForm((prevState) => !prevState);
     }
   };
@@ -68,6 +70,7 @@ const PopSignin = ({ history }) => {
       setPOPAccount(getFirstPOPMemeber(accountDetails).emailAddress);
     }
   }, [accountDetails]);
+
   useEffect(() => {
     if (error != null) {
       setShowForm(true);
