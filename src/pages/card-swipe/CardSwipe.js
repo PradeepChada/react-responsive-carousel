@@ -19,7 +19,7 @@ const PaymentTotal = () => {
   );
 };
 
-const PaymentPageText = ({ handleClick }) => {
+const PaymentPageText = ({ handleClick, history }) => {
   return (
     <TextWrapper display='flex' flexDirection='column' alignItems='center'>
       {!flag ? (
@@ -29,7 +29,7 @@ const PaymentPageText = ({ handleClick }) => {
           Gift Card
         </Description>
       ) : (
-        <Description>
+        <Description onClick={() => history.push('/payment-failure')}>
           Please swipe the
           <br />
           Credit/Debit Card
@@ -51,7 +51,10 @@ const CardSwipe = ({ history }) => {
   return (
     <Wrapper display='flex' flexDirection='column' alignItems='center'>
       <PaymentTotal />
-      <PaymentPageText handleClick={() => history.push('/')} />
+      <PaymentPageText
+        handleClick={() => history.push('/')}
+        history={history}
+      />
     </Wrapper>
   );
 };
