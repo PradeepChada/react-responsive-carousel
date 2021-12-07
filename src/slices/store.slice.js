@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   storeLoading: false,
   stores: [],
   storesError: null,
+  formValues: {},
 };
 
 const storeSlice = createSlice({
@@ -24,6 +25,12 @@ const storeSlice = createSlice({
       state.storeLoading = false;
       state.storesError = action.payload;
     },
+    setFormValues: (state, action) => {
+      state.formValues = action.payload;
+    },
+    setStoreInfo: (state, action) => {
+      state.storeInfo = action.payload;
+    },
   },
 });
 
@@ -31,13 +38,16 @@ export const actions = storeSlice.actions;
 
 export const fetchStores = (params) => (dispatch) => {
   dispatch(actions.fetchStoreLoding());
-  storeService
+  return storeService
     .getStoreList(params)
     .then((res) => {
       dispatch(actions.fetchStoreSuccess(res?.data));
+      dispatch(actions.setFormValues(params));
+      return res?.data;
     })
-    .catch(({ response }) => {
-      dispatch(actions.fetchStoreFailure(response));
+    .catch((err) => {
+      dispatch(actions.fetchStoreFailure(err.response));
+      throw err;
     });
 };
 

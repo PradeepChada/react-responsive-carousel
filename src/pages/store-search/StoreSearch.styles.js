@@ -36,6 +36,24 @@ export const ContentWrapper = styled(Box)({
       },
     },
   },
+  '& .MuiAlert-root': {
+    marginTop: styles.margin[3],
+    height: '2rem',
+    padding: `0 ${styles.padding[2]}`,
+    fontSize: font.size[14],
+    display: 'flex',
+    alignItems: 'center',
+    color: colors.danger,
+    border: `1px solid rgba(223, 46, 47, 0.1)`,
+    backgroundColor: '#FDF4F5',
+  },
+  '& .MuiFormHelperText-root': {
+    '&.Mui-error': {
+      color: colors.danger,
+      marginLeft: styles.margin[0],
+      fontSize: font.size[14],
+    },
+  },
 });
 
 export const StoreList = styled(Grid)({

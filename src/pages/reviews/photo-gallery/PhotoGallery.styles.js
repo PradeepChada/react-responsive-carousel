@@ -16,7 +16,7 @@ export const GelleryContainer = styled(Box)({
     '& .bg-img': {
       marginLeft: '0.375rem',
       backgroundSize: 'cover',
-      width: 80,
+      width: 78,
       height: 78,
       display: 'inline-block',
       position: 'relative',

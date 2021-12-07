@@ -167,7 +167,7 @@ export const fetchShipSkuAvailability = (body) => (dispatch) => {
       dispatch(actions.shipSkuAvailSuccess(res?.data));
     })
     .catch((err) => {
-      dispatch(actions.shipSkuAvailError(err));
+      dispatch(actions.shipSkuAvailFailure(err));
     });
 };
 
