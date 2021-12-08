@@ -27,7 +27,7 @@ const TransactionComplete = ({ history }) => {
 
   const onClickNewCheckout = () => {
     dispatch(actions.clearCart());
-    history.push('/sku-checkout');
+    history.push('/pop-signin');
   };
 
   return (
@@ -53,7 +53,9 @@ const TransactionComplete = ({ history }) => {
             </Button>
           </Grid>
           <Grid item xs={12} align='center'>
-            <ButtonDone variant='text'>DONE</ButtonDone>
+            <ButtonDone variant='text' onClick={() => history.push('/')}>
+              DONE
+            </ButtonDone>
           </Grid>
         </Grid>
       </Grid>
