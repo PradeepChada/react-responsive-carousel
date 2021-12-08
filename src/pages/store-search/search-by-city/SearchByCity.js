@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { fetchStores } from '../../../slices/store.slice';
 
-const validationSchema = Yup.object({
+const validationSchemaZip = Yup.object({
   city: Yup.string().required('City required'),
   state: Yup.string().required('State required'),
 });
@@ -28,7 +28,7 @@ const SearchByCity = ({ history, setPickStore, storeLoading }) => {
         city: '',
         state: '',
       },
-      validationSchema: validationSchema,
+      validationSchema: validationSchemaZip,
       onSubmit: (obj) => handleSearch(obj),
     });
 
