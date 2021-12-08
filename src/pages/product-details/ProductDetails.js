@@ -111,7 +111,7 @@ const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
         variant='text'
         onClick={() => toggleDrawer(true)}
       >
-        Show availability in other stores
+        Check Availability in Other Stores
         <ChevronRight />
       </Button>
     </>
@@ -350,37 +350,53 @@ const ProductDetails = ({ history, match }) => {
         ) : (
           <>
             <Box className='store-tile'>
-              <img
-                src={StoreIcon}
-                alt='Store'
-              />
-              <Box flexGrow={1}>
-                {showStockDetails(skuAvailabilityLoading, inStoreQty)}
-                {showAvailabilityInOtherStore(
-                  skuAvailabilityLoading,
-                  toggleDrawer
+              <Box display='flex' flexDirection='row' width='100%'>
+                <img
+                  src={StoreIcon}
+                  alt='Store'
+                  style={{ alignSelf: 'flex-start' }}
+                />
+                <Box flexGrow={1}>
+                  {showStockDetails(skuAvailabilityLoading, inStoreQty)}
+                  <Typography className='department'>
+                    Department: Kitchen
+                  </Typography>
+                </Box>
+                {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
+                  <ButtonGroupWrapper>
+                    <Typography
+                      className='plus-button'
+                      onClick={minusButtonHandler}
+                    >
+                      -
+                    </Typography>
+                    <InputWrapper
+                      value={skuQuantity}
+                      onChange={onChangeQuantity}
+                      onBlur={onBlurQuantityInput}
+                    />
+                    <Typography
+                      className='minus-button'
+                      onClick={plusButtonHandler}
+                    >
+                      +
+                    </Typography>
+                  </ButtonGroupWrapper>
                 )}
               </Box>
-              {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
-                <ButtonGroupWrapper>
-                  <Typography
-                    className='plus-button'
-                    onClick={minusButtonHandler}
-                  >
-                    -
-                  </Typography>
-                  <InputWrapper
-                    value={skuQuantity}
-                    onChange={onChangeQuantity}
-                    onBlur={onBlurQuantityInput}
-                  />
-                  <Typography
-                    className='minus-button'
-                    onClick={plusButtonHandler}
-                  >
-                    +
-                  </Typography>
-                </ButtonGroupWrapper>
+              <hr />
+              <Typography className='need-more-text'>Need More ?</Typography>
+              <Button
+                className='availability-link'
+                variant='text'
+                onClick={() => history.push('/sku-future-availability')}
+              >
+                Check Future Availability
+                <ChevronRight />
+              </Button>
+              {showAvailabilityInOtherStore(
+                skuAvailabilityLoading,
+                toggleDrawer
               )}
             </Box>
             <Box className='store-tile other-stores'>
