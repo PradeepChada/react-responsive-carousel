@@ -47,7 +47,16 @@ const theme = createTheme({
               borderColor: colors.selectGray,
               borderWidth: 1,
             },
+            '&.Mui-error': {
+              '& fieldset': {
+                borderColor: colors.danger,
+              },
+            },
           },
+          // '&p.Mui-error': {
+          //   color: colors.danger,
+          //   marginLeft: 0
+          // }
         },
       },
     },
@@ -67,6 +76,10 @@ const theme = createTheme({
           borderColor: colors.lightBlue,
           fontWeight: '600',
           color: colors.lightBlue,
+          '&.no-border': {
+            border: 'none',
+            color: colors.textBlack,
+          },
         },
         text: {
           padding: styles.padding[0],

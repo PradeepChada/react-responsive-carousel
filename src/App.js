@@ -26,6 +26,7 @@ import CardSwipe from './pages/card-swipe/CardSwipe';
 import PaymentFailure from './pages/payment-failure/PaymentFailure';
 import PaymentSuccess from './pages/payment-success/PaymentSuccess';
 import TransactionComplete from './pages/transaction-success/TransactionComplete';
+import StoreSearch from './pages/store-search/StoreSearch';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -103,6 +104,7 @@ const App = () => {
                       path='/transaction-success'
                       component={TransactionComplete}
                     />
+                    <Route exact path='/store-search' component={StoreSearch} />
                   </Switch>
                 </StyledBody>
               </StoreProvider>

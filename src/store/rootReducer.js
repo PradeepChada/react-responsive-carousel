@@ -6,6 +6,7 @@ import skuVariants from '../slices/skuVariants.slice';
 import reviewSlice from '../slices/reviews.slice';
 import skuQuestions from '../slices/q&a.slice';
 import cartSlice from '../slices/cart.slice';
+import storeSlice from '../slices/store.slice';
 import popAccountSlice from '../slices/pop.slice';
 
 export default combineReducers({
@@ -17,4 +18,5 @@ export default combineReducers({
   skuQuestions: skuQuestions.reducer,
   cart: cartSlice.reducer,
   popAccount: popAccountSlice.reducer,
+  store: storeSlice.reducer,
 });
