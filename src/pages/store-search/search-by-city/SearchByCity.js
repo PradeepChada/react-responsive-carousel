@@ -1,3 +1,5 @@
+// NOSONAR
+
 import React, { useState } from 'react';
 import { Button, Grid, Alert } from '@mui/material';
 import TextField from '@mui/material/TextField';
