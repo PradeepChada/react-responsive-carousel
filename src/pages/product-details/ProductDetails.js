@@ -294,7 +294,7 @@ const ProductDetails = ({ history, match }) => {
       <ProductVideos
         showModal={showVideos}
         handleClose={() => setShowVideos(false)}
-        data={videos}
+        data={[...videos, ...videos]}
       />
       <ProductTitle
         title={skuData?.name}
