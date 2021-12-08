@@ -7,10 +7,9 @@ const INITIAL_STATE = {
   loading: false,
   skuVariants: null,
   error: null,
-  // error: skuErrorMessages.malfunction,
   skuAvailabilityLoading: false,
   skuAvailability: null,
-  skuAvailabilityError: null
+  skuAvailabilityError: null,
 };
 
 const skuSlice = createSlice({
@@ -20,7 +19,7 @@ const skuSlice = createSlice({
     variantsLoading: (state) => {
       state.loading = true;
       state.skuVariants = null;
-      state.error = null
+      state.error = null;
     },
     variantsSuccess: (state, action) => {
       state.loading = false;
@@ -31,7 +30,7 @@ const skuSlice = createSlice({
       state.error = action.payload;
     },
     reset: () => {
-      return INITIAL_STATE
+      return INITIAL_STATE;
     },
     skuAvailabilityLoading: (state) => {
       state.skuAvailabilityLoading = true;
@@ -46,28 +45,28 @@ const skuSlice = createSlice({
       state.skuAvailabilityLoading = false;
       state.skuAvailabilityError = action.payload;
     },
-  }
+  },
 });
-
 
 export const actions = skuSlice.actions;
 
 export const fetchSkuVariants = (skuCode, storeId) => (dispatch) => {
   dispatch(actions.variantsLoading());
-  additionalSku.getSkuVariants(skuCode)
+  additionalSku
+    .getSkuVariants(skuCode)
     .then((res) => {
       if (res?.status === 204)
         dispatch(actions.variantsSuccess(skuErrorMessages.productVariants));
-      else{
+      else {
         dispatch(actions.variantsSuccess(res?.data));
         const stockBody = {
           sourceStoreNumber: storeId,
           fulfillmentStoreNumbers: [899, storeId],
-          skuQtyPairs: res?.data?.skus?.map(o => ({
+          skuQtyPairs: res?.data?.skus?.map((o) => ({
             skuNumber: o.id,
-            qty: 0
-          }))
-        }
+            qty: 0,
+          })),
+        };
         dispatch(fetchSkuAvailability(stockBody));
       }
     })
@@ -78,7 +77,8 @@ export const fetchSkuVariants = (skuCode, storeId) => (dispatch) => {
 
 export const fetchSkuAvailability = (body) => (dispatch) => {
   dispatch(actions.skuAvailabilityLoading());
-  skuService.getSkuAvailability(body)
+  skuService
+    .getSkuAvailability(body)
     .then((res) => {
       dispatch(actions.skuAvailabilitySuccess(res?.data));
     })
@@ -86,6 +86,5 @@ export const fetchSkuAvailability = (body) => (dispatch) => {
       dispatch(actions.skuAvailabilityFailure(err));
     });
 };
-
 
 export default skuSlice;

@@ -9,7 +9,6 @@ const INITIAL_STATE = {
   loading: false,
   skuData: null,
   error: null,
-  // error: skuErrorMessages.malfunction,
   skuAvailabilityLoading: false,
   skuAvailability: null,
   skuAvailabilityError: null,
@@ -32,7 +31,6 @@ const skuSlice = createSlice({
     },
     loading: (state) => {
       state.loading = true;
-      // state.skuData = null;
       state.error = null;
     },
     success: (state, action) => {
