@@ -38,29 +38,32 @@ const popAccountSlice = createSlice({
 
 export const actions = popAccountSlice.actions;
 
-export const fetchPOPAccountDetailsByPhone = (phone, history) => (dispatch) => {
-  dispatch(actions.loading());
-  popService
-    .getAccountByPhone(phone)
-    .then((res) => {
-      if (res?.data?._embedded.customers.length === 0) {
-        dispatch(actions.failure(popAccountNotFound.phone));
-      } else {
-        dispatch(actions.success(res?.data?._embedded.customers));
-        if (res?.data?._embedded.customers.length === 1) {
-          dispatch(
-            setMainPOPAccount(
-              getFirstPOPMemeber(res?.data?._embedded.customers).emailAddress
-            )
-          );
-          history.push('/sku-checkout');
+export const fetchPOPAccountDetailsByPhone =
+  (phone, history, setShowForm) => (dispatch) => {
+    dispatch(actions.loading());
+    popService
+      .getAccountByPhone(phone)
+      .then((res) => {
+        if (res?.data?._embedded.customers.length === 0) {
+          dispatch(actions.failure(popAccountNotFound.phone));
+        } else {
+          dispatch(actions.success(res?.data?._embedded.customers));
+          if (res?.data?._embedded.customers.length === 1) {
+            dispatch(
+              setMainPOPAccount(
+                getFirstPOPMemeber(res?.data?._embedded.customers).emailAddress
+              )
+            );
+            history.push('/sku-checkout');
+          } else {
+            setShowForm((prevState) => !prevState);
+          }
         }
-      }
-    })
-    .catch((err) => {
-      dispatch(actions.failure(popAccountNotFound.unknown));
-    });
-};
+      })
+      .catch((err) => {
+        dispatch(actions.failure(popAccountNotFound.unknown));
+      });
+  };
 
 export const fetchPOPAccountDetailsByEmail = (email, history) => (dispatch) => {
   dispatch(actions.loading());
