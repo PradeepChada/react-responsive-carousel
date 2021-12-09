@@ -26,6 +26,7 @@ import CardSwipe from './pages/card-swipe/CardSwipe';
 import PaymentFailure from './pages/payment-failure/PaymentFailure';
 import PaymentSuccess from './pages/payment-success/PaymentSuccess';
 import TransactionComplete from './pages/transaction-success/TransactionComplete';
+import SKUFuture from './pages/sku-future/SKUFuture';
 import StoreSearch from './pages/store-search/StoreSearch';
 
 const StyledBody = styled('div')({
@@ -103,6 +104,11 @@ const App = () => {
                       exact
                       path='/transaction-success'
                       component={TransactionComplete}
+                    />
+                    <Route
+                      exact
+                      path='/sku-future-availability'
+                      component={SKUFuture}
                     />
                     <Route exact path='/store-search' component={StoreSearch} />
                   </Switch>

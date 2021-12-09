@@ -59,12 +59,18 @@ export const Availability = styled(Box)({
     padding: '0.75rem 0.875rem',
     margin: `${styles.margin[2]} 0`,
     display: styles.display.flex,
-    alignItems: styles.align.center,
+    flexDirection: 'column',
+    alignItems: styles.align.start,
     '&.other-stores': {
       padding: '1.125rem 0.875rem',
     },
     '& img': {
       marginRight: styles.margin[3],
+    },
+    '& .department': {
+      fontSize: font.size[14],
+      fontWeight: font.weight[400],
+      marginTop: styles.margin[2],
     },
     '& .stock-details': {
       fontWeight: font.weight[600],
@@ -78,14 +84,26 @@ export const Availability = styled(Box)({
     },
     '& .availability-link': {
       color: colors.brandBlue,
-      fontSize: font.size[14],
+      fontSize: font.size[16],
       fontWeight: font.weight['bold'],
       textTransform: 'unset',
       padding: styles.padding[0],
-      marginTop: styles.margin[1],
+      marginTop: styles.margin[3],
+    },
+    '& hr': {
+      width: '100%',
+      border: `1px solid ${colors.gray85}`,
+      marginTop: styles.margin[3],
+    },
+    '& .need-more-text': {
+      width: '100%',
+      marginTop: styles.margin[3],
+      fontSize: font.size[14],
+      fontWeight: font.weight['bold'],
     },
   },
   '& .other-stores': {
+    flexDirection:"row",
     alignItems: styles.align.center,
     '& .stock-details': {
       padding: '0.375rem 0',
