@@ -27,6 +27,7 @@ import PaymentFailure from './pages/payment-failure/PaymentFailure';
 import PaymentSuccess from './pages/payment-success/PaymentSuccess';
 import TransactionComplete from './pages/transaction-success/TransactionComplete';
 import SKUFuture from './pages/sku-future/SKUFuture';
+import StoreSearch from './pages/store-search/StoreSearch';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -109,6 +110,7 @@ const App = () => {
                       path='/sku-future-availability'
                       component={SKUFuture}
                     />
+                    <Route exact path='/store-search' component={StoreSearch} />
                   </Switch>
                 </StyledBody>
               </StoreProvider>
