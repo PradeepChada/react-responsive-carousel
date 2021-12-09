@@ -84,7 +84,6 @@ const StoreSearch = ({ history }) => {
     handleBlur,
     handleChange,
     setFieldError,
-    setFieldValue,
   } = useFormik({
     initialValues: {
       city: '',
