@@ -84,9 +84,27 @@ const LoadingSkeleton = () => {
     </Container>
   );
 };
-const showStockDetails = (skuAvailabilityLoading, inStoreQty) => {
+const showStockDetails = (
+  skuAvailabilityLoading,
+  inStoreQty,
+  skuAvailabilityError,
+  fetchSkuAvailabilityData
+) => {
   if (skuAvailabilityLoading) {
     return <Skeleton />;
+  }
+  if (skuAvailabilityError) {
+    return (
+      <StockError>
+        {skuErrorMessages.inventory?.shortDescription}
+        <Box className='refresh-btn'>
+          <img src={RefreshIcon} alt='Refresh' />
+          <Button onClick={fetchSkuAvailabilityData} variant='text'>
+            Refresh Page
+          </Button>
+        </Box>
+      </StockError>
+    );
   }
   return (
     <div className='stock-details'>
@@ -336,75 +354,62 @@ const ProductDetails = ({ history, match }) => {
       </div>
       <Availability>
         <Typography className='sub-head'>Availability</Typography>
-        {skuAvailabilityError ? (
-          <StockError>
-            {skuErrorMessages.inventory?.shortDescription}
-            <Box className='refresh-btn'>
-              {/* <CachedIcon />  */}
-              <img src={RefreshIcon} alt='Refresh' />
-              <Button onClick={fetchSkuAvailabilityData} variant='text'>
-                Refresh Page
-              </Button>
-            </Box>
-          </StockError>
-        ) : (
-          <>
-            <Box className='store-tile'>
-              <Box display='flex' flexDirection='row' width='100%'>
-                <img
-                  src={StoreIcon}
-                  alt='Store'
-                  style={{ alignSelf: 'flex-start' }}
-                />
-                <Box flexGrow={1}>
-                  {showStockDetails(skuAvailabilityLoading, inStoreQty)}
-                  <Typography className='department'>
-                    Department: Kitchen
-                  </Typography>
-                </Box>
-                {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
-                  <ButtonGroupWrapper>
-                    <Typography
-                      className='plus-button'
-                      onClick={minusButtonHandler}
-                    >
-                      -
-                    </Typography>
-                    <InputWrapper
-                      value={skuQuantity}
-                      onChange={onChangeQuantity}
-                      onBlur={onBlurQuantityInput}
-                    />
-                    <Typography
-                      className='minus-button'
-                      onClick={plusButtonHandler}
-                    >
-                      +
-                    </Typography>
-                  </ButtonGroupWrapper>
-                )}
-              </Box>
-              <hr />
-              <Typography className='need-more-text'>Need More ?</Typography>
-              <Button
-                className='availability-link'
-                variant='text'
-                onClick={() => history.push('/sku-future-availability')}
-              >
-                Check Future Availability
-                <ChevronRight />
-              </Button>
-              {showAvailabilityInOtherStore(
+        <Box className='store-tile'>
+          <Box display='flex' flexDirection='row' width='100%'>
+            <img
+              src={StoreIcon}
+              alt='Store'
+              style={{ alignSelf: 'flex-start' }}
+            />
+            <Box flexGrow={1}>
+              {showStockDetails(
                 skuAvailabilityLoading,
-                toggleDrawer
+                inStoreQty,
+                skuAvailabilityError,
+                fetchSkuAvailabilityData
               )}
+              <Typography className='department'>
+                Department: Kitchen
+              </Typography>
             </Box>
-            <Box className='store-tile other-stores'>
-              <img src={DeliveryIcon} alt='Store' />
-              <Box flexGrow={1}>{_renderDCInfo()}</Box>
-            </Box>
-          </>
-        )}
+            {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
+              <ButtonGroupWrapper>
+                <Typography
+                  className='plus-button'
+                  onClick={minusButtonHandler}
+                >
+                  -
+                </Typography>
+                <InputWrapper
+                  value={skuQuantity}
+                  onChange={onChangeQuantity}
+                  onBlur={onBlurQuantityInput}
+                />
+                <Typography
+                  className='minus-button'
+                  onClick={plusButtonHandler}
+                >
+                  +
+                </Typography>
+              </ButtonGroupWrapper>
+            )}
+          </Box>
+          <hr />
+          <Typography className='need-more-text'>Need More ?</Typography>
+          <Button
+            className='availability-link'
+            variant='text'
+            onClick={() => history.push('/sku-future-availability')}
+          >
+            Check Future Availability
+            <ChevronRight />
+          </Button>
+          {showAvailabilityInOtherStore(skuAvailabilityLoading, toggleDrawer)}
+        </Box>
+        <Box className='store-tile other-stores'>
+          <img src={DeliveryIcon} alt='Store' />
+          <Box flexGrow={1}>{_renderDCInfo()}</Box>
+        </Box>
       </Availability>
       <Box>
         {videos.length > 0 && (
