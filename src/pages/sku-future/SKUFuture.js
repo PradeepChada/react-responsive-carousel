@@ -29,7 +29,7 @@ function SKUFuture() {
           onChange={inputHandler}
         />
         <Typography className='available'>
-          45 will be available at Arlington Highlands on on 01/22/2022{' '}
+          45 will be available at Arlington Highlands  on 01/22/2022.
         </Typography>
         <Typography className='not-available'>
           Backordered: This item may be available at other stores near you.
