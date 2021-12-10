@@ -1,6 +1,5 @@
 import { styled } from '@mui/styles';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { colors, font, styles } from '../../utils/themeUtils';
 
@@ -14,11 +13,6 @@ const sizes = {
     title: font.size[26],
   },
 };
-
-export const TextWrapper = styled(Box)({
-  // width: '260px',
-  // marginTop: '30px',
-});
 
 export const ErrorIcon = styled(ErrorOutlineIcon)({
   color: colors.red,
