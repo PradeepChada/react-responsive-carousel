@@ -21,14 +21,6 @@ import stateList from './../../constants/states.json';
 import * as Yup from 'yup';
 import { fetchStores } from './../../slices/store.slice';
 
-const validationSchemaZip = Yup.object({
-  city: Yup.string().required('City required'),
-  state: Yup.string().required('State required'),
-  zipCode: Yup.number('Zip Code must be a number').required(
-    'Zip code required'
-  ),
-});
-
 const Panel = (props) => (
   <Grid sx={{ marginTop: '1rem', height: '100%' }}>{props.children}</Grid>
 );
@@ -67,6 +59,23 @@ const PickStore = ({ stores, formValues, history }) => {
   );
 };
 
+const getValidationSchema = (tabIndex) => {
+  return Yup.lazy(() =>
+    Yup.object({
+      ...(tabIndex === 0
+        ? {
+            city: Yup.string().required('City required'),
+            state: Yup.string().required('State required'),
+          }
+        : {
+            zipCode: Yup.number()
+              .typeError('Zip Code must be a number')
+              .required('Zip code required'),
+          }),
+    })
+  );
+};
+
 const StoreSearch = ({ history }) => {
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
@@ -75,6 +84,8 @@ const StoreSearch = ({ history }) => {
   const { stores, storeLoading, formValues } = useSelector(
     (state) => state.store
   );
+
+  const validationSchema = getValidationSchema(index);
 
   const {
     values,
@@ -88,13 +99,13 @@ const StoreSearch = ({ history }) => {
     initialValues: {
       city: '',
       state: '',
+      zipCode: '',
     },
-    validationSchema: validationSchemaZip,
+    validationSchema,
     onSubmit: (obj) => handleSearch(obj),
   });
 
   const handleSearch = (formData) => {
-    debugger;
     setError(false);
     const body = {
       ...(index === 0
