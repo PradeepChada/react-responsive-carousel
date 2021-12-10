@@ -128,7 +128,7 @@ const SearchPage = ({ history }) => {
       {!loading && !error && !skuData && <SearchPageText />}
       {error ? (
         <ErrorWrapper alignItems='center'>
-          <SkuError descriptionPadding={'0rem 4rem'} {...error} />
+          <SkuError {...error} />
         </ErrorWrapper>
       ) : (
         (loading || skuData) && (
