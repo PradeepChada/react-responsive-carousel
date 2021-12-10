@@ -33,7 +33,7 @@ const PopSignin = ({ history }) => {
   const [phone, setPhone] = useState('');
   const [popAccount, setPOPAccount] = useState(null);
   const dispatch = useDispatch();
-  const { accountDetails, loading, error} = useSelector(
+  const { accountDetails, loading, error } = useSelector(
     (state) => state.popAccount
   );
   const nextButtonHandler = () => {
@@ -82,6 +82,9 @@ const PopSignin = ({ history }) => {
 
   useEffect(() => {
     dispatch(actions.setErrorNull());
+    return () => {
+      dispatch(setSpinnerOff());
+    };
   }, [dispatch]);
 
   useEffect(() => {

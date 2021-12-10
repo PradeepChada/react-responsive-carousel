@@ -64,7 +64,7 @@ export const Availability = styled(Box)({
     '&.other-stores': {
       padding: '1.125rem 0.875rem',
     },
-    '& img': {
+    '& img:first-of-type': {
       marginRight: styles.margin[3],
     },
     '& .department': {
@@ -103,7 +103,7 @@ export const Availability = styled(Box)({
     },
   },
   '& .other-stores': {
-    flexDirection:"row",
+    flexDirection: 'row',
     alignItems: styles.align.center,
     '& .stock-details': {
       padding: '0.375rem 0',
