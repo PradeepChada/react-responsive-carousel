@@ -59,6 +59,23 @@ const PickStore = ({ stores, formValues, history }) => {
   );
 };
 
+const getValidationSchema = (tabIndex) => {
+  return Yup.lazy(() =>
+    Yup.object({
+      ...(tabIndex === 0
+        ? {
+            city: Yup.string().required('City required'),
+            state: Yup.string().required('State required'),
+          }
+        : {
+            zipCode: Yup.number()
+              .typeError('Zip Code must be a number')
+              .required('Zip code required'),
+          }),
+    })
+  );
+};
+
 const StoreSearch = ({ history }) => {
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
@@ -68,20 +85,7 @@ const StoreSearch = ({ history }) => {
     (state) => state.store
   );
 
-  const validationSchemaZip = Yup.lazy(() =>
-    Yup.object({
-      ...(index === 0
-        ? {
-            city: Yup.string().required('City required'),
-            state: Yup.string().required('State required'),
-          }
-        : {
-            zipCode: Yup.number('Zip Code must be a number').required(
-              'Zip code required'
-            ),
-          }),
-    })
-  );
+  const validationSchema = getValidationSchema(index);
 
   const {
     values,
@@ -97,7 +101,7 @@ const StoreSearch = ({ history }) => {
       state: '',
       zipCode: '',
     },
-    validationSchema: validationSchemaZip,
+    validationSchema,
     onSubmit: (obj) => handleSearch(obj),
   });
 
