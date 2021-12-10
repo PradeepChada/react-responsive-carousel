@@ -1,4 +1,10 @@
-import { Typography, Skeleton, Button, Drawer, Container } from '@mui/material';
+import {
+  Typography,
+  Skeleton,
+  Button,
+  Drawer,
+  Container,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
@@ -11,8 +17,6 @@ import {
   ErrorWrapper,
   StockError,
   SalePriceWrapper,
-  ButtonGroupWrapper,
-  InputWrapper,
   SaveButton,
 } from './ProductDetails.styles';
 import StoreIcon from './../../assets/icons/store.svg';
@@ -98,7 +102,7 @@ const showStockDetails = (
       <StockError>
         {skuErrorMessages.inventory?.shortDescription}
         <Box className='refresh-btn'>
-          <img src={RefreshIcon} alt='Refresh' />
+          <img src={RefreshIcon} alt='Refresh' style={{ margin: '0' }} />
           <Button onClick={fetchSkuAvailabilityData} variant='text'>
             Refresh Page
           </Button>
@@ -109,10 +113,10 @@ const showStockDetails = (
   return (
     <div className='stock-details'>
       {inStoreQty ? (
-        <span className='stock-green'>{inStoreQty} in Stock</span>
+        <span className='stock-green'>{inStoreQty} Available</span>
       ) : (
         <span className='stock-red'>Out of Stock</span>
-      )}{' '}
+      )}
       in this store
     </div>
   );
@@ -263,25 +267,6 @@ const ProductDetails = ({ history, match }) => {
   );
 
   const dcQty = getQtyInDC(shipSkuAvailData?.inventoryEstimates);
-
-  const plusButtonHandler = () => {
-    setSkuQuantity((prevQuantity) => {
-      if (prevQuantity < 999) {
-        return prevQuantity + 1;
-      } else {
-        return prevQuantity;
-      }
-    });
-  };
-  const minusButtonHandler = () => {
-    setSkuQuantity((prevQuantity) => {
-      if (prevQuantity > 1) {
-        return prevQuantity - 1;
-      } else {
-        return prevQuantity;
-      }
-    });
-  };
   const saveChangesButtonHandler = () => {
     dispatch(
       setItemQuantityByGivenQuantityFromCart(
@@ -291,17 +276,6 @@ const ProductDetails = ({ history, match }) => {
       )
     );
     history.push('/sku-checkout');
-  };
-  const onChangeQuantity = (event) => {
-    if (event.target.value < 1000) {
-      setSkuQuantity(event.target.value);
-    }
-  };
-
-  const onBlurQuantityInput = () => {
-    if (skuQuantity <= 0) {
-      setSkuQuantity(1);
-    }
   };
 
   const videos = getProductVideos(skuData || {});
@@ -355,44 +329,22 @@ const ProductDetails = ({ history, match }) => {
       <Availability>
         <Typography className='sub-head'>Availability</Typography>
         <Box className='store-tile'>
-          <Box display='flex' flexDirection='row' width='100%'>
-            <img
-              src={StoreIcon}
-              alt='Store'
-              style={{ alignSelf: 'flex-start' }}
-            />
-            <Box flexGrow={1}>
+          <Box display='flex' flexDirection='column'>
+            <Box display='flex' flexDirection='row'>
+              <img src={StoreIcon} alt='Store' />
               {showStockDetails(
                 skuAvailabilityLoading,
                 inStoreQty,
                 skuAvailabilityError,
                 fetchSkuAvailabilityData
               )}
+            </Box>
+            <Box display='flex' flexDirection='row'>
+              <Box width='43px'></Box>
               <Typography className='department'>
                 Department: Kitchen
               </Typography>
             </Box>
-            {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
-              <ButtonGroupWrapper>
-                <Typography
-                  className='plus-button'
-                  onClick={minusButtonHandler}
-                >
-                  -
-                </Typography>
-                <InputWrapper
-                  value={skuQuantity}
-                  onChange={onChangeQuantity}
-                  onBlur={onBlurQuantityInput}
-                />
-                <Typography
-                  className='minus-button'
-                  onClick={plusButtonHandler}
-                >
-                  +
-                </Typography>
-              </ButtonGroupWrapper>
-            )}
           </Box>
           <hr />
           <Typography className='need-more-text'>Need More ?</Typography>
