@@ -1,10 +1,4 @@
-import {
-  Typography,
-  Skeleton,
-  Button,
-  Drawer,
-  Container,
-} from '@mui/material';
+import { Typography, Skeleton, Button, Drawer, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
@@ -17,7 +11,6 @@ import {
   ErrorWrapper,
   StockError,
   SalePriceWrapper,
-  SaveButton,
 } from './ProductDetails.styles';
 import StoreIcon from './../../assets/icons/store.svg';
 import DeliveryIcon from './../../assets/icons/delivery.svg';
@@ -34,7 +27,6 @@ import {
   getQtyInStore,
   getQtyInDC,
   getSkuPriceDetails,
-  givenItemExitsInCart,
   getProductImages,
   getProductVideos,
 } from './../../utils/skuHelpers';
@@ -44,7 +36,6 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
-import { setItemQuantityByGivenQuantityFromCart } from '../../slices/cart.slice';
 import ProductVideos from './product-videos/ProductVideos';
 
 const LoadingSkeleton = () => {
@@ -140,7 +131,6 @@ const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
   );
 };
 const ProductDetails = ({ history, match }) => {
-  const SKUCheckoutDetailsURL = '/sku-checkout/sku-details';
   const [showVideos, setShowVideos] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -162,9 +152,7 @@ const ProductDetails = ({ history, match }) => {
     (state) => state.reviews
   );
   const { questionsData } = useSelector((state) => state.skuQuestions);
-  const { cartItems } = useSelector((state) => state.cart);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [skuQuantity, setSkuQuantity] = useState(1);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
   useEffect(() => {
@@ -180,17 +168,6 @@ const ProductDetails = ({ history, match }) => {
       dispatch(resetQA());
     }
   }, [dispatch, skuData]);
-
-  useEffect(() => {
-    if (history.location.pathname.includes(SKUCheckoutDetailsURL)) {
-      const isExits = givenItemExitsInCart(match?.params?.id, cartItems);
-      if (isExits <= -1) {
-        history.replace('/sku-checkout');
-      } else {
-        setSkuQuantity(cartItems[isExits].skuQuantity);
-      }
-    }
-  }, [match?.params?.id, cartItems, history]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
@@ -267,17 +244,6 @@ const ProductDetails = ({ history, match }) => {
   );
 
   const dcQty = getQtyInDC(shipSkuAvailData?.inventoryEstimates);
-  const saveChangesButtonHandler = () => {
-    dispatch(
-      setItemQuantityByGivenQuantityFromCart(
-        match?.params?.id,
-        cartItems,
-        skuQuantity
-      )
-    );
-    history.push('/sku-checkout');
-  };
-
   const videos = getProductVideos(skuData || {});
   return (
     <PageContainer>
@@ -418,9 +384,6 @@ const ProductDetails = ({ history, match }) => {
           </Box>
         </InfoTile>
       </Box>
-      {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
-        <SaveButton onClick={saveChangesButtonHandler}>Save Changes</SaveButton>
-      )}
     </PageContainer>
   );
 };
