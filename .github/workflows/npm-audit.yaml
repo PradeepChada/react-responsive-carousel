@@ -1,0 +1,38 @@
+name: npm-audit
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pull requests for the master branch
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'package.json'
+  schedule:
+    # Second day of the month
+    - cron:  '0 0 2 * *'
+  # Allows this workflow to be ran manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  npm-audit:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    steps:
+      # Checkout repository 
+      - uses: actions/checkout@v2
+
+      # Checkout script repo
+      - name: Checkout scripts repo
+        uses: actions/checkout@v2
+        with:
+          repository: the-container-store/Github-Actions-Scripts
+          token: ${{ secrets.GH_ACTIONS_PAT }}
+          path: github-scripts
+
+      - name: 'Run npm-audit via Docker'
+        shell: bash
+        run: ${GITHUB_WORKSPACE}/github-scripts/npm/audit.sh
+        env:
+          APP_NAME: mobius
+          NODE_IMAGE: node:14.18.0-slim
