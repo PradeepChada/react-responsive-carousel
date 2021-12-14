@@ -8,6 +8,7 @@ import {
 } from './SearchBar.styles';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { getDigitOnly } from '../../utils/skuHelpers';
 const SearchBar = ({ handleSearch, handleClear }) => {
   const [SKUCode, setSKUCode] = useState('');
   const history = useHistory();
@@ -18,7 +19,7 @@ const SearchBar = ({ handleSearch, handleClear }) => {
       handleSearch(input.trim());
       setSKUCode('');
     }
-    setSKUCode(input);
+    setSKUCode(getDigitOnly(input));
   };
 
   const handleClearButtonClick = () => {

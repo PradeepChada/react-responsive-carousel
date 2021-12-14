@@ -4,6 +4,8 @@ import { styles, font, colors } from '../../utils/themeUtils';
 import { Box } from '@mui/system';
 
 export const PageContainer = styled(Container)({
+  display:"flex",
+  flexDirection:"column",
   padding: styles.padding[3],
   height: '100%',
   '& .pop-account-text': {
@@ -51,7 +53,6 @@ export const PageContainer = styled(Container)({
     fontSize: font.size[14],
     fontWeight: font.weight['bold'],
     textTransform: 'uppercase',
-    marginBottom: styles.margin[3],
   },
   '& legend': {
     fontSize: font.size[16],

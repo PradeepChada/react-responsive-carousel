@@ -64,13 +64,14 @@ export const Availability = styled(Box)({
     '&.other-stores': {
       padding: '1.125rem 0.875rem',
     },
-    '& img': {
+    '& img:first-of-type': {
       marginRight: styles.margin[3],
     },
     '& .department': {
       fontSize: font.size[14],
       fontWeight: font.weight[400],
       marginTop: styles.margin[2],
+      textTransform: 'capitalize',
     },
     '& .stock-details': {
       fontWeight: font.weight[600],
@@ -103,7 +104,7 @@ export const Availability = styled(Box)({
     },
   },
   '& .other-stores': {
-    flexDirection:"row",
+    flexDirection: 'row',
     alignItems: styles.align.center,
     '& .stock-details': {
       padding: '0.375rem 0',

@@ -4,8 +4,8 @@ import { colors, styles } from './../../utils/themeUtils';
 
 export const Wrapper = styled(Container)({
   position: 'fixed',
-  display: "grid",
-  placeItems:"center",
+  display: 'grid',
+  placeItems: 'center',
   height: '100%',
   background: colors.white,
   opacity: '0.75',
@@ -52,41 +52,33 @@ export const SpinnerChild = styled('div')({
   '& div:nth-of-type(1)': {
     transform: 'rotate(0deg)',
     animationDelay: '-1.0542168674698795s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(2)': {
     transform: 'rotate(45deg)',
     animationDelay: '-0.9036144578313252s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(3)': {
     transform: 'rotate(90deg)',
     animationDelay: '-0.753012048192771s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(4)': {
     transform: 'rotate(135deg)',
     animationDelay: '-0.6024096385542168s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(5)': {
     transform: 'rotate(180deg)',
     animationDelay: '-0.4518072289156626s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(6)': {
     transform: 'rotate(225deg)',
     animationDelay: '-0.3012048192771084s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(7)': {
     transform: 'rotate(270deg)',
     animationDelay: '-0.1506024096385542s',
-    background: colors.spinnerBackground,
   },
   '& div:nth-of-type(8)': {
     transform: 'rotate(315deg)',
     animationDelay: '0s',
-    background: colors.spinnerBackground,
   },
 });

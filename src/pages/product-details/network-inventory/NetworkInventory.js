@@ -55,7 +55,7 @@ const NetworkInventory = ({ toggleDrawer, data, loading, error }) => {
                   className='outlet-info'
                 />
                 {outlet.quantity ? (
-                  <ValueInStock>{outlet.quantity} in Stock</ValueInStock>
+                  <ValueInStock>{outlet.quantity} Available</ValueInStock>
                 ) : (
                   <ValueOutOfStock>Out of Stock</ValueOutOfStock>
                 )}
