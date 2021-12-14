@@ -307,11 +307,13 @@ const ProductDetails = ({ history, match }) => {
             </Box>
             <Box display='flex' flexDirection='row'>
               <Box width='43px'></Box>
-              {skuData?.departmentName && (
-                <Typography className='department'>
-                  Department: {skuData?.departmentName}
-                </Typography>
-              )}
+
+              <Typography className='department'>
+                Department:&nbsp;
+                {skuData?.departmentName
+                  ? skuData?.departmentName?.toLowerCase()
+                  : 'None'}
+              </Typography>
             </Box>
           </Box>
           <hr />
