@@ -71,6 +71,7 @@ export const Availability = styled(Box)({
       fontSize: font.size[14],
       fontWeight: font.weight[400],
       marginTop: styles.margin[2],
+      textTransform: 'capitalize',
     },
     '& .stock-details': {
       fontWeight: font.weight[600],
