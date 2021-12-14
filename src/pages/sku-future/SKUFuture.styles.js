@@ -6,8 +6,14 @@ export const Wrapper = styled(Container)({
   display: styles.display.flex,
   flexDirection: 'column',
   justifyContent: styles.justify.between,
-  height: '100vh',
+  height: '100%',
   padding: styles.padding[3],
+  '& form': {
+    display: styles.display.flex,
+    flexDirection: 'column',
+    width: 'inherit',
+    height: 'inherit',
+  },
   '& p:nth-of-type(1)': {
     fontSize: font.size[20],
     fontWeight: font.weight['bold'],
@@ -28,6 +34,9 @@ export const Wrapper = styled(Container)({
     fontSize: font.size[16],
     fontWeight: font.weight['bold'],
     color: colors.danger,
+  },
+  '& button:first-of-type': {
+    marginTop: styles.margin['auto'],
   },
   '& .search-button': {
     display: styles.display.flex,

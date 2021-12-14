@@ -7,5 +7,5 @@ export const getStoreList = (params) => {
     .map((key) => `${key}=${params[key]}`)
     .join('&');
   const url = `${config.appConfig.container_store_base_url}/store/api/locations?${queryStr}`;
-  return Axios.get(url);
+  return Axios.get(url, { withCredentials: true });
 };

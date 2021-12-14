@@ -1,5 +1,4 @@
 import { Button, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { getDigitOnly } from '../../utils/skuHelpers';
@@ -15,7 +14,7 @@ function SKUFuture() {
   };
   return (
     <Wrapper>
-      <Box>
+      <form>
         <Typography>Future Availability Check</Typography>
         <Typography>
           Showing next available date for a desired quantity.
@@ -29,18 +28,21 @@ function SKUFuture() {
           onChange={inputHandler}
         />
         <Typography className='available'>
-          45 will be available at Arlington Highlands on on 01/22/2022{' '}
+          45 is available today at Arlington Highlands 01/22/2022
+        </Typography>
+        <Typography className='available'>
+          45 will be available at Arlington Highlands on 01/22/2022
         </Typography>
         <Typography className='not-available'>
           Backordered: This item may be available at other stores near you.
         </Typography>
-      </Box>
-      <Box display='flex' flexDirection='column' width='100%'>
-        <Button className='search-button'>SEARCH</Button>
+        <Button type='submit' className='search-button'>
+          SEARCH
+        </Button>
         <Button className='cancel-button' onClick={() => history.goBack()}>
           CANCEL
         </Button>
-      </Box>
+      </form>
     </Wrapper>
   );
 }
