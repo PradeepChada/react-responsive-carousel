@@ -1,10 +1,4 @@
-import {
-  Typography,
-  Skeleton,
-  Button,
-  Drawer,
-  Container,
-} from '@mui/material';
+import { Typography, Skeleton, Button, Drawer, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import ProductTitle from '../../components/product-title/ProductTitle';
@@ -384,6 +378,16 @@ const ProductDetails = ({ history, match }) => {
           }
         >
           <Typography>Additional Sizes & Colors</Typography>
+          <ChevronRight />
+        </InfoTile>
+        <InfoTile
+          onClick={() =>
+            history.push(
+              `/recommended-products/${match?.params?.id}/${skuData?.defaultProductId}`
+            )
+          }
+        >
+          <Typography>Recommended Products</Typography>
           <ChevronRight />
         </InfoTile>
         <InfoTile onClick={() => history.push(`/reviews/${match?.params?.id}`)}>

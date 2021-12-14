@@ -28,6 +28,7 @@ import PaymentSuccess from './pages/payment-success/PaymentSuccess';
 import TransactionComplete from './pages/transaction-success/TransactionComplete';
 import SKUFuture from './pages/sku-future/SKUFuture';
 import StoreSearch from './pages/store-search/StoreSearch';
+import RecommendedProducts from './pages/recommended-products/RecommendedProducts';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -70,6 +71,11 @@ const App = () => {
                       exact
                       path='/product-variants/:id/:defaultProduct'
                       component={ProductVariants}
+                    />
+                    <Route
+                      exact
+                      path='/recommended-products/:id/:defaultProduct'
+                      component={RecommendedProducts}
                     />
                     <Route
                       exact
