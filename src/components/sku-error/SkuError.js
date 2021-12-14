@@ -8,10 +8,10 @@ const SkuError = ({ title, description, size }) => {
     <Box display='flex' flexDirection='column' alignItems='center' size={size}>
       <ErrorIcon size={size} />
       <Box textAlign='center'>
-        <Title size={size}>{title}</Title>
-        {description && (
-          <Description >{description}</Description>
-        )}
+        <Title error-title={title} size={size}>
+          {title}
+        </Title>
+        {description && <Description>{description}</Description>}
       </Box>
     </Box>
   );

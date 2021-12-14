@@ -108,7 +108,7 @@ const showStockDetails = (
       ) : (
         <span className='stock-red'>Out of Stock</span>
       )}
-      in this store
+      &nbsp;in this store
     </div>
   );
 };
@@ -307,9 +307,11 @@ const ProductDetails = ({ history, match }) => {
             </Box>
             <Box display='flex' flexDirection='row'>
               <Box width='43px'></Box>
-              <Typography className='department'>
-                Department: Kitchen
-              </Typography>
+              {skuData?.departmentName && (
+                <Typography className='department'>
+                  Department: {skuData?.departmentName}
+                </Typography>
+              )}
             </Box>
           </Box>
           <hr />

@@ -31,7 +31,7 @@ export const Description = styled(Typography)({
 
 export const ErrorWrapper = styled(Box)({
   padding: '1.875rem 0',
-  '& p:nth-child(2)': {
+  '& p[error-title="Search Malfunction"] + p': {
     padding: '0 4rem',
   },
 });
