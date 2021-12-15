@@ -33,7 +33,13 @@ const LoadingSkeleton = () => {
     </Box>
   );
 };
-
+const showSKULoadingSkeletion = (loading) => {
+  if (loading) {
+    return Array(3)
+      .fill(null)
+      .map((_, i) => <SkuTile key={`key${i}`} loading={true} />);
+  }
+};
 const ProductVariants = ({ history, match }) => {
   const dispatch = useDispatch();
   const { loading, skuVariants, error } = useSelector(
@@ -60,9 +66,6 @@ const ProductVariants = ({ history, match }) => {
     }
   }, [dispatch, match?.params?.id, skuData, storeId]);
 
-  useEffect(() => {
-    console.log('skuAvailability', skuAvailability);
-  }, [skuAvailability]);
   const getSkuData = (item) => {
     return {
       image: `${config.appConfig.asset_base_url}${item.mediaList?.[0]?.url}`,
@@ -101,11 +104,8 @@ const ProductVariants = ({ history, match }) => {
         Additional Sizes & Colors{' '}
         {variants?.length ? `(${variants.length})` : null}
       </Title>
-      {loading ? (
-        Array(3)
-          .fill(null)
-          .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
-      ) : variants?.length ? (
+      {showSKULoadingSkeletion(loading)}
+      {variants?.length ? (
         variants.map((item, i) => {
           const skuInfo = getSkuData(item);
           return (
