@@ -79,6 +79,10 @@ const SkuTile = ({
     event.stopPropagation();
     decreaseItemQuantity(skuInfo.skuId, skuQuantity);
   };
+  const crossIconHandler = (event) => {
+    event.stopPropagation();
+    removeItem(skuInfo.skuId);
+  };
   if (loading) {
     return _renderSkeleton();
   }
@@ -101,7 +105,7 @@ const SkuTile = ({
             <Title data-testid='sku-title'>
               {skuInfo?.name?.substring(0, 25)}...
             </Title>
-            <ClearIconWrapper onClick={() => removeItem(skuInfo.skuId)} />
+            <ClearIconWrapper onClick={crossIconHandler} />
           </Box>
           <Code>SKU: #{skuInfo?.skuId}</Code>
           <Box
