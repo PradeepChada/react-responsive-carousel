@@ -48,6 +48,12 @@ export const getQtyInStore = (data = [], storeId) =>
   data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
     ?.qtyAvailableAtStore;
 
+export const getSKUQtyInStore = (data = [], storeId, skuCode) =>
+  data?.find(
+    (o) =>
+      o.fulfillmentStoreNumber === String(storeId) && o.skuNumber === skuCode
+  )?.qtyAvailableAtStore;
+
 export const getQtyInDC = (data = []) => data?.[0]?.qtyAvailable;
 
 export const getQtyOnline = (data = []) =>
@@ -153,7 +159,7 @@ const filterDigitOnly = (value) => {
 };
 export const getDigitOnly = (value) => {
   let _newData = value.split('');
-  _newData =filterDigitOnly(_newData);
+  _newData = filterDigitOnly(_newData);
   return _newData.join('');
 };
 

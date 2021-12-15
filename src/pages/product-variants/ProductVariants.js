@@ -11,7 +11,7 @@ import {
   ErrorWrapper,
   NoContent,
 } from './ProductVariants.styles';
-import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
+import { getSKUQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -60,14 +60,18 @@ const ProductVariants = ({ history, match }) => {
     }
   }, [dispatch, match?.params?.id, skuData, storeId]);
 
+  useEffect(() => {
+    console.log('skuAvailability', skuAvailability);
+  }, [skuAvailability]);
   const getSkuData = (item) => {
     return {
       image: `${config.appConfig.asset_base_url}${item.mediaList?.[0]?.url}`,
       skuPriceDetails: getSkuPriceDetails(item?.productPrice),
       name: item.name,
-      qtyAvailableAtStore: getQtyInStore(
+      qtyAvailableAtStore: getSKUQtyInStore(
         skuAvailability?.inventoryEstimates,
-        skuAvailability?.requestStoreNumber
+        skuAvailability?.requestStoreNumber,
+        item.id
       ),
       skuId: item.id,
     };
