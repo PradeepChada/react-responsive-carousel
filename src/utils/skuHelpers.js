@@ -48,7 +48,7 @@ export const getQtyInStore = (data = [], storeId) =>
   data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
     ?.qtyAvailableAtStore;
 
-export const getSKUQtyInStore = (data = [], storeId, skuCode) =>
+export const getSKUQtyInStore = (skuCode, storeId, data = []) =>
   data?.find(
     (o) =>
       o.fulfillmentStoreNumber === String(storeId) && o.skuNumber === skuCode

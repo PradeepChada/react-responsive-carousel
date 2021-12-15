@@ -39,6 +39,7 @@ const showSKULoadingSkeletion = (loading) => {
       .fill(null)
       .map((_, i) => <SkuTile key={`key${i}`} loading={true} />);
   }
+  return null;
 };
 const ProductVariants = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -72,9 +73,9 @@ const ProductVariants = ({ history, match }) => {
       skuPriceDetails: getSkuPriceDetails(item?.productPrice),
       name: item.name,
       qtyAvailableAtStore: getSKUQtyInStore(
-        skuAvailability?.inventoryEstimates,
+        item.id,
         skuAvailability?.requestStoreNumber,
-        item.id
+        skuAvailability?.inventoryEstimates
       ),
       skuId: item.id,
     };
