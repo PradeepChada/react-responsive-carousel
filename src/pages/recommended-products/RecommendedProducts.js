@@ -10,7 +10,6 @@ import {
   NoContent,
   SkuList,
 } from './RecommendedProducts.styles';
-import SkuError from '../../components/sku-error/SkuError';
 import ProductCard from './product-card/ProductCard';
 import { fetchFreqBoughtProducts } from '../../slices/recommended.slice';
 
