@@ -4,6 +4,12 @@ import { colors, styles, font } from '../../utils/themeUtils';
 
 export const PageContainer = styled(Container)({
   padding: `0.625rem ${styles.margin[3]}`,
+  "& .css-18h73ui p:nth-of-type(3)":{
+    marginTop:"0.75rem"
+  },
+  "& .css-18h73ui p:nth-of-type(4)":{
+    marginTop:"1.875rem"
+  }
 });
 
 export const Wrapper = styled(Box)({
