@@ -9,26 +9,26 @@ export const Wrapper = styled(Grid)({
   marginRight: styles.margin[2],
   '& img': {
     width: '100%',
-    minHeight: 150,
+    minHeight: 142,
   },
   '& .content': {
     padding: `${styles.padding[1]} 0`,
     paddingBottom: '2rem',
     '& .colors-available': {
       '& .more-text': {
-        color: '#54565B',
+        color: colors.selectGray,
         fontWeight: font.weight[600],
       },
-      display: 'flex',
-      alignItems: 'center',
+      display: styles.display.flex,
+      alignItems: styles.align.center,
       minHeight: 22,
       '& .color-tile': {
         padding: 2,
         marginRight: styles.margin[1],
         width: '1rem',
         height: '1rem',
-        outline: '1px solid #D9D9D9',
-        border: '2px solid #fff',
+        outline: `1px solid ${colors.gray85}`,
+        border: `2px solid ${colors.white}`,
       },
     },
     '& .price': {
@@ -47,10 +47,10 @@ export const Wrapper = styled(Grid)({
       fontSize: font.size[14],
       fontWeight: font.weight[600],
       '&.green': {
-        color: '#128400',
+        color: colors.green,
       },
       '&.red': {
-        color: '#DF2E2F',
+        color: colors.danger,
       },
     },
   },

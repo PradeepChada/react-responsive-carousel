@@ -21,6 +21,9 @@ export const SkuList = styled(Box)({
   display: '-webkit-box',
   overflowX: 'auto',
   marginTop: styles.margin[3],
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
 
 export const ErrorWrapper = styled(Box)({

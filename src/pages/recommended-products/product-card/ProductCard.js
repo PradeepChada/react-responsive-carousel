@@ -24,7 +24,7 @@ const ProductCard = ({ data, onClickProduct }) => {
   const _renderStock = () => {
     return (
       <div className={`stock ${data?.quantity ? 'green' : 'red'}`}>
-        {data?.quantity ? '10 Available' : 'Out of Stock'}{' '}
+        {data?.quantity ? `${data?.quantity} Available` : 'Out of Stock'}{' '}
       </div>
     );
   };
@@ -34,8 +34,8 @@ const ProductCard = ({ data, onClickProduct }) => {
       <img src={data?.image} alt='product' />
       <Grid className='content'>
         {_renderColorsAvail()}
-        <div className='price'>${data.price}</div>
-        <div className='title'>{data?.title}</div>
+        <div className='price'>${data.price?.toFixed(2)}</div>
+        <div className='title'>{data?.name}</div>
 
         <Box className='ratings-wrapper' display='flex' alignItems='center'>
           <RatingsBar rating={data?.rating} />
