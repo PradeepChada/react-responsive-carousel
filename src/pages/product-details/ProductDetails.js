@@ -356,6 +356,16 @@ const ProductDetails = ({ history, match }) => {
           <Typography>Additional Sizes & Colors</Typography>
           <ChevronRight />
         </InfoTile>
+        <InfoTile
+          onClick={() =>
+            history.push(
+              `/recommended-products/${match?.params?.id}/${skuData?.defaultProductId}`
+            )
+          }
+        >
+          <Typography>Recommended Products</Typography>
+          <ChevronRight />
+        </InfoTile>
         <InfoTile onClick={() => history.push(`/reviews/${match?.params?.id}`)}>
           <div className='ratings-wrapper'>
             <Box display='flex' justifyContent='space-between'>
