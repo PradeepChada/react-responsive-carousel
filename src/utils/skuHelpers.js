@@ -158,9 +158,9 @@ const filterDigitOnly = (value) => {
   });
 };
 export const getDigitOnly = (value) => {
-  let _newData = value.split('');
-  _newData = filterDigitOnly(_newData);
-  return _newData.join('');
+  let newData = value.split('');
+  newData = filterDigitOnly(newData);
+  return newData.join('');
 };
 
 export const validateEmail = (email) => {

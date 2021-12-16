@@ -33,7 +33,7 @@ const LoadingSkeleton = () => {
     </Box>
   );
 };
-const showSKULoadingSkeletion = (loading) => {
+const renderSKULoadingSkeletion = (loading) => {
   if (loading) {
     return Array(3)
       .fill(null)
@@ -105,7 +105,7 @@ const ProductVariants = ({ history, match }) => {
         Additional Sizes & Colors{' '}
         {variants?.length ? `(${variants.length})` : null}
       </Title>
-      {showSKULoadingSkeletion(loading)}
+      {renderSKULoadingSkeletion(loading)}
       {variants?.length ? (
         variants.map((item, i) => {
           const skuInfo = getSkuData(item);
