@@ -100,21 +100,10 @@ const RecommendedProducts = ({ history, match }) => {
       </ErrorWrapper>
     );
   }
-  return (
-    <PageContainer>
-      {skuTitleLoading ? (
-        <LoadingSkeleton />
-      ) : (
-        <ProductTitle
-          title={skuData?.name}
-          skuId={match?.params?.id}
-          rating={reviewsData?.results?.[0]?.rollup?.average_rating}
-          ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
-        />
-      )}
-      <Title variant='h6'>Frequently Bought Together</Title>
 
-      {freqBoughtLoading ? (
+  const renderContent = () => {
+    if (freqBoughtLoading) {
+      return (
         <SkuList>
           {Array(3)
             .fill(null)
@@ -122,7 +111,9 @@ const RecommendedProducts = ({ history, match }) => {
               <ProductSkeleton />
             ))}
         </SkuList>
-      ) : freqBoughtProducts?.length ? (
+      );
+    } else {
+      return freqBoughtProducts?.length ? (
         <SkuList>
           {freqBoughtProducts.map((item, i) => {
             return (
@@ -137,7 +128,24 @@ const RecommendedProducts = ({ history, match }) => {
         </SkuList>
       ) : (
         <NoContent>No recommended products found</NoContent>
+      );
+    }
+  };
+
+  return (
+    <PageContainer>
+      {skuTitleLoading ? (
+        <LoadingSkeleton />
+      ) : (
+        <ProductTitle
+          title={skuData?.name}
+          skuId={match?.params?.id}
+          rating={reviewsData?.results?.[0]?.rollup?.average_rating}
+          ratingCount={reviewsData?.results?.[0]?.rollup?.review_count}
+        />
       )}
+      <Title variant='h6'>Frequently Bought Together</Title>
+      {renderContent()}
     </PageContainer>
   );
 };

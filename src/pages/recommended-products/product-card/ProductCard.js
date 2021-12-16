@@ -3,6 +3,9 @@ import React from 'react';
 import { Wrapper, RatingCount } from './ProductCard.styles';
 import RatingsBar from '../../../components/ratings-bar/RatingsBar';
 
+const IMG_BASE_URL =
+  'https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/o~f_webp/v~4b.129.0.0/https://www.containerstore.com';
+
 const ProductCard = ({ data, onClickProduct }) => {
   const _renderColorsAvail = () => {
     return (
@@ -31,7 +34,7 @@ const ProductCard = ({ data, onClickProduct }) => {
 
   return (
     <Wrapper onClick={onClickProduct}>
-      <img src={data?.image} alt='product' />
+      <img src={`${IMG_BASE_URL}${data?.image}`} alt='product' />
       <Grid className='content'>
         {_renderColorsAvail()}
         <div className='price'>${data.price?.toFixed(2)}</div>

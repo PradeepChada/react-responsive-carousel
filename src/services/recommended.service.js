@@ -1,6 +1,3 @@
-// import Axios from '../api';
-// import config from '../config';
-
 import { frequentlyBoughtTogether } from '../utils/recommended';
 
 export const getFreqBoughtProducts = () => {
