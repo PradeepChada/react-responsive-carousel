@@ -11,7 +11,7 @@ import {
   ErrorWrapper,
   NoContent,
 } from './ProductVariants.styles';
-import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
+import { getSKUQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -33,7 +33,14 @@ const LoadingSkeleton = () => {
     </Box>
   );
 };
-
+const renderSKULoadingSkeletion = (loading) => {
+  if (loading) {
+    return Array(3)
+      .fill(null)
+      .map((_, i) => <SkuTile key={`key${i}`} loading={true} />);
+  }
+  return null;
+};
 const ProductVariants = ({ history, match }) => {
   const dispatch = useDispatch();
   const { loading, skuVariants, error } = useSelector(
@@ -65,9 +72,10 @@ const ProductVariants = ({ history, match }) => {
       image: `${config.appConfig.asset_base_url}${item.mediaList?.[0]?.url}`,
       skuPriceDetails: getSkuPriceDetails(item?.productPrice),
       name: item.name,
-      qtyAvailableAtStore: getQtyInStore(
-        skuAvailability?.inventoryEstimates,
-        skuAvailability?.requestStoreNumber
+      qtyAvailableAtStore: getSKUQtyInStore(
+        item.id,
+        skuAvailability?.requestStoreNumber,
+        skuAvailability?.inventoryEstimates
       ),
       skuId: item.id,
     };
@@ -97,11 +105,8 @@ const ProductVariants = ({ history, match }) => {
         Additional Sizes & Colors{' '}
         {variants?.length ? `(${variants.length})` : null}
       </Title>
-      {loading ? (
-        Array(3)
-          .fill(null)
-          .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
-      ) : variants?.length ? (
+      {renderSKULoadingSkeletion(loading)}
+      {variants?.length ? (
         variants.map((item, i) => {
           const skuInfo = getSkuData(item);
           return (

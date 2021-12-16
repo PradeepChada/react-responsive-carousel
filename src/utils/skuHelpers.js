@@ -48,6 +48,12 @@ export const getQtyInStore = (data = [], storeId) =>
   data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
     ?.qtyAvailableAtStore;
 
+export const getSKUQtyInStore = (skuCode, storeId, data = []) =>
+  data?.find(
+    (o) =>
+      o.fulfillmentStoreNumber === String(storeId) && o.skuNumber === skuCode
+  )?.qtyAvailableAtStore;
+
 export const getQtyInDC = (data = []) => data?.[0]?.qtyAvailable;
 
 export const getQtyOnline = (data = []) =>
@@ -143,24 +149,11 @@ export const capitalizeFirstLetter = (str) => {
   return arr.join(' ');
 };
 
-const filterDigitOnly = (value) => {
-  return value.filter((data) => {
-    if (data >= '0' && data <= '9') {
-      return true;
-    }
-    return false;
-  });
-};
-export const getDigitOnly = (value) => {
-  let _newData = value.split('');
-  _newData =filterDigitOnly(_newData);
-  return _newData.join('');
-};
+const filterDigitOnly = (value) => value.filter((data) => /^\d+$/.test(data));
 
-export const validateEmail = (email) => {
-  const re = /\S+@\S+\.\S+/;
-  return re.test(email);
-};
+export const getDigitOnly = (value) => value?.replace(/[^\d]/g, '');
+
+export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
 export const reFormPhone = (phone) => {
   let _newPhone = phone.split('');
