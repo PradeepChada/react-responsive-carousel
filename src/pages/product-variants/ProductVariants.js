@@ -102,7 +102,7 @@ const ProductVariants = ({ history, match }) => {
         />
       )}
       <Title variant='h6' nocontent={variants?.length === 0 ? 'true' : 'false'}>
-        Additional Sizes & Colors{' '}
+        Additional Sizes & Colors
         {variants?.length ? `(${variants.length})` : null}
       </Title>
       {renderSKULoadingSkeletion(loading)}
