@@ -11,7 +11,7 @@ export const Wrapper = styled(Box)({
   paddingBottom: styles.padding[3],
   width: '100%',
   '& .availability-link': {
-    fontSize: font.size[14],
+    fontSize: font.size[12],
     fontWeight: font.weight['bold'],
     color: colors.darkBlue,
     cursor: 'pointer',
