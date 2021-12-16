@@ -7,7 +7,6 @@ import { fetchSkuDetails } from '../../slices/sku.slice';
 import {
   PageContainer,
   Title,
-  ErrorWrapper,
   NoContent,
   SkuList,
 } from './RecommendedProducts.styles';
@@ -69,7 +68,7 @@ const ProductSkeleton = () => {
 
 const RecommendedProducts = ({ history, match }) => {
   const dispatch = useDispatch();
-  const { freqBoughtLoading, freqBoughtProducts, freqBoughtErroor } =
+  const { freqBoughtLoading, freqBoughtProducts, freqBoughtError } =
     useSelector((state) => state.recommended);
   const { reviewsData } = useSelector((state) => state.reviews);
 
@@ -93,14 +92,6 @@ const RecommendedProducts = ({ history, match }) => {
     }
   }, [dispatch, match?.params?.id, skuData, storeId]);
 
-  if (freqBoughtErroor) {
-    return (
-      <ErrorWrapper alignItems='center'>
-        <SkuError {...freqBoughtErroor} />
-      </ErrorWrapper>
-    );
-  }
-
   const renderContent = () => {
     if (freqBoughtLoading) {
       return (
@@ -113,7 +104,9 @@ const RecommendedProducts = ({ history, match }) => {
         </SkuList>
       );
     } else {
-      return freqBoughtProducts?.length ? (
+      return freqBoughtError || freqBoughtProducts?.length === 0 ? (
+        <NoContent>No recommended products found</NoContent>
+      ) : (
         <SkuList>
           {freqBoughtProducts.map((item, i) => {
             return (
@@ -126,8 +119,6 @@ const RecommendedProducts = ({ history, match }) => {
             );
           })}
         </SkuList>
-      ) : (
-        <NoContent>No recommended products found</NoContent>
       );
     }
   };
