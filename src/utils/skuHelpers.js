@@ -151,8 +151,7 @@ export const capitalizeFirstLetter = (str) => {
 
 const filterDigitOnly = (value) => value.filter((data) => /^\d+$/.test(data));
 
-export const getDigitOnly = (value) =>
-  filterDigitOnly(value.split('')).join('');
+export const getDigitOnly = (value) => value?.replace(/[^\d]/g, '');
 
 export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
