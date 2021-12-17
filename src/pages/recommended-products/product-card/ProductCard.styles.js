@@ -44,8 +44,12 @@ export const Wrapper = styled(Grid)({
       minHeight: '1rem',
     },
     '& .title': {
-      fontSize: 14,
+      fontSize: font.size[14],
       marginTop: styles.margin[1],
+      '-webkit-line-clamp': 2,
+      display: '-webkit-box',
+      overflow: 'hidden',
+      '-webkit-box-orient': 'vertical',
     },
     '& .ratings-wrapper': {
       marginTop: styles.margin[1],
