@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PageContainer, BoxWrapper } from './PopSignin.styles';
+import { Redirect } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import {
   Button,
@@ -33,9 +34,10 @@ const PopSignin = ({ history }) => {
   const [phone, setPhone] = useState('');
   const [popAccount, setPOPAccount] = useState(null);
   const dispatch = useDispatch();
-  const { accountDetails, loading, error } = useSelector(
+  const { accountDetails, loading, error, mainAccount } = useSelector(
     (state) => state.popAccount
   );
+  const { cartItems } = useSelector((state) => state.cart);
   const nextButtonHandler = () => {
     if (email.trim() !== '') {
       if (validateEmail(email.trim())) {
@@ -68,6 +70,7 @@ const PopSignin = ({ history }) => {
     dispatch(setMainPOPAccount(popAccount));
     history.push('/sku-checkout');
   };
+
   useEffect(() => {
     if (accountDetails.length > 0) {
       setPOPAccount(getFirstPOPMemeber(accountDetails).emailAddress);
@@ -197,6 +200,9 @@ const PopSignin = ({ history }) => {
       </BoxWrapper>
     );
   };
+  if (cartItems.length >= 1 || mainAccount) {
+    return <Redirect to='/sku-checkout' />;
+  }
 
   return (
     <PageContainer>
