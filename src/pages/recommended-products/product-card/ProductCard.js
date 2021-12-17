@@ -37,7 +37,9 @@ const ProductCard = ({ data, onClickProduct }) => {
       <img src={`${IMG_BASE_URL}${data?.image}`} alt='product' />
       <Grid className='content'>
         {_renderColorsAvail()}
-        <div className='price'>${data.price?.toFixed(2)}</div>
+        <div className={`price ${data.price_range ? 'danger' : ''}`}>
+          {data.price_range || `$${data.price?.toFixed(2)}`}
+        </div>
         <div className='title'>{data?.name}</div>
 
         <Box className='ratings-wrapper' display='flex' alignItems='center'>

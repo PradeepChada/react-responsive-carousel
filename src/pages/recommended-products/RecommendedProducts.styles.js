@@ -16,6 +16,7 @@ export const SkuList = styled(Box)({
   display: '-webkit-box',
   overflowX: 'auto',
   marginTop: styles.margin[3],
+  minHeight: '20rem',
   '&::-webkit-scrollbar': {
     display: 'none',
   },
