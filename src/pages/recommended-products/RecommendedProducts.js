@@ -153,8 +153,6 @@ const CustomerAlsoViewed = ({ history }) => {
 
 const RecommendedProducts = ({ history, match }) => {
   const dispatch = useDispatch();
-  // const { freqBoughtLoading, freqBoughtProducts, freqBoughtError } =
-  //   useSelector((state) => state.recommended);
   const { reviewsData } = useSelector((state) => state.reviews);
 
   const {
