@@ -6,7 +6,7 @@ import RatingsBar from '../../../components/ratings-bar/RatingsBar';
 const IMG_BASE_URL =
   'https://cdn-fsly.yottaa.net/55df7e1a2bb0ac7d800040c2/o~f_webp/v~4b.129.0.0/https://www.containerstore.com';
 
-const ProductCard = ({ data, onClickProduct }) => {
+const ProductCard = ({ data, onClickProduct, section }) => {
   const _renderColorsAvail = () => {
     return (
       <div className='colors-available'>
@@ -40,6 +40,13 @@ const ProductCard = ({ data, onClickProduct }) => {
         <div className={`price ${data.price_range ? 'danger' : ''}`}>
           {data.price_range || `$${data.price?.toFixed(2)}`}
         </div>
+        {section === 'customers_considered' && (
+          <div className='original-price'>
+            {data?.original_price_range
+              ? `was ${data.original_price_range}`
+              : ''}
+          </div>
+        )}
         <div className='title'>{data?.name}</div>
 
         <Box className='ratings-wrapper' display='flex' alignItems='center'>

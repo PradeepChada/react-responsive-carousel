@@ -62,7 +62,7 @@ export const customersAlsoViewed = [
     image: '/catalogimages/373961/10078269-drop-front-sweater-box-navy.jpg',
     price: 29.99,
     price_range: '$4.80 - $15.99',
-    original_price_range: 'Was $5.99 - $19.99',
+    original_price_range: '$5.99 - $19.99',
     rating: 1.5,
     num_of_ratings: 24,
     quantity: 10,

@@ -13,7 +13,7 @@ export const Wrapper = styled(Grid)({
   },
   '& .content': {
     padding: `${styles.padding[1]} 0`,
-    paddingBottom: styles.padding[3],
+    paddingBottom: styles.padding[4],
     '& .colors-available': {
       '& .more-text': {
         color: colors.selectGray,
@@ -37,6 +37,11 @@ export const Wrapper = styled(Grid)({
       '&.danger': {
         color: colors.red,
       },
+    },
+    '& .original-price': {
+      fontSize: font.size[12],
+      margin: '2px 0',
+      minHeight: '1rem',
     },
     '& .title': {
       fontSize: 14,

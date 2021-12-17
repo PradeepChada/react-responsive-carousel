@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Skeleton, Box } from '@mui/material';
+import { Skeleton, Box, Divider } from '@mui/material';
 import ProductTitle from '../../components/product-title/ProductTitle';
 import { fetchSkuVariants } from '../../slices/skuVariants.slice';
 import { fetchSkuDetails } from '../../slices/sku.slice';
@@ -132,6 +132,7 @@ const CustomerAlsoViewed = ({ history }) => {
             return (
               <ProductCard
                 data={item}
+                section='customers_considered'
                 onClickProduct={() =>
                   history.push(`/product-details/${item?.id}`)
                 }
@@ -190,6 +191,7 @@ const RecommendedProducts = ({ history, match }) => {
         />
       )}
       <FreqBoughtTogether history={history} />
+      <Divider />
       <CustomerAlsoViewed history={history} />
     </PageContainer>
   );
