@@ -13,7 +13,7 @@ export const Wrapper = styled(Grid)({
   },
   '& .content': {
     padding: `${styles.padding[1]} 0`,
-    paddingBottom: '2rem',
+    paddingBottom: styles.padding[4],
     '& .colors-available': {
       '& .more-text': {
         color: colors.selectGray,
@@ -34,10 +34,22 @@ export const Wrapper = styled(Grid)({
     '& .price': {
       fontWeight: font.weight[600],
       marginTop: styles.margin[2],
+      '&.danger': {
+        color: colors.red,
+      },
+    },
+    '& .original-price': {
+      fontSize: font.size[12],
+      margin: '2px 0',
+      minHeight: '1rem',
     },
     '& .title': {
-      fontSize: 14,
+      fontSize: font.size[14],
       marginTop: styles.margin[1],
+      '-webkit-line-clamp': 2,
+      display: '-webkit-box',
+      overflow: 'hidden',
+      '-webkit-box-orient': 'vertical',
     },
     '& .ratings-wrapper': {
       marginTop: styles.margin[1],

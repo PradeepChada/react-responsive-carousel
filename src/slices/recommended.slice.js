@@ -5,6 +5,10 @@ const INITIAL_STATE = {
   freqBoughtLoading: false,
   freqBoughtProducts: [],
   freqBoughtError: null,
+
+  custViewedLoading: false,
+  custViewedProducts: [],
+  custViewedError: null,
 };
 
 const freqBoughtSlice = createSlice({
@@ -18,11 +22,23 @@ const freqBoughtSlice = createSlice({
     fetchFreqBoughtSuccess: (state, action) => {
       state.freqBoughtLoading = false;
       state.freqBoughtProducts = action.payload;
-      state.error = null;
     },
     fetchFreqBoughtFailure: (state, action) => {
       state.freqBoughtLoading = false;
       state.freqBoughtError = action.payload;
+    },
+
+    fetchCustViewedLoding: (state) => {
+      state.custViewedLoading = true;
+      state.custViewedError = null;
+    },
+    fetchCustViewedSuccess: (state, action) => {
+      state.custViewedLoading = false;
+      state.custViewedProducts = action.payload;
+    },
+    fetchCustViewedFailure: (state, action) => {
+      state.custViewedLoading = false;
+      state.custViewedError = action.payload;
     },
   },
 });
@@ -37,7 +53,19 @@ export const fetchFreqBoughtProducts = () => (dispatch) => {
       dispatch(actions.fetchFreqBoughtSuccess(res?.data));
     })
     .catch((err) => {
-      dispatch(actions.fetchFreqBoughtFailure(err.response));
+      dispatch(actions.fetchFreqBoughtFailure(err));
+    });
+};
+
+export const fetchCustViewedProducts = () => (dispatch) => {
+  dispatch(actions.fetchCustViewedLoding());
+  return recommendedService
+    .getCustViewedProducts()
+    .then((res) => {
+      dispatch(actions.fetchCustViewedSuccess(res?.data));
+    })
+    .catch((err) => {
+      dispatch(actions.fetchCustViewedFailure(err));
     });
 };
 
