@@ -4,19 +4,38 @@ import { LocationTile, PageContainer } from './HomePage.styles';
 import ScanIcon from './../../assets/icons/scan.svg';
 import CartIcon from './../../assets/icons/cart.svg';
 import FeatureFlag from '../../components/feature-flag/FeatureFlag';
-import { Button } from '@mui/material';
+import { Button, Grid, Alert } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 const HomePage = ({ history }) => {
   const { storeInfo } = useSelector((state) => state.store);
-  const storeName = storeInfo ? storeInfo?.name : 'Change store location';
+  const storeName = storeInfo ? storeInfo?.name : '';
+
+  const handleNavigate = (path) => {
+    if (!storeName) return null;
+    history.push(path);
+  };
   return (
     <PageContainer>
       <LocationTile>
-        <span>Store: {storeName}</span>
-        <Button variant='text' onClick={() => history.push('/store-search')}>
-          Change
-        </Button>
+        <Grid container justifyContent='space-between'>
+          <Grid item>
+            <span>Store: {storeName || '--'}</span>
+          </Grid>
+          <Grid item>
+            <Button
+              variant='text'
+              onClick={() => history.push('/store-search')}
+            >
+              Change
+            </Button>
+          </Grid>
+        </Grid>
+        {!storeName && (
+          <Alert icon={false} severity='error'>
+            This is an error alert — check it out!
+          </Alert>
+        )}
       </LocationTile>
       <div className='home-content'>
         <FeatureFlag>
@@ -24,7 +43,7 @@ const HomePage = ({ history }) => {
             className='inventory-tile'
             icon={ScanIcon}
             title='Price & Inventory Check'
-            handleClick={() => history.push('/sku-search')}
+            handleClick={() => handleNavigate('/sku-search')}
             data-testid='price-and-inventory'
             data-feature='price_check'
           />
@@ -33,7 +52,7 @@ const HomePage = ({ history }) => {
           <HomeTile
             icon={CartIcon}
             title='Take Checkout'
-            handleClick={() => history.push('/pop-signin')}
+            handleClick={() => handleNavigate('/pop-signin')}
             data-testid='take-checkout'
             data-feature='take_checkout'
           />

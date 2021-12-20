@@ -90,6 +90,20 @@ const theme = createTheme({
         },
       },
     },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          height: '2rem',
+          padding: `0 ${styles.padding[2]}`,
+          fontSize: font.size[14],
+          display: 'flex',
+          alignItems: 'center',
+          color: colors.danger,
+          border: `1px solid rgba(223, 46, 47, 0.1)`,
+          backgroundColor: colors.bgDanger,
+        },
+      },
+    },
   },
 });
 

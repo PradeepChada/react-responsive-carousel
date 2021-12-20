@@ -205,11 +205,8 @@ const Reviews = ({ match }) => {
   };
 
   const { reviewsData, loading } = useSelector((state) => state.reviews);
-  const {
-    storeId,
-    skuData,
-    loading: skuLoading,
-  } = useSelector((state) => state.sku);
+  const { storeId } = useSelector((state) => state.store);
+  const { skuData, loading: skuLoading } = useSelector((state) => state.sku);
 
   useEffect(() => {
     if (skuData?.id !== Number(match?.params?.id)) {

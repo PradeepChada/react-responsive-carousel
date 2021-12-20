@@ -68,7 +68,7 @@ const NotFound = () => {
     </NotFoundQA>
   );
 };
-const noOfTotalQuestion = (loading,questionsData,showingQuestions) => {
+const noOfTotalQuestion = (loading, questionsData, showingQuestions) => {
   return loading ? (
     <NoOfQuestionTextSkeletion width={84} />
   ) : (
@@ -78,10 +78,10 @@ const noOfTotalQuestion = (loading,questionsData,showingQuestions) => {
 };
 function QuestionAndAnswer({ match }) {
   const dispatch = useDispatch();
+  const { storeId } = useSelector((state) => state.store);
   const {
     skuData,
     error: skuError,
-    storeId,
     loading: skuLoading,
   } = useSelector((state) => state.sku);
   const { loading, questionsData, error } = useSelector(
@@ -160,7 +160,7 @@ function QuestionAndAnswer({ match }) {
         <>
           <Typography className='text'>Q&A</Typography>
           <Typography className='total-question'>
-            {noOfTotalQuestion(loading,questionsData,showingQuestions)}
+            {noOfTotalQuestion(loading, questionsData, showingQuestions)}
           </Typography>
           <SelectWrapper value={selectedOption} onChange={sortByClickHandler}>
             {options.map((option) => (

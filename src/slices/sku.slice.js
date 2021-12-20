@@ -5,7 +5,6 @@ import { fetchReviewDetails, actions as reviewsActions } from './reviews.slice';
 import { getReviewsApiUrl } from '../utils/skuHelpers';
 
 const INITIAL_STATE = {
-  storeId: 27,
   loading: false,
   skuData: null,
   error: null,
@@ -26,9 +25,6 @@ const skuSlice = createSlice({
   name: 'sku',
   initialState: INITIAL_STATE,
   reducers: {
-    updateStoreId: (state, action) => {
-      state.storeId = action.payload;
-    },
     loading: (state) => {
       state.loading = true;
       state.error = null;
@@ -41,8 +37,8 @@ const skuSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    reset: (state) => {
-      return { ...INITIAL_STATE, storeId: state.storeId };
+    reset: () => {
+      return { ...INITIAL_STATE };
     },
     skuAvailabilityLoading: (state) => {
       state.skuAvailabilityLoading = true;

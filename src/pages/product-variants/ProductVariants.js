@@ -40,9 +40,8 @@ const ProductVariants = ({ history, match }) => {
     (state) => state.skuVariants
   );
   const { reviewsData } = useSelector((state) => state.reviews);
-
+  const { storeId } = useSelector((state) => state.store);
   const {
-    storeId,
     loading: skuTitleLoading,
     skuData,
     skuAvailabilityLoading,

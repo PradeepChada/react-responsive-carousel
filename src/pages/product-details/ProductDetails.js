@@ -118,8 +118,8 @@ const ProductDetails = ({ history, match }) => {
   const SKUCheckoutDetailsURL = '/sku-checkout/sku-details';
   const [showVideos, setShowVideos] = useState(false);
   const dispatch = useDispatch();
+  const { storeId } = useSelector((state) => state.store);
   const {
-    storeId,
     loading,
     skuData,
     error,

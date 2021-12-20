@@ -6,6 +6,8 @@ const INITIAL_STATE = {
   stores: [],
   storesError: null,
   formValues: {},
+  storeInfo: null,
+  storeId: null,
 };
 
 const storeSlice = createSlice({
@@ -30,6 +32,10 @@ const storeSlice = createSlice({
     },
     setStoreInfo: (state, action) => {
       state.storeInfo = action.payload;
+      state.storeId = action.payload?.id;
+    },
+    updateStoreId: (state, action) => {
+      state.storeId = action.payload;
     },
   },
 });
