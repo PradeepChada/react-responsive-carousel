@@ -251,7 +251,7 @@ const Reviews = ({ match }) => {
         ratingCount={rollup?.review_count}
       />
       <Title>Customer Reviews</Title>
-      {reviewsData ? (
+      {reviewsData && ratings?.length ? (
         <>
           <RatingContainer>
             <Typography variant='h4'>

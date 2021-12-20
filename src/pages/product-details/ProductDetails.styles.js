@@ -56,19 +56,26 @@ export const Availability = styled(Box)({
   },
   '& .store-tile': {
     background: colors.bgGray,
-    padding: '0.625rem 0.875rem',
+    padding: '0.75rem 0.875rem',
     margin: `${styles.margin[2]} 0`,
     display: styles.display.flex,
-    alignItems: styles.align.center,
+    flexDirection: 'column',
+    alignItems: styles.align.start,
     '&.other-stores': {
       padding: '1.125rem 0.875rem',
     },
-    '& img': {
+    '& img:first-of-type': {
       marginRight: styles.margin[3],
+    },
+    '& .department': {
+      fontSize: font.size[14],
+      fontWeight: font.weight[400],
+      marginTop: styles.margin[2],
+      textTransform: 'capitalize',
     },
     '& .stock-details': {
       fontWeight: font.weight[600],
-      fontSize: font.size[12],
+      fontSize: font.size[16],
       '& .stock-green': {
         color: colors.green,
       },
@@ -78,13 +85,26 @@ export const Availability = styled(Box)({
     },
     '& .availability-link': {
       color: colors.brandBlue,
-      fontSize: font.size[10],
-      textDecoration: 'underline',
+      fontSize: font.size[16],
+      fontWeight: font.weight['bold'],
       textTransform: 'unset',
       padding: styles.padding[0],
+      marginTop: styles.margin[3],
+    },
+    '& hr': {
+      width: '100%',
+      border: `1px solid ${colors.gray85}`,
+      marginTop: styles.margin[3],
+    },
+    '& .need-more-text': {
+      width: '100%',
+      marginTop: styles.margin[3],
+      fontSize: font.size[14],
+      fontWeight: font.weight['bold'],
     },
   },
   '& .other-stores': {
+    flexDirection: 'row',
     alignItems: styles.align.center,
     '& .stock-details': {
       padding: '0.375rem 0',

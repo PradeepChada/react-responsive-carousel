@@ -11,9 +11,6 @@ import {
   ErrorWrapper,
   StockError,
   SalePriceWrapper,
-  ButtonGroupWrapper,
-  InputWrapper,
-  SaveButton,
 } from './ProductDetails.styles';
 import StoreIcon from './../../assets/icons/store.svg';
 import DeliveryIcon from './../../assets/icons/delivery.svg';
@@ -30,7 +27,6 @@ import {
   getQtyInStore,
   getQtyInDC,
   getSkuPriceDetails,
-  givenItemExitsInCart,
   getProductImages,
   getProductVideos,
 } from './../../utils/skuHelpers';
@@ -40,7 +36,6 @@ import { skuErrorMessages } from '../../constants/errorMessages';
 import RatingsBar from '../../components/ratings-bar/RatingsBar';
 import { fetchQuestionDetails, resetQA } from '../../slices/q&a.slice';
 import { RatingCount } from '../../components/product-title/ProductTitle.styles';
-import { setItemQuantityByGivenQuantityFromCart } from '../../slices/cart.slice';
 import ProductVideos from './product-videos/ProductVideos';
 
 const LoadingSkeleton = () => {
@@ -84,18 +79,36 @@ const LoadingSkeleton = () => {
     </Container>
   );
 };
-const showStockDetails = (skuAvailabilityLoading, inStoreQty) => {
+const showStockDetails = (
+  skuAvailabilityLoading,
+  inStoreQty,
+  skuAvailabilityError,
+  fetchSkuAvailabilityData
+) => {
   if (skuAvailabilityLoading) {
     return <Skeleton />;
+  }
+  if (skuAvailabilityError) {
+    return (
+      <StockError>
+        {skuErrorMessages.inventory?.shortDescription}
+        <Box className='refresh-btn'>
+          <img src={RefreshIcon} alt='Refresh' style={{ margin: '0' }} />
+          <Button onClick={fetchSkuAvailabilityData} variant='text'>
+            Refresh Page
+          </Button>
+        </Box>
+      </StockError>
+    );
   }
   return (
     <div className='stock-details'>
       {inStoreQty ? (
-        <span className='stock-green'>{inStoreQty} in Stock</span>
+        <span className='stock-green'>{inStoreQty} Available</span>
       ) : (
         <span className='stock-red'>Out of Stock</span>
-      )}{' '}
-      in this store
+      )}
+      &nbsp;in this store
     </div>
   );
 };
@@ -105,17 +118,19 @@ const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
     return <Skeleton width={200} />;
   }
   return (
-    <Button
-      className='availability-link'
-      variant='text'
-      onClick={() => toggleDrawer(true)}
-    >
-      View availability in other stores
-    </Button>
+    <>
+      <Button
+        className='availability-link'
+        variant='text'
+        onClick={() => toggleDrawer(true)}
+      >
+        Check Availability in Other Stores
+        <ChevronRight />
+      </Button>
+    </>
   );
 };
 const ProductDetails = ({ history, match }) => {
-  const SKUCheckoutDetailsURL = '/sku-checkout/sku-details';
   const [showVideos, setShowVideos] = useState(false);
   const dispatch = useDispatch();
   const { storeId } = useSelector((state) => state.store);
@@ -137,9 +152,7 @@ const ProductDetails = ({ history, match }) => {
     (state) => state.reviews
   );
   const { questionsData } = useSelector((state) => state.skuQuestions);
-  const { cartItems } = useSelector((state) => state.cart);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [skuQuantity, setSkuQuantity] = useState(1);
   const skuPriceDetails = getSkuPriceDetails(skuData?.skuPrices);
 
   useEffect(() => {
@@ -155,17 +168,6 @@ const ProductDetails = ({ history, match }) => {
       dispatch(resetQA());
     }
   }, [dispatch, skuData]);
-
-  useEffect(() => {
-    if (history.location.pathname.includes(SKUCheckoutDetailsURL)) {
-      const isExits = givenItemExitsInCart(match?.params?.id, cartItems);
-      if (isExits <= -1) {
-        history.replace('/sku-checkout');
-      } else {
-        setSkuQuantity(cartItems[isExits].skuQuantity);
-      }
-    }
-  }, [match?.params?.id, cartItems, history]);
 
   const toggleDrawer = (open) => {
     open && dispatch(fetchStoreAvailability(match?.params?.id, storeId));
@@ -219,8 +221,8 @@ const ProductDetails = ({ history, match }) => {
           <span className='stock-green'>Available</span>
         ) : (
           <span className='stock-red'>Unavailable</span>
-        )}{' '}
-        in DC
+        )}
+        &nbsp;in DC
       </div>
     );
   };
@@ -242,47 +244,6 @@ const ProductDetails = ({ history, match }) => {
   );
 
   const dcQty = getQtyInDC(shipSkuAvailData?.inventoryEstimates);
-
-  const plusButtonHandler = () => {
-    setSkuQuantity((prevQuantity) => {
-      if (prevQuantity < 999) {
-        return prevQuantity + 1;
-      } else {
-        return prevQuantity;
-      }
-    });
-  };
-  const minusButtonHandler = () => {
-    setSkuQuantity((prevQuantity) => {
-      if (prevQuantity > 1) {
-        return prevQuantity - 1;
-      } else {
-        return prevQuantity;
-      }
-    });
-  };
-  const saveChangesButtonHandler = () => {
-    dispatch(
-      setItemQuantityByGivenQuantityFromCart(
-        match?.params?.id,
-        cartItems,
-        skuQuantity
-      )
-    );
-    history.push('/sku-checkout');
-  };
-  const onChangeQuantity = (event) => {
-    if (event.target.value < 1000) {
-      setSkuQuantity(event.target.value);
-    }
-  };
-
-  const onBlurQuantityInput = () => {
-    if (skuQuantity <= 0) {
-      setSkuQuantity(1);
-    }
-  };
-
   const videos = getProductVideos(skuData || {});
   return (
     <PageContainer>
@@ -333,56 +294,44 @@ const ProductDetails = ({ history, match }) => {
       </div>
       <Availability>
         <Typography className='sub-head'>Availability</Typography>
-        {skuAvailabilityError ? (
-          <StockError>
-            {skuErrorMessages.inventory?.shortDescription}
-            <Box className='refresh-btn'>
-              {/* <CachedIcon />  */}
-              <img src={RefreshIcon} alt='Refresh' />
-              <Button onClick={fetchSkuAvailabilityData} variant='text'>
-                Refresh Page
-              </Button>
-            </Box>
-          </StockError>
-        ) : (
-          <>
-            <Box className='store-tile'>
+        <Box className='store-tile'>
+          <Box display='flex' flexDirection='column'>
+            <Box display='flex' flexDirection='row'>
               <img src={StoreIcon} alt='Store' />
-              <Box flexGrow={1}>
-                {showStockDetails(skuAvailabilityLoading, inStoreQty)}
-                {showAvailabilityInOtherStore(
-                  skuAvailabilityLoading,
-                  toggleDrawer
-                )}
-              </Box>
-              {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
-                <ButtonGroupWrapper>
-                  <Typography
-                    className='plus-button'
-                    onClick={minusButtonHandler}
-                  >
-                    -
-                  </Typography>
-                  <InputWrapper
-                    value={skuQuantity}
-                    onChange={onChangeQuantity}
-                    onBlur={onBlurQuantityInput}
-                  />
-                  <Typography
-                    className='minus-button'
-                    onClick={plusButtonHandler}
-                  >
-                    +
-                  </Typography>
-                </ButtonGroupWrapper>
+              {showStockDetails(
+                skuAvailabilityLoading,
+                inStoreQty,
+                skuAvailabilityError,
+                fetchSkuAvailabilityData
               )}
             </Box>
-            <Box className='store-tile other-stores'>
-              <img src={DeliveryIcon} alt='Store' />
-              <Box flexGrow={1}>{_renderDCInfo()}</Box>
+            <Box display='flex' flexDirection='row'>
+              <Box width='43px'></Box>
+
+              <Typography className='department'>
+                Department:&nbsp;
+                {skuData?.departmentName
+                  ? skuData?.departmentName?.toLowerCase()
+                  : 'None'}
+              </Typography>
             </Box>
-          </>
-        )}
+          </Box>
+          <hr />
+          <Typography className='need-more-text'>Need More ?</Typography>
+          <Button
+            className='availability-link'
+            variant='text'
+            onClick={() => history.push('/sku-future-availability')}
+          >
+            Check Future Availability
+            <ChevronRight />
+          </Button>
+          {showAvailabilityInOtherStore(skuAvailabilityLoading, toggleDrawer)}
+        </Box>
+        <Box className='store-tile other-stores'>
+          <img src={DeliveryIcon} alt='Store' />
+          <Box flexGrow={1}>{_renderDCInfo()}</Box>
+        </Box>
       </Availability>
       <Box>
         {videos.length > 0 && (
@@ -405,6 +354,16 @@ const ProductDetails = ({ history, match }) => {
           }
         >
           <Typography>Additional Sizes & Colors</Typography>
+          <ChevronRight />
+        </InfoTile>
+        <InfoTile
+          onClick={() =>
+            history.push(
+              `/recommended-products/${match?.params?.id}/${skuData?.defaultProductId}`
+            )
+          }
+        >
+          <Typography>Recommended Products</Typography>
           <ChevronRight />
         </InfoTile>
         <InfoTile onClick={() => history.push(`/reviews/${match?.params?.id}`)}>
@@ -439,9 +398,6 @@ const ProductDetails = ({ history, match }) => {
           </Box>
         </InfoTile>
       </Box>
-      {history.location.pathname.includes(SKUCheckoutDetailsURL) && (
-        <SaveButton onClick={saveChangesButtonHandler}>Save Changes</SaveButton>
-      )}
     </PageContainer>
   );
 };

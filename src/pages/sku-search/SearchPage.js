@@ -144,6 +144,7 @@ const SearchPage = ({ history }) => {
             skuAvailabilityError={skuAvailabilityError}
             toggleDrawer={toggleDrawer}
             handleClick={(id) => history.push(`/product-details/${id}`)}
+            showRatingandAvailability={true}
           />
         )
       )}

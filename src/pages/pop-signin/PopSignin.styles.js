@@ -1,8 +1,11 @@
 import { styled } from '@mui/styles';
 import { Container } from '@mui/material';
 import { styles, font, colors } from '../../utils/themeUtils';
+import { Box } from '@mui/system';
 
 export const PageContainer = styled(Container)({
+  display:"flex",
+  flexDirection:"column",
   padding: styles.padding[3],
   height: '100%',
   '& .pop-account-text': {
@@ -30,13 +33,12 @@ export const PageContainer = styled(Container)({
     backgroundColor: colors.lightBlue,
     color: colors.white,
     borderRadius: '4px',
-    height: '48px',
+    padding: styles.padding[3],
     width: '100%',
     marginBottom: styles.margin[2],
     fontSize: font.size[14],
     fontWeight: font.weight['bold'],
     textTransform: 'uppercase',
-    marginTop: '5rem',
   },
   '& .signup-button': {
     display: styles.display.flex,
@@ -45,13 +47,12 @@ export const PageContainer = styled(Container)({
     color: colors.lightBlue,
     backgroundColor: colors.white,
     borderRadius: '4px',
-    height: '48px',
-    border: ` 1px solid ${colors.lightBlue}`,
+    border: `1px solid ${colors.lightBlue}`,
     width: '100%',
+    padding: styles.padding[3],
     fontSize: font.size[14],
     fontWeight: font.weight['bold'],
     textTransform: 'uppercase',
-    marginBottom: styles.margin[3],
   },
   '& legend': {
     fontSize: font.size[16],
@@ -61,6 +62,11 @@ export const PageContainer = styled(Container)({
   },
   '& span': {
     fontSize: font.size[16],
+  },
+  '& label': {
+    '& p': {
+      wordBreak: 'break-all',
+    },
   },
   '& .error': {
     fontSize: font.size[14],
@@ -74,4 +80,11 @@ export const PageContainer = styled(Container)({
       borderColor: colors.danger,
     },
   },
+});
+
+export const BoxWrapper = styled(Box)({
+  display: styles.display.flex,
+  flexDirection: 'column',
+  justifyContent: styles.justify.between,
+  height: '100%',
 });

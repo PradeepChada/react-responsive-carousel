@@ -28,7 +28,7 @@ const showStock = (skuAvailabilityLoading, skuAvailabilityError, skuInfo) => {
     return <StockError>{skuErrorMessages.inventory?.description}</StockError>;
   } else {
     return skuInfo?.qtyAvailableAtStore > 0 ? (
-      <Stock>{skuInfo?.qtyAvailableAtStore} in Stock</Stock>
+      <Stock>{skuInfo?.qtyAvailableAtStore} Available</Stock>
     ) : (
       <OutOfStock>Out of Stock</OutOfStock>
     );
@@ -43,6 +43,7 @@ const SkuTile = ({
   skuAvailabilityError,
   handleClick,
   toggleDrawer,
+  showRatingandAvailability,
 }) => {
   const _renderSkeleton = () => {
     return (
@@ -51,9 +52,11 @@ const SkuTile = ({
         <Box display='flex' flexDirection='column' overflow='hidden'>
           <PriceSkeleton variant='text' data-testid='price-skeleton' />
           <TitleSkeleton variant='text' data-testid='title-skeleton' />
-          <Skeleton variant='text' className='availability-link' />
+          {showRatingandAvailability && (
+            <Skeleton variant='text' className='availability-link' />
+          )}
           <StockSkeleton variant='text' data-testid='stock-skeleton' />
-          <Skeleton variant='text' />
+          {showRatingandAvailability && <Skeleton variant='text' />}
           <CodeSkeleton variant='text' data-testid='code-skeleton' />
         </Box>
       </Wrapper>
@@ -79,9 +82,9 @@ const SkuTile = ({
         <Title data-testid='sku-title'>
           {skuInfo?.name?.substring(0, 25)}...
         </Title>
-        <RatingsBar rating={rating} />
+        {showRatingandAvailability && <RatingsBar rating={rating} />}
         {showStock(skuAvailabilityLoading, skuAvailabilityError, skuInfo)}
-        {showNearAvailability && (
+        {showRatingandAvailability && showNearAvailability && (
           <Button
             className='availability-link'
             variant='text'
@@ -110,4 +113,9 @@ SkuTile.propTypes = {
   skuAvailabilityError: PropTypes.object,
   handleClick: PropTypes.func,
   toggleDrawer: PropTypes.func,
+  showRatingandAvailability: PropTypes.bool,
+};
+
+SkuTile.defaultProps = {
+  showRatingandAvailability: false,
 };

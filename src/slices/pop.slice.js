@@ -1,6 +1,7 @@
 import * as popService from '../services/popAccount.service';
 import { createSlice } from '@reduxjs/toolkit';
 import { popAccountNotFound } from '../constants/errorMessages';
+import { getFirstPOPMemeber } from '../utils/skuHelpers';
 const INITIAL_STATE = {
   loading: false,
   accountDetails: [],
@@ -29,28 +30,42 @@ const popAccountSlice = createSlice({
       state.mainAccount = null;
       state.error = action.payload;
     },
+    setErrorNull: (state, action) => {
+      state.error = null;
+    },
   },
 });
 
-const actions = popAccountSlice.actions;
+export const actions = popAccountSlice.actions;
 
-export const fetchPOPAccountDetailsByPhone = (phone) => (dispatch) => {
-  dispatch(actions.loading());
-  popService
-    .getAccountByPhone(phone)
-    .then((res) => {
-      if (res?.data?._embedded.customers.length === 0) {
-        dispatch(actions.failure(popAccountNotFound.phone));
-      } else {
-        dispatch(actions.success(res?.data?._embedded.customers));
-      }
-    })
-    .catch((err) => {
-      dispatch(actions.failure(popAccountNotFound.unknown));
-    });
-};
+export const fetchPOPAccountDetailsByPhone =
+  (phone, history, setShowForm) => (dispatch) => {
+    dispatch(actions.loading());
+    popService
+      .getAccountByPhone(phone)
+      .then((res) => {
+        if (res?.data?._embedded.customers.length === 0) {
+          dispatch(actions.failure(popAccountNotFound.phone));
+        } else {
+          dispatch(actions.success(res?.data?._embedded.customers));
+          if (res?.data?._embedded.customers.length === 1) {
+            dispatch(
+              setMainPOPAccount(
+                getFirstPOPMemeber(res?.data?._embedded.customers).emailAddress
+              )
+            );
+            history.push('/sku-checkout');
+          } else {
+            setShowForm((prevState) => !prevState);
+          }
+        }
+      })
+      .catch((err) => {
+        dispatch(actions.failure(popAccountNotFound.unknown));
+      });
+  };
 
-export const fetchPOPAccountDetailsByEmail = (email) => (dispatch) => {
+export const fetchPOPAccountDetailsByEmail = (email, history) => (dispatch) => {
   dispatch(actions.loading());
   popService
     .getAccountByEmail(email)
@@ -59,6 +74,14 @@ export const fetchPOPAccountDetailsByEmail = (email) => (dispatch) => {
         dispatch(actions.failure(popAccountNotFound.email));
       } else {
         dispatch(actions.success(res?.data?._embedded.customers));
+        if (res?.data?._embedded.customers.length === 1) {
+          dispatch(
+            setMainPOPAccount(
+              getFirstPOPMemeber(res?.data?._embedded.customers).emailAddress
+            )
+          );
+          history.push('/sku-checkout');
+        }
       }
     })
     .catch((err) => {

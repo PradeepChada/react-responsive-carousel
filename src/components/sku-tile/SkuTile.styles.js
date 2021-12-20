@@ -12,10 +12,12 @@ export const Wrapper = styled(Box)({
   width: '100%',
   '& .availability-link': {
     fontSize: font.size[12],
+    fontWeight: font.weight['bold'],
     color: colors.darkBlue,
-    textDecoration: 'underline',
     cursor: 'pointer',
     marginBottom: styles.margin[3],
+    textAlign: 'inherit',
+    lineHeight: '1',
   },
 });
 
@@ -103,6 +105,7 @@ export const StockError = styled(Box)({
   borderRadius: '0.25rem',
   fontWeight: font.weight[400],
   marginTop: styles.margin[1],
+  marginBottom: styles.margin[2],
   padding: '0.625rem',
 });
 

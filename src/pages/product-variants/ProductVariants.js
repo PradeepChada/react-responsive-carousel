@@ -11,7 +11,7 @@ import {
   ErrorWrapper,
   NoContent,
 } from './ProductVariants.styles';
-import { getQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
+import { getSKUQtyInStore, getSkuPriceDetails } from './../../utils/skuHelpers';
 import SkuError from '../../components/sku-error/SkuError';
 import config from './../../config';
 import { skuErrorMessages } from '../../constants/errorMessages';
@@ -64,9 +64,10 @@ const ProductVariants = ({ history, match }) => {
       image: `${config.appConfig.asset_base_url}${item.mediaList?.[0]?.url}`,
       skuPriceDetails: getSkuPriceDetails(item?.productPrice),
       name: item.name,
-      qtyAvailableAtStore: getQtyInStore(
-        skuAvailability?.inventoryEstimates,
-        skuAvailability?.requestStoreNumber
+      qtyAvailableAtStore: getSKUQtyInStore(
+        item.id,
+        skuAvailability?.requestStoreNumber,
+        skuAvailability?.inventoryEstimates
       ),
       skuId: item.id,
     };
@@ -124,7 +125,7 @@ const ProductVariants = ({ history, match }) => {
         />
       )}
       <Title variant='h6' nocontent={variants?.length === 0 ? 'true' : 'false'}>
-        Additional Sizes & Colors{' '}
+        Additional Sizes & Colors&nbsp;
         {variants?.length ? `(${variants.length})` : null}
       </Title>
       {renderContent()}

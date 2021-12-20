@@ -48,6 +48,12 @@ export const getQtyInStore = (data = [], storeId) =>
   data?.find((o) => o.fulfillmentStoreNumber === String(storeId))
     ?.qtyAvailableAtStore;
 
+export const getSKUQtyInStore = (skuCode, storeId, data = []) =>
+  data?.find(
+    (o) =>
+      o.fulfillmentStoreNumber === String(storeId) && o.skuNumber === skuCode
+  )?.qtyAvailableAtStore;
+
 export const getQtyInDC = (data = []) => data?.[0]?.qtyAvailable;
 
 export const getQtyOnline = (data = []) =>
@@ -58,8 +64,6 @@ export const getReviewsApiUrl = (productId, sort = '') => {
 };
 
 export const filterQuestionsData = (questionData, newQuestions) => {
-  console.log(questionData);
-  console.log(newQuestions);
   return {
     ...newQuestions,
     questionData: {
@@ -70,7 +74,7 @@ export const filterQuestionsData = (questionData, newQuestions) => {
 };
 
 export const showCheckoutHeader = (path) => {
-  return ['/sku-checkout', '/payment-details', '/pop-signup'].includes(path);
+  return ['/sku-checkout', '/payment-details', '/pop-signin'].includes(path);
 };
 
 export const showCancelOrderButton = (path) => {
@@ -115,7 +119,7 @@ export const getPOPAccountFullName = (accountDetails, emailAddress) => {
       _fullname = `${data.firstName} ${data.lastName}`;
     }
   });
-  return _fullname;
+  return capitalizeFirstLetter(_fullname);
 };
 export const generateVideoUrl = (provider, videoId) => {
   if (provider === 'WISTIA') {
@@ -135,4 +139,37 @@ export const getProductVideos = ({ productVisuals }) => {
         videoId: o.videoId,
       })) || []
   );
+};
+
+export const capitalizeFirstLetter = (str) => {
+  const arr = str.split(' ');
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+  }
+  return arr.join(' ');
+};
+
+const filterDigitOnly = (value) => value.filter((data) => /^\d+$/.test(data));
+
+export const getDigitOnly = (value) => value?.replace(/[^\d]/g, '');
+
+export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
+export const reFormPhone = (phone) => {
+  let _newPhone = phone.split('');
+  _newPhone = filterDigitOnly(_newPhone);
+
+  if (_newPhone.length > 10) {
+    _newPhone = _newPhone.slice(0, 10);
+  }
+  if (_newPhone.length > 0) {
+    _newPhone.splice(0, 0, '(');
+  }
+  if (_newPhone.length > 3) {
+    _newPhone.splice(4, 0, ') ');
+  }
+  if (_newPhone.length > 8) {
+    _newPhone.splice(8, 0, ' - ');
+  }
+  return _newPhone.join('');
 };
