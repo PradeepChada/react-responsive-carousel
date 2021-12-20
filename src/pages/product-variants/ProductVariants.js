@@ -72,6 +72,37 @@ const ProductVariants = ({ history, match }) => {
     };
   };
 
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <>
+          {Array(3)
+            .fill(null)
+            .map((_, i) => (
+              <SkuTile key={`key${i}`} loading={true} />
+            ))}
+        </>
+      );
+    } else {
+      return variants?.length ? (
+        variants.map((item, i) => {
+          const skuInfo = getSkuData(item);
+          return (
+            <SkuTile
+              key={`key${i}`}
+              skuInfo={skuInfo}
+              skuAvailabilityLoading={skuAvailabilityLoading}
+              skuAvailabilityError={skuAvailabilityError}
+              handleClick={(id) => history.push(`/product-details/${id}`)}
+            />
+          );
+        })
+      ) : (
+        <NoContent>{skuErrorMessages.productVariants.title}</NoContent>
+      );
+    }
+  };
+
   if (error) {
     return (
       <ErrorWrapper alignItems='center'>
@@ -96,26 +127,7 @@ const ProductVariants = ({ history, match }) => {
         Additional Sizes & Colors{' '}
         {variants?.length ? `(${variants.length})` : null}
       </Title>
-      {loading ? (
-        Array(3)
-          .fill(null)
-          .map((_, i) => <SkuTile key={`key${i}`} loading={true} />)
-      ) : variants?.length ? (
-        variants.map((item, i) => {
-          const skuInfo = getSkuData(item);
-          return (
-            <SkuTile
-              key={`key${i}`}
-              skuInfo={skuInfo}
-              skuAvailabilityLoading={skuAvailabilityLoading}
-              skuAvailabilityError={skuAvailabilityError}
-              handleClick={(id) => history.push(`/product-details/${id}`)}
-            />
-          );
-        })
-      ) : (
-        <NoContent>{skuErrorMessages.productVariants.title}</NoContent>
-      )}
+      {renderContent()}
     </PageContainer>
   );
 };

@@ -12,8 +12,9 @@ const HomePage = ({ history }) => {
   const storeName = storeInfo ? storeInfo?.name : '';
 
   const handleNavigate = (path) => {
-    if (!storeName) return null;
-    history.push(path);
+    if (storeName) {
+      history.push(path);
+    }
   };
   return (
     <PageContainer>
