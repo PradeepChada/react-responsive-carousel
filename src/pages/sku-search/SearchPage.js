@@ -38,8 +38,8 @@ const SearchPageText = () => {
 
 const SearchPage = ({ history }) => {
   const dispatch = useDispatch();
+  const { storeId } = useSelector((state) => state.store);
   const {
-    storeId,
     loading,
     skuData,
     error,

@@ -33,23 +33,15 @@ const LoadingSkeleton = () => {
     </Box>
   );
 };
-const renderSKULoadingSkeletion = (loading) => {
-  if (loading) {
-    return Array(3)
-      .fill(null)
-      .map((_, i) => <SkuTile key={`key${i}`} loading={true} />);
-  }
-  return null;
-};
+
 const ProductVariants = ({ history, match }) => {
   const dispatch = useDispatch();
   const { loading, skuVariants, error } = useSelector(
     (state) => state.skuVariants
   );
   const { reviewsData } = useSelector((state) => state.reviews);
-
+  const { storeId } = useSelector((state) => state.store);
   const {
-    storeId,
     loading: skuTitleLoading,
     skuData,
     skuAvailabilityLoading,
@@ -81,6 +73,37 @@ const ProductVariants = ({ history, match }) => {
     };
   };
 
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <>
+          {Array(3)
+            .fill(null)
+            .map((_, i) => (
+              <SkuTile key={`key${i}`} loading={true} />
+            ))}
+        </>
+      );
+    } else {
+      return variants?.length ? (
+        variants.map((item, i) => {
+          const skuInfo = getSkuData(item);
+          return (
+            <SkuTile
+              key={`key${i}`}
+              skuInfo={skuInfo}
+              skuAvailabilityLoading={skuAvailabilityLoading}
+              skuAvailabilityError={skuAvailabilityError}
+              handleClick={(id) => history.push(`/product-details/${id}`)}
+            />
+          );
+        })
+      ) : (
+        <NoContent>{skuErrorMessages.productVariants.title}</NoContent>
+      );
+    }
+  };
+
   if (error) {
     return (
       <ErrorWrapper alignItems='center'>
@@ -105,23 +128,7 @@ const ProductVariants = ({ history, match }) => {
         Additional Sizes & Colors&nbsp;
         {variants?.length ? `(${variants.length})` : null}
       </Title>
-      {renderSKULoadingSkeletion(loading)}
-      {variants?.length ? (
-        variants.map((item, i) => {
-          const skuInfo = getSkuData(item);
-          return (
-            <SkuTile
-              key={`key${i}`}
-              skuInfo={skuInfo}
-              skuAvailabilityLoading={skuAvailabilityLoading}
-              skuAvailabilityError={skuAvailabilityError}
-              handleClick={(id) => history.push(`/product-details/${id}`)}
-            />
-          );
-        })
-      ) : (
-        <NoContent>{skuErrorMessages.productVariants.title}</NoContent>
-      )}
+      {renderContent()}
     </PageContainer>
   );
 };

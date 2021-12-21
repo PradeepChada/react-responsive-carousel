@@ -14,18 +14,18 @@ export const PageContainer = styled(Container)({
 });
 
 export const LocationTile = styled(Grid)({
-  height: '3rem',
-  justifyContent: styles.justify.between,
-  alignItems: styles.align.center,
-  display: styles.display.flex,
+  // height: '3rem',
   backgroundColor: colors.lightGray,
   marginBottom: styles.margin[3],
   fontWeight: font.weight[600],
-  padding: `${styles.padding[0]} ${styles.padding[3]}`,
+  padding: `${styles.padding[3]} ${styles.padding[3]}`,
   marginTop: `-${styles.margin[1]}`,
   '& button': {
     padding: 0,
     fontWeight: font.weight[600],
     minWidth: 'unset',
+  },
+  '& .MuiAlert-root': {
+    marginTop: styles.margin[1],
   },
 });

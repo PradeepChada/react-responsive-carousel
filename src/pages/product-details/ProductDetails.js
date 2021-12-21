@@ -133,8 +133,8 @@ const showAvailabilityInOtherStore = (skuAvailabilityLoading, toggleDrawer) => {
 const ProductDetails = ({ history, match }) => {
   const [showVideos, setShowVideos] = useState(false);
   const dispatch = useDispatch();
+  const { storeId } = useSelector((state) => state.store);
   const {
-    storeId,
     loading,
     skuData,
     error,
