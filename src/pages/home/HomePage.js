@@ -34,7 +34,7 @@ const HomePage = ({ history }) => {
         </Grid>
         {!storeName && (
           <Alert icon={false} severity='error'>
-            This is an error alert — check it out!
+            Please select your store location before proceeding
           </Alert>
         )}
       </LocationTile>
