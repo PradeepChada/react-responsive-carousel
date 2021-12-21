@@ -7,9 +7,18 @@ export const Wrapper = styled(Grid)({
   padding: `${styles.padding[1]}`,
   minHeight: 'min-content',
   marginRight: styles.margin[2],
+  position: 'relative',
   '& img': {
     width: '100%',
     minHeight: 142,
+  },
+  '& .badge': {
+    position: 'absolute',
+    left: '.25rem',
+    padding: '2px 6px',
+    color: colors.white,
+    fontSize: font.size[14],
+    borderRadius: '0px 0px 4px 0px',
   },
   '& .content': {
     padding: `${styles.padding[1]} 0`,

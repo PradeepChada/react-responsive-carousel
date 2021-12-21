@@ -9,6 +9,10 @@ export const frequentlyBoughtTogether = [
     num_of_ratings: 44,
     quantity: 10,
     colors: [],
+    badge: {
+      color: '#1FA68D',
+      text: 'New',
+    },
   },
   {
     id: '10065402',
@@ -67,6 +71,10 @@ export const customersAlsoViewed = [
     num_of_ratings: 24,
     quantity: 10,
     colors: [],
+    badge: {
+      color: '#D72230',
+      text: 'Sale',
+    },
   },
   {
     pid: '10032358',

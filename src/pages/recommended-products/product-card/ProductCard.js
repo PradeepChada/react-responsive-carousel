@@ -35,6 +35,11 @@ const ProductCard = ({ data, onClickProduct, section }) => {
   return (
     <Wrapper onClick={onClickProduct}>
       <img src={`${IMG_BASE_URL}${data?.image}`} alt='product' />
+      {data?.badge && (
+        <span style={{ backgroundColor: data.badge?.color }} className='badge'>
+          {data?.badge?.text}
+        </span>
+      )}
       <Grid className='content'>
         {_renderColorsAvail()}
         <div className={`price ${data.price_range ? 'danger' : ''}`}>
