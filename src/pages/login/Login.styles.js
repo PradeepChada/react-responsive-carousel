@@ -1,5 +1,5 @@
 import { styled } from '@mui/styles';
-import { Container, Typography, Box } from '@mui/material';
+import { Container } from '@mui/material';
 import { colors, styles, font } from './../../utils/themeUtils';
 
 export const PageContainer = styled(Container)({
