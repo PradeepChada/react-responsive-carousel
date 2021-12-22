@@ -53,10 +53,45 @@ const theme = createTheme({
               },
             },
           },
-          // '&p.Mui-error': {
-          //   color: colors.danger,
-          //   marginLeft: 0
-          // }
+          '& .MuiFormHelperText-root.Mui-error': {
+            color: colors.danger,
+            marginLeft: 0,
+          },
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.white,
+          color: colors.textBlack,
+          '& .MuiInputLabel-root': {
+            '&.Mui-focused': {
+              color: colors.selectGray,
+            },
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused': {
+              color: colors.selectGray,
+              '& fieldset': {
+                borderColor: colors.selectGray,
+                borderWidth: 1,
+              },
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderWidth: 1,
+            },
+            '&.Mui-error': {
+              '& fieldset': {
+                borderColor: colors.danger,
+                borderWidth: 1,
+              },
+            },
+          },
+          '& .MuiFormHelperText-root.Mui-error': {
+            color: colors.danger,
+            marginLeft: 0,
+          },
         },
       },
     },

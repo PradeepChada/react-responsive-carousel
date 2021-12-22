@@ -29,6 +29,7 @@ import TransactionComplete from './pages/transaction-success/TransactionComplete
 import SKUFuture from './pages/sku-future/SKUFuture';
 import StoreSearch from './pages/store-search/StoreSearch';
 import RecommendedProducts from './pages/recommended-products/RecommendedProducts';
+import AuthProvider from './components/auth-provider/AuthProvider';
 
 const StyledBody = styled('div')({
   backgroundColor: '#fff',
@@ -47,78 +48,88 @@ const App = () => {
           <ThemeProvider theme={theme}>
             <BrowserRouter>
               <StoreProvider>
-                <Spinner />
-                <Header />
-                <StyledBody>
-                  <Switch>
-                    <Route exact path='/' component={HomeContainer} />
-                    <Route
-                      exact
-                      path='/sku-search'
-                      component={SearchContainer}
-                    />
-                    <Route
-                      exact
-                      path='/product-details/:id'
-                      component={ProductDetails}
-                    />
-                    <Route
-                      exact
-                      path='/product-info/:id'
-                      component={ProductInfo}
-                    />
-                    <Route
-                      exact
-                      path='/product-variants/:id/:defaultProduct'
-                      component={ProductVariants}
-                    />
-                    <Route
-                      exact
-                      path='/recommended-products/:id/:defaultProduct'
-                      component={RecommendedProducts}
-                    />
-                    <Route
-                      exact
-                      path='/sku-info/q&a/:id'
-                      component={QuestionAndAnswer}
-                    />
-                    <Route exact path='/reviews/:id' component={Reviews} />
-                    <Route exact path='/pop-signin' component={PopSignin} />
-                    <Route exact path='/sku-checkout' component={SkuCheckout} />
-                    <Route
-                      exact
-                      path='/sku-checkout/sku-details/:id'
-                      component={ProductDetails}
-                    />
-                    <Route
-                      exact
-                      path='/payment-details'
-                      component={PaymentDetails}
-                    />
-                    <Route exact path='/card-swipe' component={CardSwipe} />
-                    <Route
-                      exact
-                      path='/payment-failure'
-                      component={PaymentFailure}
-                    />
-                    <Route
-                      exact
-                      path='/payment-success'
-                      component={PaymentSuccess}
-                    />
-                    <Route
-                      exact
-                      path='/transaction-success'
-                      component={TransactionComplete}
-                    />
-                    <Route
-                      exact
-                      path='/sku-future-availability'
-                      component={SKUFuture}
-                    />
-                    <Route exact path='/store-search' component={StoreSearch} />
-                  </Switch>
-                </StyledBody>
+                <AuthProvider>
+                  <Spinner />
+                  <Header />
+                  <StyledBody>
+                    <Switch>
+                      <Route exact path='/' component={HomeContainer} />
+                      <Route
+                        exact
+                        path='/sku-search'
+                        component={SearchContainer}
+                      />
+                      <Route
+                        exact
+                        path='/product-details/:id'
+                        component={ProductDetails}
+                      />
+                      <Route
+                        exact
+                        path='/product-info/:id'
+                        component={ProductInfo}
+                      />
+                      <Route
+                        exact
+                        path='/product-variants/:id/:defaultProduct'
+                        component={ProductVariants}
+                      />
+                      <Route
+                        exact
+                        path='/recommended-products/:id/:defaultProduct'
+                        component={RecommendedProducts}
+                      />
+                      <Route
+                        exact
+                        path='/sku-info/q&a/:id'
+                        component={QuestionAndAnswer}
+                      />
+                      <Route exact path='/reviews/:id' component={Reviews} />
+                      <Route exact path='/pop-signin' component={PopSignin} />
+                      <Route
+                        exact
+                        path='/sku-checkout'
+                        component={SkuCheckout}
+                      />
+                      <Route
+                        exact
+                        path='/sku-checkout/sku-details/:id'
+                        component={ProductDetails}
+                      />
+                      <Route
+                        exact
+                        path='/payment-details'
+                        component={PaymentDetails}
+                      />
+                      <Route exact path='/card-swipe' component={CardSwipe} />
+                      <Route
+                        exact
+                        path='/payment-failure'
+                        component={PaymentFailure}
+                      />
+                      <Route
+                        exact
+                        path='/payment-success'
+                        component={PaymentSuccess}
+                      />
+                      <Route
+                        exact
+                        path='/transaction-success'
+                        component={TransactionComplete}
+                      />
+                      <Route
+                        exact
+                        path='/sku-future-availability'
+                        component={SKUFuture}
+                      />
+                      <Route
+                        exact
+                        path='/store-search'
+                        component={StoreSearch}
+                      />
+                    </Switch>
+                  </StyledBody>
+                </AuthProvider>
               </StoreProvider>
             </BrowserRouter>
           </ThemeProvider>

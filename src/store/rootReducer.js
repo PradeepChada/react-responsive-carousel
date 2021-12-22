@@ -9,6 +9,7 @@ import cartSlice from '../slices/cart.slice';
 import storeSlice from '../slices/store.slice';
 import popAccountSlice from '../slices/pop.slice';
 import recommended from '../slices/recommended.slice';
+import auth from '../slices/auth.slice';
 
 export default combineReducers({
   currency: currencySlice.reducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   popAccount: popAccountSlice.reducer,
   store: storeSlice.reducer,
   recommended: recommended.reducer,
+  auth: auth.reducer,
 });

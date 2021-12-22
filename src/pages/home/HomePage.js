@@ -4,11 +4,12 @@ import { LocationTile, PageContainer } from './HomePage.styles';
 import ScanIcon from './../../assets/icons/scan.svg';
 import CartIcon from './../../assets/icons/cart.svg';
 import FeatureFlag from '../../components/feature-flag/FeatureFlag';
-import { Button, Grid, Alert } from '@mui/material';
+import { Button, Grid, Alert, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 const HomePage = ({ history }) => {
   const { storeInfo } = useSelector((state) => state.store);
+  const { profile } = useSelector((state) => state.auth);
   const storeName = storeInfo ? storeInfo?.name : '';
 
   const handleNavigate = (path) => {
@@ -39,6 +40,9 @@ const HomePage = ({ history }) => {
         )}
       </LocationTile>
       <div className='home-content'>
+        <Typography variant='h5' className='profile-name'>
+          Hi {profile?.firstName}!<Button>Signout</Button>
+        </Typography>
         <FeatureFlag>
           <HomeTile
             className='inventory-tile'

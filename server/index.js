@@ -1,9 +1,17 @@
 const express = require("express");
 const path = require("path");
 const routes = require("./routes");
-const app = express();
+const bodyParser = require("body-parser");
 const consulConfig = require("./helpers/consulConfig");
+
+const app = express();
 const port = process.env.PORT || 3000;
+
+// support parsing of application/json type post data
+app.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", routes);
 
